@@ -32,6 +32,7 @@ from time import sleep
 from math import cos, sin, pi, radians
 from sys import implementation
 import ustruct
+import gc
 
 
 def color565(r, g, b):
@@ -169,10 +170,8 @@ class Display():
         self.write_cmd(self.DFUNCTR, 0x08, 0x82, 0x27)
         self.write_cmd(self.ENABLE3G, 0x00)  # enable 3 gamma ctrl
         self.write_cmd(self.GAMMASET, 0x01)  # gamma curve selected
-        self.write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E,
-                       0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)
-        self.write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31,
-                       0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)
+        self.write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)
+        self.write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)
         self.write_cmd(self.SLPOUT)  # exit sleep
         sleep(.1)
         self.write_cmd(self.DISPLAY_ON)  # display on
@@ -337,7 +336,7 @@ class Display():
         line = color.to_bytes(2, 'big') * w
         self.block(x, y, x + w - 1, y, line)
 
-    def draw_image(self, path, x=0, y=0, w=320, h=240):
+    def draw_image(self, path, x=0, y=0, w=240, h=320):
         """
         Method to draw image on screen from flash or sd card
 
@@ -353,7 +352,7 @@ class Display():
         if self.is_off_grid(x, y, x2, y2):
             return
         with open(path, 'rb') as f:
-            chunk_height = 25600 // w  # 153600 total bytes of an image
+            chunk_height = 22500 // w  # 153600 total bytes of an image
             chunk_count, remainder = divmod(h, chunk_height)
             chunk_size = chunk_height * w * 2
             chunk_y = y
@@ -385,6 +384,7 @@ class Display():
             int, int
         """
         buf, w, h = font.get_letter(letter, color, background, landscape)
+        # check for errors (Font could be missing specified letter)
         if w == 0:
             return w, h
         if landscape:
@@ -408,29 +408,38 @@ class Display():
             x2: int
             y2: int
         """
+        # check for horizontal line
         if y1 == y2:
             if x1 > x2:
                 x1, x2 = x2, x1
             self.draw_hline(x1, y1, x2 - x1 + 1, color)
             return
+        # check for vertical line
         if x1 == x2:
             if y1 > y2:
                 y1, y2 = y2, y1
             self.draw_vline(x1, y1, y2 - y1 + 1, color)
             return
+        # confirm coordinates in boundary
         if self.is_off_grid(min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2)):
             return
+        # changes in x, y
         dx = x2 - x1
         dy = y2 - y1
+        # determine how steep the line is
         is_steep = abs(dy) > abs(dx)
+        # rotate line
         if is_steep:
             x1, y1 = y1, x1
             x2, y2 = y2, x2
+        # swap start and end points if necessary
         if x1 > x2:
             x1, x2 = x2, x1
             y1, y2 = y2, y1
+        # recalculate differentials
         dx = x2 - x1
         dy = y2 - y1
+        # calculate error
         error = dx >> 1
         ystep = 1 if y1 < y2 else -1
         y = y1
@@ -452,7 +461,9 @@ class Display():
             coords: list
             color: int
         """
+        # starting point
         x1, y1 = coords[0]
+        # iterate through coordinates
         for i in range(1, len(coords)):
             x2, y2 = coords[i]
             self.draw_line(x1, y1, x2, y2, color)
@@ -489,6 +500,7 @@ class Display():
         for s in range(n):
             t = 2.0 * pi * s / sides + theta
             coords.append([int(r * cos(t) + x0), int(r * sin(t) + y0)])
+        # cast to python float first to fix rounding errors
         self.draw_lines(coords, color=color)
 
     def draw_rectangle(self, x, y, w, h, color):
@@ -541,17 +553,23 @@ class Display():
             spacing: int, optional
         """
         for letter in text:
+            # get letter array and letter dimension
             w, h = self.draw_letter(x, y, letter, font, color, background, landscape)
+            # stop on error
             if w == 0 or h == 0:
                 print('ivalid width {0} or height {1}'.format(w, h))
                 return
             if landscape:
+                # fill in spacing
                 if spacing:
                     self.fill_hrect(x, y - w - spacing, h, spacing, background)
+                # position y for next letter
                 y -= (w + spacing)
             else:
+                # fill in spacing
                 if spacing:
                     self.fill_hrect(x + w, y, spacing, h, background)
+                # position x for next letter
                 x += (w + spacing)
 
     def draw_vline(self, x, y, h, color):
@@ -564,6 +582,7 @@ class Display():
             h: int
             color: int
         """
+        # confirm coordinates in boundary
         if self.is_off_grid(x, y, x, y + h - 1):
             return
         line = color.to_bytes(2, 'big') * h
@@ -617,7 +636,9 @@ class Display():
         y = b
         px = 0
         py = twoa2 * y
+        # plot initial points
         self.draw_line(x0, y0 - y, x0, y0 + y, color)
+        # region 1
         p = round(b2 - (a2 * b) + (0.25 * a2))
         while px < py:
             x += 1
@@ -630,6 +651,7 @@ class Display():
                 p += b2 + px - py
             self.draw_line(x0 + x, y0 - y, x0 + x, y0 + y, color)
             self.draw_line(x0 - x, y0 - y, x0 - x, y0 + y, color)
+        # region 2
         p = round(b2 * (x + 0.5) * (x + 0.5) +
                   a2 * (y - 1) * (y - 1) - a2 * b2)
         while y > 0:
@@ -704,17 +726,23 @@ class Display():
             color: int
             rotate:: int, optional
         """
+        # determine side coordinates
         coords = []
         theta = radians(rotate)
         n = sides + 1
         for s in range(n):
             t = 2.0 * pi * s / sides + theta
             coords.append([int(r * cos(t) + x0), int(r * sin(t) + y0)])
+        # starting point
         x1, y1 = coords[0]
+        # minimum Maximum X dict
         xdict = {y1: [x1, x1]}
+        # iterate through coordinates
         for row in coords[1:]:
             x2, y2 = row
             xprev, yprev = x2, y2
+            # calculate perimeter
+            # check for horizontal side
             if y1 == y2:
                 if x1 > x2:
                     x1, x2 = x2, x1
@@ -724,20 +752,28 @@ class Display():
                     xdict[y1] = [x1, x2]
                 x1, y1 = xprev, yprev
                 continue
+            # non-horizontal side
+            # changes in x, y
             dx = x2 - x1
             dy = y2 - y1
+            # determine how steep the line is
             is_steep = abs(dy) > abs(dx)
+            # rotate line
             if is_steep:
                 x1, y1 = y1, x1
                 x2, y2 = y2, x2
+            # swap start and end points if necessary
             if x1 > x2:
                 x1, x2 = x2, x1
                 y1, y2 = y2, y1
+            # recalculate differentials
             dx = x2 - x1
             dy = y2 - y1
+            # calculate error
             error = dx >> 1
             ystep = 1 if y1 < y2 else -1
             y = y1
+            # calcualte minimum and maximum x values
             for x in range(x1, x2 + 1):
                 if is_steep:
                     if x in xdict:
@@ -754,6 +790,7 @@ class Display():
                     y += ystep
                     error += dx
             x1, y1 = xprev, yprev
+        # fill polygon
         for y, x in xdict.items():
             self.draw_hline(x[0], y, x[1] - x[0] + 2, color)
 
