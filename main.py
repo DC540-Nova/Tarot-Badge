@@ -35,7 +35,7 @@ def img_test():
     """
     Function to test img display functionality
     """
-    display.clear()
+    # display.clear()
     display.draw_image('/sd/02-TheHighPriestess.raw')
     sleep(1)
 
@@ -43,7 +43,7 @@ def font_test():
     """
     Function to test various fonts
     """
-    display.clear()
+    # display.clear()
     print('Loading fonts...')
     print('Loading arcadepix')
     arcadepix = XglcdFont('fonts/ArcadePix9x11.c', 9, 11)
@@ -63,7 +63,7 @@ def font_test():
     unispace = XglcdFont('fonts/Unispace12x24.c', 12, 24)
     print('Loading wendy')
     wendy = XglcdFont('fonts/Wendy7x8.c', 7, 8)
-    print('Fonts loaded.')
+    print('Fonts loaded...')
     display.draw_text(0, 0, 'Arcade Pix 9x11', arcadepix, color565(255, 0, 0))
     display.draw_text(0, 22, 'Bally 7x9', bally, color565(0, 255, 0))
     display.draw_text(0, 43, 'Broadway 17x15', broadway, color565(0, 0, 255))
@@ -75,7 +75,7 @@ def font_test():
     display.draw_text(0, 220, 'Wendy 7x8', wendy, color565(255, 0, 128))
     sleep(5)
 
-sd_test()
+#sd_test()
 img_test()
-font_test()
+#font_test()
 

@@ -352,7 +352,7 @@ class Display():
         if self.is_off_grid(x, y, x2, y2):
             return
         with open(path, 'rb') as f:
-            chunk_height = 22500 // w  # 153600 total bytes of an image
+            chunk_height = 25600 // w  # 153600 total bytes of an image
             chunk_count, remainder = divmod(h, chunk_height)
             chunk_size = chunk_height * w * 2
             chunk_y = y
@@ -910,7 +910,7 @@ class Display():
         self.cs(0)
         self.spi.write(bytearray([command]))
         self.cs(1)
-        # Handle any passed data
+        # handle any passed data
         if len(args) > 0:
             self.write_data(bytearray(args))
 
