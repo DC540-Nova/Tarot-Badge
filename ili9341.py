@@ -30,8 +30,8 @@
 
 from time import sleep
 from math import cos, sin, pi, radians
+from sys import implementation
 import ustruct
-import gc
 
 
 def color565(r, g, b):
@@ -55,63 +55,63 @@ class Display():
     """
 
     # ili9341 registers
-    NOP = const(0x00)
-    SWRESET = const(0x01)
-    RDDID = const(0x04)
-    RDDST = const(0x09)
-    SLPIN = const(0x10)
-    SLPOUT = const(0x11)
-    PTLON = const(0x12)
-    NORON = const(0x13)
-    RDMODE = const(0x0A)
-    RDMADCTL = const(0x0B)
-    RDPIXFMT = const(0x0C)
-    RDIMGFMT = const(0x0D)
-    RDSELFDIAG = const(0x0F)
-    INVOFF = const(0x20) 
-    INVON = const(0x21)
-    GAMMASET = const(0x26)
-    DISPLAY_OFF = const(0x28)
-    DISPLAY_ON = const(0x29)
-    SET_COLUMN = const(0x2A)
-    SET_PAGE = const(0x2B)
-    WRITE_RAM = const(0x2C)
-    READ_RAM = const(0x2E)
-    PTLAR = const(0x30)
-    VSCRDEF = const(0x33)
-    MADCTL = const(0x36)
-    VSCRSADD = const(0x37)
-    PIXFMT = const(0x3A)
-    WRITE_DISPLAY_BRIGHTNESS = const(0x51)
+    NOP = const(0x00)  # no-op
+    SWRESET = const(0x01)  # software reset
+    RDDID = const(0x04)  # read display ID info
+    RDDST = const(0x09)  # read display status
+    SLPIN = const(0x10)  # enter sleep mode
+    SLPOUT = const(0x11)  # exit sleep mode
+    PTLON = const(0x12)  # partial mode on
+    NORON = const(0x13)  # normal display mode on
+    RDMODE = const(0x0A)  # read display power mode
+    RDMADCTL = const(0x0B)  # read display MADCTL
+    RDPIXFMT = const(0x0C)  # read display pixel format
+    RDIMGFMT = const(0x0D)  # read display image format
+    RDSELFDIAG = const(0x0F)  # read display self-diagnostic
+    INVOFF = const(0x20)  # display inversion off
+    INVON = const(0x21)  # display inversion on
+    GAMMASET = const(0x26)  # gamma set
+    DISPLAY_OFF = const(0x28)  # display off
+    DISPLAY_ON = const(0x29)  # display on
+    SET_COLUMN = const(0x2A)  # column address set
+    SET_PAGE = const(0x2B)  # page address set
+    WRITE_RAM = const(0x2C)  # memory write
+    READ_RAM = const(0x2E)  # memory read
+    PTLAR = const(0x30)  # partial area
+    VSCRDEF = const(0x33)  # vertical scrolling definition
+    MADCTL = const(0x36)  # memory access control
+    VSCRSADD = const(0x37)  # vertical scrolling start address
+    PIXFMT = const(0x3A)  # COLMOD: pixel format set
+    WRITE_DISPLAY_BRIGHTNESS = const(0x51)  # brightness hardware dependent
     READ_DISPLAY_BRIGHTNESS = const(0x52)
     WRITE_CTRL_DISPLAY = const(0x53)
     READ_CTRL_DISPLAY = const(0x54)
-    WRITE_CABC = const(0x55)
-    READ_CABC = const(0x56) 
-    WRITE_CABC_MINIMUM = const(0x5E) 
-    READ_CABC_MINIMUM = const(0x5F) 
-    FRMCTR1 = const(0xB1) 
-    FRMCTR2 = const(0xB2) 
-    FRMCTR3 = const(0xB3) 
-    INVCTR = const(0xB4) 
-    DFUNCTR = const(0xB6)
-    PWCTR1 = const(0xC0) 
-    PWCTR2 = const(0xC1) 
-    PWCTRA = const(0xCB)  
-    PWCTRB = const(0xCF) 
-    VMCTR1 = const(0xC5)  
-    VMCTR2 = const(0xC7)  
-    RDID1 = const(0xDA) 
-    RDID2 = const(0xDB) 
-    RDID3 = const(0xDC) 
-    RDID4 = const(0xDD)  
-    GMCTRP1 = const(0xE0)  
-    GMCTRN1 = const(0xE1) 
-    DTCA = const(0xE8) 
-    DTCB = const(0xEA) 
-    POSC = const(0xED)  
-    ENABLE3G = const(0xF2) 
-    PUMPRC = const(0xF7) 
+    WRITE_CABC = const(0x55)  # write content adaptive brightness control
+    READ_CABC = const(0x56)  # read content adaptive brightness control
+    WRITE_CABC_MINIMUM = const(0x5E)  # write CABC minimum brightness
+    READ_CABC_MINIMUM = const(0x5F)  # read CABC minimum brightness
+    FRMCTR1 = const(0xB1)  # frame rate control (in normal mode/full colors)
+    FRMCTR2 = const(0xB2)  # frame rate control (in idle mode/8 colors)
+    FRMCTR3 = const(0xB3)  # frame rate control (in partial mode/full colors)
+    INVCTR = const(0xB4)  # display inversion control
+    DFUNCTR = const(0xB6)  # display function control
+    PWCTR1 = const(0xC0)  # power control 1
+    PWCTR2 = const(0xC1)  # power control 2
+    PWCTRA = const(0xCB)  # power control Aa
+    PWCTRB = const(0xCF)  # power control B
+    VMCTR1 = const(0xC5)  # VCOM control 1
+    VMCTR2 = const(0xC7)  # VCOM control 2
+    RDID1 = const(0xDA)  # read ID 1
+    RDID2 = const(0xDB)  # read ID 2
+    RDID3 = const(0xDC)  # read ID 3
+    RDID4 = const(0xDD)  # read ID 4
+    GMCTRP1 = const(0xE0)  # positive gamma correction
+    GMCTRN1 = const(0xE1)  # negative gamma correction
+    DTCA = const(0xE8)  # driver timing control A
+    DTCB = const(0xEA)  # Driver timing control B
+    POSC = const(0xED)  # power on sequence control
+    ENABLE3G = const(0xF2)  # enable 3 gamma control
+    PUMPRC = const(0xF7)  # pump ratio control
 
     ROTATE = {
         0: 0x88,
@@ -138,9 +138,10 @@ class Display():
         self.width = width
         self.height = height
         if rotation not in self.ROTATE.keys():
-            raise RuntimeError('Rotation must be 0, 90, 180 or 270.')
+            raise RuntimeError('rotation must be 0, 90, 180 or 270')
         else:
             self.rotation = self.ROTATE[rotation]
+        # initialize GPIO pins and set implementation specific methods
         self.cs.init(self.cs.OUT, value=1)
         self.dc.init(self.dc.OUT, value=0)
         self.rst.init(self.rst.OUT, value=1)
@@ -148,7 +149,8 @@ class Display():
         self.write_cmd = self.write_cmd_mpy
         self.write_data = self.write_data_mpy
         self.reset()
-        self.write_cmd(self.SWRESET)
+        # send initialization commands
+        self.write_cmd(self.SWRESET)  # software reset
         sleep(.1)
         self.write_cmd(self.PWCTRB, 0x00, 0xC1, 0x30)  # pwr ctrl B
         self.write_cmd(self.POSC, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
@@ -210,6 +212,7 @@ class Display():
         """
         w = self.width
         h = self.height
+        # clear display in 1024 byte blocks
         if color:
             line = color.to_bytes(2, 'big') * (w * 8)
         else:
@@ -272,8 +275,7 @@ class Display():
         Params:
             x0: int
             y0: int
-            a: int
-            b: int
+            r: int
             color: int
         """
         a2 = a * a
@@ -284,10 +286,12 @@ class Display():
         y = b
         px = 0
         py = twoa2 * y
+        # plot initial points
         self.draw_pixel(x0 + x, y0 + y, color)
         self.draw_pixel(x0 - x, y0 + y, color)
         self.draw_pixel(x0 + x, y0 - y, color)
         self.draw_pixel(x0 - x, y0 - y, color)
+        # region 1
         p = round(b2 - (a2 * b) + (0.25 * a2))
         while px < py:
             x += 1
@@ -302,8 +306,8 @@ class Display():
             self.draw_pixel(x0 - x, y0 + y, color)
             self.draw_pixel(x0 + x, y0 - y, color)
             self.draw_pixel(x0 - x, y0 - y, color)
-        p = round(b2 * (x + 0.5) * (x + 0.5) +
-                  a2 * (y - 1) * (y - 1) - a2 * b2)
+        # region 2
+        p = round(b2 * (x + 0.5) * (x + 0.5) + a2 * (y - 1) * (y - 1) - a2 * b2)
         while y > 0:
             y -= 1
             py -= twoa2
@@ -333,7 +337,7 @@ class Display():
         line = color.to_bytes(2, 'big') * w
         self.block(x, y, x + w - 1, y, line)
 
-    def draw_image(self, path, x=0, y=0, w=240, h=320):
+    def draw_image(self, path, x=0, y=0, w=320, h=240):
         """
         Method to draw image on screen from flash or sd card
 
@@ -349,7 +353,7 @@ class Display():
         if self.is_off_grid(x, y, x2, y2):
             return
         with open(path, 'rb') as f:
-            chunk_height = 25000 // w #153600, 25600
+            chunk_height = 25600 // w  # 153600 total bytes of an image
             chunk_count, remainder = divmod(h, chunk_height)
             chunk_size = chunk_height * w * 2
             chunk_y = y
@@ -364,7 +368,6 @@ class Display():
                 buf = f.read(remainder * w * 2)
                 self.block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
 
-     
     def draw_letter(self, x, y, letter, font, color, background=0, landscape=False):
         """
         Method to draw a single letter as portrait is the default landscape
