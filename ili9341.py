@@ -336,7 +336,7 @@ class Display():
         line = color.to_bytes(2, 'big') * w
         self.block(x, y, x + w - 1, y, line)
 
-    def draw_image(self, path, x=0, y=0, w=240, h=320):
+    def draw_image(self, path, x=0, y=0, w=240, h=320, draw_speed=26375):
         """
         Method to draw image on screen from flash or sd card
 
@@ -346,13 +346,14 @@ class Display():
             y: int, optional
             w: int, optional
             h: int, optional
+            draw_speed: int, optional
         """
         x2 = x + w - 1
         y2 = y + h - 1
         if self.is_off_grid(x, y, x2, y2):
             return
         with open(path, 'rb') as f:
-            chunk_height = 25600 // w  # 153600 total bytes of an image, 25600
+            chunk_height = draw_speed // w  # 153600 total bytes of an image
             chunk_count, remainder = divmod(h, chunk_height)
             chunk_size = chunk_height * w * 2
             chunk_y = y

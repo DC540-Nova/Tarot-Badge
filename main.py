@@ -7,7 +7,7 @@ from ili9341 import Display, color565
 from time import sleep
 from xglcd_font import XglcdFont
 
-# config 
+# config
 spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
 display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
 sd_cs = machine.Pin(9, machine.Pin.OUT)
@@ -36,7 +36,7 @@ def img_test():
     Function to test img display functionality
     """
     # display.clear()
-    display.draw_image('/sd/02-TheHighPriestess.raw')
+    display.draw_image('/sd/02-TheHighPriestess.raw', draw_speed=26375)  # implemented draw_speed for BAAB so can try different speeds
     sleep(1)
 
 def font_test():
@@ -75,21 +75,18 @@ def font_test():
     display.draw_text(0, 220, 'Wendy 7x8', wendy, color565(255, 0, 128))
     sleep(5)
     
+    
 def main_menu():
     """
     Function to display the main menu
     """
-    #display.clear()
+    display.clear()
     display.draw_text(0, 0, 'MAIN MENU', unispace, color565(255, 128, 0))
     display.draw_text(0, 25, 'up: Badge ID', unispace, color565(255, 255, 0))
     display.draw_text(0, 50, 'down: Games', unispace, color565(255, 255, 0))
     display.draw_text(0, 75, 'lt: Phonebooth', unispace, color565(255, 255, 0))
 
- 
-    #text('rt: Extras', x=0, y=47, start_clear=False)
-    #text('submit: Reset', x=0, y=57, start_clear=False)
 
-#bally = XglcdFont('fonts/Bally7x9.c', 7, 9)
 unispace = XglcdFont('fonts/Unispace12x24.c', 12, 24)
 #sd_test()
 img_test()
