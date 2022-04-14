@@ -342,8 +342,8 @@ class Display():
 
         Params:
             path: str
-            x: int
-            y: int
+            x: int, optional
+            y: int, optional
             w: int, optional
             h: int, optional
         """
@@ -352,7 +352,7 @@ class Display():
         if self.is_off_grid(x, y, x2, y2):
             return
         with open(path, 'rb') as f:
-            chunk_height = 25600 // w  # 153600 total bytes of an image
+            chunk_height = 25600 // w  # 153600 total bytes of an image, 25600
             chunk_count, remainder = divmod(h, chunk_height)
             chunk_size = chunk_height * w * 2
             chunk_y = y

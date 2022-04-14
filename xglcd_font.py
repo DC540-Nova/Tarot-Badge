@@ -115,7 +115,7 @@ class XglcdFont(object):
         letter_ord = ord(letter) - self.start_letter
         # confirm font contains letter
         if letter_ord >= self.letter_count:
-            print('Font does not contain character: ' + letter)
+            print('font does not contain character: ' + letter)
             return b'', 0, 0
         bytes_per_letter = self.bytes_per_letter
         offset = letter_ord * bytes_per_letter
@@ -151,12 +151,12 @@ class XglcdFont(object):
                     lh = letter_height
         else:
             # populate buffer in order for portrait
-            col = 0  # Set column to first column
+            col = 0  # set column to first column
             bytes_per_letter = ceil(letter_height / 8)
             letter_byte = 0
             # loop through letter byte data and convert to pixel data
             for b in mv[1:]:
-                # Process only colored bits
+                # process only colored bits
                 segment_size = letter_byte * letter_width * 16
                 for bit in self.lit_bits(b):
                     pos = (bit * letter_width) + (col * 2) + segment_size
