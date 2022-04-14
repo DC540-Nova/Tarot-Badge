@@ -33,3 +33,22 @@
                 #self.block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
             buf = framebuf.FrameBuffer(bytearray(buf), w, h, framebuf.RGB565)
             self.block(x, chunk_y, x2, chunk_y + chunk_height - 1, buf)
+
+            
+            
+            
+            
+ 
+def write_bin(f, pixel_list):
+    """
+    Method to save image in RGB565 format
+    
+    Params:
+        f: object
+        pixel_list: list
+    """
+    for pix in pixel_list:
+        r = (pix[0] >> 3) & 0x1F
+        g = (pix[1] >> 2) & 0x3F
+        b = (pix[2] >> 3) & 0x1F
+        f.write(pack('>H', (r << 11) + (g << 5) + b))
