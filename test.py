@@ -1,4 +1,4 @@
-    def draw_image(self, path, x=0, y=0, w=240, h=320, draw_speed=26375):
+   def draw_image(self, path, x=0, y=0, w=240, h=320, draw_speed=26375):
         """
         Method to draw image on screen from flash or sd card
 
@@ -17,19 +17,19 @@
             return
         with open(path, 'rb') as f:
             chunk_height = draw_speed // w  # 153600 total bytes of an image
-            chunk_count, remainder = divmod(h, chunk_height)
+            #chunk_count, remainder = divmod(h, chunk_height)
             chunk_size = chunk_height * w * 2
             chunk_y = y
-            buf = bytes(0)
-            if chunk_count:
-                for _ in range(0, chunk_count):
-                    gc.collect()
-                    buf += f.read(chunk_size)
+            #buf = bytes(0)
+      #      if chunk_count:
+   #             for _ in range(0, chunk_count):
+   #                 gc.collect()
+            buf = f.read(chunk_size)
                     #self.block(x, chunk_y, x2, chunk_y + chunk_height - 1, buf)
-                    chunk_y += chunk_height
-            if remainder:
-                gc.collect()
-                buf += f.read(remainder * w * 2)
+   #                 chunk_y += chunk_height
+            #if remainder:
+             #   gc.collect()
+            #    buf += f.read(remainder * w * 2)
                 #self.block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
-                framebuf.FrameBuffer(bytearray(buf), w, h, framebuf.RGB565)
-                self.block(x, chunk_y, x2, chunk_y + chunk_height - 1, buf)
+            buf = framebuf.FrameBuffer(bytearray(buf), w, h, framebuf.RGB565)
+            self.block(x, chunk_y, x2, chunk_y + chunk_height - 1, buf)
