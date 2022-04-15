@@ -5,11 +5,18 @@
 
 import utime
 from machine import Pin, SPI
+
+import config
+import neo_pixel
 import sdcard
 import uos
 from ili9341 import Display, color565
 from xglcd_font import XglcdFont
 import _thread
+import random
+
+neo_pixel = neo_pixel.NeoPixel(Pin)
+
 
 # config
 spi = SPI(
@@ -40,11 +47,14 @@ sd = sdcard.SDCard(sd_spi, sd_cs)
 vfs = uos.VfsFat(sd)
 uos.mount(vfs, "/sd")
 
+hex1 = [32, 31, 30, 27, 28, 29, 32]
+paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
+
 
 def bg_task():
     while True:
-        print("entered into the bg thread")
-        # utime.sleep(0.1)
+        for my_LED in hex1:
+            neo_pixel.led_on(paths[my_LED - 11], config.COLORS[random.randint(1, 7)])
 
 
 def sd_test():
