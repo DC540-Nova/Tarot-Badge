@@ -30,7 +30,7 @@ p0.value(0)
 sd_cs = Pin(9, Pin.OUT)
 sd_spi = SPI(
     1,
-    baudrate=40000000,
+    baudrate=1000000,
     polarity=0,
     phase=0,
     bits=8,
@@ -52,9 +52,12 @@ paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3
 
 
 def bg_task():
-    while True:
+    for _ in range(20):
         for my_LED in hex1:
             neo_pixel.led_on(paths[my_LED - 11], config.COLORS[random.randint(1, 7)])
+    utime.sleep_ms(10)
+    neo_pixel.led_clear()
+    _thread.exit()  # noqa
 
 
 def sd_test():
@@ -73,7 +76,6 @@ def img_test():
     """
     Function to test img display functionality
     """
-
     display.clear()
     display.draw_image('/sd/02-TheHighPriestess.raw', draw_speed=2600)
     p0.value(1)
