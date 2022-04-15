@@ -1,3 +1,8 @@
+# pip install adafruit-ampy
+# ampy -p com5 put main.py
+# open micropython terminal - tools - mp - mp REPL
+# ctrl-d to load
+
 import utime
 from machine import Pin, SPI
 import sdcard
@@ -7,7 +12,11 @@ from xglcd_font import XglcdFont
 import _thread
 
 # config
-spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
+spi = SPI(
+    0,
+    baudrate=40000000,
+    sck=Pin(6),
+    mosi=Pin(7))
 display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
 p0 = Pin(0, Pin.OUT)
 p0.value(0)
@@ -35,7 +44,7 @@ uos.mount(vfs, "/sd")
 def bg_task():
     while True:
         print("entered into the bg thread")
-        utime.sleep(1)
+        # utime.sleep(0.1)
 
 
 def sd_test():
@@ -57,6 +66,7 @@ def img_test():
 
     display.clear()
     display.draw_image('/sd/02-TheHighPriestess.raw', draw_speed=2600)
+    p0.value(1)
     utime.sleep(1)
     p0.value(0)
 
@@ -74,7 +84,7 @@ def main_menu():
 
 
 unispace = XglcdFont('Unispace12x24.c', 12, 24)
-# sd_test()
+sd_test()
 print("main thread img_test")
 _thread.start_new_thread(bg_task, ())
 img_test()
