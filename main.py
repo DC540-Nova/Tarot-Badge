@@ -52,11 +52,13 @@ paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3
 
 
 def bg_task():
+    """
+    Function to test demo multi-threadded functionality
+    """
     for count in range(20):
         for my_LED in hex1:
             neo_pixel.led_on(paths[my_LED - 11], config.COLORS[random.randint(1, 7)])
             if count == 19:
-                utime.sleep_ms(100)
                 neo_pixel.led_clear()
                 _thread.exit()  # noqa
 
