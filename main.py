@@ -52,12 +52,13 @@ paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3
 
 
 def bg_task():
-    for _ in range(20):
+    for count in range(20):
         for my_LED in hex1:
             neo_pixel.led_on(paths[my_LED - 11], config.COLORS[random.randint(1, 7)])
-    utime.sleep_ms(10)
-    neo_pixel.led_clear()
-    _thread.exit()  # noqa
+            if count == 19:
+                utime.sleep_ms(100)
+                neo_pixel.led_clear()
+                _thread.exit()  # noqa
 
 
 def sd_test():
@@ -93,6 +94,8 @@ def main_menu():
     display.draw_text(0, 50, 'down: Games', unispace, color565(255, 255, 0))
     display.draw_text(0, 75, 'lt: Phonebooth', unispace, color565(255, 255, 0))
     p0.value(1)
+    utime.sleep(1)
+    p0.value(0)
 
 
 unispace = XglcdFont('Unispace12x24.c', 12, 24)
