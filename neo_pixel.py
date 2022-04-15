@@ -40,16 +40,16 @@ class NeoPixel:
     Class to handle NeoPixel functionality
     """
 
-    def __init__(self, pin, LED_COUNT=LED_COUNT):
+    def __init__(self, pin, LED_COUNT=LED_COUNT):  # noqa
         """
         Params:
             pin: object
             LED_COUNT: int
         """
         # create the StateMachine with the ws2812 program, outputting on Pin(LED_PIN)
-        sm = rp2.StateMachine(0, self.__ws2812, freq=8_000_000, sideset_base=pin(LED_PIN))
+        sm = rp2.StateMachine(0, self.__ws2812, freq=8_000_000, sideset_base=pin(LED_PIN))  # noqa
         # start the StateMachine, it will wait for data on its FIFO
-        sm.active(1)
+        sm.active(1)  # noqa
         # display a pattern on the LEDs via an array of LED RGB values
         ar = array.array('I', [0 for _ in range(LED_COUNT)])
         self.num_leds = LED_COUNT
@@ -59,22 +59,22 @@ class NeoPixel:
         self.paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
 
     @staticmethod
-    @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT,
+    @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT,  # noqa
                  autopull=True, pull_thresh=24)
     def __ws2812():
         """
         Internal method to handle ARM 32 assembly LED NeoPixel driver
         """
-        T1 = 2
-        T2 = 5
-        T3 = 3
+        T1 = 2  # noqa
+        T2 = 5  # noqa
+        T3 = 3  # noqa
         wrap_target()
         label("bitloop")
-        out(x, 1).side(0)[T3 - 1]
-        jmp(not_x, "do_zero").side(1)[T1 - 1]
-        jmp("bitloop").side(1)[T2 - 1]
+        out(x, 1).side(0)[T3 - 1]  # noqa
+        jmp(not_x, "do_zero").side(1)[T1 - 1]  # noqa
+        jmp("bitloop").side(1)[T2 - 1]  # noqa
         label("do_zero")
-        nop().side(0)[T2 - 1]
+        nop().side(0)[T2 - 1]  # noqa
         wrap()
 
     def pixels_set(self, led, color):
@@ -98,7 +98,7 @@ class NeoPixel:
             g = int(((cc >> 16) & 0xFF) * brightness)  # 8-bit green dimmed to brightness
             b = int((cc & 0xFF) * brightness)  # 8-bit blue dimmed to brightness
             dimmer_ar[ii] = (g << 16) + (r << 8) + b  # 24-bit color dimmed to brightness
-        self.sm.put(dimmer_ar, 8)  # update the state machine with new colors
+        self.sm.put(dimmer_ar, 8)  # update the state machine with new colors  # noqa
         sleep_ms(10)
 
     def led_clear(self, reverse=False, hard_clear=False, clear_only_spheres=False, clear_only_paths=False):
@@ -148,7 +148,7 @@ class NeoPixel:
             self.pixels_show()
         else:
             self.pixels_set(led, color)
-            self.pixels_show(brightness)
+            self.pixels_show(brightness)  # noqa
 
     def breathing_led_on(self, led, color=RED, repeat=1):
         """
@@ -165,7 +165,7 @@ class NeoPixel:
             breath_amps.extend([ii for ii in range(1000, -1, -step)])
             for ii in breath_amps:
                 self.pixels_set(led, color)
-                self.pixels_show(ii / 255)
+                self.pixels_show(ii / 255)  # noqa
                 sleep(0.02)
             repeat -= 1
 
@@ -209,7 +209,7 @@ class NeoPixel:
                     self.pixels_set(led, color)
                 for led in self.paths:
                     self.pixels_set(led, color)
-                self.pixels_show(ii / 25)
+                self.pixels_show(ii / 25)  # noqa
             repeat -= 1
         self.led_clear()
         display.clear()
@@ -231,7 +231,7 @@ class NeoPixel:
                     self.pixels_set(led, color)
                 for led in self.paths:
                     self.pixels_set(led, color)
-                self.pixels_show(ii / 25)
+                self.pixels_show(ii / 25)  # noqa
             repeat -= 1
         self.led_clear()
         display.clear()

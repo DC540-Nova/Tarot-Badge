@@ -96,6 +96,6 @@ def main_menu():
 unispace = XglcdFont('Unispace12x24.c', 12, 24)
 sd_test()
 print("main thread img_test")
-_thread.start_new_thread(bg_task, ())
+_thread.start_new_thread(bg_task, ())  # noqa
 img_test()
 main_menu()
