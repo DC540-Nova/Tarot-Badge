@@ -29,7 +29,7 @@
 # pyright: reportUndefinedVariable=false
 
 import sys
-from os import path  # noqa
+import os
 from pathlib import Path
 from PIL import Image
 from PIL.Image import Resampling  # noqa
@@ -62,15 +62,15 @@ def convert(f):
 
 if __name__ == '__main__':
     args = sys.argv
+    if len(args) != 1:
+        error('usage: python convert.py')
 
-    if len(args) != 2:
-        error('usage: python convert.py deck')
-    directory = args[1]
-    if not path.exists(directory):
-        error('file not found: ' + directory)
+    directory = 'deck'
+    if not os.path.exists(directory):  # noqa
+        error('directory does not exist: ' + directory)
 
     files = Path(directory).glob('*')
     for filename in files:
-        filename, ext = path.splitext(filename)
+        filename, ext = os.path.splitext(filename)  # noqa
         convert(filename + ext)
-        print('saved: ' + filename)
+        print('saved: ' + filename + ext)
