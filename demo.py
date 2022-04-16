@@ -132,7 +132,9 @@ def play():
         p0.value(1)
 
         # Load sprite
-        dc_540_logo = BouncingSprite('dc540_logo.raw', 100, 100, 240, 320, 1, display)
+        import gc
+        gc.collect()
+        dc_540_logo = BouncingSprite('dc540_logo.raw', 115, 115, 240, 320, 1, display)
 
         while True:
             timer = ticks_us()
