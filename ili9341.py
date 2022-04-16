@@ -30,9 +30,9 @@
 
 from time import sleep
 from math import cos, sin, pi, radians
-from sys import implementation
 import ustruct
 import gc
+from micropython import const
 
 
 def color565(r, g, b):

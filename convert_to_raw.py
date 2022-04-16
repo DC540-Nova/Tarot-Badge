@@ -28,12 +28,11 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-
-from pickletools import optimize
+import sys
+import os
 from PIL import Image
 from struct import pack
-from os import path
-import sys
+from pathlib import Path
 
 
 def error(msg):
@@ -47,7 +46,7 @@ def error(msg):
     sys.exit(-1)
 
 
-def write_bin(f, pixel_list):
+def write_bin(f, pixel_list):  # noqa
     """
     Method to save image in RGB565 format
     
@@ -64,17 +63,27 @@ def write_bin(f, pixel_list):
 
 if __name__ == '__main__':
     args = sys.argv
+    if len(args) != 1:
+        error('usage: python convert_to_raw.py')
 
-    if len(args) != 2:
-        error('please specify input file: ./img2rgb565.py test.png')
-    in_path = args[1]
-    if not path.exists(in_path):
-        error('file not found: ' + in_path)
-        
-    filename, ext = path.splitext(in_path)
-    out_path = filename + '.raw'
-    img = Image.open(in_path).convert('RGB')
-    pixels = list(img.getdata())
-    with open(out_path, 'wb') as f:
-        write_bin(f, pixels)
-    print('saved: ' + out_path)
+    directory = 'deck'
+    if not os.path.exists(directory):  # noqa
+        error('directory does not exist: ' + directory)
+
+    new_directory = 'deck-raw'
+    try:
+        os.mkdir(new_directory)
+    except (OSError, WindowsError) as error:
+        pass
+    new_directory = os.path.abspath(new_directory) # noqa
+
+    files = Path(directory).glob('*')
+    for filename in files:
+        filename, ext = os.path.splitext(filename)  # noqa
+        absolute_path = os.path.abspath(__file__)  # noqa
+        out_path = new_directory + filename[4:] + '.raw'  # noqa
+        img = Image.open(filename + ext).convert('RGB')
+        pixels = list(img.getdata())
+        with open(out_path, 'wb') as f:
+            write_bin(f, pixels)
+        print('saved: ' + out_path)
