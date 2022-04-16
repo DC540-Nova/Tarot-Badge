@@ -8,15 +8,15 @@ from machine import Pin, SPI
 
 import config
 import neo_pixel
-import sdcard
-import uos
 from ili9341 import Display, color565
 from xglcd_font import XglcdFont
+import uos
+import sdcard
 import _thread
 import random
+import gc
 
 neo_pixel = neo_pixel.NeoPixel(Pin)
-
 
 # config
 spi = SPI(
@@ -30,7 +30,7 @@ p0.value(0)
 sd_cs = Pin(9, Pin.OUT)
 sd_spi = SPI(
     1,
-    baudrate=1000000,
+    baudrate=40000000,
     polarity=0,
     phase=0,
     bits=8,
@@ -67,11 +67,11 @@ def sd_test():
     """
     Function to test sd card functionality
     """
-    with open('/sd/test01.txt', 'w') as file:
-        file.write('Hello, Baab!\r\n')
-        file.write('This is the United States calling are we reaching?\r\n')
-    with open('/sd/test01.txt', 'r') as file:
-        data = file.read()
+    with open('test01.txt', 'w') as f:
+        f.write('Hello, Baab!\r\n')
+        f.write('This is the United States calling are we reaching?\r\n')
+    with open('test01.txt', 'r') as f:
+        data = f.read()
         print(data)
 
 
@@ -79,8 +79,16 @@ def img_test():
     """
     Function to test img display functionality
     """
-    display.clear()
-    display.draw_image('/sd/02-TheHighPriestess.raw', draw_speed=2600)
+    # display.clear()
+    display.draw_image('sd/00-TheFool.raw', draw_speed=1024)
+    p0.value(1)
+    utime.sleep(1)
+    p0.value(0)
+    display.draw_image('sd/01-TheMagician.raw', draw_speed=1024)
+    p0.value(1)
+    utime.sleep(1)
+    p0.value(0)
+    display.draw_image('sd/02-TheHighPriestess.raw', draw_speed=1024)
     p0.value(1)
     utime.sleep(1)
     p0.value(0)
@@ -103,6 +111,9 @@ def main_menu():
 unispace = XglcdFont('Unispace12x24.c', 12, 24)
 sd_test()
 print("main thread img_test")
+gc.collect()
 _thread.start_new_thread(bg_task, ())  # noqa
+gc.collect()
 img_test()
+gc.collect()
 main_menu()

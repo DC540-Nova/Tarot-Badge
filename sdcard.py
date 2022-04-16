@@ -42,6 +42,7 @@ class SDCard:
     """
     Class to handle SDCard functionality
     """
+
     def __init__(self, spi, cs, baudrate=1320000):
         """
         Params:
@@ -63,7 +64,7 @@ class SDCard:
     def init_spi(self, baudrate):
         """
         Method to handle init of spi device
-        
+
         Params:
             baudrate: int
         """
@@ -77,7 +78,7 @@ class SDCard:
     def init_card(self, baudrate):
         """
         Method to handle init of spi device
-        
+
         Params:
             baudrate: int
         """
@@ -150,7 +151,7 @@ class SDCard:
     def cmd(self, cmd, arg, crc, final=0, release=True, skip1=False):
         """
         Method to handle cmd functionality
-        
+
         Params:
             cmd: int
             arg: int
@@ -158,7 +159,7 @@ class SDCard:
             final: int, optional
             release: bool, optional
             skip1: bool, optional
-        
+
         Returns:
             int
         """
@@ -194,7 +195,7 @@ class SDCard:
     def readinto(self, buf):
         """
         Method to handle reading info
-        
+
         Params:
             buf: int
         """
@@ -222,7 +223,7 @@ class SDCard:
     def write(self, token, buf):
         """
         Method to handle write operation
-        
+
         Params:
             token: int
             buf: int
@@ -247,7 +248,7 @@ class SDCard:
     def write_token(self, token):
         """
         Method to handle writing of token
-        
+
         Params:
             token: int
         """
@@ -263,7 +264,7 @@ class SDCard:
     def readblocks(self, block_num, buf):
         """
         Method to handle reading of blocks on drive
-        
+
         Params:
             block_num: int
             buf: int
@@ -288,7 +289,7 @@ class SDCard:
             mv = memoryview(buf)
             while nblocks:
                 # receive the data and release card
-                self.readinto(mv[offset : offset + 512])
+                self.readinto(mv[offset: offset + 512])
                 offset += 512
                 nblocks -= 1
             if self.cmd(12, 0, 0xFF, skip1=True):
@@ -297,7 +298,7 @@ class SDCard:
     def writeblocks(self, block_num, buf):
         """
         Method to handle writing of blocks on drive
-        
+
         Params:
             block_num: int
             buf: int
@@ -318,7 +319,7 @@ class SDCard:
             offset = 0
             mv = memoryview(buf)
             while nblocks:
-                self.write(_TOKEN_CMD25, mv[offset : offset + 512])
+                self.write(_TOKEN_CMD25, mv[offset: offset + 512])
                 offset += 512
                 nblocks -= 1
             self.write_token(_TOKEN_STOP_TRAN)
@@ -326,14 +327,14 @@ class SDCard:
     def ioctl(self, op, arg):
         """
         Method to handle ioctl functionality
-        
+
         Params:
             opm: int
             arg: int
-            
+
         Returns:
             int
         """
         # get number of blocks
-        if op == 4: 
+        if op == 4:
             return self.sectors
