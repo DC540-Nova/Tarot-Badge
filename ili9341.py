@@ -370,37 +370,6 @@ class Display:
                 buf = f.read(remainder * w * 2)
                 self.block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
 
-    def draw_letter(self, x, y, letter, font, color, background=0, landscape=False):
-        """
-        Method to draw a single letter as portrait is the default landscape
-
-        Params:
-            x: int
-            y: int
-            letter: str
-            font: object
-            color: int
-            background: int, optional
-            landscape: bool, optional
-            
-        Returns:
-            int, int
-        """
-        buf, w, h = font.get_letter(letter, color, background, landscape)
-        # check for errors (Font could be missing specified letter)
-        if w == 0:
-            return w, h
-        if landscape:
-            y -= w
-            if self.is_off_grid(x, y, x + h - 1, y + w - 1):
-                return 0, 0
-            self.block(x, y, x + h - 1, y + w - 1, buf)
-        else:
-            if self.is_off_grid(x, y, x + w - 1, y + h - 1):
-                return 0, 0
-            self.block(x, y, x + w - 1, y + h - 1, buf)
-        return w, h
-
     def draw_line(self, x1, y1, x2, y2, color):
         """
         Method to draw a line.
@@ -542,7 +511,38 @@ class Display:
             return
         self.block(x, y, x2, y2, buf)
 
-    def draw_text(self, x, y, text, font, color,  background=0, landscape=False, spacing=1):
+    def draw_letter(self, x, y, letter, color, font, background=0, landscape=False):
+        """
+        Method to draw a single letter as portrait is the default landscape
+
+        Params:
+            x: int
+            y: int
+            letter: str
+            color: int
+            font: object
+            background: int, optional
+            landscape: bool, optional
+
+        Returns:
+            int, int
+        """
+        buf, w, h = font.get_letter(letter, color, background, landscape)
+        # check for errors (Font could be missing specified letter)
+        if w == 0:
+            return w, h
+        if landscape:
+            y -= w
+            if self.is_off_grid(x, y, x + h - 1, y + w - 1):
+                return 0, 0
+            self.block(x, y, x + h - 1, y + w - 1, buf)
+        else:
+            if self.is_off_grid(x, y, x + w - 1, y + h - 1):
+                return 0, 0
+            self.block(x, y, x + w - 1, y + h - 1, buf)
+        return w, h
+
+    def draw_text(self, x, y, text, color, font, background=0, landscape=False, spacing=1):
         """
         Method to draw text
 
@@ -550,15 +550,18 @@ class Display:
             x: int
             y: int
             text: str
-            font: object
             color: int
+            font: object
             background: int, optional
             landscape: bool, optional
             spacing: int, optional
         """
         for letter in text:
+            if letter == ' ' and x > 144:
+                x = 0
+                y += 24
             # get letter array and letter dimension
-            w, h = self.draw_letter(x, y, letter, font, color, background, landscape)
+            w, h = self.draw_letter(x, y, letter, color, font, background, landscape)
             # stop on error
             if w == 0 or h == 0:
                 print('ivalid width {0} or height {1}'.format(w, h))

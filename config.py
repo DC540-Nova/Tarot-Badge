@@ -35,11 +35,7 @@ from ili9341 import Display
 from xglcd_font import XglcdFont
 
 # display config
-spi = SPI(
-    0,
-    baudrate=40000000,
-    sck=Pin(6),
-    mosi=Pin(7))
+spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
 display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
 display_on = Pin(0, Pin.OUT)
 display_on.value(0)
@@ -49,17 +45,8 @@ unispace = XglcdFont('Unispace12x24.c', 12, 24)
 
 # sd card config
 sd_cs = Pin(9, Pin.OUT)
-sd_spi = SPI(
-    1,
-    baudrate=40000000,
-    polarity=0,
-    phase=0,
-    bits=8,
-    firstbit=SPI.MSB,
-    sck=Pin(10),
-    mosi=Pin(11),
-    miso=Pin(8)
-)
+sd_spi = SPI(1, baudrate=40000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11),
+             miso=Pin(8))
 
 # initialize sd card
 sd = sdcard.SDCard(sd_spi, sd_cs)

@@ -5,7 +5,7 @@
 # Developer: Kevin Thomas
 # Developer: Corinne "Rinn" Neidig
 #
-# Copyright (c) 2021 DC540 Defcon Group
+# Copyright (c) 2022 DC540 Defcon Group
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -33,10 +33,10 @@
 # mpremote exec 'import main'
 
 import utime
-from ili9341 import color565
 import _thread
 import random
 
+from ili9341 import color565
 import neo_pixel
 import demo
 from config import *
@@ -98,16 +98,30 @@ def main_menu():
     Function to display the main menu
     """
     display.clear()
-    display.draw_text(0, 0, 'MAIN MENU', unispace, color565(255, 128, 0))
-    display.draw_text(0, 25, 'up: Badge ID', unispace, color565(255, 255, 0))
-    display.draw_text(0, 50, 'down: Games', unispace, color565(255, 255, 0))
-    display.draw_text(0, 75, 'lt: Phonebooth', unispace, color565(255, 255, 0))
+    display.draw_text(0, 0, 'MAIN MENU', color565(255, 128, 0), unispace)
+    display.draw_text(0, 25, 'up: Badge ID', color565(255, 255, 0), unispace)
+    display.draw_text(0, 50, 'down: Games', color565(255, 255, 0), unispace)
+    display.draw_text(0, 75, 'lt: Phonebooth', color565(255, 255, 0), unispace)
     display_on.value(1)
     utime.sleep(1)
+    display_on.value(0)
+
+
+def questions():
+    """
+    Function to test questions on display
+    """
+    display.clear()
+    display.draw_text(0, 0, 'This is a long message I do hope it will wrap i will cry badly '
+                            'if it does not and blame babba.', color565(255, 128, 0), unispace)
+    display_on.value(1)
+    utime.sleep(5)
     display_on.value(0)
 
 
 sd_test()
 img_test()
 main_menu()
+questions()
 demo.play()
+
