@@ -28,9 +28,9 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from ili9341 import Display
-from machine import Pin, SPI
 from utime import sleep_us, ticks_us, ticks_diff
+
+from config import *
 
 
 class BouncingSprite(object):
@@ -38,7 +38,7 @@ class BouncingSprite(object):
     Class to handle a bouncing sprite animation
     """
 
-    def __init__(self, path, w, h, screen_width, screen_height, speed, display):
+    def __init__(self, path, w, h, screen_width, screen_height, speed, display):  # noqa
         """
         Params:
             path: str,
@@ -118,35 +118,17 @@ def play():
     """
     Function to play demo
     """
-    try:
-        # Baud rate of 40000000 seems about the max
-        spi = SPI(
-            0,
-            baudrate=40000000,
-            sck=Pin(6),
-            mosi=Pin(7))
-        display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
-        display.clear()
+    # load sprite
+    dc_540_logo = BouncingSprite('dc540_logo.raw', 115, 115, 240, 320, 1, display)
 
-        p0 = Pin(0, Pin.OUT)
-        p0.value(1)
-
-        # Load sprite
-        import gc
-        gc.collect()
-        dc_540_logo = BouncingSprite('dc540_logo.raw', 115, 115, 240, 320, 1, display)
-
-        while True:
-            timer = ticks_us()
-            dc_540_logo.update_pos()
-            dc_540_logo.draw()
-            # attempt to set framerate to 30 FPS
-            timer_dif = 33333 - ticks_diff(ticks_us(), timer)
-            if timer_dif > 0:
-                sleep_us(timer_dif)
-
-    except KeyboardInterrupt:
-        display.cleanup()  # noqa
-
-
-play()
+    display.clear()
+    display_on.value(1)
+    for _ in range(500):
+        timer = ticks_us()
+        dc_540_logo.update_pos()
+        dc_540_logo.draw()
+        # attempt to set framerate to 30 FPS
+        timer_dif = 33333 - ticks_diff(ticks_us(), timer)
+        if timer_dif > 0:
+            sleep_us(timer_dif)
+    display_on.value(0)

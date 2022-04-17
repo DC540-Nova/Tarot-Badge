@@ -50,7 +50,7 @@ def color565(r, g, b):
     return (r & 0xf8) << 8 | (g & 0xfc) << 3 | b >> 3
 
 
-class Display():
+class Display:
     """
     Class to handle IL9341 display.
     """
@@ -170,8 +170,10 @@ class Display():
         self.write_cmd(self.DFUNCTR, 0x08, 0x82, 0x27)
         self.write_cmd(self.ENABLE3G, 0x00)  # enable 3 gamma ctrl
         self.write_cmd(self.GAMMASET, 0x01)  # gamma curve selected
-        self.write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)
-        self.write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)
+        self.write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09,
+                       0x00)
+        self.write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36,
+                       0x0F)
         self.write_cmd(self.SLPOUT)  # exit sleep
         sleep(.1)
         self.write_cmd(self.DISPLAY_ON)  # display on
@@ -196,7 +198,7 @@ class Display():
 
     def cleanup(self):
         """
-        Method to cleanup resources
+        Method to clean up resources
         """
         self.clear()
         self.display_off()
@@ -408,6 +410,7 @@ class Display():
             y1: int
             x2: int
             y2: int
+            color: int
         """
         # check for horizontal line
         if y1 == y2:
@@ -591,7 +594,7 @@ class Display():
 
     def fill_circle(self, x0, y0, r, color):
         """
-        Method to filled a circle
+        Method to fill a circle
 
         Params:
             x0: int
@@ -815,7 +818,7 @@ class Display():
         if chunk_count:
             buf = color.to_bytes(2, 'big') * chunk_size
             for c in range(0, chunk_count):
-                self.block(chunk_x, y,chunk_x + chunk_width - 1, y + h - 1, buf)
+                self.block(chunk_x, y, chunk_x + chunk_width - 1, y + h - 1, buf)
                 chunk_x += chunk_width
         if remainder:
             buf = color.to_bytes(2, 'big') * remainder * h
@@ -849,7 +852,8 @@ class Display():
             return True
         return False
 
-    def load_sprite(self, path, w, h):
+    @staticmethod
+    def load_sprite(path, w, h):
         """
         Method to load sprite image
 

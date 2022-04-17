@@ -28,10 +28,47 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-import usys
-from machine import *
+from machine import Pin, SPI
+import uos
+import sdcard
+from ili9341 import Display
+from xglcd_font import XglcdFont
 
-# NeoPixel config
+# display config
+spi = SPI(
+    0,
+    baudrate=40000000,
+    sck=Pin(6),
+    mosi=Pin(7))
+display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
+display_on = Pin(0, Pin.OUT)
+display_on.value(0)
+
+# load font
+unispace = XglcdFont('Unispace12x24.c', 12, 24)
+
+# sd card config
+sd_cs = Pin(9, Pin.OUT)
+sd_spi = SPI(
+    1,
+    baudrate=40000000,
+    polarity=0,
+    phase=0,
+    bits=8,
+    firstbit=SPI.MSB,
+    sck=Pin(10),
+    mosi=Pin(11),
+    miso=Pin(8)
+)
+
+# initialize sd card
+sd = sdcard.SDCard(sd_spi, sd_cs)
+
+# mount sd filesystem
+vfs = uos.VfsFat(sd)
+uos.mount(vfs, '/sd')
+
+# neo_pixel config
 LED_PIN = 5
 LED_COUNT = 32
 BLACK = (0, 0, 0)
@@ -47,17 +84,17 @@ ORANGE = (255, 65, 0)
 GRAY = (128, 128, 128)
 COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
 
-# Button config
-BUTTON_LEFT = Pin(0, Pin.IN, Pin.PULL_UP)
-BUTTON_UP = Pin(1, Pin.IN, Pin.PULL_UP)
-BUTTON_DOWN = Pin(2, Pin.IN, Pin.PULL_UP)
-BUTTON_RIGHT = Pin(3, Pin.IN, Pin.PULL_UP)
-BUTTON_SUBMIT = Pin(10, Pin.IN, Pin.PULL_UP)
-BUTTON_EXTRA = Pin(8, Pin.IN, Pin.PULL_UP)
+# button config
+# BUTTON_LEFT = Pin(0, Pin.IN, Pin.PULL_UP)
+# BUTTON_UP = Pin(1, Pin.IN, Pin.PULL_UP)
+# BUTTON_DOWN = Pin(2, Pin.IN, Pin.PULL_UP)
+# BUTTON_RIGHT = Pin(3, Pin.IN, Pin.PULL_UP)
+# BUTTON_SUBMIT = Pin(10, Pin.IN, Pin.PULL_UP)
+# BUTTON_EXTRA = Pin(8, Pin.IN, Pin.PULL_UP)
 
-# NRF config
-if usys.platform == 'rp2':  # Software SPI
-    cfg = {'spi': 0, 'copi': 4, 'cipo': 7, 'sck': 6, 'csn': 14, 'ce': 17}
-else:
-    raise ValueError('Unsupported platform {}'.format(usys.platform))
-PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
+# nrf config
+# if usys.platform == 'rp2':  # Software SPI
+#     cfg = {'spi': 0, 'copi': 4, 'cipo': 7, 'sck': 6, 'csn': 14, 'ce': 17}
+# else:
+#     raise ValueError('Unsupported platform {}'.format(usys.platform))
+# PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')

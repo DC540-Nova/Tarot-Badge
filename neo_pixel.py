@@ -68,14 +68,14 @@ class NeoPixel:
         T1 = 2  # noqa
         T2 = 5  # noqa
         T3 = 3  # noqa
-        wrap_target()
-        label("bitloop")
+        wrap_target()  # noqa
+        label("bitloop")  # noqa
         out(x, 1).side(0)[T3 - 1]  # noqa
         jmp(not_x, "do_zero").side(1)[T1 - 1]  # noqa
         jmp("bitloop").side(1)[T2 - 1]  # noqa
-        label("do_zero")
+        label("do_zero")  # noqa
         nop().side(0)[T2 - 1]  # noqa
-        wrap()
+        wrap()  # noqa
 
     def pixels_set(self, led, color):
         """
@@ -168,71 +168,3 @@ class NeoPixel:
                 self.pixels_show(ii / 255)  # noqa
                 sleep(0.02)
             repeat -= 1
-
-    def morse_code(self, sentence, color=RED, clear_display=True, encrypted=True):
-        """
-        Method to display a morse code animation
-        Params:
-            sentence: str
-            color: tuple, optional
-            clear_display: bool, optional
-            encrypted: bool, optional
-        """
-        if clear_display:
-            display.clear()
-        self.led_clear()
-        encoded_sentence = morse_code.convert_to_morse_code(sentence, encrypted)
-        for letter in encoded_sentence:
-            if letter == '.':
-                morse_code.morse_code_dot(color)
-            elif letter == '-':
-                morse_code.morse_code_dash(color)
-            else:
-                morse_code.morse_code_pause()
-        display.clear()
-        file_manager.update_status()
-
-    def flicker(self, color=RED, repeat=1):
-        """
-        Method to display a flicker animation
-        Params:
-            color: tuple, optional
-            repeat: int, optional
-        """
-        display.clear()
-        while repeat > 0:
-            step = 5
-            breath_amps = [ii for ii in range(0, 1000, step)]
-            breath_amps.extend([ii for ii in range(10, -1, -step)])
-            for ii in breath_amps:
-                for led in self.spheres:
-                    self.pixels_set(led, color)
-                for led in self.paths:
-                    self.pixels_set(led, color)
-                self.pixels_show(ii / 25)  # noqa
-            repeat -= 1
-        self.led_clear()
-        display.clear()
-        file_manager.update_status()
-
-    def won(self, color=RED, repeat=5):
-        """
-        Method to display a won game animation
-        Params:
-            color: tuple, optional
-            repeat: int, optional
-        """
-        while repeat > 0:
-            step = 5
-            breath_amps = [ii for ii in range(0, 10000, step)]
-            breath_amps.extend([ii for ii in range(10000, -1, -step)])
-            for ii in breath_amps:
-                for led in self.spheres:
-                    self.pixels_set(led, color)
-                for led in self.paths:
-                    self.pixels_set(led, color)
-                self.pixels_show(ii / 25)  # noqa
-            repeat -= 1
-        self.led_clear()
-        display.clear()
-        file_manager.update_status()

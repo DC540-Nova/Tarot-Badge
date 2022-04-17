@@ -125,7 +125,7 @@ class XglcdFont(object):
         letter_height = self.height
         # get size in bytes of specified letter
         letter_size = letter_height * letter_width
-        # create buffer (double size to accommodate 16 bit colors)
+        # create buffer (double size to accommodate 16-bit colors)
         if background:
             buf = bytearray(background.to_bytes(2, 'big') * letter_size)
         else:
