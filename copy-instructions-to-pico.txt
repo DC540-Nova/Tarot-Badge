@@ -1,0 +1,5 @@
+1)cd to Tarot-Badge directory
+2)plug Pico into USB
+3)./setup.sh  # one time only operation otherwise SKIP this step
+4)source venv/bin/activate
+5)./copy-files-to-pico.sh
