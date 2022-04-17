@@ -1,0 +1,32 @@
+* Use VBUS and GND vs 3.3
+
+Display
+-------
+SPI0
+  sck  = GP6
+  mosi = GP7
+  dc   = GP15 
+  cs   = GP13
+  rst  = GP14
+  led  = GP0
+
+SD Card Reader INTERNAL-ONBOARD
+-------------------------------
+SPI1
+  cs   = GP9
+  sck  = GP10 (shared w/ NRF)
+  mosi = GP11 (shared w/ NRF)
+  miso = GP8  (shared w/ NRF)
+
+NeoPixel 8x8
+------------
+   led = GP5
+
+NRF
+---
+SPI1
+  miso = GP8  (shareed with SD Card Reader INTERNAL-ONBOARD)
+  mosi = GP11 (shareed with SD Card Reader INTERNAL-ONBOARD)
+  sck  = GP10 (shared w/ NRF)
+  csn  = GP27
+   ce  = GP28
