@@ -30,6 +30,8 @@
 
 from machine import Pin, SPI
 import uos
+import usys
+
 import sdcard
 from ili9341 import Display
 from xglcd_font import XglcdFont
@@ -80,8 +82,8 @@ COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, G
 # BUTTON_EXTRA = Pin(8, Pin.IN, Pin.PULL_UP)
 
 # nrf config
-# if usys.platform == 'rp2':  # Software SPI
-#     cfg = {'spi': 0, 'copi': 4, 'cipo': 7, 'sck': 6, 'csn': 14, 'ce': 17}
-# else:
-#     raise ValueError('Unsupported platform {}'.format(usys.platform))
-# PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
+if usys.platform == 'rp2':  # Software SPI
+    cfg = {'spi': 1, 'copi': 8, 'cipo': 11, 'sck': 10, 'csn': 27, 'ce': 28}
+else:
+    raise ValueError('Unsupported platform {}'.format(usys.platform))
+PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
