@@ -65,7 +65,7 @@ if __name__ == '__main__':
     args = sys.argv
 
     if len(args) != 2:
-        error('usage: ./img2rgb565.py test.png')
+        error('usage: python img2rgb565.py test.png')
     in_path = args[1]
     if not path.exists(in_path):
         error('file not found: ' + in_path)

@@ -23,3 +23,8 @@ Instructions To Convert Deck To 240x320
   *NOTE* this will convert all the files in deck and create a dir called deck-raw and copy .raw files into it
 6)copy all the files in deck-raw to sd drive
 
+Instructions To Convert Single FIle To .raw
+-------------------------------------------
+1)manually convert the .png, jpg, etc to 240x320
+2)python img2rgb565.py test.png
+  *NOTE* this will create a 240x320 .raw file
