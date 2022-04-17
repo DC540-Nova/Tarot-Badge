@@ -32,45 +32,16 @@ from machine import Pin, SPI
 import uos
 import usys
 
-from ili9341 import Display
-from xglcd_font import XglcdFont
+import sdcard
 
-# display config
-spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
-display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
-display_on = Pin(0, Pin.OUT)
-display_on.value(0)
+# sd card config
+sd_cs = Pin(9, Pin.OUT)
+sd_spi = SPI(1, baudrate=40000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11),
+             miso=Pin(8))
 
-# load font
-unispace = XglcdFont('Unispace12x24.c', 12, 24)
+# initialize sd card
+sd = sdcard.SDCard(sd_spi, sd_cs)
 
-# neo_pixel config
-LED_PIN = 5
-LED_COUNT = 32
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 150, 0)
-GREEN = (0, 255, 0)
-CYAN = (0, 255, 255)
-BLUE = (0, 0, 255)
-PURPLE = (180, 0, 255)
-WHITE = (255, 255, 255)
-BROWN = (165, 42, 42)
-ORANGE = (255, 65, 0)
-GRAY = (128, 128, 128)
-COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
-
-# button config
-# BUTTON_LEFT = Pin(0, Pin.IN, Pin.PULL_UP)
-# BUTTON_UP = Pin(1, Pin.IN, Pin.PULL_UP)
-# BUTTON_DOWN = Pin(2, Pin.IN, Pin.PULL_UP)
-# BUTTON_RIGHT = Pin(3, Pin.IN, Pin.PULL_UP)
-# BUTTON_SUBMIT = Pin(10, Pin.IN, Pin.PULL_UP)
-# BUTTON_EXTRA = Pin(8, Pin.IN, Pin.PULL_UP)
-
-# nrf config
-if usys.platform == 'rp2':  # Software SPI
-    cfg = {'spi': 1, 'copi': 8, 'cipo': 11, 'sck': 10, 'csn': 27, 'ce': 28}
-else:
-    raise ValueError('Unsupported platform {}'.format(usys.platform))
-PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
+# mount sd filesystem
+vfs = uos.VfsFat(sd)
+uos.mount(vfs, '/sd')

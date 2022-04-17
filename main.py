@@ -31,6 +31,9 @@
 # pip install mpremote
 # mpremote cp main.py :
 # mpremote exec 'import main'
+# mpremote connect /dev/tty.u* exec 'import main'
+# mpremote connect /dev/tty.u* cp main.py :/sd/
+# mpremote connect /dev/tty.u* cp *.* :/sd/
 
 import utime
 import _thread
