@@ -5,7 +5,7 @@
 # Developer: Kevin Thomas
 # Developer: Corinne "Rinn" Neidig
 #
-# Copyright (c) 2021 DC540 Defcon Group
+# Copyright (c) 2022 DC540 Defcon Group
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,9 +30,8 @@
 
 from machine import Pin, SPI
 import uos
-import usys
 
-import sdcard
+import sd_card
 
 # sd card config
 sd_cs = Pin(9, Pin.OUT)
@@ -40,7 +39,7 @@ sd_spi = SPI(1, baudrate=40000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB
              miso=Pin(8))
 
 # initialize sd card
-sd = sdcard.SDCard(sd_spi, sd_cs)
+sd = sd_card.SDCard(sd_spi, sd_cs)
 
 # mount sd filesystem
 vfs = uos.VfsFat(sd)
