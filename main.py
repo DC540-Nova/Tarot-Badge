@@ -31,6 +31,7 @@
 # pip install mpremote
 # mpremote cp main.py :
 # mpremote exec 'import main'
+# mpremote connect /dev/tty.u* cp main.py :
 # mpremote connect /dev/tty.u* exec 'import main'
 # mpremote connect /dev/tty.u* cp main.py :/sd/
 # mpremote connect /dev/tty.u* cp *.* :/sd/
@@ -38,13 +39,19 @@
 import utime
 import _thread
 import random
+import gc
 
 from ili9341 import color565
 import neo_pixel
 import demo
+#import nrf
 from config import *
 
 neo_pixel = neo_pixel.NeoPixel(Pin)
+from machine import Pin
+# Pin(9).value(0)
+# print(Pin(9).value())
+# nrf = nrf.NRF()
 
 hex1 = [32, 31, 30, 27, 28, 29, 32]
 paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
@@ -54,6 +61,7 @@ def bg_task():
     """
     Function to test demo multi-threadded functionality
     """
+    gc.collect()
     for count in range(20):
         for my_LED in hex1:
             neo_pixel.led_on(paths[my_LED - 11], COLORS[random.randint(1, 7)])
@@ -122,8 +130,17 @@ def questions():
     display_on.value(0)
 
 
-sd_test()
+def test_NRF_send():
+    """
+    test NRF send functionality
+    """
+    nrf.send('test')
+
+
+# sd_test()
+
 img_test()
-main_menu()
-questions()
-demo.play()
+#test_NRF_send()
+# main_menu()
+# questions()
+# demo.play()

@@ -28,20 +28,18 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from machine import Pin, SPI
-import uos
-import usys
+import ubinascii
+from machine import unique_id
 
-import sd_card
 
-# sd card config
-sd_cs = Pin(9, Pin.OUT)
-sd_spi = SPI(1, baudrate=40000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11),
-             miso=Pin(8))
+def get_unique_id():
+    """
+    Function to obtain unique_id
 
-# initialize sd card
-sd = sd_card.SDCard(sd_spi, sd_cs)
-
-# mount sd filesystem
-vfs = uos.VfsFat(sd)
-uos.mount(vfs, '/sd')
+    Returns:
+        my_id_hex: str
+    """
+    my_id = unique_id()
+    my_id_hex = ubinascii.hexlify(my_id).decode('utf-8')
+    my_id_hex = str(my_id_hex)
+    return my_id_hex
