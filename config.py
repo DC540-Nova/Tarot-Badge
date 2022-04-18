@@ -68,9 +68,9 @@ COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, G
 # BUTTON_SUBMIT = Pin(10, Pin.IN, Pin.PULL_UP)
 # BUTTON_EXTRA = Pin(8, Pin.IN, Pin.PULL_UP)
 
-# # nrf config
-# if usys.platform == 'rp2':  # Software SPI
-#     cfg = {'spi': 1, 'copi': 11, 'cipo': 8, 'sck': 10, 'csn': 1, 'ce': 2}
-# else:
-#     raise ValueError('Unsupported platform {}'.format(usys.platform))
-# PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
+# nrf config
+if usys.platform == 'rp2':  # Software SPI
+    cfg = {'spi': 1, 'copi': 11, 'cipo': 8, 'sck': 10, 'csn': 1, 'ce': 2}
+else:
+    raise ValueError('Unsupported platform {}'.format(usys.platform))
+PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
