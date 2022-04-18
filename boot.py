@@ -32,15 +32,32 @@ from machine import Pin, SPI
 import uos
 
 import sd_card
+import nrf
+import share_spi1
+
+SD_CARD_CS = Pin(9, Pin.OUT)
+NRF_CS = Pin(1, Pin.OUT)
 
 # sd card config
-sd_cs = Pin(9, Pin.OUT)
-sd_spi = SPI(1, baudrate=40000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11),
-             miso=Pin(8))
+sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11),
+                  miso=Pin(8))
 
-# initialize sd card
-sd = sd_card.SDCard(sd_spi, sd_cs)
+# init sd card
+sd_card = sd_card.SDCard(sd_card_spi, SD_CARD_CS)
 
-# mount sd filesystem
-vfs = uos.VfsFat(sd)
+# mount sd card filesystem
+vfs = uos.VfsFat(sd_card)
 uos.mount(vfs, '/sd')
+
+# nrf config
+if usys.platform == 'rp2':  # Software SPI
+    cfg = {'spi': 1, 'copi': 11, 'cipo': 8, 'sck': 10, 'csn': NRF_CS, 'ce': 2}
+else:
+    raise ValueError('Unsupported platform {}'.format(usys.platform))
+PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
+
+# init nrf
+nrf = nrf.NRF()
+
+# init share_spi1
+share_spi1 = share_spi1.Device()  # ensure both sd card cs and nrf cs are set high as they are not in use
