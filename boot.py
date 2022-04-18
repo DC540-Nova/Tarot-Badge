@@ -30,7 +30,6 @@
 
 from machine import Pin, SPI
 import uos
-import usys
 
 import sd_card
 
