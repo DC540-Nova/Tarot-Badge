@@ -135,32 +135,16 @@ def questions():
     display_on.value(0)
 
 
-def test_NRF_send():
+def test_nrf_send():
     """
-    test NRF send functionality
+    test nrf send functionality
     """
-    import nrf
-    share_spi1.deactivate_sd_card()
+    pass
 
-    # nrf config
-    if usys.platform == 'rp2':  # Software SPI
-        cfg = {'spi': 1, 'copi': 11, 'cipo': 8, 'sck': 10, 'csn': 1, 'ce': 2}
-    else:
-        raise ValueError('Unsupported platform {}'.format(usys.platform))
-    PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
-
-    # init nrf
-    nrf = nrf.NRF()
-
-
-    share_spi1.activate_nrf()
-    nrf.send('test')
-    share_spi1.deactivate_nrf()
 
 # sd_test()
-
 img_test()
-test_NRF_send()
+test_nrf_send()
 # main_menu()
 # questions()
 # demo.play()
