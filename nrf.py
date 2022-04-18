@@ -105,6 +105,7 @@ class NRF24L01:
         sleep_ms(5)
         # set address width to 5 bytes and check for device present
         self.reg_write(SETUP_AW, 0b11)
+        sleep_ms(5)
         if self.reg_read(SETUP_AW) != 0b11:
             raise OSError('nRF24L01+ Hardware not responding')
         # disable dynamic payloads

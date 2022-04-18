@@ -28,49 +28,40 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from machine import Pin, SPI
-import uos
-import usys
+from machine import Pin
 
-from ili9341 import Display
-from xglcd_font import XglcdFont
 
-# display config
-spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
-display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
-display_on = Pin(0, Pin.OUT)
-display_on.value(0)
+class Device:
+    """
+    Class to handle sharing spi1 on two devices
+    """
 
-# load font
-unispace = XglcdFont('Unispace12x24.c', 12, 24)
+    def __init__(self):
+        self.sd_card_cs = Pin(9)
+        self.sd_card_cs.value(1)  # drive sd card cs high on init
+        self.nrf_cs = Pin(1)
+        self.nrf_cs.value(1)  # drive nrf cs high on init
 
-# neo_pixel config
-LED_PIN = 5
-LED_COUNT = 32
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 150, 0)
-GREEN = (0, 255, 0)
-CYAN = (0, 255, 255)
-BLUE = (0, 0, 255)
-PURPLE = (180, 0, 255)
-WHITE = (255, 255, 255)
-BROWN = (165, 42, 42)
-ORANGE = (255, 65, 0)
-GRAY = (128, 128, 128)
-COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
+    def activate_sd_card(self):
+        """
+        Method to activate sd card for usage
+        """
+        self.sd_card_cs.value(0)  # drive sd cs card low so that it is ready to use
 
-# button config
-# BUTTON_LEFT = Pin(0, Pin.IN, Pin.PULL_UP)
-# BUTTON_UP = Pin(1, Pin.IN, Pin.PULL_UP)
-# BUTTON_DOWN = Pin(2, Pin.IN, Pin.PULL_UP)
-# BUTTON_RIGHT = Pin(3, Pin.IN, Pin.PULL_UP)
-# BUTTON_SUBMIT = Pin(10, Pin.IN, Pin.PULL_UP)
-# BUTTON_EXTRA = Pin(8, Pin.IN, Pin.PULL_UP)
+    def deactivate_sd_card(self):
+        """
+        Method to deactivate sd card for when not in use
+        """
+        self.sd_card_cs.value(1)  # drive sd cs card high when not in use so other device can access
 
-# # nrf config
-# if usys.platform == 'rp2':  # Software SPI
-#     cfg = {'spi': 1, 'copi': 11, 'cipo': 8, 'sck': 10, 'csn': 1, 'ce': 2}
-# else:
-#     raise ValueError('Unsupported platform {}'.format(usys.platform))
-# PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')
+    def activate_nrf(self):
+        """
+        Method to activate nrf for usage
+        """
+        self.nrf_cs.value(0)  # drive nrf cs low so that it is ready to use
+
+    def deactivate_nrf(self):
+        """
+        Method to deactivate nrf for when not in use
+        """
+        self.nrf_cs.value(1)  # drive nrf high when not in use so other device can access
