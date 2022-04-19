@@ -128,29 +128,12 @@ def questions():
 
 def test_sao_comms():
     from machine import UART, Pin
-    import utime
-    # Initialize a UART objects
-    uart = UART(0, baudrate=115200, rx=Pin(1), tx=Pin(0), timeout=10)
-    count = 1
-    while True:
-        print('\n\n===============CNT {}==============='.format(count))
-        # Send a message
-        print('Send: {}'.format('hello {}\n'.format(count)))
-        print('Send Byte :')  # Number of bytes sent
-        uart.write(b'hello')
-        # Wait 1s bell
-        utime.sleep_ms(1000)
-        if uart.any():
-            # If the data type byte read return data for the row of data
-            # E.g. b'hello 1 \ n '
-            bin_data = uart.readline()
-            # Hand to the information printed on the terminal
-            print('Echo Byte: {}'.format(bin_data))
-            # Converted to a string of data bytes default byte UTF-8 encoding
-            #print('Echo String: {}'.format(bin_data.decode()))
-        # Counter +1
-        count += 1
-        print('---------------------------------------')
+    uart1 = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))
+    uart1.write('hello')  # write 5 bytes
+    utime.sleep(2)
+    result = uart1.read(5)  # read up to 5 bytes
+    print(result)
+    utime.sleep(2)
 
 
 # sd_test()
