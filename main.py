@@ -126,23 +126,8 @@ def questions():
     display_on.value(0)
 
 
-def test_sao_comms():
-    from machine import UART
-    uart0 = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))
-
-    txData = b'hello world\n\r'
-    uart0.write(txData)
-    time.sleep(0.1)
-    rxData = bytes()
-    while uart0.any() > 0:
-        rxData += uart0.read(1)
-
-    print(rxData.decode('utf-8'))
-
-
-# sd_test()
-# img_test()
-# main_menu()
-# questions()
-# demo.play()
-test_sao_comms()
+sd_test()
+img_test()
+main_menu()
+questions()
+demo.play()
