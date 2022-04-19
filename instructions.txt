@@ -1,5 +1,5 @@
-Instructions To Setup Automation ONE-TIME OPERATION
----------------------------------------------------
+Instructions To Set Up Automation ONE-TIME OPERATION
+----------------------------------------------------
 1)cd to Tarot-Badge Directory
 2)./setup.sh
 
@@ -18,7 +18,7 @@ Instructions To Convert Deck To 240x320
   *NOTE* PLEASE NAME FILES EXACTLY AS THEY ARE IN deck FOLDER FOR NEW DECKS
   *NOTE* I can change the naming convention to exactly how you want it
 4)python convert.py
-  *NOTE* this will convert the files to 240x320 and overwrite the originasl in the deck directory
+  *NOTE* this will convert the files to 240x320 and overwrite the originals in the deck directory
 5)python convert_to_raw.py
   *NOTE* this will convert all the files in deck and create a dir called deck-raw and copy .raw files into it
 6)copy all the files in deck-raw to sd drive
@@ -29,6 +29,6 @@ OR
 
 Instructions To Convert Single File To .raw
 -------------------------------------------
-1)manually convert the .png, jpg, etc to 240x320
+1)manually convert the .png, jpg, etc. to 240x320
 2)python img2rgb565.py test.png
   *NOTE* this will create a 240x320 .raw file
