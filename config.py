@@ -28,6 +28,7 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import usys
 from machine import Pin, SPI
 
 from ili9341 import Display
@@ -38,6 +39,8 @@ spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
 display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
 display_on = Pin(2, Pin.OUT)
 display_on.value(0)
+
+Pin(13).value(1)
 
 # load font
 unispace = XglcdFont('Unispace12x24.c', 12, 24)
@@ -65,4 +68,3 @@ COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, G
 # BUTTON_RIGHT = Pin(3, Pin.IN, Pin.PULL_UP)
 # BUTTON_SUBMIT = Pin(10, Pin.IN, Pin.PULL_UP)
 # BUTTON_EXTRA = Pin(8, Pin.IN, Pin.PULL_UP)
-

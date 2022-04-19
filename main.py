@@ -126,9 +126,8 @@ def questions():
     display_on.value(0)
 
 
-# sd_test()
+sd_test()
 img_test()
-import nrf
-# main_menu()
-# questions()
-# demo.play()
+main_menu()
+questions()
+demo.play()
