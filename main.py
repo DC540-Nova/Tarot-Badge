@@ -127,17 +127,17 @@ def questions():
 
 
 def test_sao_comms():
-    from machine import UART, Pin
-    uart1 = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))
-    print('writing...')
-    for _ in range(10):
-        uart1.write(b'hello')  # write 5 bytes
-        utime.sleep(1)
-    print('reading...')
-    for _ in range(10):
-        result = uart1.read(5)  # read up to 5 bytes
-        print(result)
-        utime.sleep(2)
+    from machine import UART
+    uart0 = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))
+
+    txData = b'hello world\n\r'
+    uart0.write(txData)
+    time.sleep(0.1)
+    rxData = bytes()
+    while uart0.any() > 0:
+        rxData += uart0.read(1)
+
+    print(rxData.decode('utf-8'))
 
 
 # sd_test()
