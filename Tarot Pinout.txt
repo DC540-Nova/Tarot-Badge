@@ -8,25 +8,16 @@ SPI0
   dc   = GP15 
   cs   = GP13
   rst  = GP14
-  led  = GP0
+  led  = GP2
 
 SD Card Reader INTERNAL-ONBOARD
 -------------------------------
 SPI1
   cs   = GP9
-  sck  = GP10 (shared w/ NRF)
-  mosi = GP11 (shared w/ NRF)
-  cipo = GP8  (shared w/ NRF)
+  sck  = GP10
+  mosi = GP11
+  cipo = GP8
 
 NeoPixel 8x8
 ------------
    led = GP5
-
-NRF
----
-SPI1
-  cipo = GP8  (shareed with SD Card Reader INTERNAL-ONBOARD)
-  mosi = GP11 (shareed with SD Card Reader INTERNAL-ONBOARD)
-  sck  = GP10 (shared w/ NRF)
-  csn  = GP27
-   ce  = GP28
