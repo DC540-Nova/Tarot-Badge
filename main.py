@@ -44,14 +44,10 @@ import gc
 from ili9341 import color565
 import neo_pixel
 import demo
-import share_spi1
 
 from config import *
 
 neo_pixel = neo_pixel.NeoPixel(Pin)
-# init share_spi1
-share_spi1 = share_spi1.Device()  # ensure both sd card cs and nrf cs are set high as they are not in use
-
 
 hex1 = [32, 31, 30, 27, 28, 29, 32]
 paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
@@ -86,10 +82,6 @@ def img_test():
     """
     Function to test img display functionality
     """
-    from machine import Pin
-    Pin(9).value()
-    Pin(1).value()
-    share_spi1.activate_sd_card()
     display.clear()
     _thread.start_new_thread(bg_task, ())  # noqa
     display.draw_image('sd/00-TheFool.raw', draw_speed=1024)
@@ -106,7 +98,6 @@ def img_test():
     display_on.value(1)
     utime.sleep(1)
     display_on.value(0)
-    share_spi1.deactivate_sd_card()
 
 
 def main_menu():
@@ -135,16 +126,8 @@ def questions():
     display_on.value(0)
 
 
-def test_nrf_send():
-    """
-    test nrf send functionality
-    """
-    pass
-
-
-# sd_test()
+sd_test()
 img_test()
-test_nrf_send()
-# main_menu()
-# questions()
-# demo.play()
+main_menu()
+questions()
+demo.play()
