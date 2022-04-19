@@ -126,8 +126,36 @@ def questions():
     display_on.value(0)
 
 
-sd_test()
-img_test()
-main_menu()
-questions()
-demo.play()
+def test_sao_comms():
+    from machine import UART, Pin
+    import utime
+    # Initialize a UART objects
+    uart = UART(0, baudrate=115200, rx=1, tx=0, timeout=10)
+    count = 1
+    while True:
+        print('\n\n===============CNT {}==============='.format(count))
+        # Send a message
+        print('Send: {}'.format('hello {}\n'.format(count)))
+        print('Send Byte :')  # Number of bytes sent
+        uart.write('hello {}\n'.format(count))
+        # Wait 1s bell
+        utime.sleep_ms(1000)
+        if uart.any():
+            # If the data type byte read return data for the row of data
+            # E.g. b'hello 1 \ n '
+            bin_data = uart.readline()
+            # Hand to the information printed on the terminal
+            print('Echo Byte: {}'.format(bin_data))
+            # Converted to a string of data bytes default byte UTF-8 encoding
+            print('Echo String: {}'.format(bin_data.decode()))
+        # Counter +1
+        count += 1
+        print('---------------------------------------')
+
+
+# sd_test()
+# img_test()
+# main_menu()
+# questions()
+# demo.play()
+test_sao_comms()
