@@ -28,42 +28,35 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from machine import Pin, SPI, unique_id  # noqa
+from utime import sleep
 
-from ili9341 import Display
-from xglcd_font import XglcdFont
+import file_manager
+from button_input import ButtonInput
+from neo_pixel import NeoPixel
+import game
+from config import *
 
-# display config
-spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
-display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
-display_on = Pin(2, Pin.OUT)
-display_on.value(0)
+button_input = ButtonInput()
+neo_pixel = NeoPixel(Pin)
 
-Pin(13).value(1)
+button_delay = 0.1
 
-# load font
-unispace = XglcdFont('Unispace12x24.c', 12, 24)
 
-# neo_pixel config
-LED_PIN = 5
-LED_COUNT = 32
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 150, 0)
-GREEN = (0, 255, 0)
-CYAN = (0, 255, 255)
-BLUE = (0, 0, 255)
-PURPLE = (180, 0, 255)
-WHITE = (255, 255, 255)
-BROWN = (165, 42, 42)
-ORANGE = (255, 65, 0)
-GRAY = (128, 128, 128)
-COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
-
-# button config
-BUTTON_LEFT = Pin(21, Pin.IN, Pin.PULL_UP)
-BUTTON_UP = Pin(20, Pin.IN, Pin.PULL_UP)
-BUTTON_DOWN = Pin(19, Pin.IN, Pin.PULL_UP)
-BUTTON_RIGHT = Pin(18, Pin.IN, Pin.PULL_UP)
-BUTTON_SUBMIT = Pin(17, Pin.IN, Pin.PULL_UP)
-BUTTON_EXTRA = Pin(16, Pin.IN, Pin.PULL_UP)
+def system():
+    """
+    Function to handle the menu system
+    """
+    neo_pixel.led_clear()
+    game.__ham_radio_question_loop()
+    while True:
+        sleep(button_delay)
+        if not BUTTON_UP.value():
+            print('1')
+        elif not BUTTON_DOWN.value():
+            print('2')
+        elif not BUTTON_LEFT.value():
+            print('3')
+        elif not BUTTON_RIGHT.value():
+            print('4')
+        elif not BUTTON_SUBMIT.value():
+            print('5')
