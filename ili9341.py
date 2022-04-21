@@ -302,7 +302,6 @@ class Display:
         Method to draw text
 
         Params:
-
             text: str
             color: int
             font: object
