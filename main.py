@@ -126,8 +126,41 @@ def questions():
     display_on.value(0)
 
 
-sd_test()
-img_test()
-main_menu()
-questions()
-demo.play()
+def uart_send():
+    """
+    Function to test UART sending functionality
+    """
+    from machine import UART
+    uart0 = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))  # noqa
+    for _ in range(100):
+        uart0.write(b'BAAB 1 calling BAAB 2 are we reaching?')
+        utime.sleep(0.1)
+
+
+def uart_recv():
+    """
+    Function to test UART receiving functionality
+    """
+    from machine import UART
+    uart0 = UART(0, baudrate=9600, tx=Pin(0), rx=Pin(1))  # noqa
+    rx_data = bytes()
+    for _ in range(10000):
+        while uart0.any() > 0:
+            rx_data += uart0.read(1)
+    try:
+        # print(rx_data.decode('utf-8'))
+        baab_message = rx_data.decode('utf-8')
+        display.clear()
+        display.draw_text(0, 0, baab_message, color565(255, 255, 0), unispace)
+        display_on.value(1)
+        utime.sleep(5)
+        display_on.value(0)
+    except UnicodeError:
+        pass
+
+
+# sd_test()
+# img_test()
+# main_menu()
+# questions()
+# demo.play()
