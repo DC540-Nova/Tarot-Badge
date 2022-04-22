@@ -83,30 +83,25 @@ def img_test():
     """
     Function to test img display functionality
     """
+    display.handle_threading_setup()
     _thread.start_new_thread(bg_task, ())  # noqa
-    display.draw_image('sd/00-TheFool.raw')
+    display.draw_image('sd/00-TheFool.raw', multithreading=True)
+    display.handle_threading_teardown()
+    display.handle_threading_setup()
     _thread.start_new_thread(bg_task, ())  # noqa
-    display.draw_image('sd/01-TheMagician.raw')
+    display.draw_image('sd/01-TheMagician.raw', multithreading=True)
+    display.handle_threading_teardown()
+    display.handle_threading_setup()
     _thread.start_new_thread(bg_task, ())  # noqa
-    display.draw_image('sd/02-TheHighPriestess.raw')
-
-
-def main_menu():
-    """
-    Function to display the main menu
-    """
-    display.draw_text(0, 0, 'MAIN MENU', color565(255, 128, 0))
-    display.draw_text(0, 25, 'up: Badge ID', color565(255, 255, 0))
-    display.draw_text(0, 50, 'down: Games', color565(255, 255, 0))
-    display.draw_text(0, 75, 'lt: Phonebooth', color565(255, 255, 0))
+    display.draw_image('sd/02-TheHighPriestess.raw', multithreading=True)
+    display.handle_threading_teardown()
 
 
 def questions():
     """
     Function to test questions on display
     """
-    display.draw_text(0, 0, 'This is a long message I do hope it will wrap i will cry badly '
-                            'if it does not and blame babba.', color565(255, 128, 0))
+    display.draw_text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
 
 
 def uart_send():
@@ -140,6 +135,5 @@ def uart_recv():
 
 # sd_test()
 # img_test()
-# main_menu()
 # questions()
 # demo.play()

@@ -263,7 +263,7 @@ class Display:
             self.__block(0, y, width - 1, y + 7, line)
 
     def draw_text(self, text, color=color565(255, 255, 0), font=UNISPACE, x=8, y=0, background=0, spacing=1,
-                  sleep_time=2):
+                  sleep_time=3):
         """
         Method to draw text
 
@@ -289,7 +289,7 @@ class Display:
         utime.sleep(sleep_time)
         self.POWER_DISPLAY.value(0)
 
-    def draw_image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2):
+    def draw_image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, multithreading=False):
         """
         Method to draw image on screen from flash or sd card
 
@@ -301,8 +301,10 @@ class Display:
             height: int, optional
             draw_speed: int, optional
             sleep_time: int, optional
+            multithreading: bool, optional
         """
-        self.clear()
+        if not multithreading:
+            self.clear()
         x2 = x + width - 1
         with open(path, 'rb') as f:
             chunk_height = draw_speed // width  # 153600 total bytes of an image
@@ -319,6 +321,24 @@ class Display:
                 gc.collect()
                 buf = f.read(remainder * width * 2)
                 self.__block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
+        if not multithreading:
+            self.POWER_DISPLAY.value(1)
+            utime.sleep(sleep_time)
+            self.POWER_DISPLAY.value(0)
+
+    def handle_threading_setup(self):
+        """
+        Method to handle threading setup functionality to ensure thread does not crash
+        """
+        self.clear()
+
+    def handle_threading_teardown(self, sleep_time=1):
+        """
+        Method to handle threading teardown functionality to ensure thread does not crash
+
+        Params:
+            sleep_time: int, optional
+        """
         self.POWER_DISPLAY.value(1)
         utime.sleep(sleep_time)
         self.POWER_DISPLAY.value(0)
