@@ -83,6 +83,14 @@ def img_test():
     """
     Function to test img display functionality
     """
+    display.clear()
+    _thread.start_new_thread(bg_task, ())  # noqa
+    display.draw_image('sd/00-TheFool.raw', draw_speed=1024)
+    display_on.value(1)
+    utime.sleep(1)
+    display_on.value(0)
+    
+    
     _thread.start_new_thread(bg_task, ())  # noqa
     display.draw_image('sd/00-TheFool.raw')
     _thread.start_new_thread(bg_task, ())  # noqa
