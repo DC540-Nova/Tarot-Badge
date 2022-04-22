@@ -314,7 +314,7 @@ class Display:
         y2 = y + h - 1
         if self.is_off_grid(x, y, x2, y2):
             return
-        self.block(x, y, x2, y2, buf)
+        self.__block(x, y, x2, y2, buf)
     
     @staticmethod
     def load_sprite(path, width, height):
