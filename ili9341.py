@@ -245,6 +245,20 @@ class Display:
         self.__block(x, y, x + width - 1, y + height - 1, buf)
         return width, height
 
+    @staticmethod
+    def load_sprite(path, width, height):
+        """
+        Method to load sprite image
+
+        Params:
+            path: str
+            width: int
+            height: int
+        """
+        buf_size = width * height * 2
+        with open(path, 'rb') as f:
+            return f.read(buf_size)
+    
     def clear(self, color=0):
         """
         Method to clear display
