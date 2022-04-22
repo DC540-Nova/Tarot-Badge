@@ -28,18 +28,12 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from utime import sleep
-
-import file_manager
-from button_input import ButtonInput
 from neo_pixel import NeoPixel
 import game
+from data import *
 from config import *
 
-button_input = ButtonInput()
 neo_pixel = NeoPixel(Pin)
-
-button_delay = 0.1
 
 
 def system():
@@ -47,16 +41,5 @@ def system():
     Function to handle the menu system
     """
     neo_pixel.led_clear()
-    game.__ham_radio_question_loop()
-    while True:
-        sleep(button_delay)
-        if not BUTTON_UP.value():
-            print('1')
-        elif not BUTTON_DOWN.value():
-            print('2')
-        elif not BUTTON_LEFT.value():
-            print('3')
-        elif not BUTTON_RIGHT.value():
-            print('4')
-        elif not BUTTON_SUBMIT.value():
-            print('5')
+    game.questions(ham_radio_questions)
+

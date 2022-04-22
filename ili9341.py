@@ -28,25 +28,28 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from time import sleep
+import utime
 import ustruct
 import gc
+from machine import Pin
 from micropython import const
 
+from xglcd_font import XglcdFont
 
-def color565(r, g, b):
+
+def color565(red, green, blue):
     """
     Function to return RGB565 color value
     
     Params:
-        r: int
-        g: int
-        b: int
+        red: int
+        green: int
+        blue: int
         
     Returns:
         int
     """
-    return (r & 0xf8) << 8 | (g & 0xfc) << 3 | b >> 3
+    return (red & 0xf8) << 8 | (green & 0xfc) << 3 | blue >> 3
 
 
 class Display:
@@ -112,6 +115,8 @@ class Display:
     POSC = const(0xED)  # power on sequence control
     ENABLE3G = const(0xF2)  # enable 3 gamma control
     PUMPRC = const(0xF7)  # pump ratio control
+    UNISPACE = XglcdFont('Unispace12x24.c', 12, 24)  # load font
+    POWER_DISPLAY = Pin(2, Pin.OUT)
 
     ROTATE = {
         0: 0x88,
@@ -120,7 +125,7 @@ class Display:
         270: 0x28
     }
 
-    def __init__(self, spi, cs, dc, rst, width=240, height=320, rotation=0):
+    def __init__(self, spi, cs, dc, rst, width=240, height=320, rotation=0):  # noqa
         """
         Params:
             spi: object
@@ -149,7 +154,7 @@ class Display:
         self.write_data = self.__write_data
         # send initialization commands
         self.write_cmd(self.SWRESET)  # software reset
-        sleep(.1)
+        utime.sleep(.1)
         self.write_cmd(self.PWCTRB, 0x00, 0xC1, 0x30)  # pwr ctrl B
         self.write_cmd(self.POSC, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
         self.write_cmd(self.DTCA, 0x85, 0x00, 0x78)  # driver timing ctrl A
@@ -172,9 +177,9 @@ class Display:
         self.write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36,
                        0x0F)
         self.write_cmd(self.SLPOUT)  # exit sleep
-        sleep(.1)
+        utime.sleep(.1)
         self.write_cmd(self.DISPLAY_ON)  # display on
-        sleep(.1)
+        utime.sleep(.1)
         self.clear()  # display clear
 
     def __write_cmd(self, command, *args):
@@ -221,63 +226,6 @@ class Display:
         self.write_cmd(self.WRITE_RAM)
         self.write_data(data)
 
-    def clear(self, color=0):
-        """
-        Method to clear display
-
-        Params:
-            color: int, optional
-        """
-        w = self.width
-        h = self.height
-        # clear display in 1024 byte blocks
-        if color:
-            line = color.to_bytes(2, 'big') * (w * 8)
-        else:
-            line = bytearray(w * 16)
-        for y in range(0, h, 8):
-            self.__block(0, y, w - 1, y + 7, line)
-
-    def draw_image(self, path, x=0, y=0, w=240, h=320, draw_speed=26375):
-        """
-        Method to draw image on screen from flash or sd card
-
-        Params:
-            path: str
-            x: int, optional
-            y: int, optional
-            w: int, optional
-            h: int, optional
-            draw_speed: int, optional
-        """
-        x2 = x + w - 1
-        with open(path, 'rb') as f:
-            chunk_height = draw_speed // w  # 153600 total bytes of an image
-            chunk_count, remainder = divmod(h, chunk_height)
-            chunk_size = chunk_height * w * 2
-            chunk_y = y
-            if chunk_count:
-                for _ in range(0, chunk_count):
-                    gc.collect()
-                    buf = f.read(chunk_size)
-                    self.__block(x, chunk_y, x2, chunk_y + chunk_height - 1, buf)
-                    chunk_y += chunk_height
-            if remainder:
-                gc.collect()
-                buf = f.read(remainder * w * 2)
-                self.__block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
-
-    def draw_pixel(self, x, y, color):
-        """
-        Method to draw a single pixel
-
-        Args:
-            x: int
-            y: int
-            color: int
-        """
-        self.__block(x, y, x, y, color.to_bytes(2, 'big'))
-
     def __draw_letter(self, letter, color, font, x, y, background=0):
         """
         Private method to draw a single letter
@@ -297,19 +245,39 @@ class Display:
         self.__block(x, y, x + width - 1, y + height - 1, buf)
         return width, height
 
-    def draw_text(self, text, color, font, x=8, y=0, background=0, spacing=1):
+    def clear(self, color=0):
+        """
+        Method to clear display
+
+        Params:
+            color: int, optional
+        """
+        width = self.width
+        height = self.height
+        # clear display in 1024 byte blocks
+        if color:
+            line = color.to_bytes(2, 'big') * (width * 8)
+        else:
+            line = bytearray(width * 16)
+        for y in range(0, height, 8):
+            self.__block(0, y, width - 1, y + 7, line)
+
+    def draw_text(self, text, color=color565(255, 255, 0), font=UNISPACE, x=8, y=0, background=0, spacing=1,
+                  sleep_time=2):
         """
         Method to draw text
 
         Params:
             text: str
-            color: int
-            font: object
+            color: int, optional
+            font: object, optional
             x: int, optional
             y: int, optional
             background: int, optional
             spacing: int, optional
+            sleep_time: int, optional
         """
+        self.clear()
         for letter in text:
             if letter == ' ' and x > 144:
                 x = 0
@@ -317,3 +285,40 @@ class Display:
             # get letter array and letter dimension
             width, height = self.__draw_letter(letter, color, font, x, y, background)
             x += (width + spacing)
+        self.POWER_DISPLAY.value(1)
+        utime.sleep(sleep_time)
+        self.POWER_DISPLAY.value(0)
+
+    def draw_image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2):
+        """
+        Method to draw image on screen from flash or sd card
+
+        Params:
+            path: str
+            x: int, optional
+            y: int, optional
+            width: int, optional
+            height: int, optional
+            draw_speed: int, optional
+            sleep_time: int, optional
+        """
+        self.clear()
+        x2 = x + width - 1
+        with open(path, 'rb') as f:
+            chunk_height = draw_speed // width  # 153600 total bytes of an image
+            chunk_count, remainder = divmod(height, chunk_height)
+            chunk_size = chunk_height * width * 2
+            chunk_y = y
+            if chunk_count:
+                for _ in range(0, chunk_count):
+                    gc.collect()
+                    buf = f.read(chunk_size)
+                    self.__block(x, chunk_y, x2, chunk_y + chunk_height - 1, buf)
+                    chunk_y += chunk_height
+            if remainder:
+                gc.collect()
+                buf = f.read(remainder * width * 2)
+                self.__block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
+        self.POWER_DISPLAY.value(1)
+        utime.sleep(sleep_time)
+        self.POWER_DISPLAY.value(0)

@@ -28,126 +28,24 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from utime import sleep
-
 from config import *
 
 
-class ButtonInput:
+def get_response():
     """
-    Class to handle building strings with buttons
+    Function to handle a button press
+
+    Returns:
+        int
     """
-
-    def __init__(self):
-        self.multiple_choice_letters = [
-            'A',
-            'B',
-            'C',
-            'D'
-        ]
-        self.y_n_letters = [
-            'Y',
-            'N'
-        ]
-        self.word = ''
-        self.position = 0
-        self.char_position = 0
-        self.multiple_choice_letters_length = len(self.multiple_choice_letters) - 1
-        self.y_n_letters_length = len(self.y_n_letters) - 1
-        self.press_time = 0.50
-
-    def get_response(self, input_type='numbers'):
-        """
-        Method to handle a button press for get_response logic
-
-        Params:
-            input_type: str, optional
-
-        Returns:
-            int, char
-        """
-        if input_type == 'multiple_choice_letters':
-            self.word = ''
-            self.position = 0
-            self.char_position = 0
-            display.text(self.multiple_choice_letters[self.position])
-            while True:
-                if not BUTTON_UP.value():
-                    if self.position >= self.multiple_choice_letters_length:
-                        sleep(self.press_time)
-                    else:
-                        self.position += 1
-                        display.text(self.word)
-                        display.text(self.multiple_choice_letters[self.position], x=self.char_position,
-                                     start_clear=False)
-                        sleep(self.press_time)
-                elif not BUTTON_DOWN.value():
-                    if self.position <= 0:
-                        sleep(self.press_time)
-                    else:
-                        self.position -= 1
-                        display.text(self.word)
-                        display.text(self.multiple_choice_letters[self.position], x=self.char_position,
-                                     start_clear=False)
-                        sleep(self.press_time)
-                elif not BUTTON_RIGHT.value():
-                    self.word += self.multiple_choice_letters[self.position]
-                    display.text(self.word + '_')
-                    self.char_position += 8
-                    sleep(self.press_time)
-                elif not BUTTON_LEFT.value():
-                    if len(self.word) == 1:
-                        self.word = self.word[0:-1]
-                        display.text(self.word)
-                        display.text(self.multiple_choice_letters[self.position])
-                        self.char_position -= 8
-                    elif len(self.word) > 1:
-                        self.word = self.word[0:-1]
-                        display.text(self.word)
-                        self.char_position -= 8
-                    sleep(self.press_time)
-                elif not BUTTON_SUBMIT.value():
-                    if self.word:
-                        self.word = str(self.word)
-                        return self.word
-        elif input_type == 'y_n_letters':
-            self.word = ''
-            self.position = 0
-            self.char_position = 0
-            display.text(self.y_n_letters[self.position])
-            while True:
-                if not BUTTON_UP.value():
-                    if self.position >= self.y_n_letters_length:
-                        sleep(self.press_time)
-                    else:
-                        self.position += 1
-                        display.text(self.word)
-                        display.text(self.y_n_letters[self.position], x=self.char_position, start_clear=False)
-                        sleep(self.press_time)
-                elif not BUTTON_DOWN.value():
-                    if self.position <= 0:
-                        sleep(self.press_time)
-                    else:
-                        self.position -= 1
-                        display.text(self.word)
-                        display.text(self.y_n_letters[self.position], x=self.char_position, start_clear=False)
-                        sleep(self.press_time)
-                elif not BUTTON_RIGHT.value():
-                    self.word += self.y_n_letters[self.position]
-                    display.text(self.word + '_')
-                    self.char_position += 8
-                    sleep(self.press_time)
-                elif not BUTTON_LEFT.value():
-                    if len(self.word) == 1:
-                        self.word = self.word[0:-1]
-                        display.text(self.word)
-                        display.text(self.y_n_letters[self.position])
-                        self.char_position -= 8
-                    elif len(self.word) > 1:
-                        self.word = self.word[0:-1]
-                        display.text(self.word)
-                        self.char_position -= 8
-                    sleep(self.press_time)
-                elif not BUTTON_SUBMIT.value():
-                    self.word = str(self.word)
-                    return self.word
+    while True:
+        if not BUTTON_UP.value():
+            return 1
+        elif not BUTTON_DOWN.value():
+            return 2
+        elif not BUTTON_RIGHT.value():
+            return 3
+        elif not BUTTON_LEFT.value():
+            return 4
+        elif not BUTTON_SUBMIT.value():
+            return 5

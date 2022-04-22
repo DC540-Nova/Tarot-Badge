@@ -31,25 +31,19 @@
 from machine import Pin, SPI, unique_id  # noqa
 
 from ili9341 import Display
-from xglcd_font import XglcdFont
 
 # display config
 spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
 display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
-display_on = Pin(2, Pin.OUT)
-display_on.value(0)
-
-Pin(13).value(1)
-
-# load font
-unispace = XglcdFont('Unispace12x24.c', 12, 24)
 
 # neo_pixel config
 LED_PIN = 5
 LED_COUNT = 32
+
+# default colors
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
-YELLOW = (255, 150, 0)
+YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
 CYAN = (0, 255, 255)
 BLUE = (0, 0, 255)

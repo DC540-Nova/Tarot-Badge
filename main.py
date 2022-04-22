@@ -35,6 +35,7 @@
 # mpremote connect /dev/tty.u* exec 'import main'
 # mpremote connect /dev/tty.u* cp main.py :/sd/
 # mpremote connect /dev/tty.u* cp *.* :/sd/
+# screen /dev/tty.u*
 
 import utime
 import _thread
@@ -82,48 +83,30 @@ def img_test():
     """
     Function to test img display functionality
     """
-    display.clear()
     _thread.start_new_thread(bg_task, ())  # noqa
-    display.draw_image('sd/00-TheFool.raw', draw_speed=1024)
-    display_on.value(1)
-    utime.sleep(1)
-    display_on.value(0)
+    display.draw_image('sd/00-TheFool.raw')
     _thread.start_new_thread(bg_task, ())  # noqa
-    display.draw_image('sd/01-TheMagician.raw', draw_speed=1024)
-    display_on.value(1)
-    utime.sleep(1)
-    display_on.value(0)
+    display.draw_image('sd/01-TheMagician.raw')
     _thread.start_new_thread(bg_task, ())  # noqa
-    display.draw_image('sd/02-TheHighPriestess.raw', draw_speed=1024)
-    display_on.value(1)
-    utime.sleep(1)
-    display_on.value(0)
+    display.draw_image('sd/02-TheHighPriestess.raw')
 
 
 def main_menu():
     """
     Function to display the main menu
     """
-    display.clear()
-    display.draw_text(0, 0, 'MAIN MENU', color565(255, 128, 0), unispace)
-    display.draw_text(0, 25, 'up: Badge ID', color565(255, 255, 0), unispace)
-    display.draw_text(0, 50, 'down: Games', color565(255, 255, 0), unispace)
-    display.draw_text(0, 75, 'lt: Phonebooth', color565(255, 255, 0), unispace)
-    display_on.value(1)
-    utime.sleep(1)
-    display_on.value(0)
+    display.draw_text(0, 0, 'MAIN MENU', color565(255, 128, 0))
+    display.draw_text(0, 25, 'up: Badge ID', color565(255, 255, 0))
+    display.draw_text(0, 50, 'down: Games', color565(255, 255, 0))
+    display.draw_text(0, 75, 'lt: Phonebooth', color565(255, 255, 0))
 
 
 def questions():
     """
     Function to test questions on display
     """
-    display.clear()
     display.draw_text(0, 0, 'This is a long message I do hope it will wrap i will cry badly '
-                            'if it does not and blame babba.', color565(255, 128, 0), unispace)
-    display_on.value(1)
-    utime.sleep(5)
-    display_on.value(0)
+                            'if it does not and blame babba.', color565(255, 128, 0))
 
 
 def uart_send():
@@ -150,11 +133,7 @@ def uart_recv():
     try:
         # print(rx_data.decode('utf-8'))
         baab_message = rx_data.decode('utf-8')
-        display.clear()
-        display.draw_text(0, 0, baab_message, color565(255, 255, 0), unispace)
-        display_on.value(1)
-        utime.sleep(5)
-        display_on.value(0)
+        display.draw_text(0, 0, baab_message, color565(255, 255, 0))
     except UnicodeError:
         pass
 

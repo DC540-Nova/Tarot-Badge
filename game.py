@@ -28,66 +28,50 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-import urandom  # noqa
-from utime import sleep
+import random
 
-from button_input import ButtonInput
-import file_manager
+import button_input
 from neo_pixel import NeoPixel
-from ili9341 import color565
-
 from config import *
 from data import *
 
-button_input = ButtonInput()
 neo_pixel = NeoPixel(Pin)
 
 
-def __ham_radio_question_loop(sleep_time=2):
+def questions(question_bank):
     """
-    Private function to handle ham radio question loop
+    Function to handle a generic question loop
 
     Params:
-        sleep_time: int, optional
+        question_bank, dict
 
     Returns:
         bool
     """
-    questions = list(ham_radio_questions)
-    answers = list(ham_radio_questions.values())
+    questions = list(question_bank)  # noqa
     question_number = 0
     counter = 1
     answer_list = []
     for _ in questions:
-        question, answers = urandom.choice(list(ham_radio_questions.items()))
-
-        display.clear()
-        display.draw_text(question, color565(255, 255, 0), unispace)
-        display_on.value(1)
+        question, answers = random.choice(list(ham_radio_questions.items()))
+        display.draw_text(question)
         correct_answer_index = answers[4]
         # strip off correct_answer_index from being displayed
         answers = answers[0:-1]
-        sleep(sleep_time)
         for answer in answers:
-            display.scroll_text([[0, 0, answer]], len(answer))
-            sleep(sleep_time)
-        answer = button_input.get_response(input_type='multiple_choice_letters')
-        if answer == 'A':
-            answer = 0
-        elif answer == 'B':
-            answer = 1
-        elif answer == 'C':
-            answer = 2
-        else:
-            answer = 3
+            display.draw_text(answer)
+        display.draw_text('CHOOSE...')
+        answer = button_input.get_response()
         if answer == correct_answer_index:
             answer_list.append(1)
+            display.draw_text('CORRECT')
         else:
             answer_list.append(0)
+            display.draw_text('INCORRECT')
         question_number += 1
         counter += 1
         del ham_radio_questions[question]
-        if counter > 20:
+        if counter > 5:
             break
     answer_total = 0
     for answer in answer_list:
@@ -95,7 +79,7 @@ def __ham_radio_question_loop(sleep_time=2):
             answer_total += 1
         else:
             pass
-    if answer_total >= 15:
+    if answer_total >= 2:
         return True
     else:
         return False
