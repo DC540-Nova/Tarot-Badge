@@ -244,6 +244,32 @@ class Display:
         buf, width, height = font.get_letter(letter, color, background)
         self.__block(x, y, x + width - 1, y + height - 1, buf)
         return width, height
+    
+    def fill_vrect(self, x, y, w, h, color):
+        """
+        Method to draw a filled rectangle
+
+        Params:
+            x: int
+            y: int
+            w: int
+            h: int
+            color: int
+        """
+        if self.is_off_grid(x, y, x + w - 1, y + h - 1):
+            return
+        chunk_width = 1024 // h
+        chunk_count, remainder = divmod(w, chunk_width)
+        chunk_size = chunk_width * h
+        chunk_x = x
+        if chunk_count:
+            buf = color.to_bytes(2, 'big') * chunk_size
+            for c in range(0, chunk_count):
+                self.block(chunk_x, y, chunk_x + chunk_width - 1, y + h - 1, buf)
+                chunk_x += chunk_width
+        if remainder:
+            buf = color.to_bytes(2, 'big') * remainder * h
+            self.block(chunk_x, y, chunk_x + remainder - 1, y + h - 1, buf)
 
     @staticmethod
     def load_sprite(path, width, height):
