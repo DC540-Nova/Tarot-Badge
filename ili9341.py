@@ -270,6 +270,34 @@ class Display:
         if remainder:
             buf = color.to_bytes(2, 'big') * remainder * h
             self.block(chunk_x, y, chunk_x + remainder - 1, y + h - 1, buf)
+            
+    def is_off_grid(self, xmin, ymin, xmax, ymax):
+        """
+        Method to check if coordinates extend past display boundaries
+
+        Params:
+            xmin: int
+            ymin: int
+            xmax: int
+            ymax: int
+        Returns:
+            bool
+        """
+        if xmin < 0:
+            print('x-coordinate: {0} below minimum of 0.'.format(xmin))
+            return True
+        if ymin < 0:
+            print('y-coordinate: {0} below minimum of 0.'.format(ymin))
+            return True
+        if xmax >= self.width:
+            print('x-coordinate: {0} above maximum of {1}.'.format(
+                xmax, self.width - 1))
+            return True
+        if ymax >= self.height:
+            print('y-coordinate: {0} above maximum of {1}.'.format(
+                ymax, self.height - 1))
+            return True
+        return False
 
     @staticmethod
     def load_sprite(path, width, height):
