@@ -299,6 +299,23 @@ class Display:
             return True
         return False
 
+    def draw_sprite(self, buf, x, y, w, h):
+        """
+        Method to draw a sprite
+
+        Params:
+            buf: bytearray
+            x: int
+            y: int
+            w: int
+            h: int
+        """
+        x2 = x + w - 1
+        y2 = y + h - 1
+        if self.is_off_grid(x, y, x2, y2):
+            return
+        self.block(x, y, x2, y2, buf)
+    
     @staticmethod
     def load_sprite(path, width, height):
         """
