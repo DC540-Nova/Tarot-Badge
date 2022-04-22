@@ -244,7 +244,21 @@ class Display:
         buf, width, height = font.get_letter(letter, color, background)
         self.__block(x, y, x + width - 1, y + height - 1, buf)
         return width, height
-    
+
+    @staticmethod
+    def load_sprite(path, width, height):
+        """
+        Method to load sprite image
+
+        Params:
+            path: str
+            width: int
+            height: int
+        """
+        buf_size = width * height * 2
+        with open(path, 'rb') as f:
+            return f.read(buf_size)
+
     def fill_v_rect(self, x, y, width, height, color):
         """
         Method to draw a filled rectangle, vertical
@@ -315,20 +329,6 @@ class Display:
         if self.is_off_grid(x, y, x2, y2):
             return
         self.__block(x, y, x2, y2, buf)
-    
-    @staticmethod
-    def load_sprite(path, width, height):
-        """
-        Method to load sprite image
-
-        Params:
-            path: str
-            width: int
-            height: int
-        """
-        buf_size = width * height * 2
-        with open(path, 'rb') as f:
-            return f.read(buf_size)
     
     def clear(self, color=0):
         """
@@ -490,21 +490,21 @@ class BouncingSprite:
         y = self.y
         prev_x = self.prev_x
         prev_y = self.prev_y
-        w = self.width
-        h = self.height
+        width = self.width
+        height = self.height
         x_speed = abs(self.x_speed)
         y_speed = abs(self.y_speed)
         # determine direction and remove previous portion of sprite
         if prev_x > x:
             # left
-            self.display.fill_v_rect(x + w, prev_y, x_speed, h, 0)
+            self.display.fill_v_rect(x + width, prev_y, x_speed, height, 0)
         elif prev_x < x:
             # right
-            self.display.fill_v_rect(x - x_speed, prev_y, x_speed, h, 0)
+            self.display.fill_v_rect(x - x_speed, prev_y, x_speed, height, 0)
         if prev_y > y:
             # upward
-            self.display.fill_v_rect(prev_x, y + h, w, y_speed, 0)
+            self.display.fill_v_rect(prev_x, y + height, width, y_speed, 0)
         elif prev_y < y:
             # downward
-            self.display.fill_v_rect(prev_x, y - y_speed, w, y_speed, 0)
-        self.display.draw_sprite(self.buf, x, y, w, h)
+            self.display.fill_v_rect(prev_x, y - y_speed, width, y_speed, 0)
+        self.display.draw_sprite(self.buf, x, y, width, height)
