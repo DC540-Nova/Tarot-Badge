@@ -33,26 +33,26 @@ from utime import sleep_us, ticks_us, ticks_diff
 from config import *
 
 
-class BouncingSprite(object):
+class BouncingSprite:
     """
     Class to handle a bouncing sprite animation
     """
 
-    def __init__(self, path, w, h, screen_width, screen_height, speed, display):  # noqa
+    def __init__(self, path, width, height, screen_width, screen_height, speed, display):  # noqa
         """
         Params:
             path: str,
-            w: int,
-            h: int,
+            width: int,
+            height: int,
             screen_width: int
             screen_height: int
             size: int.
             speed: int
             display: object
         """
-        self.buf = display.load_sprite(path, w, h)
-        self.w = w
-        self.h = h
+        self.buf = display.load_sprite(path, width, height)
+        self.width = width
+        self.height = height
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.display = display
@@ -69,15 +69,15 @@ class BouncingSprite(object):
         """
         x = self.x
         y = self.y
-        w = self.w
-        h = self.h
+        width = self.width
+        height = self.height
         x_speed = abs(self.x_speed)
         y_speed = abs(self.y_speed)
-        if x + w + x_speed >= self.screen_width:
+        if x + width + x_speed >= self.screen_width:
             self.x_speed = -x_speed
         elif x - x_speed < 0:
             self.x_speed = x_speed
-        if y + h + y_speed >= self.screen_height:
+        if y + height + y_speed >= self.screen_height:
             self.y_speed = -y_speed
         elif y - y_speed <= 0:
             self.y_speed = y_speed
@@ -94,22 +94,22 @@ class BouncingSprite(object):
         y = self.y
         prev_x = self.prev_x
         prev_y = self.prev_y
-        w = self.w
-        h = self.h
+        w = self.width
+        h = self.height
         x_speed = abs(self.x_speed)
         y_speed = abs(self.y_speed)
         # determine direction and remove previous portion of sprite
         if prev_x > x:
-            # Left
+            # left
             self.display.fill_vrect(x + w, prev_y, x_speed, h, 0)
         elif prev_x < x:
-            # Right
+            # right
             self.display.fill_vrect(x - x_speed, prev_y, x_speed, h, 0)
         if prev_y > y:
-            # Upward
+            # upward
             self.display.fill_vrect(prev_x, y + h, w, y_speed, 0)
         elif prev_y < y:
-            # Downward
+            # downward
             self.display.fill_vrect(prev_x, y - y_speed, w, y_speed, 0)
         self.display.draw_sprite(self.buf, x, y, w, h)
 
@@ -118,11 +118,9 @@ def play():
     """
     Function to play demo
     """
-    # load sprite
     dc_540_logo = BouncingSprite('dc540_logo.raw', 115, 115, 240, 320, 1, display)
-
     display.clear()
-    display_on.value(1)
+    display.POWER_DISPLAY.value(1)
     for _ in range(500):
         timer = ticks_us()
         dc_540_logo.update_pos()
@@ -131,4 +129,4 @@ def play():
         timer_dif = 33333 - ticks_diff(ticks_us(), timer)
         if timer_dif > 0:
             sleep_us(timer_dif)
-    display_on.value(0)
+    display.POWER_DISPLAY.value(0)

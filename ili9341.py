@@ -265,11 +265,11 @@ class Display:
         if chunk_count:
             buf = color.to_bytes(2, 'big') * chunk_size
             for c in range(0, chunk_count):
-                self.block(chunk_x, y, chunk_x + chunk_width - 1, y + h - 1, buf)
+                self.__block(chunk_x, y, chunk_x + chunk_width - 1, y + h - 1, buf)
                 chunk_x += chunk_width
         if remainder:
             buf = color.to_bytes(2, 'big') * remainder * h
-            self.block(chunk_x, y, chunk_x + remainder - 1, y + h - 1, buf)
+            self.__block(chunk_x, y, chunk_x + remainder - 1, y + h - 1, buf)
             
     def is_off_grid(self, xmin, ymin, xmax, ymax):
         """
