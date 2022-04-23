@@ -65,6 +65,7 @@ class SDCard:
     def init_spi(self, baudrate):
         """
         Method to handle init of spi device
+
         Params:
             baudrate: int
         """
@@ -78,6 +79,7 @@ class SDCard:
     def init_card(self, baudrate):
         """
         Method to handle init of spi device
+
         Params:
             baudrate: int
         """
@@ -150,6 +152,7 @@ class SDCard:
     def cmd(self, cmd, arg, crc, final=0, release=True, skip1=False):
         """
         Method to handle cmd functionality
+
         Params:
             cmd: int
             arg: int
@@ -157,6 +160,7 @@ class SDCard:
             final: int, optional
             release: bool, optional
             skip1: bool, optional
+
         Returns:
             int
         """
@@ -192,6 +196,7 @@ class SDCard:
     def readinto(self, buf):
         """
         Method to handle reading info
+
         Params:
             buf: int
         """
@@ -219,6 +224,7 @@ class SDCard:
     def write(self, token, buf):
         """
         Method to handle write operation
+
         Params:
             token: int
             buf: int
@@ -243,6 +249,7 @@ class SDCard:
     def write_token(self, token):
         """
         Method to handle writing of token
+
         Params:
             token: int
         """
@@ -258,6 +265,7 @@ class SDCard:
     def readblocks(self, block_num, buf):
         """
         Method to handle reading of blocks on drive
+
         Params:
             block_num: int
             buf: int
@@ -291,6 +299,7 @@ class SDCard:
     def writeblocks(self, block_num, buf):
         """
         Method to handle writing of blocks on drive
+
         Params:
             block_num: int
             buf: int

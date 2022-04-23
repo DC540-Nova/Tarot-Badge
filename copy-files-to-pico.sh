@@ -15,3 +15,4 @@ mpremote connect /dev/tty.u* cp game.py :
 mpremote connect /dev/tty.u* cp button_input.py :
 mpremote connect /dev/tty.u* cp data.py :
 mpremote connect /dev/tty.u* cp menu.py :
+mpremote connect /dev/tty.u* cp tarot.py :
