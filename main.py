@@ -57,9 +57,9 @@ def bg_task():
     paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
     for count in range(20):
         for my_LED in hex1:
-            neo_pixel.led_on(paths[my_LED - 11], COLORS[random.randint(1, 7)])
+            neo_pixel.on(paths[my_LED - 11], COLORS[random.randint(1, 7)])
             if count == 19:
-                neo_pixel.led_clear()
+                neo_pixel.clear()
                 _thread.exit()  # noqa
 
 
@@ -100,7 +100,7 @@ def questions():
     display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
 
 
-# sd_test()
-# img_test()
-# questions()
+sd_test()
+img_test()
+questions()
 game.questions(ham_radio_questions)

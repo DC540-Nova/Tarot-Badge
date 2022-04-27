@@ -37,5 +37,5 @@ def system():
     """
     Function to handle the menu system
     """
-    neo_pixel.led_clear()
+    neo_pixel.clear()
     game.questions(ham_radio_questions)

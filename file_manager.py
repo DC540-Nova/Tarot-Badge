@@ -113,15 +113,15 @@ def update_status(got_correct_answer=False):
                 most_recent_game_won = status[-1]
                 # Account for zero-index
                 most_recent_game_won -= 1
-                neo_pixel.breathing_led_on(spheres[most_recent_game_won])
+                neo_pixel.breathing_led(spheres[most_recent_game_won])
                 # Display the remaining games without animation
                 for game in status:
                     game_offset = game - 1
-                    neo_pixel.led_on(spheres[game_offset], RED)
+                    neo_pixel.on(spheres[game_offset], RED)
             else:
                 for game in status:
                     game_offset = game - 1
-                    neo_pixel.led_on(spheres[game_offset], RED)
+                    neo_pixel.on(spheres[game_offset], RED)
     except OSError:
         pass
 
@@ -204,6 +204,6 @@ def reset(file, sleep_time=2):
             clear_status_file()
     else:
         pass
-    neo_pixel.led_clear()
+    neo_pixel.clear()
     display.clear()
     update_status()

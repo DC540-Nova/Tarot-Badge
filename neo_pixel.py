@@ -59,11 +59,10 @@ class NeoPixel:
         self.paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
 
     @staticmethod
-    @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT,  # noqa
-                 autopull=True, pull_thresh=24)
+    @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT, autopull=True, pull_thresh=24)  # noqa
     def __ws2812():
         """
-        Internal method to handle ARM 32 assembly LED NeoPixel driver
+        Private method to handle ARM32 assembly LED neopixel driver
         """
         T1 = 2  # noqa
         T2 = 5  # noqa
@@ -77,31 +76,33 @@ class NeoPixel:
         nop().side(0)[T2 - 1]  # noqa
         wrap()  # noqa
 
-    def pixels_set(self, led, color):
+    def set(self, led, color):
         """
-        Method to set 24-bit color on pixel
+        Method to set 24-bit color set neopixel
+
         Params:
             led: int
             color: tuple
         """
         self.ar[led] = (color[1] << 16) + (color[0] << 8) + color[2]  # set 24-bit color
 
-    def pixels_show(self, brightness=1):
+    def show(self, brightness=1):
         """
-        Method to handle illumination of pixels
+        Method to show 24-bit color show neopixel
+
         Params:
             brightness: float, optional
         """
         dimmer_ar = array.array('I', [0 for _ in range(self.num_leds)])
         for ii, cc in enumerate(self.ar):
-            r = int(((cc >> 8) & 0xFF) * brightness)  # 8-bit red dimmed to brightness
-            g = int(((cc >> 16) & 0xFF) * brightness)  # 8-bit green dimmed to brightness
-            b = int((cc & 0xFF) * brightness)  # 8-bit blue dimmed to brightness
-            dimmer_ar[ii] = (g << 16) + (r << 8) + b  # 24-bit color dimmed to brightness
+            red = int(((cc >> 8) & 0xFF) * brightness)  # 8-bit red dimmed to brightness
+            green = int(((cc >> 16) & 0xFF) * brightness)  # 8-bit green dimmed to brightness
+            blue = int((cc & 0xFF) * brightness)  # 8-bit blue dimmed to brightness
+            dimmer_ar[ii] = (green << 16) + (red << 8) + blue  # 24-bit color dimmed to brightness
         self.sm.put(dimmer_ar, 8)  # update the state machine with new colors  # noqa
         sleep_ms(10)
 
-    def led_clear(self, reverse=False, hard_clear=False, clear_only_spheres=False, clear_only_paths=False):
+    def clear(self, reverse=False, hard_clear=False, clear_only_spheres=False, clear_only_paths=False):
         """
         Method to clear pixels
 
@@ -113,28 +114,28 @@ class NeoPixel:
         """
         if hard_clear:
             for led in range(self.num_leds):
-                self.pixels_set(led, BLACK)
-            self.pixels_show()
+                self.set(led, BLACK)
+            self.show()
         if clear_only_spheres:
             for led in self.spheres:
-                self.pixels_set(led, BLACK)
-                self.pixels_show()
+                self.set(led, BLACK)
+                self.show()
         if clear_only_paths:
             for led in self.paths:
-                self.pixels_set(led, BLACK)
-                self.pixels_show()
+                self.set(led, BLACK)
+                self.show()
         if reverse:
             for led in reversed(range(self.num_leds)):
-                self.pixels_set(led, BLACK)
-                self.pixels_show()
+                self.set(led, BLACK)
+                self.show()
         else:
             for led in range(self.num_leds):
-                self.pixels_set(led, BLACK)
-                self.pixels_show()
+                self.set(led, BLACK)
+                self.show()
 
-    def led_on(self, led, color=RED, all_on=False, brightness=1.0):
+    def on(self, led, color=RED, all_on=False, brightness=1.0):
         """
-        Method to handle a pixels_set and pixels_show action all in one
+        Method to handle a set and show neopixel action all in one
 
         Params:
             led: int
@@ -144,27 +145,28 @@ class NeoPixel:
         """
         if all_on:
             for led in range(self.num_leds):
-                self.pixels_set(led, color)
-            self.pixels_show()
+                self.set(led, color)
+            self.show()
         else:
-            self.pixels_set(led, color)
-            self.pixels_show(brightness)  # noqa
+            self.set(led, color)
+            self.show(brightness)  # noqa
 
-    def breathing_led_on(self, led, color=RED, repeat=1):
+    def breathing_led(self, led, color=RED, repeat=1):
         """
-        Method to handle a breathing led on animation
+        Method to handle a breathing led animation
+
         Params:
             led: int
             color: tuple, optional
             repeat: int, optional
         """
         while repeat > 0:
-            self.led_clear()
+            self.clear()
             step = 5
             breath_amps = [ii for ii in range(0, 1000, step)]
             breath_amps.extend([ii for ii in range(1000, -1, -step)])
             for ii in breath_amps:
-                self.pixels_set(led, color)
-                self.pixels_show(ii / 255)  # noqa
+                self.set(led, color)
+                self.show(ii / 255)  # noqa
                 sleep(0.02)
             repeat -= 1

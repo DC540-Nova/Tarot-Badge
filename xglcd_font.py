@@ -86,9 +86,9 @@ class XglcdFont(object):
                     int(b, 16) for b in line.split(','))
                 offset += bytes_per_letter
 
-    def lit_bits(self, n):
+    def __lit_bits(self, n):
         """
-        Method to return positions of 1 bits only
+        Private method to return positions of 1 bits only
         
         Params:
             n: int
@@ -138,7 +138,7 @@ class XglcdFont(object):
             # loop through letter byte data and convert to pixel data
             for b in mv[1:]:
                 # process only colored bits
-                for bit in self.lit_bits(b):
+                for bit in self.__lit_bits(b):
                     buf[bit + pos] = msb
                     buf[bit + pos + 1] = lsb
                 if lh > 8:
@@ -158,7 +158,7 @@ class XglcdFont(object):
             for b in mv[1:]:
                 # process only colored bits
                 segment_size = letter_byte * letter_width * 16
-                for bit in self.lit_bits(b):
+                for bit in self.__lit_bits(b):
                     pos = (bit * letter_width) + (col * 2) + segment_size
                     buf[pos] = msb
                     pos = (bit * letter_width) + (col * 2) + 1 + segment_size
@@ -168,23 +168,3 @@ class XglcdFont(object):
                     col += 1
                     letter_byte = 0
         return buf, letter_width, letter_height
-
-    def measure_text(self, text, spacing=1):
-        """
-        Method to measure length of text string in pixels
-
-        Params:
-            text: str
-            spacing: int, optional
-            
-        Returns:
-            int
-        """
-        length = 0
-        for letter in text:
-            # get index of letter
-            letter_ord = ord(letter) - self.start_letter
-            offset = letter_ord * self.bytes_per_letter
-            # add length of letter and spacing
-            length += self.letters[offset] + spacing
-        return length
