@@ -28,10 +28,10 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from config import *
+from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT
 
 
-def get_response():
+def press():
     """
     Function to handle a button press
 

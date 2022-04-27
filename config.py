@@ -59,3 +59,4 @@ BUTTON_DOWN = Pin(19, Pin.IN, Pin.PULL_UP)
 BUTTON_RIGHT = Pin(18, Pin.IN, Pin.PULL_UP)
 BUTTON_SUBMIT = Pin(17, Pin.IN, Pin.PULL_UP)
 BUTTON_EXTRA = Pin(16, Pin.IN, Pin.PULL_UP)
+import button  # noqa

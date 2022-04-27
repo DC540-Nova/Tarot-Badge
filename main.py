@@ -43,7 +43,9 @@ import _thread
 import random
 import gc
 
-from config import *
+import game
+from config import display, neo_pixel, COLORS
+from data import ham_radio_questions
 
 
 def bg_task():
@@ -98,6 +100,7 @@ def questions():
     display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
 
 
-sd_test()
-img_test()
-questions()
+# sd_test()
+# img_test()
+# questions()
+game.questions(ham_radio_questions)

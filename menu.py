@@ -28,12 +28,9 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from neo_pixel import NeoPixel
 import game
-from data import *
-from config import *
-
-neo_pixel = NeoPixel(Pin)
+from config import neo_pixel
+from data import ham_radio_questions
 
 
 def system():
@@ -42,4 +39,3 @@ def system():
     """
     neo_pixel.led_clear()
     game.questions(ham_radio_questions)
-

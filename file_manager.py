@@ -180,7 +180,7 @@ def reset(file, sleep_time=2):
         sleep_time: int, optional
     """
     # Avoid circular import issue
-    from button_input import ButtonInput
+    from button import ButtonInput
     from neo_pixel import NeoPixel
     button_input = ButtonInput()
     neo_pixel = NeoPixel(Pin)
