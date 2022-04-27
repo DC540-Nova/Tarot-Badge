@@ -293,7 +293,7 @@ class SDCard:
 
     def ioctl(self, op, arg):  # noqa
         """
-        Method to handle ioctl functionality
+        Method to handle input/output control functionality
 
         Params:
             op: int
