@@ -189,7 +189,7 @@ class SDCard:
 
     def __write(self, token, buf):
         """
-        Private Method to handle write operation
+        Private method to handle write operation
 
         Params:
             token: int
@@ -212,9 +212,9 @@ class SDCard:
         self.cs(1)
         self.spi.write(b'\xff')
 
-    def write_token(self, token):
+    def __write_token(self, token):
         """
-        Method to handle writing of token
+        Private method to handle writing of a token
 
         Params:
             token: int
@@ -289,7 +289,7 @@ class SDCard:
                 self.__write(self.TOKEN_CMD25, mv[offset: offset + 512])  # noqa
                 offset += 512
                 nblocks -= 1
-            self.write_token(self.TOKEN_STOP_TRAN)
+            self.__write_token(self.TOKEN_STOP_TRAN)
 
     def ioctl(self, op, arg):  # noqa
         """
