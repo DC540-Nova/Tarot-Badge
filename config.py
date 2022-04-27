@@ -28,19 +28,15 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from machine import Pin, SPI, unique_id  # noqa
-
-from ili9341 import Display
-
 # display config
+from machine import Pin, SPI
 spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
+from ili9341 import Display  # noqa
 display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
 
 # neo_pixel config
 LED_PIN = 5
 LED_COUNT = 32
-
-# default colors
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
@@ -53,6 +49,8 @@ BROWN = (165, 42, 42)
 ORANGE = (255, 65, 0)
 GRAY = (128, 128, 128)
 COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
+from neo_pixel import NeoPixel  # noqa
+neo_pixel = NeoPixel(Pin)
 
 # button config
 BUTTON_LEFT = Pin(21, Pin.IN, Pin.PULL_UP)

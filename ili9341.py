@@ -37,21 +37,6 @@ from micropython import const
 from xglcd_font import XglcdFont
 
 
-def color565(red, green, blue):
-    """
-    Function to return RGB565 color value
-    
-    Params:
-        red: int
-        green: int
-        blue: int
-        
-    Returns:
-        int
-    """
-    return (red & 0xf8) << 8 | (green & 0xfc) << 3 | blue >> 3
-
-
 class Display:
     """
     Class to handle IL9341 display.
@@ -240,91 +225,6 @@ class Display:
         buf, width, height = font.get_letter(letter, color, background)
         self.__block(x, y, x + width - 1, y + height - 1, buf)
         return width, height
-
-    @staticmethod
-    def load_sprite(path, width, height):
-        """
-        Method to load sprite image
-
-        Params:
-            path: str
-            width: int
-            height: int
-        """
-        buf_size = width * height * 2
-        with open(path, 'rb') as f:
-            return f.read(buf_size)
-
-    def fill_v_rect(self, x, y, width, height, color):
-        """
-        Method to draw a filled rectangle, vertical
-
-        Params:
-            x: int
-            y: int
-            width: int
-            height: int
-            color: int
-        """
-        if self.is_off_grid(x, y, x + width - 1, y + height - 1):
-            return
-        chunk_width = 1024 // height
-        chunk_count, remainder = divmod(width, chunk_width)
-        chunk_size = chunk_width * height
-        chunk_x = x
-        if chunk_count:
-            buf = color.to_bytes(2, 'big') * chunk_size
-            for c in range(0, chunk_count):
-                self.__block(chunk_x, y, chunk_x + chunk_width - 1, y + height - 1, buf)
-                chunk_x += chunk_width
-        if remainder:
-            buf = color.to_bytes(2, 'big') * remainder * height
-            self.__block(chunk_x, y, chunk_x + remainder - 1, y + height - 1, buf)
-            
-    def is_off_grid(self, x_min, y_min, x_max, y_max):
-        """
-        Method to check if coordinates extend past display boundaries
-
-        Params:
-            x_min: int
-            y_min: int
-            x_max: int
-            y_max: int
-        Returns:
-            bool
-        """
-        if x_min < 0:
-            print('x-coordinate: {0} below minimum of 0.'.format(x_min))
-            return True
-        if y_min < 0:
-            print('y-coordinate: {0} below minimum of 0.'.format(y_min))
-            return True
-        if x_max >= self.width:
-            print('x-coordinate: {0} above maximum of {1}.'.format(
-                x_max, self.width - 1))
-            return True
-        if y_max >= self.height:
-            print('y-coordinate: {0} above maximum of {1}.'.format(
-                y_max, self.height - 1))
-            return True
-        return False
-
-    def draw_sprite(self, buf, x, y, width, height):
-        """
-        Method to draw a sprite
-
-        Params:
-            buf: bytearray
-            x: int
-            y: int
-            width: int
-            height: int
-        """
-        x2 = x + width - 1
-        y2 = y + height - 1
-        if self.is_off_grid(x, y, x2, y2):
-            return
-        self.__block(x, y, x2, y2, buf)
     
     def clear(self, color=0):
         """
@@ -343,7 +243,7 @@ class Display:
         for y in range(0, height, 8):
             self.__block(0, y, width - 1, y + 7, line)
 
-    def text(self, text, color=color565(255, 255, 0), font=UNISPACE_FONT, x=8, y=0, background=0, spacing=1,
+    def text(self, text, color=0b1111111111100000, font=UNISPACE_FONT, x=8, y=0, background=0, spacing=1,
              sleep_time=3):
         """
         Method to draw text
@@ -372,7 +272,7 @@ class Display:
 
     def image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, multithreading=False):
         """
-        Method to draw image on screen from flash or sd card
+        Method to draw image on display
 
         Params:
             path: str
@@ -423,84 +323,3 @@ class Display:
         self.POWER_DISPLAY.value(1)
         utime.sleep(sleep_time)
         self.POWER_DISPLAY.value(0)
-
-
-class BouncingSprite:
-    """
-    Class to handle a bouncing sprite animation
-    """
-
-    def __init__(self, path, width, height, screen_width, screen_height, speed, display):  # noqa
-        """
-        Params:
-            path: str,
-            width: int,
-            height: int,
-            screen_width: int
-            screen_height: int
-            size: int.
-            speed: int
-            display: object
-        """
-        self.buf = display.load_sprite(path, width, height)
-        self.width = width
-        self.height = height
-        self.screen_width = screen_width
-        self.screen_height = screen_height
-        self.display = display
-        self.x_speed = speed
-        self.y_speed = speed
-        self.x = self.screen_width // 2
-        self.y = self.screen_height // 2
-        self.prev_x = self.x
-        self.prev_y = self.y
-
-    def update_pos(self):
-        """
-        Method to update sprite speed and position
-        """
-        x = self.x
-        y = self.y
-        width = self.width
-        height = self.height
-        x_speed = abs(self.x_speed)
-        y_speed = abs(self.y_speed)
-        if x + width + x_speed >= self.screen_width:
-            self.x_speed = -x_speed
-        elif x - x_speed < 0:
-            self.x_speed = x_speed
-        if y + height + y_speed >= self.screen_height:
-            self.y_speed = -y_speed
-        elif y - y_speed <= 0:
-            self.y_speed = y_speed
-        self.prev_x = x
-        self.prev_y = y
-        self.x = x + self.x_speed
-        self.y = y + self.y_speed
-
-    def draw(self):
-        """
-        Method to draw a bouncing sprite
-        """
-        x = self.x
-        y = self.y
-        prev_x = self.prev_x
-        prev_y = self.prev_y
-        width = self.width
-        height = self.height
-        x_speed = abs(self.x_speed)
-        y_speed = abs(self.y_speed)
-        # determine direction and remove previous portion of sprite
-        if prev_x > x:
-            # left
-            self.display.fill_v_rect(x + width, prev_y, x_speed, height, 0)
-        elif prev_x < x:
-            # right
-            self.display.fill_v_rect(x - x_speed, prev_y, x_speed, height, 0)
-        if prev_y > y:
-            # upward
-            self.display.fill_v_rect(prev_x, y + height, width, y_speed, 0)
-        elif prev_y < y:
-            # downward
-            self.display.fill_v_rect(prev_x, y - y_speed, width, y_speed, 0)
-        self.display.draw_sprite(self.buf, x, y, width, height)
