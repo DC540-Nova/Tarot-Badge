@@ -32,10 +32,12 @@
 # mpremote cp main.py :
 # mpremote exec 'import main'
 # mpremote connect /dev/tty.u* cp main.py :
-# mpremote connect /dev/tty.u* exec 'import main'
+# mpremote connect /dev/tty.u* rm ili9341.mpy :
 # mpremote connect /dev/tty.u* cp main.py :/sd/
 # mpremote connect /dev/tty.u* cp *.* :/sd/
+# mpremote connect /dev/tty.u* exec 'import main;main.img_test()'
 # screen /dev/tty.u*
+# ~/Documents/pico/micropython/mpy-cross/mpy-cross ili9341.py
 
 import utime
 import _thread
@@ -44,7 +46,6 @@ import gc
 
 from ili9341 import color565
 import neo_pixel
-import demo
 
 from config import *
 
