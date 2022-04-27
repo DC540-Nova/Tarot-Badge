@@ -161,7 +161,7 @@ class SDCard:
 
     def __read(self, buf):
         """
-        Private method to handle read
+        Private method to handle read operation
 
         Params:
             buf: int
@@ -187,9 +187,9 @@ class SDCard:
         self.cs(1)
         self.spi.write(b'\xff')
 
-    def write(self, token, buf):
+    def __write(self, token, buf):
         """
-        Method to handle write operation
+        Private Method to handle write operation
 
         Params:
             token: int
@@ -277,7 +277,7 @@ class SDCard:
             if self.__cmd(24, block_num * self.cdv, 0) != 0:
                 raise OSError(5)  # EIO
             # send the data
-            self.write(self.TOKEN_DATA, buf)
+            self.__write(self.TOKEN_DATA, buf)
         else:
             # CMD25: set write address for first block
             if self.__cmd(25, block_num * self.cdv, 0) != 0:
@@ -286,7 +286,7 @@ class SDCard:
             offset = 0
             mv = memoryview(buf)
             while nblocks:
-                self.write(self.TOKEN_CMD25, mv[offset: offset + 512])  # noqa
+                self.__write(self.TOKEN_CMD25, mv[offset: offset + 512])  # noqa
                 offset += 512
                 nblocks -= 1
             self.write_token(self.TOKEN_STOP_TRAN)
