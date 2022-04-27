@@ -29,8 +29,6 @@
 # pyright: reportUndefinedVariable=false
 
 # pip install mpremote
-# mpremote cp main.py :
-# mpremote exec 'import main'
 # mpremote connect /dev/tty.u* cp main.py :
 # mpremote connect /dev/tty.u* rm ili9341.py :
 # mpremote connect /dev/tty.u* cp main.py :/sd/
