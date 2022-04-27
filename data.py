@@ -173,73 +173,73 @@ cards = {
             '',  # noqa
             ''
         ],
-    '24 ':
+    '24 Three Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '25 ':
+    '25 Four Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '26 ':
+    '26 Five Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '27 ':
+    '27 Six Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '28 ':
+    '28 Seven Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '29 ':
+    '29 Eight Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '30 ':
+    '30 Nine Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '31 ':
+    '31 Ten Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '32 ':
+    '32 Page Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '33 ':
+    '33 Knight Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '34 ':
+    '34 Queen Of Wands':
         [
             '',
             '',  # noqa
             ''
         ],
-    '35 ':
+    '35 King Of Wands':
         [
             '',
             '',  # noqa
