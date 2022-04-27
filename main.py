@@ -65,10 +65,10 @@ def sd_test():
     """
     Function to test sd card functionality
     """
-    with open('test01.txt', 'w') as f:
+    with open('sd/test01.txt', 'w') as f:
         f.write('Hello, Baab!\r\n')
         f.write('This is the United States calling are we reaching?\r\n')
-    with open('test01.txt', 'r') as f:
+    with open('sd/test01.txt', 'r') as f:
         data = f.read()
         print(data)
 
@@ -101,4 +101,4 @@ def questions():
 sd_test()
 img_test()
 questions()
-game.questions(ham_radio_questions)
+# game.questions(ham_radio_questions)

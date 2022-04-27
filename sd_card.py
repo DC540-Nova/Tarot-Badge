@@ -44,7 +44,7 @@ class SDCard:
     TOKEN_STOP_TRAN = const(0xFD)  # token stop tran
     TOKEN_DATA = const(0xFE)  # token data
 
-    def __init__(self, spi, cs, baudrate=1320000):
+    def __init__(self, spi, cs):
         """
         Params:
             spi: object
@@ -60,33 +60,14 @@ class SDCard:
             self.dummybuf[i] = 0xFF
         self.dummybuf_memoryview = memoryview(self.dummybuf)
         # initialise the card
-        self.init_card(baudrate)
+        self.init_card()
 
-    def init_spi(self, baudrate):
+    def init_card(self):
         """
         Method to handle init of spi device
-
-        Params:
-            baudrate: int
-        """
-        try:
-            master = self.spi.MASTER
-        except AttributeError:
-            self.spi.init(baudrate=baudrate, phase=0, polarity=0)
-        else:
-            self.spi.init(master, baudrate=baudrate, phase=0, polarity=0)
-
-    def init_card(self, baudrate):
-        """
-        Method to handle init of spi device
-
-        Params:
-            baudrate: int
         """
         # init CS pin
         self.cs.init(self.cs.OUT, value=1)
-        # init SPI bus; use low data rate for initialisation
-        self.init_spi(100000)
         # clock card at least 100 cycles with cs high
         for i in range(16):
             self.spi.write(b'\xff')
@@ -112,7 +93,7 @@ class SDCard:
         self.readinto(csd)
         if csd[0] & 0xC0 == 0x40:  # CSD version 2.0
             self.sectors = ((csd[8] << 8 | csd[9]) + 1) * 1024
-        elif csd[0] & 0xC0 == 0x00:  # CSD version 1.0 (old, <=2GB)
+        elif csd[0] & 0xC0 == 0x00:  # CSD version 1.0 (old, <= 2GB)
             c_size = csd[6] & 0b11 | csd[7] << 2 | (csd[8] & 0b11000000) << 4
             c_size_mult = ((csd[9] & 0b11) << 1) | csd[10] >> 7
             self.sectors = (c_size + 1) * (2 ** (c_size_mult + 2))  # noqa
@@ -121,19 +102,6 @@ class SDCard:
         # CMD16: set block length to 512 bytes
         if self.cmd(16, 512, 0) != 0:
             raise OSError('cannot set 512 block size')
-        # set to high data rate now that it is initialised
-        self.init_spi(baudrate)
-
-    def init_card_v1(self):
-        """
-        Method to handle init card version 1
-        """
-        for i in range(self.CMD_TIMEOUT):
-            self.cmd(55, 0, 0)
-            if self.cmd(41, 0, 0) == 0:
-                self.cdv = 512  # noqa
-                return
-        raise OSError('timeout waiting for v1 card')
 
     def init_card_v2(self):
         """
