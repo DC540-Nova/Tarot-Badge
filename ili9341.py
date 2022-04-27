@@ -138,6 +138,13 @@ class Display:
         # send initialization commands
         self.__write_cmd(self.SWRESET)  # software reset
         utime.sleep(.1)
+        # init the display
+        self.__init_display()
+
+    def __init_display(self):
+        """
+        Private method to handle init of display
+        """
         self.__write_cmd(self.PWCTRB, 0x00, 0xC1, 0x30)  # pwr ctrl B
         self.__write_cmd(self.POSC, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
         self.__write_cmd(self.DTCA, 0x85, 0x00, 0x78)  # driver timing ctrl A
@@ -155,8 +162,10 @@ class Display:
         self.__write_cmd(self.DFUNCTR, 0x08, 0x82, 0x27)
         self.__write_cmd(self.ENABLE3G, 0x00)  # enable 3 gamma ctrl
         self.__write_cmd(self.GAMMASET, 0x01)  # gamma curve selected
-        self.__write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)  # noqa
-        self.__write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)  # noqa
+        self.__write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E,
+                         0x09, 0x00)  # noqa
+        self.__write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31,
+                         0x36, 0x0F)  # noqa
         self.__write_cmd(self.SLPOUT)  # exit sleep
         utime.sleep(.1)
         self.__write_cmd(self.DISPLAY_ON)  # display on

@@ -64,7 +64,7 @@ class SDCard:
 
     def __init_card(self):
         """
-        Private method to handle init of sd card device
+        Private method to handle init of sd card
         """
         # init CS pin
         self.cs.init(self.cs.OUT, value=1)
