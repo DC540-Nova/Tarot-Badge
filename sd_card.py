@@ -60,11 +60,11 @@ class SDCard:
             self.dummybuf[i] = 0xFF
         self.dummybuf_memoryview = memoryview(self.dummybuf)
         # initialise the card
-        self.init_card()
+        self.__init_card()
 
-    def init_card(self):
+    def __init_card(self):
         """
-        Method to handle init of spi device
+        Private method to handle init of sd card device
         """
         # init CS pin
         self.cs.init(self.cs.OUT, value=1)
@@ -73,21 +73,19 @@ class SDCard:
             self.spi.write(b'\xff')
         # CMD0: init card should return _R1_IDLE_STATE (allow 5 attempts)
         for _ in range(5):
-            if self.cmd(0, 0, 0x95) == self.R1_IDLE_STATE:
+            if self.__cmd(0, 0, 0x95) == self.R1_IDLE_STATE:
                 break
         else:
             raise OSError('no SD card')
         # CMD8: determine card version
-        r = self.cmd(8, 0x01AA, 0x87, 4)
+        r = self.__cmd(8, 0x01AA, 0x87, 4)
         if r == self.R1_IDLE_STATE:
-            self.init_card_v2()
-        elif r == (self.R1_IDLE_STATE | self.R1_ILLEGAL_COMMAND):
-            self.init_card_v1()
+            self.__init_card_v2()
         else:
             raise OSError('could not determine SD card version')
         # get the number of sectors
         # CMD9: response R2 (R1 byte + 16-byte block read)
-        if self.cmd(9, 0, 0, 0, False) != 0:
+        if self.__cmd(9, 0, 0, 0, False) != 0:
             raise OSError('no response from SD card')
         csd = bytearray(16)
         self.readinto(csd)
@@ -100,26 +98,26 @@ class SDCard:
         else:
             raise OSError('SD card CSD format not supported')
         # CMD16: set block length to 512 bytes
-        if self.cmd(16, 512, 0) != 0:
+        if self.__cmd(16, 512, 0) != 0:
             raise OSError('cannot set 512 block size')
 
-    def init_card_v2(self):
+    def __init_card_v2(self):
         """
-        Method to handle init card version 1
+        Private method to handle init card version 2
         """
         for i in range(self.CMD_TIMEOUT):
             time.sleep_ms(50)
-            self.cmd(58, 0, 0, 4)
-            self.cmd(55, 0, 0)
-            if self.cmd(41, 0x40000000, 0) == 0:
-                self.cmd(58, 0, 0, 4)
+            self.__cmd(58, 0, 0, 4)
+            self.__cmd(55, 0, 0)
+            if self.__cmd(41, 0x40000000, 0) == 0:
+                self.__cmd(58, 0, 0, 4)
                 self.cdv = 1  # noqa
                 return
         raise OSError('timeout waiting for v2 card')
 
-    def cmd(self, cmd, arg, crc, final=0, release=True, skip1=False):
+    def __cmd(self, cmd, arg, crc, final=0, release=True, skip1=False):
         """
-        Method to handle cmd functionality
+        Private method to handle cmd functionality
 
         Params:
             cmd: int
@@ -242,7 +240,7 @@ class SDCard:
         assert nblocks and not len(buf) % 512, 'buffer length is invalid'
         if nblocks == 1:
             # CMD17: set read address for single block
-            if self.cmd(17, block_num * self.cdv, 0, release=False) != 0:
+            if self.__cmd(17, block_num * self.cdv, 0, release=False) != 0:
                 # release the card
                 self.cs(1)
                 raise OSError(5)  # EIO
@@ -250,7 +248,7 @@ class SDCard:
             self.readinto(buf)
         else:
             # CMD18: set read address for multiple blocks
-            if self.cmd(18, block_num * self.cdv, 0, release=False) != 0:
+            if self.__cmd(18, block_num * self.cdv, 0, release=False) != 0:
                 # release the card
                 self.cs(1)
                 raise OSError(5)  # EIO
@@ -261,7 +259,7 @@ class SDCard:
                 self.readinto(mv[offset: offset + 512])
                 offset += 512
                 nblocks -= 1
-            if self.cmd(12, 0, 0xFF, skip1=True):
+            if self.__cmd(12, 0, 0xFF, skip1=True):
                 raise OSError(5)  # EIO
 
     def writeblocks(self, block_num, buf):
@@ -276,13 +274,13 @@ class SDCard:
         assert nblocks and not err, 'buffer length is invalid'
         if nblocks == 1:
             # CMD24: set write address for single block
-            if self.cmd(24, block_num * self.cdv, 0) != 0:
+            if self.__cmd(24, block_num * self.cdv, 0) != 0:
                 raise OSError(5)  # EIO
             # send the data
             self.write(self.TOKEN_DATA, buf)
         else:
             # CMD25: set write address for first block
-            if self.cmd(25, block_num * self.cdv, 0) != 0:
+            if self.__cmd(25, block_num * self.cdv, 0) != 0:
                 raise OSError(5)  # EIO
             # send the data
             offset = 0
