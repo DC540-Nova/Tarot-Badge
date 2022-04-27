@@ -40,6 +40,19 @@ class NeoPixel:
     Class to handle NeoPixel functionality
     """
 
+    BLACK = (0, 0, 0)
+    RED = (255, 0, 0)
+    YELLOW = (255, 255, 0)
+    GREEN = (0, 255, 0)
+    CYAN = (0, 255, 255)
+    BLUE = (0, 0, 255)
+    PURPLE = (180, 0, 255)
+    WHITE = (255, 255, 255)
+    BROWN = (165, 42, 42)
+    ORANGE = (255, 65, 0)
+    GRAY = (128, 128, 128)
+    COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
+
     def __init__(self, pin, LED_COUNT=LED_COUNT):  # noqa
         """
         Params:
@@ -114,15 +127,15 @@ class NeoPixel:
         """
         if hard_clear:
             for led in range(self.num_leds):
-                self.set(led, BLACK)
+                self.set(led, self.BLACK)
             self.show()
         if clear_only_spheres:
             for led in self.spheres:
-                self.set(led, BLACK)
+                self.set(led, self.BLACK)
                 self.show()
         if clear_only_paths:
             for led in self.paths:
-                self.set(led, BLACK)
+                self.set(led, self.BLACK)
                 self.show()
         if reverse:
             for led in reversed(range(self.num_leds)):
@@ -130,7 +143,7 @@ class NeoPixel:
                 self.show()
         else:
             for led in range(self.num_leds):
-                self.set(led, BLACK)
+                self.set(led, self.BLACK)
                 self.show()
 
     def on(self, led, color=RED, all_on=False, brightness=1.0):

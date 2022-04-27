@@ -42,7 +42,7 @@ import random
 import gc
 
 import game
-from config import display, neo_pixel, COLORS
+from config import display, neo_pixel
 from data import ham_radio_questions
 
 
@@ -55,7 +55,7 @@ def bg_task():
     paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
     for count in range(20):
         for my_LED in hex1:
-            neo_pixel.on(paths[my_LED - 11], COLORS[random.randint(1, 7)])
+            neo_pixel.on(paths[my_LED - 11], neo_pixel.COLORS[random.randint(1, 7)])
             if count == 19:
                 neo_pixel.clear()
                 _thread.exit()  # noqa

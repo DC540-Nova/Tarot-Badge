@@ -37,18 +37,6 @@ display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
 # neo_pixel config
 LED_PIN = 5
 LED_COUNT = 32
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
-GREEN = (0, 255, 0)
-CYAN = (0, 255, 255)
-BLUE = (0, 0, 255)
-PURPLE = (180, 0, 255)
-WHITE = (255, 255, 255)
-BROWN = (165, 42, 42)
-ORANGE = (255, 65, 0)
-GRAY = (128, 128, 128)
-COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
 from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin)
 
