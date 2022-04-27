@@ -28,17 +28,7 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-# display config
 from machine import Pin, SPI
-spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
-from ili9341 import Display  # noqa
-display = Display(spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
-
-# neo_pixel config
-LED_PIN = 5
-LED_COUNT = 32
-from neo_pixel import NeoPixel  # noqa
-neo_pixel = NeoPixel(Pin)
 
 # button config
 BUTTON_LEFT = Pin(21, Pin.IN, Pin.PULL_UP)
@@ -48,3 +38,14 @@ BUTTON_RIGHT = Pin(18, Pin.IN, Pin.PULL_UP)
 BUTTON_SUBMIT = Pin(17, Pin.IN, Pin.PULL_UP)
 BUTTON_EXTRA = Pin(16, Pin.IN, Pin.PULL_UP)
 import button  # noqa
+
+# display config
+display_spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
+from ili9341 import Display  # noqa
+display = Display(display_spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
+
+# neo_pixel config
+LED_PIN = 5
+LED_COUNT = 32
+from neo_pixel import NeoPixel  # noqa
+neo_pixel = NeoPixel(Pin)
