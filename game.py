@@ -30,12 +30,8 @@
 
 import random
 
-import button_input
-from neo_pixel import NeoPixel
-from config import *
-from data import *
-
-neo_pixel = NeoPixel(Pin)
+from config import button, display
+from data import ham_radio_questions
 
 
 def questions(question_bank):
@@ -54,20 +50,20 @@ def questions(question_bank):
     answer_list = []
     for _ in questions:
         question, answers = random.choice(list(ham_radio_questions.items()))
-        display.draw_text(question)
+        display.text(question)
         correct_answer_index = answers[4]
         # strip off correct_answer_index from being displayed
         answers = answers[0:-1]
         for answer in answers:
-            display.draw_text(answer)
-        display.draw_text('CHOOSE...')
-        answer = button_input.get_response()
+            display.text(answer)
+        display.text('CHOOSE...')
+        answer = button.press()
         if answer == correct_answer_index:
             answer_list.append(1)
-            display.draw_text('CORRECT')
+            display.text('CORRECT')
         else:
             answer_list.append(0)
-            display.draw_text('INCORRECT')
+            display.text('INCORRECT')
         question_number += 1
         counter += 1
         del ham_radio_questions[question]

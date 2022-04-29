@@ -37,24 +37,9 @@ from micropython import const
 from xglcd_font import XglcdFont
 
 
-def color565(red, green, blue):
-    """
-    Function to return RGB565 color value
-    
-    Params:
-        red: int
-        green: int
-        blue: int
-        
-    Returns:
-        int
-    """
-    return (red & 0xf8) << 8 | (green & 0xfc) << 3 | blue >> 3
-
-
 class Display:
     """
-    Class to handle IL9341 display.
+    Class to handle IL9341 display
     """
 
     # ili9341 registers
@@ -115,7 +100,7 @@ class Display:
     POSC = const(0xED)  # power on sequence control
     ENABLE3G = const(0xF2)  # enable 3 gamma control
     PUMPRC = const(0xF7)  # pump ratio control
-    UNISPACE = XglcdFont('Unispace12x24.c', 12, 24)  # load font
+    UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
     POWER_DISPLAY = Pin(2, Pin.OUT)
 
     ROTATE = {
@@ -125,7 +110,7 @@ class Display:
         270: 0x28
     }
 
-    def __init__(self, spi, cs, dc, rst, width=240, height=320, rotation=0):  # noqa
+    def __init__(self, spi, cs, dc, rst, width=240, height=320, rotation=0):
         """
         Params:
             spi: object
@@ -150,35 +135,38 @@ class Display:
         self.cs.init(self.cs.OUT, value=1)
         self.dc.init(self.dc.OUT, value=0)
         self.rst.init(self.rst.OUT, value=1)
-        self.write_cmd = self.__write_cmd
-        self.write_data = self.__write_data
         # send initialization commands
-        self.write_cmd(self.SWRESET)  # software reset
+        self.__write_cmd(self.SWRESET)  # software reset
         utime.sleep(.1)
-        self.write_cmd(self.PWCTRB, 0x00, 0xC1, 0x30)  # pwr ctrl B
-        self.write_cmd(self.POSC, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
-        self.write_cmd(self.DTCA, 0x85, 0x00, 0x78)  # driver timing ctrl A
-        self.write_cmd(self.PWCTRA, 0x39, 0x2C, 0x00, 0x34, 0x02)  # pwr ctrl A
-        self.write_cmd(self.PUMPRC, 0x20)  # pump ratio control
-        self.write_cmd(self.DTCB, 0x00, 0x00)  # driver timing ctrl B
-        self.write_cmd(self.PWCTR1, 0x23)  # pwr ctrl 1
-        self.write_cmd(self.PWCTR2, 0x10)  # pwr ctrl 2
-        self.write_cmd(self.VMCTR1, 0x3E, 0x28)  # VCOM ctrl 1
-        self.write_cmd(self.VMCTR2, 0x86)  # VCOM ctrl 2
-        self.write_cmd(self.MADCTL, self.rotation)  # mem access ctrl
-        self.write_cmd(self.VSCRSADD, 0x00)  # vertical scrolling start address
-        self.write_cmd(self.PIXFMT, 0x55)  # COLMOD: pixel format
-        self.write_cmd(self.FRMCTR1, 0x00, 0x18)  # frame rate ctrl
-        self.write_cmd(self.DFUNCTR, 0x08, 0x82, 0x27)
-        self.write_cmd(self.ENABLE3G, 0x00)  # enable 3 gamma ctrl
-        self.write_cmd(self.GAMMASET, 0x01)  # gamma curve selected
-        self.write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09,
-                       0x00)
-        self.write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36,
-                       0x0F)
-        self.write_cmd(self.SLPOUT)  # exit sleep
+        # init the display
+        self.__init_display()
+
+    def __init_display(self):
+        """
+        Private method to handle init of display
+        """
+        self.__write_cmd(self.PWCTRB, 0x00, 0xC1, 0x30)  # pwr ctrl B
+        self.__write_cmd(self.POSC, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
+        self.__write_cmd(self.DTCA, 0x85, 0x00, 0x78)  # driver timing ctrl A
+        self.__write_cmd(self.PWCTRA, 0x39, 0x2C, 0x00, 0x34, 0x02)  # pwr ctrl A
+        self.__write_cmd(self.PUMPRC, 0x20)  # pump ratio control
+        self.__write_cmd(self.DTCB, 0x00, 0x00)  # driver timing ctrl B
+        self.__write_cmd(self.PWCTR1, 0x23)  # pwr ctrl 1
+        self.__write_cmd(self.PWCTR2, 0x10)  # pwr ctrl 2
+        self.__write_cmd(self.VMCTR1, 0x3E, 0x28)  # VCOM ctrl 1
+        self.__write_cmd(self.VMCTR2, 0x86)  # VCOM ctrl 2
+        self.__write_cmd(self.MADCTL, self.rotation)  # mem access ctrl
+        self.__write_cmd(self.VSCRSADD, 0x00)  # vertical scrolling start address
+        self.__write_cmd(self.PIXFMT, 0x55)  # COLMOD: pixel format
+        self.__write_cmd(self.FRMCTR1, 0x00, 0x18)  # frame rate ctrl
+        self.__write_cmd(self.DFUNCTR, 0x08, 0x82, 0x27)
+        self.__write_cmd(self.ENABLE3G, 0x00)  # enable 3 gamma ctrl
+        self.__write_cmd(self.GAMMASET, 0x01)  # gamma curve selected
+        self.__write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)  # noqa
+        self.__write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)  # noqa
+        self.__write_cmd(self.SLPOUT)  # exit sleep
         utime.sleep(.1)
-        self.write_cmd(self.DISPLAY_ON)  # display on
+        self.__write_cmd(self.DISPLAY_ON)  # display on
         utime.sleep(.1)
         self.clear()  # display clear
 
@@ -196,7 +184,7 @@ class Display:
         self.cs(1)
         # handle any passed data
         if len(args) > 0:
-            self.write_data(bytearray(args))
+            self.__write_data(bytearray(args))
 
     def __write_data(self, data):
         """
@@ -221,12 +209,12 @@ class Display:
             y1: int
             data: bytes
         """
-        self.write_cmd(self.SET_COLUMN, *ustruct.pack('>HH', x0, x1))
-        self.write_cmd(self.SET_PAGE, *ustruct.pack('>HH', y0, y1))
-        self.write_cmd(self.WRITE_RAM)
-        self.write_data(data)
+        self.__write_cmd(self.SET_COLUMN, *ustruct.pack('>HH', x0, x1))
+        self.__write_cmd(self.SET_PAGE, *ustruct.pack('>HH', y0, y1))
+        self.__write_cmd(self.WRITE_RAM)
+        self.__write_data(data)
 
-    def __draw_letter(self, letter, color, font, x, y, background=0):
+    def __letter(self, letter, color, font, x, y, background=0):
         """
         Private method to draw a single letter
 
@@ -244,91 +232,6 @@ class Display:
         buf, width, height = font.get_letter(letter, color, background)
         self.__block(x, y, x + width - 1, y + height - 1, buf)
         return width, height
-
-    @staticmethod
-    def load_sprite(path, width, height):
-        """
-        Method to load sprite image
-
-        Params:
-            path: str
-            width: int
-            height: int
-        """
-        buf_size = width * height * 2
-        with open(path, 'rb') as f:
-            return f.read(buf_size)
-
-    def fill_v_rect(self, x, y, width, height, color):
-        """
-        Method to draw a filled rectangle, vertical
-
-        Params:
-            x: int
-            y: int
-            width: int
-            height: int
-            color: int
-        """
-        if self.is_off_grid(x, y, x + width - 1, y + height - 1):
-            return
-        chunk_width = 1024 // height
-        chunk_count, remainder = divmod(width, chunk_width)
-        chunk_size = chunk_width * height
-        chunk_x = x
-        if chunk_count:
-            buf = color.to_bytes(2, 'big') * chunk_size
-            for c in range(0, chunk_count):
-                self.__block(chunk_x, y, chunk_x + chunk_width - 1, y + height - 1, buf)
-                chunk_x += chunk_width
-        if remainder:
-            buf = color.to_bytes(2, 'big') * remainder * height
-            self.__block(chunk_x, y, chunk_x + remainder - 1, y + height - 1, buf)
-            
-    def is_off_grid(self, x_min, y_min, x_max, y_max):
-        """
-        Method to check if coordinates extend past display boundaries
-
-        Params:
-            x_min: int
-            y_min: int
-            x_max: int
-            y_max: int
-        Returns:
-            bool
-        """
-        if x_min < 0:
-            print('x-coordinate: {0} below minimum of 0.'.format(x_min))
-            return True
-        if y_min < 0:
-            print('y-coordinate: {0} below minimum of 0.'.format(y_min))
-            return True
-        if x_max >= self.width:
-            print('x-coordinate: {0} above maximum of {1}.'.format(
-                x_max, self.width - 1))
-            return True
-        if y_max >= self.height:
-            print('y-coordinate: {0} above maximum of {1}.'.format(
-                y_max, self.height - 1))
-            return True
-        return False
-
-    def draw_sprite(self, buf, x, y, width, height):
-        """
-        Method to draw a sprite
-
-        Params:
-            buf: bytearray
-            x: int
-            y: int
-            width: int
-            height: int
-        """
-        x2 = x + width - 1
-        y2 = y + height - 1
-        if self.is_off_grid(x, y, x2, y2):
-            return
-        self.__block(x, y, x2, y2, buf)
     
     def clear(self, color=0):
         """
@@ -347,8 +250,8 @@ class Display:
         for y in range(0, height, 8):
             self.__block(0, y, width - 1, y + 7, line)
 
-    def draw_text(self, text, color=color565(255, 255, 0), font=UNISPACE, x=8, y=0, background=0, spacing=1,
-                  sleep_time=3):
+    def text(self, text, color=0b1111111111100000, font=UNISPACE_FONT, x=8, y=0, background=0, spacing=1,
+             sleep_time=3):
         """
         Method to draw text
 
@@ -368,15 +271,15 @@ class Display:
                 x = 0
                 y += 24
             # get letter array and letter dimension
-            width, height = self.__draw_letter(letter, color, font, x, y, background)
+            width, height = self.__letter(letter, color, font, x, y, background)
             x += (width + spacing)
         self.POWER_DISPLAY.value(1)
         utime.sleep(sleep_time)
         self.POWER_DISPLAY.value(0)
 
-    def draw_image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, multithreading=False):
+    def image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, multithreading=False):
         """
-        Method to draw image on screen from flash or sd card
+        Method to draw image on display
 
         Params:
             path: str
@@ -427,84 +330,3 @@ class Display:
         self.POWER_DISPLAY.value(1)
         utime.sleep(sleep_time)
         self.POWER_DISPLAY.value(0)
-
-
-class BouncingSprite:
-    """
-    Class to handle a bouncing sprite animation
-    """
-
-    def __init__(self, path, width, height, screen_width, screen_height, speed, display):  # noqa
-        """
-        Params:
-            path: str,
-            width: int,
-            height: int,
-            screen_width: int
-            screen_height: int
-            size: int.
-            speed: int
-            display: object
-        """
-        self.buf = display.load_sprite(path, width, height)
-        self.width = width
-        self.height = height
-        self.screen_width = screen_width
-        self.screen_height = screen_height
-        self.display = display
-        self.x_speed = speed
-        self.y_speed = speed
-        self.x = self.screen_width // 2
-        self.y = self.screen_height // 2
-        self.prev_x = self.x
-        self.prev_y = self.y
-
-    def update_pos(self):
-        """
-        Method to update sprite speed and position
-        """
-        x = self.x
-        y = self.y
-        width = self.width
-        height = self.height
-        x_speed = abs(self.x_speed)
-        y_speed = abs(self.y_speed)
-        if x + width + x_speed >= self.screen_width:
-            self.x_speed = -x_speed
-        elif x - x_speed < 0:
-            self.x_speed = x_speed
-        if y + height + y_speed >= self.screen_height:
-            self.y_speed = -y_speed
-        elif y - y_speed <= 0:
-            self.y_speed = y_speed
-        self.prev_x = x
-        self.prev_y = y
-        self.x = x + self.x_speed
-        self.y = y + self.y_speed
-
-    def draw(self):
-        """
-        Method to draw a bouncing sprite
-        """
-        x = self.x
-        y = self.y
-        prev_x = self.prev_x
-        prev_y = self.prev_y
-        width = self.width
-        height = self.height
-        x_speed = abs(self.x_speed)
-        y_speed = abs(self.y_speed)
-        # determine direction and remove previous portion of sprite
-        if prev_x > x:
-            # left
-            self.display.fill_v_rect(x + width, prev_y, x_speed, height, 0)
-        elif prev_x < x:
-            # right
-            self.display.fill_v_rect(x - x_speed, prev_y, x_speed, height, 0)
-        if prev_y > y:
-            # upward
-            self.display.fill_v_rect(prev_x, y + height, width, y_speed, 0)
-        elif prev_y < y:
-            # downward
-            self.display.fill_v_rect(prev_x, y - y_speed, width, y_speed, 0)
-        self.display.draw_sprite(self.buf, x, y, width, height)
