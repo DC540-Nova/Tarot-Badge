@@ -168,7 +168,7 @@ class Display:
         self.__write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)  # noqa
         self.__write_cmd(self.SLPOUT)  # exit sleep
         utime.sleep(.1)
-        self.__write_cmd(self.DISPLAY_ON)  # display on
+        self.__write_cmd(self.DISPON)  # display on
         utime.sleep(.1)
         self.clear()  # display clear
 
@@ -213,7 +213,7 @@ class Display:
         """
         self.__write_cmd(self.CASET, *ustruct.pack('>HH', x0, x1))
         self.__write_cmd(self.PASET, *ustruct.pack('>HH', y0, y1))
-        self.__write_cmd(self.WRITE_RAM)
+        self.__write_cmd(self.RAMWR)
         self.__write_data(data)
 
     def __letter(self, letter, color, font, x, y, background=0):
