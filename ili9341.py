@@ -43,27 +43,29 @@ class Display:
     """
 
     # ili9341 registers
-    NOP = const(0x00)  # no-op
-    SWRESET = const(0x01)  # software reset
-    RDDID = const(0x04)  # read display ID info
-    RDDST = const(0x09)  # read display status
-    SLPIN = const(0x10)  # enter sleep mode
-    SLPOUT = const(0x11)  # exit sleep mode
-    PTLON = const(0x12)  # partial mode on
-    NORON = const(0x13)  # normal display mode on
-    RDMODE = const(0x0A)  # read display power mode
-    RDMADCTL = const(0x0B)  # read display MADCTL
-    RDPIXFMT = const(0x0C)  # read display pixel format
-    RDIMGFMT = const(0x0D)  # read display image format
-    RDSELFDIAG = const(0x0F)  # read display self-diagnostic
-    INVOFF = const(0x20)  # display inversion off
-    INVON = const(0x21)  # display inversion on
-    GAMMASET = const(0x26)  # gamma set
-    DISPLAY_OFF = const(0x28)  # display off
-    DISPLAY_ON = const(0x29)  # display on
-    SET_COLUMN = const(0x2A)  # column address set
-    SET_PAGE = const(0x2B)  # page address set
-    WRITE_RAM = const(0x2C)  # memory write
+    NOP = const(0x00)  # NOP p. 89
+    SWRESET = const(0x01)  # Software Reset p. 90
+    RDDIDIF = const(0x04)  # Read Display Identification Information p. 91
+    RDDST = const(0x09)  # Read Display Status p. 92
+    RDDPM = const(0x0a)  # Read Display Power Mode p. 94
+    RDDMADCTL = const(0x0b)  # Read Display MADCTL p. 95
+    RDDCOLMOD = const(0x0c)  # Read Display Pixel Format p. 96
+    RDDIM = const(0x0d)  # Read Display Image Mode p. 97
+    RDDSM = const(0x0e)  # Read Display Signal Mode p. 98
+    RDDSDR = const(0x0f)  # Read Display Self-Diagnostic Result p. 99
+    SLPIN = const(0x10)  # Enter Sleep Mode p. 100
+    SLPOUT = const(0x11)  # Sleep Out p. 101
+    PTLON = const(0x12)  # Partial Mode ON p. 103
+    NORON = const(0x13)  # Normal Display Mode ON p. 104
+    DINVOFF = const(0x20)  # Display Inversion OFF p. 105
+    DINVON = const(0x21)  # Display Inversion ON p. 106
+    GAMSET = const(0x26)  # Gamma Set p. 107
+    DISPOFF = const(0x28)  # Display OFF p. 108
+    DISPON = const(0x29)  # Display ON p. 109
+    CASET = const(0x2a)  # Column Address Set p. 100
+    PASET = const(0x2b)  # Page Address Set p. 112
+    RAMWR = const(0x2c)  # Memory Write p. 114
+    RGBSET = const (0x2d)  # Color Set p. 115
     READ_RAM = const(0x2E)  # memory read
     PTLAR = const(0x30)  # partial area
     VSCRDEF = const(0x33)  # vertical scrolling definition
@@ -161,7 +163,7 @@ class Display:
         self.__write_cmd(self.FRMCTR1, 0x00, 0x18)  # frame rate ctrl
         self.__write_cmd(self.DFUNCTR, 0x08, 0x82, 0x27)
         self.__write_cmd(self.ENABLE3G, 0x00)  # enable 3 gamma ctrl
-        self.__write_cmd(self.GAMMASET, 0x01)  # gamma curve selected
+        self.__write_cmd(self.GAMSET, 0x01)  # gamma curve selected
         self.__write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)  # noqa
         self.__write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)  # noqa
         self.__write_cmd(self.SLPOUT)  # exit sleep
@@ -209,8 +211,8 @@ class Display:
             y1: int
             data: bytes
         """
-        self.__write_cmd(self.SET_COLUMN, *ustruct.pack('>HH', x0, x1))
-        self.__write_cmd(self.SET_PAGE, *ustruct.pack('>HH', y0, y1))
+        self.__write_cmd(self.CASET, *ustruct.pack('>HH', x0, x1))
+        self.__write_cmd(self.PASET, *ustruct.pack('>HH', y0, y1))
         self.__write_cmd(self.WRITE_RAM)
         self.__write_data(data)
 
