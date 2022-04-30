@@ -28,13 +28,151 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+from math import ceil, floor
 import utime
 import ustruct
 import gc
 from machine import Pin
 from micropython import const
 
-from xglcd_font import XglcdFont
+
+class XglcdFont:
+    """
+    Class to handle font data in X-GLCD format
+    """
+
+    # dict to tranlate bitwise values to byte position
+    BIT_POS = {1: 0, 2: 2, 4: 4, 8: 6, 16: 8, 32: 10, 64: 12, 128: 14, 256: 16}
+
+    def __init__(self, path, width, height, start_letter=32, letter_count=96):
+        """
+        Params:
+            path: str
+            width: int
+            height: int
+            start_letter: int, optional
+            letter_count: int, optional
+        """
+        self.width = width
+        self.height = height
+        self.start_letter = start_letter
+        self.letter_count = letter_count
+        self.bytes_per_letter = (floor(
+            (self.height - 1) / 8) + 1) * self.width + 1
+        self.__load_xglcd_font(path)
+
+    def __load_xglcd_font(self, path):
+        """
+        Private method to load X-GLCD font data from text file
+
+        Parms:
+            path: str
+        """
+        bytes_per_letter = self.bytes_per_letter
+        # buffer to hold letter byte values
+        self.letters = bytearray(bytes_per_letter * self.letter_count)
+        mv = memoryview(self.letters)
+        offset = 0
+        with open(path, 'r') as f:
+            for line in f:
+                # skip lines that do not start with hex values
+                line = line.strip()
+                if len(line) == 0 or line[0:2] != '0x':
+                    continue
+                # remove comments
+                comment = line.find('//')
+                if comment != -1:
+                    line = line[0:comment].strip()
+                # remove trailing commas
+                if line.endswith(','):
+                    line = line[0:len(line) - 1]
+                # convert hex strings to bytearray and insert in to letters
+                mv[offset: offset + bytes_per_letter] = bytearray(
+                    int(b, 16) for b in line.split(','))
+                offset += bytes_per_letter
+
+    def __lit_bits(self, n):
+        """
+        Private method to return positions of 1 bits only
+
+        Params:
+            n: int
+        """
+        while n:
+            b = n & (~n + 1)
+            yield self.BIT_POS[b]
+            n ^= b
+
+    def get_letter(self, letter, color, background=0, landscape=False):
+        """
+        Method to convert letter byte data to pixels
+
+        Params:
+            letter: str
+            color: int
+            background: int, optional
+            landscape: int, optional (False = portrait)
+
+        Returns:
+            bytearray, int, int
+        """
+        # get index of letter
+        letter_ord = ord(letter) - self.start_letter
+        # confirm font contains letter
+        if letter_ord >= self.letter_count:
+            print('font does not contain character: ' + letter)
+            return b'', 0, 0
+        bytes_per_letter = self.bytes_per_letter
+        offset = letter_ord * bytes_per_letter
+        mv = memoryview(self.letters[offset:offset + bytes_per_letter])
+        # get width of letter (specified by first byte)
+        letter_width = mv[0]
+        letter_height = self.height
+        # get size in bytes of specified letter
+        letter_size = letter_height * letter_width
+        # create buffer (double size to accommodate 16-bit colors)
+        if background:
+            buf = bytearray(background.to_bytes(2, 'big') * letter_size)
+        else:
+            buf = bytearray(letter_size * 2)
+        msb, lsb = color.to_bytes(2, 'big')
+        if landscape:
+            # populate buffer in order for landscape
+            pos = (letter_size * 2) - (letter_height * 2)
+            lh = letter_height
+            # loop through letter byte data and convert to pixel data
+            for b in mv[1:]:
+                # process only colored bits
+                for bit in self.__lit_bits(b):
+                    buf[bit + pos] = msb
+                    buf[bit + pos + 1] = lsb
+                if lh > 8:
+                    # increment position by double byte
+                    pos += 16
+                    lh -= 8
+                else:
+                    # descrease position to start of previous column
+                    pos -= (letter_height * 4) - (lh * 2)
+                    lh = letter_height
+        else:
+            # populate buffer in order for portrait
+            col = 0  # set column to first column
+            bytes_per_letter = ceil(letter_height / 8)
+            letter_byte = 0
+            # loop through letter byte data and convert to pixel data
+            for b in mv[1:]:
+                # process only colored bits
+                segment_size = letter_byte * letter_width * 16
+                for bit in self.__lit_bits(b):
+                    pos = (bit * letter_width) + (col * 2) + segment_size
+                    buf[pos] = msb
+                    pos = (bit * letter_width) + (col * 2) + 1 + segment_size
+                    buf[pos] = lsb
+                letter_byte += 1
+                if letter_byte + 1 > bytes_per_letter:
+                    col += 1
+                    letter_byte = 0
+        return buf, letter_width, letter_height
 
 
 class Display:
@@ -128,7 +266,7 @@ class Display:
     ENABLE_3G = const(0xf2)  # Enable 3G p. 201
     PUMP_RATIO_CONTROL = const(0xf7)  # Pump Ratio Control p. 202
     UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
-    POWER_DISPLAY = Pin(2, Pin.OUT)
+    POWER_DISPLAY = Pin(2, Pin.OUT)  # init led pin
 
     ROTATE = {
         0: 0x88,
@@ -158,13 +296,6 @@ class Display:
             raise RuntimeError('rotation must be 0, 90, 180 or 270')
         else:
             self.rotation = self.ROTATE[rotation]
-        # initialize GPIO pins and set implementation specific methods
-        self.cs.init(self.cs.OUT, value=1)
-        self.dc.init(self.dc.OUT, value=0)
-        self.rst.init(self.rst.OUT, value=1)
-        # send initialization commands
-        self.__write_cmd(self.SWRESET)  # software reset
-        utime.sleep(.1)
         # init the display
         self.__init_display()
 
@@ -172,30 +303,37 @@ class Display:
         """
         Private method to handle init of display
         """
-        self.__write_cmd(self.POWER_CONTROL_B, 0x00, 0xC1, 0x30)  # pwr ctrl B
-        self.__write_cmd(self.POWER_ON_SEQUENCE_CONTROL, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
-        self.__write_cmd(self.DRIVER_TIMING_CONTROL_A1, 0x85, 0x00, 0x78)  # driver timing ctrl A
-        self.__write_cmd(self.POWER_CONTROL_A, 0x39, 0x2C, 0x00, 0x34, 0x02)  # pwr ctrl A
-        self.__write_cmd(self.PUMP_RATIO_CONTROL, 0x20)  # pump ratio control
-        self.__write_cmd(self.DRIVER_TIMING_CONTROL_B, 0x00, 0x00)  # driver timing ctrl B
-        self.__write_cmd(self.PWCTRL1, 0x23)  # pwr ctrl 1
-        self.__write_cmd(self.PWCTRL2, 0x10)  # pwr ctrl 2
-        self.__write_cmd(self.VMCTRL1, 0x3E, 0x28)  # VCOM ctrl 1
-        self.__write_cmd(self.VMCTRL2, 0x86)  # VCOM ctrl 2
-        self.__write_cmd(self.MADCTL, self.rotation)  # mem access ctrl
-        self.__write_cmd(self.VSCRSADD, 0x00)  # vertical scrolling start address
-        self.__write_cmd(self.PIXSET, 0x55)  # COLMOD: pixel format
-        self.__write_cmd(self.FRMCTR1, 0x00, 0x18)  # frame rate ctrl
+        # initialize GPIO pins and set implementation specific methods
+        self.cs.init(self.cs.OUT, value=1)
+        self.dc.init(self.dc.OUT, value=0)
+        self.rst.init(self.rst.OUT, value=1)
+        # send initialization commands
+        self.__write_cmd(self.SWRESET)
+        utime.sleep(.1)
+        self.__write_cmd(self.POWER_CONTROL_B, 0x00, 0xc1, 0x30)
+        self.__write_cmd(self.POWER_ON_SEQUENCE_CONTROL, 0x64, 0x03, 0x12, 0x81)
+        self.__write_cmd(self.DRIVER_TIMING_CONTROL_A1, 0x85, 0x00, 0x78)
+        self.__write_cmd(self.POWER_CONTROL_A, 0x39, 0x2c, 0x00, 0x34, 0x02)
+        self.__write_cmd(self.PUMP_RATIO_CONTROL, 0x20)
+        self.__write_cmd(self.DRIVER_TIMING_CONTROL_B, 0x00, 0x00)
+        self.__write_cmd(self.PWCTRL1, 0x23)
+        self.__write_cmd(self.PWCTRL2, 0x10)
+        self.__write_cmd(self.VMCTRL1, 0x3e, 0x28)
+        self.__write_cmd(self.VMCTRL2, 0x86)
+        self.__write_cmd(self.MADCTL, self.rotation)
+        self.__write_cmd(self.VSCRSADD, 0x00)
+        self.__write_cmd(self.PIXSET, 0x55)
+        self.__write_cmd(self.FRMCTR1, 0x00, 0x18)
         self.__write_cmd(self.DISCTRL, 0x08, 0x82, 0x27)
-        self.__write_cmd(self.ENABLE_3G, 0x00)  # enable 3 gamma ctrl
-        self.__write_cmd(self.GAMSET, 0x01)  # gamma curve selected
-        self.__write_cmd(self.PGAMCTRL, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)  # noqa
-        self.__write_cmd(self.NGAMCTRL, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)  # noqa
-        self.__write_cmd(self.SLPOUT)  # exit sleep
+        self.__write_cmd(self.ENABLE_3G, 0x00)
+        self.__write_cmd(self.GAMSET, 0x01)
+        self.__write_cmd(self.PGAMCTRL, 0x0f, 0x31, 0x2b, 0x0c, 0x0e, 0x08, 0x4e, 0xf1, 0x37, 0x07, 0x10, 0x03, 0x0e, 0x09, 0x00)  # noqa
+        self.__write_cmd(self.NGAMCTRL, 0x00, 0x0e, 0x14, 0x03, 0x11, 0x07, 0x31, 0xc1, 0x48, 0x08, 0x0f, 0x0c, 0x31, 0x36, 0x0f)  # noqa
+        self.__write_cmd(self.SLPOUT)
         utime.sleep(.1)
-        self.__write_cmd(self.DISPON)  # display on
+        self.__write_cmd(self.DISPON)
         utime.sleep(.1)
-        self.clear()  # display clear
+        self.clear()
 
     def __write_cmd(self, command, *args):
         """

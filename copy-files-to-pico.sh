@@ -6,7 +6,6 @@ mpremote connect /dev/tty.u* cp ili9341.py :
 mpremote connect /dev/tty.u* cp main.py :
 mpremote connect /dev/tty.u* cp neo_pixel.py :
 mpremote connect /dev/tty.u* cp sd_card.py :
-mpremote connect /dev/tty.u* cp xglcd_font.py :
 mpremote connect /dev/tty.u* cp file_manager.py :
 mpremote connect /dev/tty.u* cp microcontroller.py :
 mpremote connect /dev/tty.u* cp game.py :
