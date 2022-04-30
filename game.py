@@ -56,7 +56,6 @@ def questions(question_bank):
         answers = answers[0:-1]
         for answer in answers:
             display.text(answer)
-        display.text('CHOOSE...')
         answer = button.press()
         if answer == correct_answer_index:
             answer_list.append(1)
