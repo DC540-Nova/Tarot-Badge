@@ -65,43 +65,68 @@ class Display:
     CASET = const(0x2a)  # Column Address Set p. 100
     PASET = const(0x2b)  # Page Address Set p. 112
     RAMWR = const(0x2c)  # Memory Write p. 114
-    RGBSET = const (0x2d)  # Color Set p. 115
-    READ_RAM = const(0x2E)  # memory read
-    PTLAR = const(0x30)  # partial area
-    VSCRDEF = const(0x33)  # vertical scrolling definition
-    MADCTL = const(0x36)  # memory access control
-    VSCRSADD = const(0x37)  # vertical scrolling start address
-    PIXFMT = const(0x3A)  # COLMOD: pixel format set
-    WRITE_DISPLAY_BRIGHTNESS = const(0x51)  # brightness hardware dependent
-    READ_DISPLAY_BRIGHTNESS = const(0x52)
-    WRITE_CTRL_DISPLAY = const(0x53)
-    READ_CTRL_DISPLAY = const(0x54)
-    WRITE_CABC = const(0x55)  # write content adaptive brightness control
-    READ_CABC = const(0x56)  # read content adaptive brightness control
-    WRITE_CABC_MINIMUM = const(0x5E)  # write CABC minimum brightness
-    READ_CABC_MINIMUM = const(0x5F)  # read CABC minimum brightness
-    FRMCTR1 = const(0xB1)  # frame rate control (in normal mode/full colors)
-    FRMCTR2 = const(0xB2)  # frame rate control (in idle mode/8 colors)
-    FRMCTR3 = const(0xB3)  # frame rate control (in partial mode/full colors)
-    INVCTR = const(0xB4)  # display inversion control
-    DFUNCTR = const(0xB6)  # display function control
-    PWCTR1 = const(0xC0)  # power control 1
-    PWCTR2 = const(0xC1)  # power control 2
-    PWCTRA = const(0xCB)  # power control Aa
-    PWCTRB = const(0xCF)  # power control B
-    VMCTR1 = const(0xC5)  # VCOM control 1
-    VMCTR2 = const(0xC7)  # VCOM control 2
-    RDID1 = const(0xDA)  # read ID 1
-    RDID2 = const(0xDB)  # read ID 2
-    RDID3 = const(0xDC)  # read ID 3
-    RDID4 = const(0xDD)  # read ID 4
-    GMCTRP1 = const(0xE0)  # positive gamma correction
-    GMCTRN1 = const(0xE1)  # negative gamma correction
-    DTCA = const(0xE8)  # driver timing control A
-    DTCB = const(0xEA)  # Driver timing control B
-    POSC = const(0xED)  # power on sequence control
-    ENABLE3G = const(0xF2)  # enable 3 gamma control
-    PUMPRC = const(0xF7)  # pump ratio control
+    RGBSET = const(0x2d)  # Color Set p. 115
+    RAMRD = const(0x2e)  # Memory Read p. 116
+    PTLAR = const(0x30)  # Partial Area p. 118
+    VSCRDEF = const(0x33)  # Vertical Scrolling Definition p. 120
+    TEOFF = const(0x34)  # Tearing Effect Line OFF p. 124
+    TEON = const(0x35)  # Tearing Effect Line ON p. 125
+    MADCTL = const(0x36)  # Memory Access Control p. 127
+    VSCRSADD = const(0x37)  # Vertical Scrolling Start Address p. 129
+    IDMOFF = const(0x38)  # Idle Mode OFF p. 131
+    IDMON = const(0x39)  # Idle Mode ON p. 132
+    PIXSET = const(0x3a)  # COLMOD: Pixel Format Set p. 134
+    WRITE_MEMORY_CONTINUE = const(0x3c)  # Write Memory Continue p. 135
+    READ_MEMORY_CONTINUE = const(0x3e)  # Read Memory Continue p. 137
+    SET_TEAR_SCANLINE = const(0x44)  # Set Tear Scanline p. 139
+    GET_SCANLINE = const(0x45)  # Get Scanline p. 140
+    WRDISBV = const(0x51)  # Write Display Brightness p. 141
+    RDDISBV = const(0x52)  # Read Display Brightness p. 142
+    WRCTRLD = const(0x53)  # Write CTRL Display p. 143
+    RDCTRLD = const(0x54)  # Read CTRL Display p. 145
+    WRCABC = const(0x55)  # Write Content Adaptive Brightness Control p. 147
+    RDCABC = const(0x56)  # Read Content Adaptive Brightness Control p. 148
+    WRITE_CABC_MINIMUM_BRIGHTNESS = const(0x5e)  # Write CABC Minimum Brightness, Backlight Control 1 p. 149
+    READ_CABC_MINIMUM_BRIGHTNESS = const(0x5f)  # Read CABC Minimum Brightness, Backlight Control 1 p. 150
+    RDID1 = const(0xda)  # Read ID1 p. 151
+    RDID2 = const(0xdb)  # Read ID2 p. 152
+    RDID3 = const(0xdc)  # Read ID2 p. 153
+    IFMODE = const(0xb0)  # Interface Mode Control p. 154
+    FRMCTR1 = const(0xb1)  # Frame Rate Control (In Normal Mode/Full Colors) p. 155
+    FRMCTR2 = const(0xb2)  # Frame Rate Control (In Idle Mode/8 Colors) p. 157
+    FRMCTR3 = const(0xb3)  # Frame Rate control (In Partial Mode/Full Colors) p. 159
+    INVTR = const(0xb4)  # Display Inversion Control p. 161
+    PRCTR = const(0xb5)  # Blanking Porch Control p. 162
+    DISCTRL = const(0xb6)  # Display Function Control p. 164
+    ETMOD = const(0xb7)  # Entry Mode Set p. 168
+    BACKLIGHT_CONTROL_1 = const(0xb8)  # Backlight Control 1 p. 169
+    BACKLIGHT_CONTROL_2 = const(0xb9)  # Backlight Control 2 p. 170
+    BACKLIGHT_CONTROL_3 = const(0xba)  # Backlight Control 3 p. 172
+    BACKLIGHT_CONTROL_4 = const(0xbb)  # Backlight Control 4 p. 173
+    BACKLIGHT_CONTROL_5 = const(0xbc)  # Backlight Control 5 p. 175
+    BACKLIGHT_CONTROL_7 = const(0xbe)  # Backlight Control 7 p. 176
+    BACKLIGHT_CONTROL_8 = const(0xbf)  # Backlight Control 8 p. 177
+    PWCTRL1 = const(0xc0)  # Power Control 1 p. 178
+    PWCTRL2 = const(0xc1)  # Power Control 2 p. 179
+    VMCTRL1 = const(0xc5)  # VCOM Control 1 p. 180
+    VMCTRL2 = const(0xc7)  # VCOM Control 2 p. 182
+    NVMWR = const(0xd0)  # NV Memory Write p. 184
+    NVMPKEY = const(0xd1)  # NV Memory Protection Key p. 185
+    RDNVM = const(0xd2)  # NV Memory Status Read p. 186
+    RDID4 = const(0xd3)  # Read ID4 p. 187
+    PGAMCTRL = const(0xe0)  # Positive Gamma Correction p. 188
+    NGAMCTRL = const(0xe1)  # Negative Gamma Correction p. 189
+    DGAMCTRL1 = const(0xe2)  # Digital Gamma Control 1 p. 190
+    DGAMCTRL2 = const(0xe3)  # Digital Gamma Control 2 p. 191
+    IFCTL = const(0xf6)  # Interface Control, 16-bits Data Format Selection p. 192
+    POWER_CONTROL_A = const(0xcb)  # Power Control A p. 195
+    POWER_CONTROL_B = const(0xcf)  # Power Control B p. 196
+    DRIVER_TIMING_CONTROL_A1 = const(0xe8)  # Driver Timing Control A1 p. 197
+    DRIVER_TIMING_CONTROL_A2 = const(0xe9)  # Driver Timing Control A2 p. 198
+    DRIVER_TIMING_CONTROL_B = const(0xea)  # Driver Timing Control B p. 199
+    POWER_ON_SEQUENCE_CONTROL = const(0xed)  # Power On Sequence Control p. 200
+    ENABLE_3G = const(0xf2)  # Enable 3G p. 201
+    PUMP_RATIO_CONTROL = const(0xf7)  # Pump Ratio Control p. 202
     UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
     POWER_DISPLAY = Pin(2, Pin.OUT)
 
@@ -147,25 +172,25 @@ class Display:
         """
         Private method to handle init of display
         """
-        self.__write_cmd(self.PWCTRB, 0x00, 0xC1, 0x30)  # pwr ctrl B
-        self.__write_cmd(self.POSC, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
-        self.__write_cmd(self.DTCA, 0x85, 0x00, 0x78)  # driver timing ctrl A
-        self.__write_cmd(self.PWCTRA, 0x39, 0x2C, 0x00, 0x34, 0x02)  # pwr ctrl A
-        self.__write_cmd(self.PUMPRC, 0x20)  # pump ratio control
-        self.__write_cmd(self.DTCB, 0x00, 0x00)  # driver timing ctrl B
-        self.__write_cmd(self.PWCTR1, 0x23)  # pwr ctrl 1
-        self.__write_cmd(self.PWCTR2, 0x10)  # pwr ctrl 2
-        self.__write_cmd(self.VMCTR1, 0x3E, 0x28)  # VCOM ctrl 1
-        self.__write_cmd(self.VMCTR2, 0x86)  # VCOM ctrl 2
+        self.__write_cmd(self.POWER_CONTROL_B, 0x00, 0xC1, 0x30)  # pwr ctrl B
+        self.__write_cmd(self.POWER_ON_SEQUENCE_CONTROL, 0x64, 0x03, 0x12, 0x81)  # pwr on seq. ctrl
+        self.__write_cmd(self.DRIVER_TIMING_CONTROL_A1, 0x85, 0x00, 0x78)  # driver timing ctrl A
+        self.__write_cmd(self.POWER_CONTROL_A, 0x39, 0x2C, 0x00, 0x34, 0x02)  # pwr ctrl A
+        self.__write_cmd(self.PUMP_RATIO_CONTROL, 0x20)  # pump ratio control
+        self.__write_cmd(self.DRIVER_TIMING_CONTROL_B, 0x00, 0x00)  # driver timing ctrl B
+        self.__write_cmd(self.PWCTRL1, 0x23)  # pwr ctrl 1
+        self.__write_cmd(self.PWCTRL2, 0x10)  # pwr ctrl 2
+        self.__write_cmd(self.VMCTRL1, 0x3E, 0x28)  # VCOM ctrl 1
+        self.__write_cmd(self.VMCTRL2, 0x86)  # VCOM ctrl 2
         self.__write_cmd(self.MADCTL, self.rotation)  # mem access ctrl
         self.__write_cmd(self.VSCRSADD, 0x00)  # vertical scrolling start address
-        self.__write_cmd(self.PIXFMT, 0x55)  # COLMOD: pixel format
+        self.__write_cmd(self.PIXSET, 0x55)  # COLMOD: pixel format
         self.__write_cmd(self.FRMCTR1, 0x00, 0x18)  # frame rate ctrl
-        self.__write_cmd(self.DFUNCTR, 0x08, 0x82, 0x27)
-        self.__write_cmd(self.ENABLE3G, 0x00)  # enable 3 gamma ctrl
+        self.__write_cmd(self.DISCTRL, 0x08, 0x82, 0x27)
+        self.__write_cmd(self.ENABLE_3G, 0x00)  # enable 3 gamma ctrl
         self.__write_cmd(self.GAMSET, 0x01)  # gamma curve selected
-        self.__write_cmd(self.GMCTRP1, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)  # noqa
-        self.__write_cmd(self.GMCTRN1, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)  # noqa
+        self.__write_cmd(self.PGAMCTRL, 0x0F, 0x31, 0x2B, 0x0C, 0x0E, 0x08, 0x4E, 0xF1, 0x37, 0x07, 0x10, 0x03, 0x0E, 0x09, 0x00)  # noqa
+        self.__write_cmd(self.NGAMCTRL, 0x00, 0x0E, 0x14, 0x03, 0x11, 0x07, 0x31, 0xC1, 0x48, 0x08, 0x0F, 0x0C, 0x31, 0x36, 0x0F)  # noqa
         self.__write_cmd(self.SLPOUT)  # exit sleep
         utime.sleep(.1)
         self.__write_cmd(self.DISPON)  # display on
