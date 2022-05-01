@@ -52,5 +52,5 @@ neo_pixel = NeoPixel(Pin)
 
 # nrf config
 cfg = {'spi': 1, 'miso': 8, 'mosi': 11, 'sck': 10, 'csn': 0, 'ce': 1}
-from nrf import NRF  # noqa
+from nrf24l01 import NRF  # noqa
 nrf = NRF(cfg)

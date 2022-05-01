@@ -30,53 +30,51 @@
 
 from utime import sleep, sleep_ms, sleep_us, ticks_ms, ticks_diff
 import ustruct as struct
+from machine import Pin, SPI
 from micropython import const
-
-from config import *
-
-neo_pixel = NeoPixel(Pin)
-
-# nRF24L01+ registers
-CONFIG = const(0x00)
-EN_RXADDR = const(0x02)
-SETUP_AW = const(0x03)
-SETUP_RETR = const(0x04)
-RF_CH = const(0x05)
-RF_SETUP = const(0x06)
-STATUS = const(0x07)
-RX_ADDR_P0 = const(0x0A)
-TX_ADDR = const(0x10)
-RX_PW_P0 = const(0x11)
-FIFO_STATUS = const(0x17)
-DYNPD = const(0x1C)
-EN_CRC = const(0x08)
-CRCO = const(0x04)
-PWR_UP = const(0x02)
-PRIM_RX = const(0x01)
-POWER_0 = const(0x00)
-POWER_1 = const(0x02)
-POWER_2 = const(0x04)
-POWER_3 = const(0x06)
-SPEED_1M = const(0x00)
-SPEED_2M = const(0x08)
-SPEED_250K = const(0x20)
-RX_DR = const(0x40)
-TX_DS = const(0x20)
-MAX_RT = const(0x10)
-RX_EMPTY = const(0x01)
-R_RX_PL_WID = const(0x60)
-R_RX_PAYLOAD = const(0x61)
-W_TX_PAYLOAD = const(0xA0)
-FLUSH_TX = const(0xE1)
-FLUSH_RX = const(0xE2)
-NOP = const(0xFF)
-PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')  # noqa
 
 
 class NRF24L01:
     """
-    Class to handle the NRF driver
+    Class to handle the nRF24L01 driver
     """
+
+    # nRF24L01 registers
+    CONFIG = const(0x00)  # Configuration Register p. 53
+    EN_AA = const(0x01)  # Enable ‘Auto Acknowledgment’ p. 53
+    EN_RXADDR = const(0x02)  # Enabled RX Addresses p. 53
+    SETUP_AW = const(0x03)
+    SETUP_RETR = const(0x04)
+    RF_CH = const(0x05)
+    RF_SETUP = const(0x06)
+    STATUS = const(0x07)
+    RX_ADDR_P0 = const(0x0A)
+    TX_ADDR = const(0x10)
+    RX_PW_P0 = const(0x11)
+    FIFO_STATUS = const(0x17)
+    DYNPD = const(0x1C)
+    EN_CRC = const(0x08)
+    CRCO = const(0x04)
+    PWR_UP = const(0x02)
+    PRIM_RX = const(0x01)
+    POWER_0 = const(0x00)
+    POWER_1 = const(0x02)
+    POWER_2 = const(0x04)
+    POWER_3 = const(0x06)
+    SPEED_1M = const(0x00)
+    SPEED_2M = const(0x08)
+    SPEED_250K = const(0x20)
+    RX_DR = const(0x40)
+    TX_DS = const(0x20)
+    MAX_RT = const(0x10)
+    RX_EMPTY = const(0x01)
+    R_RX_PL_WID = const(0x60)
+    R_RX_PAYLOAD = const(0x61)
+    W_TX_PAYLOAD = const(0xA0)
+    FLUSH_TX = const(0xE1)
+    FLUSH_RX = const(0xE2)
+    NOP = const(0xFF)
+    PIPES = (b'\xe1\xf0\xf0\xf0\xf0', b'\xe1\xf0\xf0\xf0\xf0')  # noqa
 
     def __init__(self, spi, cs, ce, channel=46, payload_size=16):  # noqa
         """
@@ -102,21 +100,20 @@ class NRF24L01:
         self.pipe0_read_addr = None
         sleep_ms(5)
         # set address width to 5 bytes and check for device present
-        self.reg_write(SETUP_AW, 0b11)
-        print(self.reg_read(SETUP_AW))
-        if self.reg_read(SETUP_AW) != 0b11:
+        self.reg_write(self.SETUP_AW, 0b11)
+        if self.reg_read(self.SETUP_AW) != 0b11:
             raise OSError('nRF24L01+ Hardware not responding')
         # disable dynamic payloads
-        self.reg_write(DYNPD, 0)
+        self.reg_write(self.DYNPD, 0)
         # auto retransmit delay: 1750us
         # auto retransmit count: 8
-        self.reg_write(SETUP_RETR, (6 << 4) | 8)
+        self.reg_write(self.SETUP_RETR, (6 << 4) | 8)
         # set rf power and speed
-        self.set_power_speed(POWER_3, SPEED_250K)  # Best for point to point links
+        self.set_power_speed(self.POWER_3, self.SPEED_250K)  # Best for point to point links
         # init CRC
         self.set_crc(2)
         # clear status flags
-        self.reg_write(STATUS, RX_DR | TX_DS | MAX_RT)
+        self.reg_write(self.STATUS, self.RX_DR | self.TX_DS | self.MAX_RT)
         # set channel
         self.set_channel(channel)
         # flush buffers
@@ -193,7 +190,7 @@ class NRF24L01:
         Method to handle flush rx
         """
         self.cs(0)
-        self.spi.readinto(self.buf, FLUSH_RX)
+        self.spi.readinto(self.buf, self.FLUSH_RX)
         self.cs(1)
 
     def flush_tx(self):
@@ -201,7 +198,7 @@ class NRF24L01:
         Class to handle flush tx
         """
         self.cs(0)
-        self.spi.readinto(self.buf, FLUSH_TX)
+        self.spi.readinto(self.buf, self.FLUSH_TX)
         self.cs(1)
 
     def set_power_speed(self, power, speed):
@@ -212,8 +209,8 @@ class NRF24L01:
             power: int
             speed: int
         """
-        setup = self.reg_read(RF_SETUP) & 0b11010001
-        self.reg_write(RF_SETUP, setup | power | speed)
+        setup = self.reg_read(self.RF_SETUP) & 0b11010001
+        self.reg_write(self.RF_SETUP, setup | power | speed)
 
     def set_crc(self, length):
         """
@@ -222,14 +219,14 @@ class NRF24L01:
         Params:
             length: int
         """
-        config = self.reg_read(CONFIG) & ~(CRCO | EN_CRC)
+        config = self.reg_read(self.CONFIG) & ~(self.CRCO | self.EN_CRC)
         if length == 0:
             pass
         elif length == 1:
-            config |= EN_CRC
+            config |= self.EN_CRC
         else:
-            config |= EN_CRC | CRCO
-        self.reg_write(CONFIG, config)
+            config |= self.EN_CRC | self.CRCO
+        self.reg_write(self.CONFIG, config)
 
     def set_channel(self, channel):
         """
@@ -238,7 +235,7 @@ class NRF24L01:
         Params:
             channel: int
         """
-        self.reg_write(RF_CH, min(channel, 125))
+        self.reg_write(self.RF_CH, min(channel, 125))
 
     def open_tx_pipe(self, address):
         """
@@ -248,9 +245,9 @@ class NRF24L01:
             addreses: int
         """
         assert len(address) == 5
-        self.reg_write_bytes(RX_ADDR_P0, address)
-        self.reg_write_bytes(TX_ADDR, address)
-        self.reg_write(RX_PW_P0, self.payload_size)
+        self.reg_write_bytes(self.RX_ADDR_P0, address)
+        self.reg_write_bytes(self.TX_ADDR, address)
+        self.reg_write(self.RX_PW_P0, self.payload_size)
 
     def open_rx_pipe(self, pipe_id, address):
         """
@@ -265,20 +262,20 @@ class NRF24L01:
         if pipe_id == 0:
             self.pipe0_read_addr = address
         if pipe_id < 2:
-            self.reg_write_bytes(RX_ADDR_P0 + pipe_id, address)
+            self.reg_write_bytes(self.RX_ADDR_P0 + pipe_id, address)
         else:
-            self.reg_write(RX_ADDR_P0 + pipe_id, address[0])
-        self.reg_write(RX_PW_P0 + pipe_id, self.payload_size)
-        self.reg_write(EN_RXADDR, self.reg_read(EN_RXADDR) | (1 << pipe_id))
+            self.reg_write(self.RX_ADDR_P0 + pipe_id, address[0])
+        self.reg_write(self.RX_PW_P0 + pipe_id, self.payload_size)
+        self.reg_write(self.EN_RXADDR, self.reg_read(self.EN_RXADDR) | (1 << pipe_id))
 
     def start_listening(self):
         """
         Method to handle start listening
         """
-        self.reg_write(CONFIG, self.reg_read(CONFIG) | PWR_UP | PRIM_RX)
-        self.reg_write(STATUS, RX_DR | TX_DS | MAX_RT)
+        self.reg_write(self.CONFIG, self.reg_read(self.CONFIG) | self.PWR_UP | self.PRIM_RX)
+        self.reg_write(self.STATUS, self.RX_DR | self.TX_DS | self.MAX_RT)
         if self.pipe0_read_addr is not None:
-            self.reg_write_bytes(RX_ADDR_P0, self.pipe0_read_addr)
+            self.reg_write_bytes(self.RX_ADDR_P0, self.pipe0_read_addr)
         self.flush_rx()
         self.flush_tx()
         self.ce(1)
@@ -299,7 +296,7 @@ class NRF24L01:
         Returns:
             bool
         """
-        return not bool(self.reg_read(FIFO_STATUS) & RX_EMPTY)
+        return not bool(self.reg_read(self.FIFO_STATUS) & self.RX_EMPTY)
 
     def recv(self):
         """
@@ -310,11 +307,11 @@ class NRF24L01:
         """
         # get the data
         self.cs(0)
-        self.spi.readinto(self.buf, R_RX_PAYLOAD)
+        self.spi.readinto(self.buf, self.R_RX_PAYLOAD)
         buf = self.spi.read(self.payload_size)
         self.cs(1)
         # clear RX ready flag
-        self.reg_write(STATUS, RX_DR)
+        self.reg_write(self.STATUS, self.RX_DR)
         return buf
 
     def send(self, buf, timeout=500):
@@ -341,11 +338,11 @@ class NRF24L01:
             buf: int
         """
         # power up
-        self.reg_write(CONFIG, (self.reg_read(CONFIG) | PWR_UP) & ~PRIM_RX)
+        self.reg_write(self.CONFIG, (self.reg_read(self.CONFIG) | self.PWR_UP) & ~self.PRIM_RX)
         sleep_us(150)
         # send the data
         self.cs(0)
-        self.spi.readinto(self.buf, W_TX_PAYLOAD)
+        self.spi.readinto(self.buf, self.W_TX_PAYLOAD)
         self.spi.write(buf)
         if len(buf) < self.payload_size:
             self.spi.write(b"\x00" * (self.payload_size - len(buf)))  # pad out data
@@ -362,12 +359,12 @@ class NRF24L01:
         Returns:
             None, int
         """
-        if not (self.reg_read(STATUS) & (TX_DS | MAX_RT)):
+        if not (self.reg_read(self.STATUS) & (self.TX_DS | self.MAX_RT)):
             return None  # tx not finished
         # either finished or failed: get and clear status flags, power down
-        status = self.reg_write(STATUS, RX_DR | TX_DS | MAX_RT)
-        self.reg_write(CONFIG, self.reg_read(CONFIG) & ~PWR_UP)
-        return 1 if status & TX_DS else 2
+        status = self.reg_write(self.STATUS, self.RX_DR | self.TX_DS | self.MAX_RT)
+        self.reg_write(self.CONFIG, self.reg_read(self.CONFIG) & ~self.PWR_UP)
+        return 1 if status & self.TX_DS else 2
 
 
 class NRF:
@@ -397,8 +394,8 @@ class NRF:
             sending_message: bool, optional
         """
 
-        self.nrf.open_tx_pipe(PIPES[0])
-        self.nrf.open_rx_pipe(1, PIPES[1])
+        self.nrf.open_tx_pipe(NRF24L01.PIPES[0])
+        self.nrf.open_rx_pipe(1, NRF24L01.PIPES[1])
         self.nrf.start_listening()
         num_needed = 1
         num_successes = 0
@@ -448,8 +445,8 @@ class NRF:
         """
         _RX_POLL_DELAY = const(15)
         _RECV_SEND_DELAY = const(10)
-        self.nrf.open_tx_pipe(PIPES[0])
-        self.nrf.open_rx_pipe(1, PIPES[1])
+        self.nrf.open_tx_pipe(NRF24L01.PIPES[0])
+        self.nrf.open_rx_pipe(1, NRF24L01.PIPES[1])
         self.nrf.start_listening()
         time = 0
         word = []

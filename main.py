@@ -42,7 +42,7 @@ import random
 import gc
 
 import game
-from config import display, neo_pixel
+from config import display, neo_pixel, nrf
 from data import ham_radio_questions
 
 
@@ -100,5 +100,7 @@ def questions():
 
 sd_test()
 img_test()
-questions()
-game.questions(ham_radio_questions)
+# questions()
+# game.questions(ham_radio_questions)
+
+nrf.send('hi')
