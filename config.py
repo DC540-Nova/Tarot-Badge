@@ -49,3 +49,8 @@ LED_PIN = 5
 LED_COUNT = 32
 from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin)
+
+# nrf config
+cfg = {'spi': 1, 'miso': 8, 'mosi': 11, 'sck': 10, 'csn': 0, 'ce': 1}
+from nrf import NRF  # noqa
+nrf = NRF(cfg)
