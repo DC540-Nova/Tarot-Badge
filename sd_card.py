@@ -41,7 +41,7 @@ class SDCard:
     CMD_TIMEOUT = const(100)  # cmd timeout
     R1_IDLE_STATE = const(1 << 0)  # idle state
     R1_ILLEGAL_COMMAND = const(1 << 2)  # illegal command
-    TOKEN_STOP_TRAN = const(0xFD)  # token stop tran
+    # TOKEN_STOP_TRAN = const(0xFD)  # token stop tran
     TOKEN_DATA = const(0xFE)  # token data
 
     def __init__(self, spi, cs):
@@ -71,7 +71,7 @@ class SDCard:
         # clock card at least 100 cycles with cs high
         for i in range(16):
             self.spi.write(b'\xff')
-        # CMD0: init card should return _R1_IDLE_STATE (allow 5 attempts)
+        # CMD0: init card should return R1_IDLE_STATE (allow 5 attempts)
         for _ in range(5):
             if self.__cmd(0, 0, 0x95) == self.R1_IDLE_STATE:
                 break
