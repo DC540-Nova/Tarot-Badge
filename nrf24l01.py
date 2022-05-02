@@ -149,6 +149,14 @@ class NRF24L01:
         regs = self.readReg(7)[0]
         return (not (0b00000001 & regfs)) or (0b01000000 & regs)
 
+    def send(self, message):
+        self.modeTX()
+        self.sendMessage(message)
+
+    def recv(self):
+        self.modeRX()
+        if self.newMessage():  # print any incoming message
+            print(''.join([chr(i) for i in self.readMessage()]))
 
 
 

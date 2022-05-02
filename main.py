@@ -104,10 +104,7 @@ sd_test()
 # game.questions(ham_radio_questions)
 
 def send():
-    nrf.modeTX()
-    nrf.sendMessage('hi there')
+    nrf.send('hi there')
 
 def recv():
-    nrf.modeRX()
-    if nrf.newMessage():  # print any incoming message
-        print("recv: ", "".join([chr(i) for i in nrf.readMessage()]))
+    nrf.recv()
