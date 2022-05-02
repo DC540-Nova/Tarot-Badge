@@ -42,7 +42,7 @@ import button  # noqa
 # display config
 display_spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
 from ili9341 import Display  # noqa
-display = Display(display_spi, dc=Pin(15), cs=Pin(13), rst=Pin(14))
+display = Display(display_spi, dc=Pin(15), cs=Pin(13, Pin.OUT), rst=Pin(14))
 
 # neo_pixel config
 LED_PIN = 5
@@ -51,7 +51,6 @@ from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin)
 
 # nrf config
-# nrf_spi = SPI(1, baudrate=1000000, sck=Pin(10), mosi=Pin(11), miso=Pin(8))
+nrf_spi = SPI(1, baudrate=1000000, sck=Pin(10), mosi=Pin(11), miso=Pin(8))
 from nrf24l01 import NRF24L01  # noqa
-#nrf = NRF24L01(nrf_spi, csn=Pin(0), ce=Pin(1))
-nrf = NRF24L01()
+nrf = NRF24L01(nrf_spi, csn=Pin(0, Pin.OUT), ce=Pin(1, Pin.OUT))

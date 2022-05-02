@@ -33,23 +33,11 @@ from machine import Pin, SPI
 
 
 class NRF24L01:
-    #nrf_spi = SPI(1, baudrate=1000000, sck=Pin(10), mosi=Pin(11), miso=Pin(8))
-    #from nrf24l01 import NRF24L01  # noqa
-    #nrf = NRF24L01(nrf_spi, csn=Pin(0), ce=Pin(1))
-    # def __init__(self, spi, csn, ce):
-    def __init__(self, port=1, miso=8, mosi=11, sck=10, csn=0, ce=1):
+    def __init__(self, spi, csn, ce):
         self.csn = csn
         self.ce = ce
 
-        self.csn = Pin(csn, 1)
-        self.ce = Pin(ce,1)
-        #
-        # self.csn(1)
-        # self.ce(1)
-
-        #self.spi = spi
-
-        self.spi = SPI(port, 1000000, miso=Pin(miso), mosi=Pin(mosi), sck=Pin(sck))
+        self.spi = spi
 
         self.csnHigh()
         self.ceLow()
