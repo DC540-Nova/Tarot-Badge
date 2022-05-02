@@ -99,8 +99,15 @@ def questions():
 
 
 sd_test()
-img_test()
+# img_test()
 # questions()
 # game.questions(ham_radio_questions)
 
-nrf.send('hi')
+def send():
+    nrf.modeTX()
+    nrf.sendMessage('hi there')
+
+def recv():
+    nrf.modeRX()
+    if nrf.newMessage():  # print any incoming message
+        print("recv: ", "".join([chr(i) for i in nrf.readMessage()]))
