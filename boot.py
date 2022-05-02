@@ -37,7 +37,7 @@ from sd_card import SDCard
 sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11), miso=Pin(8))  # noqa
 
 # init sd card
-sd_card = SDCard(sd_card_spi, Pin(9, Pin.OUT))
+sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
 
 # mount sd card filesystem
 vfs = uos.VfsFat(sd_card)

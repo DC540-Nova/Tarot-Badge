@@ -265,7 +265,11 @@ class Display:
     POWER_ON_SEQUENCE_CONTROL = const(0xed)  # Power On Sequence Control p. 200
     ENABLE_3G = const(0xf2)  # Enable 3G p. 201
     PUMP_RATIO_CONTROL = const(0xf7)  # Pump Ratio Control p. 202
+
+    # fonts
     UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
+
+    # led pin
     POWER_DISPLAY = Pin(2, Pin.OUT)  # init led pin
 
     ROTATE = {

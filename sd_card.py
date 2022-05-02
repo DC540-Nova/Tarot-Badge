@@ -38,11 +38,14 @@ class SDCard:
     """
 
     # sd card registers
+    START_BLOCK_TOKEN = const(0xfc)  # Start Block Token p. 228
+    STOP_TRAN_TOKEN = const(0xfd)  # Stop Tran Token p. 228
+    START_BLOCK = const(0xfe)  # Start Block p. 228
+
+    # set timeout, idle state and illegal command
     CMD_TIMEOUT = const(100)  # cmd timeout
     R1_IDLE_STATE = const(1 << 0)  # idle state
     R1_ILLEGAL_COMMAND = const(1 << 2)  # illegal command
-    # TOKEN_STOP_TRAN = const(0xFD)  # token stop tran
-    TOKEN_DATA = const(0xFE)  # token data
 
     def __init__(self, spi, cs):
         """
@@ -81,6 +84,8 @@ class SDCard:
         r = self.__cmd(8, 0x01AA, 0x87, 4)
         if r == self.R1_IDLE_STATE:
             self.__init_card_v2()
+        elif r == (self.R1_IDLE_STATE | self.R1_ILLEGAL_COMMAND):
+            self.__init_card_v1()
         else:
             raise OSError('could not determine SD card version')
         # get the number of sectors
@@ -100,6 +105,17 @@ class SDCard:
         # CMD16: set block length to 512 bytes
         if self.__cmd(16, 512, 0) != 0:
             raise OSError('cannot set 512 block size')
+
+    def __init_card_v1(self):
+        """
+        Private method to handle init card version 1
+        """
+        for i in range(self.CMD_TIMEOUT):
+            self.__cmd(55, 0, 0)
+            if self.__cmd(41, 0, 0) == 0:
+                self.cdv = 512
+                return
+        raise OSError('timeout waiting for v1 card')
 
     def __init_card_v2(self):
         """
@@ -170,7 +186,7 @@ class SDCard:
         # read until start byte (0xff)
         for i in range(self.CMD_TIMEOUT):
             self.spi.readinto(self.tokenbuf, 0xFF)
-            if self.tokenbuf[0] == self.TOKEN_DATA:
+            if self.tokenbuf[0] == self.START_BLOCK:
                 break
             time.sleep_ms(1)
         else:
@@ -277,7 +293,7 @@ class SDCard:
             if self.__cmd(24, block_num * self.cdv, 0) != 0:
                 raise OSError(5)  # EIO
             # send the data
-            self.__write(self.TOKEN_DATA, buf)
+            self.__write(self.START_BLOCK, buf)
         else:
             # CMD25: set write address for first block
             if self.__cmd(25, block_num * self.cdv, 0) != 0:
@@ -286,10 +302,10 @@ class SDCard:
             offset = 0
             mv = memoryview(buf)
             while nblocks:
-                self.__write(self.TOKEN_CMD25, mv[offset: offset + 512])  # noqa
+                self.__write(self.START_BLOCK_TOKEN, mv[offset: offset + 512])  # noqa
                 offset += 512
                 nblocks -= 1
-            self.__write_token(self.TOKEN_STOP_TRAN)
+            self.__write_token(self.STOP_TRAN_TOKEN)
 
     def ioctl(self, op, arg):  # noqa
         """

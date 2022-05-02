@@ -99,8 +99,8 @@ def questions():
 
 
 sd_test()
-# img_test()
-# questions()
+#img_test()
+#questions()
 # game.questions(ham_radio_questions)
 
 def send():
@@ -108,3 +108,6 @@ def send():
 
 def recv():
     nrf.recv()
+
+#send()
+#recv()
