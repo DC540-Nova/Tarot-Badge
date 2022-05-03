@@ -29,16 +29,52 @@
 # pyright: reportUndefinedVariable=false
 
 import utime
-from machine import Pin, SPI
+from micropython import const
 
 
 class NRF24L01:
+    """
+    Class to handle nRF24L01 functionality
+    """
+
+    # nRF24L01 registers
+    CONFIG = const(0x00)  # Configuration Register p. 53
+    EN_AA = const(0x01)  # Enable 'Auto Acknowledgment'  p. 53
+    EN_RXADDR = const(0x02)  # Enabled RX Addresses p. 53
+    SETUP_AW = const(0x03)  # Setup Of Address Widths p. 54
+    SETUP_RETR = const(0x04)  # Setup of Automatic Retransmission p. 54
+    RF_CH = const(0x05)  # RF Channel p. 54
+    RF_SETUP = const(0x06)  # RF Setup Register p. 54
+    STATUS = const(0x07)  # Status Register p. 55
+    OBSERVE_TX = const(0x08)  # Transmit Observe Register p. 55
+    CD = const(0x09)  # Carrier Detect p. 55
+    RX_ADDR_P0 = const(0x0a)  # Receive Address Data Pipe 0 p. 55
+    RX_ADDR_P1 = const(0x0b)  # Receive Address Data Pipe 1 p. 55
+    RX_ADDR_P2 = const(0x0c)  # Receive Address Data Pipe 2 p. 55
+    RX_ADDR_P3 = const(0x0d)  # Receive Address Data Pipe 3 p. 55
+    RX_ADDR_P4 = const(0x0e)  # Receive Address Data Pipe 4 p. 55
+    RX_ADDR_P5 = const(0x0f)  # Receive Address Data Pipe 5 p. 55
+    TX_ADDR = const(0x10)  # Transmit Address p. 56
+    RX_PW_P0 = const(0x11)  # Number Of Bytes In RX Payload In Data Pipe 0 p. 56
+    RX_PW_P1 = const(0x12)  # Number Of Bytes In RX Payload In Data Pipe 1 p. 56
+    RX_PW_P2 = const(0x13)  # Number Of Bytes In RX Payload In Data Pipe 2 p. 56
+    RX_PW_P3 = const(0x14)  # Number Of Bytes In RX Payload In Data Pipe 3 p. 56
+    RX_PW_P4 = const(0x15)  # Number Of Bytes In RX Payload In Data Pipe 4 p. 56
+    RX_PW_P5 = const(0x16)  # Number Of Bytes In RX Payload In Data Pipe 2 p. 57
+    FIFO_STATUS = const(0x17)  # FIFO Status Register p. 57
+    DYNPD = const(0x1c)  # Enable Dynamic Payload Length p. 58
+    FEATURE = const(0x1d)  # Feature Register p. 58
+
     def __init__(self, spi, csn, ce):
+        """
+        Params:
+            spi: object
+            csn: object
+            ce: object
+        """
         self.csn = csn
         self.ce = ce
-
         self.spi = spi
-
         self.csnHigh()
         self.ceLow()
         utime.sleep_ms(11)
@@ -56,7 +92,7 @@ class NRF24L01:
     def ceLow(self):
         self.ce(0)
 
-    def readReg(self, reg, size=1):
+    def __read_cmd(self, reg, size=1):
         reg = [0b00011111 & reg]
         self.csnLow()
         self.spi.write(bytearray(reg))
@@ -67,7 +103,7 @@ class NRF24L01:
 
         return result
 
-    def writeReg(self, reg, data):
+    def __write_cmd(self, reg, data):
         reg = [0b00100000 | (0b00011111 & reg)]
         self.csnLow()
         self.spi.write(bytearray(reg))
@@ -83,28 +119,28 @@ class NRF24L01:
 
         utime.sleep_ms(11)
 
-        self.writeReg(0, 0b00001010)  # config
+        self.__write_cmd(0, 0b00001010)  # config
         utime.sleep_us(1500)
-        self.writeReg(1, 0b00000011)  # no ack
+        self.__write_cmd(1, 0b00000011)  # no ack
 
-        self.writeReg(5, channel)
+        self.__write_cmd(5, channel)
 
-        self.writeReg(0x0a, channelName)
-        self.writeReg(0x10, channelName)
+        self.__write_cmd(0x0a, channelName)
+        self.__write_cmd(0x10, channelName)
 
-        self.writeReg(0x11, packetSize)  #
+        self.__write_cmd(0x11, packetSize)  #
 
     def modeTX(self):
-        reg = self.readReg(0)[0]
+        reg = self.__read_cmd(0)[0]
         reg &= ~(1 << 0)
-        self.writeReg(0, reg)
+        self.__write_cmd(0, reg)
         self.ceLow()
         utime.sleep_us(130)
 
     def modeRX(self):
-        reg = self.readReg(0)[0]
+        reg = self.__read_cmd(0)[0]
         reg |= (1 << 0)
-        self.writeReg(0, reg)
+        self.__write_cmd(0, reg)
         self.ceHigh()
         utime.sleep_us(130)
 
@@ -128,11 +164,11 @@ class NRF24L01:
         self.ceHigh()
         utime.sleep_us(10)
         for i in range(0, 10000):
-            reg = self.readReg(7)[0]
+            reg = self.__read_cmd(7)[0]
             if reg & 0b00110000:
                 break
         self.ceLow()
-        self.writeReg(7, 0b00110000)  # Clear status flags.
+        self.__write_cmd(7, 0b00110000)  # Clear status flags.
 
     def readMessage(self, size=32):
         reg = [0b01100001]
@@ -141,12 +177,12 @@ class NRF24L01:
         self.spi.write(bytearray(reg))
         result = self.spi.read(size)
         self.csnHigh()
-        self.writeReg(0x07, 0b01000000)  # clear status flags
+        self.__write_cmd(0x07, 0b01000000)  # clear status flags
         return result
 
     def newMessage(self):
-        regfs = self.readReg(0x17)[0]
-        regs = self.readReg(7)[0]
+        regfs = self.__read_cmd(0x17)[0]
+        regs = self.__read_cmd(7)[0]
         return (not (0b00000001 & regfs)) or (0b01000000 & regs)
 
     def send(self, message):
