@@ -155,11 +155,26 @@ class NRF24L01:
         utime.sleep_us(130)
 
     def __new_text(self):
+        """
+        Private method to handle checking of a raw new text received
+
+        Returns:
+            int
+        """
         regfs = self.__read_cmd(0x17)[0]
         regs = self.__read_cmd(7)[0]
         return (not (0b00000001 & regfs)) or (0b01000000 & regs)
 
     def __read_text(self, size=32):
+        """
+        Private method to handle reading of a raw new text received
+
+        Params:
+            size: int, optional
+
+        Returns:
+            bytearray
+        """
         self.__mode_rx()
         reg = [0b01100001]
         self.csn(0)
@@ -170,6 +185,13 @@ class NRF24L01:
         return result
 
     def send(self, text, size=32):
+        """
+        Method to handle sending a new text
+
+        Params:
+            text: str
+            size: int, optional
+        """
         self.__mode_tx()
         reg = [0b10100000]
         self.csn(0)
@@ -188,9 +210,12 @@ class NRF24L01:
             if reg & 0b00110000:
                 break
         self.ce(0)
-        self.__write_cmd(7, 0b00110000)  # Clear status flags.
+        self.__write_cmd(7, 0b00110000)  # clear status flags
 
     def recv(self):
+        """
+        Method to handle receiving a new message
+        """
         self.__mode_rx()
         if self.__new_text():  # print any incoming message
             print(''.join([chr(i) for i in self.__read_text()]))
