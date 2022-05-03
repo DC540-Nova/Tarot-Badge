@@ -80,6 +80,23 @@ class NRF24L01:
         utime.sleep_ms(11)
         self.__config()
 
+    def __config(self, channel=60, channelName="gyroc", packetSize=32):
+        self.csnHigh()
+        self.ceLow()
+
+        utime.sleep_ms(11)
+
+        self.__write_cmd(0, 0b00001010)  # config
+        utime.sleep_us(1500)
+        self.__write_cmd(1, 0b00000011)  # no ack
+
+        self.__write_cmd(5, channel)
+
+        self.__write_cmd(0x0a, channelName)
+        self.__write_cmd(0x10, channelName)
+
+        self.__write_cmd(0x11, packetSize)
+
     def csnHigh(self):
         self.csn(1)
 
@@ -113,22 +130,7 @@ class NRF24L01:
 
         self.csnHigh()
 
-    def __config(self, channel=60, channelName="gyroc", packetSize=32):
-        self.csnHigh()
-        self.ceLow()
 
-        utime.sleep_ms(11)
-
-        self.__write_cmd(0, 0b00001010)  # config
-        utime.sleep_us(1500)
-        self.__write_cmd(1, 0b00000011)  # no ack
-
-        self.__write_cmd(5, channel)
-
-        self.__write_cmd(0x0a, channelName)
-        self.__write_cmd(0x10, channelName)
-
-        self.__write_cmd(0x11, packetSize)  #
 
     def modeTX(self):
         reg = self.__read_cmd(0)[0]
