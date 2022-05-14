@@ -91,7 +91,7 @@ class SDCard:
         if self.__write_cmd(9, 0, 0, 0, False) != 0:
             raise OSError('no response from SD card')
         csd = bytearray(16)
-        self.__read(csd)
+        self.__read_cmd(csd)
         if csd[0] & 0xC0 == 0x40:  # CSD version 2.0
             self.sectors = ((csd[8] << 8 | csd[9]) + 1) * 1024
         elif csd[0] & 0xC0 == 0x00:  # CSD version 1.0 (old, <= 2GB)
@@ -259,7 +259,7 @@ class SDCard:
                 self.cs(1)
                 raise OSError(5)  # EIO
             # receive the data and release card
-            self.__read(buf)
+            self.__read_cmd(buf)
         else:
             # CMD18: set read address for multiple blocks
             if self.__write_cmd(18, block_num * self.cdv, 0, release=False) != 0:
@@ -270,7 +270,7 @@ class SDCard:
             mv = memoryview(buf)
             while nblocks:
                 # receive the data and release card
-                self.__read(mv[offset: offset + 512])
+                self.__read_cmd(mv[offset: offset + 512])
                 offset += 512
                 nblocks -= 1
             if self.__write_cmd(12, 0, 0xFF, skip1=True):
