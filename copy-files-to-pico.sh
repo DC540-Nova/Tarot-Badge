@@ -13,4 +13,3 @@ mpremote connect /dev/tty.u* cp button.py :
 mpremote connect /dev/tty.u* cp data.py :
 mpremote connect /dev/tty.u* cp menu.py :
 mpremote connect /dev/tty.u* cp tarot.py :
-mpremote connect /dev/tty.u* cp nrf24l01.py :

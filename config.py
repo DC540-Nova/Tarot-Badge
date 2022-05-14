@@ -49,8 +49,3 @@ LED_PIN = 5
 LED_COUNT = 32
 from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin)
-
-# nrf config
-nrf_spi = SPI(1, baudrate=1000000, sck=Pin(10), mosi=Pin(11), miso=Pin(8))
-from nrf24l01 import NRF24L01  # noqa
-nrf = NRF24L01(nrf_spi, csn=Pin(0, Pin.OUT), ce=Pin(1, Pin.OUT))
