@@ -29,503 +29,473 @@
 # pyright: reportUndefinedVariable=false
 
 cards = {
-    '0 Fool':
+    '0 The Fool':
         [
             'Taking a risk. Getting outside your comfort zone. Knowing the universe is looking after you.',
             'Foolishness. Making a stupid choice. Disregarding good advice. Getting in with a bad crowd.'
-            '00-TheFool.png',
+            '00-TheFool.raw',
         ],
-    '1 Magician':
+    '1 The Magician':
         [
             'Feeling confident, assured. Having all the tools and resources at your disposal. Power.',
             'Deception, trickery, cunning. Scammer. Personality disorders such as narcissism. Lack of empathy.',
-            '01-TheMagician.png'
+            '01-TheMagician.raw'
         ],
-    '2 High Priestess':
+    '2 The High Priestess':
         [
             'Intuition. Going within. Inner knowing.',
             'Emerging from depression. Extreme shyness or over-confidence, denying intuition, predatory sexual behavior, superficiality, disclosure of secrets.',  # noqa
-            '02-TheHighPriestess.png'
+            '02-TheHighPriestess.raw'
         ],
-    '3 Empress':
+    '3 The Empress':
         [
             'Growth, fertility, pregnancy, motherhood. New project. Dominant female.',
             'Famine, drought. Neglected land. Smother-love, living through your children. Vanity, empty nest syndrome, feeling useless, infidelity, unloving, unsupportive. Fertility issues. Failing business. Problems with adoption or step-parenting.',  # noqa
-            '03-TheEmpress.png'
+            '03-TheEmpress.raw'
         ],
-    '4 Emperor':
+    '4 The Emperor':
         [
             'Structure, organization, rules. Dominant male.',
             'Nature controlled. Urban sprawl and degeneration. Authoritarian, tyrant, dictator, domination, rigid, unyielding, fatherhood problems, loss of control, obstruction, misuse of power.',  # noqa
-            '04-TheEmperor.png'
+            '04-TheEmperor.raw'
         ],
-    '5 Hierophant':
+    '5 The Hierophant':
         [
             'Learning path, religion, spirituality, spiritual mentor, guide.',
             'Rejection of the establishment. A mentor with ulterior motives. Expulsion, excommunication. Sexual misdemeanors. Inappropriate behavior. Rejecting one’s faith.',  # noqa
-            '05-TheHierophant.png'
+            '05-TheHierophant.raw'
         ],
-    '6 Lovers':
+    '6 The Lovers':
         [
             'Life-changing choice, turning point. Union with another, two as one.',
             'Inappropriate relationship. Immaturity, lack of love, possessiveness, infatuation/stalking. Lust rather than love. Bad choice, indecision, temptation, weakness, lack of trust, separation. Endless obsessive search for non-existent soul-mate.',   # noqa
-            '06-TheLovers.png'
+            '06-TheLovers.raw'
         ],
-    '7 Chariot':
+    '7 The Chariot':
         [
             'Drive and determination. Autonomy. Mediation and negotiation.',
             'Ambition but at a cost. Personal life derailed. Travel problems. Stress, quarrels, accidents, delays. Failed negotiation.',  # noqa
-            '07-TheChariot.png'
+            '07-TheChariot.raw'
         ],
     '8 Strength':
         [
-            '',
-            '',  # noqa
-            ''
+            'Persuasion, gentle strength. Patience, control, compassion.',
+            'Mental problems. Too overbearing or too weak. Not knowing when to stop. Government vs citizens. Cruelty. Disregarding the well-being of others in order to achieve your desire.',  # noqa
+            '08-Strength.raw'
         ],
-    '9 Hermit':
+    '9 The Hermit':
         [
-            '',
-            '',  # noqa
-            ''
+            'Knowing oneself, solitude. Understanding humanity, wisdom.',
+            'Fear of being alone. Social withdrawal, paranoia, identity crisis, embittered. Worry about aging. Fear of having to depend on others.',  # noqa
+            '09-TheHermit.raw'
         ],
     '10 Wheel Of Fortune':
         [
-            '',
-            '',  # noqa
-            ''
+            'Change, good luck, destiny.',
+            'Change. Good and bad luck. Destiny, chaos, uncertainty.',  # noqa
+            '10-WheelOfFortune.raw'
         ],
     '11 Justice':
         [
-            '',
-            '',  # noqa
-            ''
+            'Cause and effect, karma, fairness, legal issues.',
+            'Cause and effect. Poetic justice, unfairness, disputes, legal problems. Bigotry, bias, intolerance. Liver damage.',  # noqa
+            '11-Justice.raw'
         ],
-    '12 Hanged Man':
+    '12 The Hanged Man':
         [
-            '',
-            '',  # noqa
-            ''
+            'On hold, nothing happening, stuck, letting go of the outcome.',
+            'Ready to go but being held back. Hidden motives or agenda. Unfinished work or projects. About to move on from a friendship or relationship.',  # noqa
+            '12-TheHangedMan.raw'
         ],
     '13 Death':
         [
-            '',
-            '',  # noqa
-            ''
+            'Endings and new beginnings, transformation, transition. Death.',
+            'Attempting to avoid an inevitable end. Chronic illness. Extreme depression or pessimism. Coming back from the dead (NDE). Obsession with death. Accident (narrowly escaping death).',  # noqa
+            '13-Death.raw'
         ],
     '14 Temperance':
         [
-            '',
-            '',  # noqa
-            ''
+            'Chemistry, moderation, balance. Getting it right.',
+            'Out of balance, non-cooperation, conflicting ideas/positions. Emotional extremes. Procrastination. Digestive problems. Mind/body health out of whack.',  # noqa
+            '14-Temperance.raw'
         ],
-    '15 Devil':
+    '15 The Devil':
         [
-            '',
-            '',  # noqa
-            ''
+            'Addiction, bad habits, co-dependency, materialism.',
+            'Extremes of the upright meaning: Life-threatening addiction, psychopathic personality disorder. Abuse (mental and physical). Escape, release, moving forward, taking control of your problems and your life.',  # noqa
+            '15-TheDevil.raw'
         ],
-    '16 Tower':
+    '16 The Tower':
         [
-            '',
-            '',  # noqa
-            ''
+            'Chaos, destruction, upheaval. Unexpected and possibly unwanted change.',
+            'Weakened energy of upright card. Irritations, things going wrong, setbacks, pressure, stress. Accidents, cuts, burns, surgery. Need to visit the doctor. Can\'t see the way through all the problems.',  # noqa
+            '16-TheTower.raw'
         ],
-    '17 Star':
+    '17 The Star':
         [
-            '',
-            '',  # noqa
-            ''
+            'Renewed optimism, hope, serenity. Spiritual love and joy.',
+            'Low self-esteem. Lack of clarity. Futility. Not feeling the love around you. Disappointment.',  # noqa
+            '17-TheStar.raw'
         ],
-    '18 Moon':
+    '18 The Moon':
         [
-            '',
-            '',  # noqa
-            ''
+            'Insecurity, anxiety, illusion, fear, health issues.',
+            'Resistance to anything spiritual. Self-delusion. Closed mind. Mental health issues, and things like fibromyalgia and urinary tract problems.',  # noqa
+            '18-TheMoon.raw'
         ],
-    '19 Sun':
+    '19 The Sun':
         [
-            '',
-            '',  # noqa
-            ''
+            'Improvement, growth, positivity, love, abundance, joy.',
+            'Weakened energy of upright card. Still positive but less so. Success is mediocre. Happiness on a lower scale.',  # noqa
+            '19-TheSun.raw'
         ],
     '20 Judgment':
         [
-            '',
-            '',  # noqa
-            ''
+            'Rebirth, calling, forgiveness.',
+            'Problematic transitions. Resistance, rejection, alienation. Over critical and judgmental.',  # noqa
+            '20-Judgement.raw'
         ],
-    '21 World':
+    '21 The World':
         [
-            '',
-            '',  # noqa
-            ''
+            'In the right place. Accomplishment, completion. Pause before the next stage.',
+            'Slightly weakened energy of upright card so generally positive. Completion of projects delayed. Wanting to move forward but held back. Overdue birth. Issues with weight loss. Having to wait for test results.',  # noqa
+            '21-TheWorld.raw'
         ],
     '22 Ace Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Rush of energy, inspiration, passion, creativity.',
+            'Weakened energy of upright meaning. Inappropriate attraction/affair. Lack of growth and expansion.',  # noqa
+            'Wands01.raw'
         ],
     '23 Two Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Planning, decisions, delays.',
+            'Unexpected turn of events. A new perspective on an old problem. Reluctance, self-imposed restriction.',  # noqa
+            'Wands02.raw'
         ],
     '24 Three Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Enterprise, entrepreneurial spirit, responsibility, opportunity. New job.',
+            'Feeling blocked. Unable to get projects started or completed. Delayed results. Investment anxiety. Distrust.',  # noqa
+            'Wands03.raw'
         ],
     '25 Four Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Community, celebration, domestic comfort, engagement, wedding, housewarming. A job well done.',
+            'Not much different from upright. Celebration, reunions, break from hard work. Building of foundations, cementing of relationships. Sale of property.',  # noqa
+            'Wands04.raw'
         ],
     '26 Five Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Arguments, disagreements, tension, competition, strife.',
+            'Refusing to engage in hostility or conflict. Settling disputes. Inner conflicts, beset by inner demons.',  # noqa
+            'Wands05.raw'
         ],
     '27 Six Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Victory, achievement. Good results in exams. Public acknowledgment.',
+            'Treachery, betrayal. Short-lived victory. Pride before a fall. Embarrassment. Public humiliation.',  # noqa
+            'Wands06.raw'
         ],
     '28 Seven Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Standing your ground, challenge, not giving up.',
+            'Putting up barriers, refusing to negotiate. Obstinate. Biased.',  # noqa
+            'Wands07.raw'
         ],
     '29 Eight Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Change, getting organized, motivation, travel, possible pregnancy.',
+            'Unforeseen, difficult event. Shock. Family or business problems. Think of this reversal as the Tower’s baby brother.',  # noqa
+            'Wands08.raw'
         ],
     '30 Nine Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Courage, determination, resilience.',
+            'Overwhelmed. Ready to give up. Illness, nagging pain. Can’t see the the wood for the trees.',  # noqa
+            'Wands09.raw'
         ],
     '31 Ten Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Responsibilities, stress, tough times.',
+            'Hard labor; little results. Letting go of a goal or dream. Facing a difficult reality.',  # noqa
+            'Wands10.raw'
         ],
     '32 Page Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Explorer, potential, free agent, no ties, messenger (or message arriving swiftly).',
+            'Childishness, tantrums. Lacking concentration and determination. Bad news or a reprimand in the form of a message.',  # noqa
+            'Wands11.raw'
         ],
     '33 Knight Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Lust, enthusiasm, entrepreneurial spirit, scattered energy.',
+            'A rogue, a philanderer, a user. A brawler. A cheater. Over-enthusiasm, impatience, bad temper. Prone to violence.',  # noqa
+            'Wands12.raw'
         ],
     '34 Queen Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Warmth, vibrancy, sexual enthusiasm.',
+            'The other woman. A jealous, temperamental mistress. A rival in love or work. Promiscuity, extravagance. Fever, infections.',  # noqa
+            'Wands13.raw'
         ],
     '35 King Of Wands':
         [
-            '',
-            '',  # noqa
-            ''
+            'Leader, visionary, role model, temperamental, egotistical.',
+            'Arrogant leader or boss. Inflated ego. Misuse of power. Almighty displays of anger. Heart problems or possible stroke.',  # noqa
+            'Wands14.raw'
         ],
-    '36 ':
+    '36 Ace Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Overwhelming romantic and spiritual love. New relationship, friendship. Compassion.',
+            'Love seeping away. Setting emotional boundaries. Lost or unrequited love. Change in a relationship from romantic to routine. Possible drinking problem.',  # noqa
+            'Cups01.raw'
         ],
-    '37 ':
+    '37 Two Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Attraction, love, commitment.',
+            'Difficulty making a romantic connection. Obstacles to love. Finding yourself in the friend-zone. Losing contact. Separation.',  # noqa
+            'Cups02.raw'
         ],
-    '38 ':
+    '38 Three Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Friendship, fun, community, girls’ night out, celebration.',
+            'Over-indulgence. Bored with partying. Disenchanted with close friends. Lack of support or cooperation.',  # noqa
+            'Cups03.raw'
         ],
-    '39 ':
+    '39 Four Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Emotional stability, contemplation, meditation, inward focus.',
+            'Ready to overcome depression. Looking for solutions. Preparing for a change. Restlessness. Mild insomnia. Tiredness, apathy. Psychic experiences.',  # noqa
+            'Cups04.raw'
         ],
-    '40 ':
+    '40 Five Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Loss, hurt, disappointment, bereavement, regret, pain. Emotional challenge.',
+            'Healing rifts. Lessening of grief. Help from friends and loved ones. Acceptance.',  # noqa
+            'Cups05.raw'
         ],
-    '41 ':
+    '41 Six Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Memories of people and places. Childhood, children, grandchildren.',
+            'Preoccupation with the past or future; failure to live in the present. Problems with a child or young person.',  # noqa
+            'Cups06.raw'
         ],
-    '42 ':
+    '42 Seven Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Fantasy, imagination, too many choices.',
+            'Surmounting feelings of doubt and confusion. Making a proactive choice. Trusting your feelings.',  # noqa
+            'Cups07.raw'
         ],
-    '43 ':
+    '43 Eight Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Parting, leaving home. Emotional choice.',
+            'Coming home. The prodigal returns. Embraced and accepted by family. Facing up to an emotional dilemma.',  # noqa
+            'Cups08.raw'
         ],
-    '44 ':
+    '44 Nine Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Emotional security. Comfort, satisfaction, happiness.',
+            'Weakened energy of upright card. Contentment may be reduced, or satisfaction fleeting. Letting go of material concerns. Overcoming mistakes. Overindulgence of food and drink.',  # noqa
+            'Cups09.raw'
         ],
-    '45 ':
+    '45 Ten Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Family, harmony, fulfillment, peace, love.',
+            'Relationship or family difficulties. Completion hard to reach. Break up or breakdown of a formerly happy home.',  # noqa
+            'Cups10.raw'
         ],
-    '46 ':
+    '46 Page Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Explorer of feelings, creative, messenger (or message arriving from overseas).',
+            'Teen experiencing emotional distress. Possible gender confusion. Someone afraid of love, or emotional involvement. Young person not fitting in with family. An emotional and possibly upsetting message.',  # noqa
+            'Cups11.raw'
         ],
-    '47 ':
+    '47 Knight Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Romantic beau. Loves to love. Bisexuality.',
+            'Deceitful in love. Unfaithfulness. Obsession with another. LGBT issues or celebration. Coming out.',  # noqa
+            'Cups12.raw'
         ],
-    '48 ':
+    '48 Queen Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Intuitive, compassionate woman. Good friend.',
+            'A delicate woman. Perhaps with health issues and/or emotional problems. Someone who needs physical and emotional support. Withdrawal of love from a partner.',  # noqa
+            'Cups13.raw'
         ],
-    '49':
+    '49 King Of Cups':
         [
-            '',
-            '',  # noqa
-            ''
+            'Friendly, gentle man. Emotionally supportive.',
+            'A man isolated emotionally. Possible alcoholic or drug addict. Depression and self pity causes relationship difficulties. Unable to express personal feelings.',  # noqa
+            'Cups14.raw'
         ],
-    '50 ':
+    '50 Ace Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Gift, manifestation, new house or project. Prosperity.',
+            'Exaggerated energy of upright card. Treasure, wealth, fortune. Prosperity without happiness. Obsessed with making money. Corruption. Easy come, easy go.',  # noqa
+            'Pentacles01.raw'
         ],
-    '51 ':
+    '51 Two Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Making ends meet. Balancing time and resources.',
+            'Paperwork/to-do list overload; too much to deal with. Data crashes. Learning difficulties. Student struggles with making ends meet, meeting deadlines, understanding the work.',  # noqa
+            'Pentacles02.raw'
         ],
-    '52 ':
+    '52 Three Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Collaboration, teamwork, pooling resources and ideas.',
+            'Job or career related problems. Disputes with coworkers or boss. Mistakes, mediocrity, poor quality, shortcuts. Job shortages.',  # noqa
+            'Pentacles03.raw'
         ],
-    '53 ':
+    '53 Four Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Stability, security, isolation, holding on to resources.',
+            'Resisting letting go of resources. Uneasiness outside of comfort zone. Blockages both mental and actual. Writer’s block. Hindrances and delays. Late payment.',  # noqa
+            'Pentacles04.raw'
         ],
-    '54 ':
+    '54 Five Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Material loss, destitution, poverty, financial or material challenge.',
+            'A turning point. Slight improvement in situation. Access to help and support. Or things go from bad to worse. The unthinkable happens. Loss of everything.',  # noqa
+            'Pentacles05.raw'
         ],
-    '55 ':
+    '55 Six Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Generosity, giving and receiving support, charity, donation of resources.',
+            'Taking advantage. Claiming under false pretenses. Greed, jealousy, disputes over money. Insurance refusing to pay. Lack of insurance. Unpaid debts or paying off a debt.',  # noqa
+            'Pentacles06.raw'
         ],
-    '56 ':
+    '56 Seven Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Slight dissatisfaction, underlying discontent, doing well but could do better. Wondering at missed opportunities.',  # noqa
+            'Unemployment, lack of skills. Feeling let down by the system. Dissatisfaction with pay. Lack of ambition. Lazy and tardy.',  # noqa
+            'Pentacles07.raw'
         ],
-    '57 ':
+    '57 Eight Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Education, training/retraining, change of career, focus on the job in hand.',
+            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Over-qualified for the job. Boredom and tedium at work and life in general.',  # noqa
+            'Pentacles08.raw'
         ],
-    '58 ':
+    '58 Nine Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Independence, happy with own company. Self-sufficiency, appreciation.',
+            'Goals attained but not as satisfying as expected. Trapped in a gilded cage. Looking for a way out. Needing a challenge. Lack of exercise. Lack of company.',  # noqa
+            'Pentacles09.raw'
         ],
-    '59 ':
+    '59 Ten Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Family structure, wealth, business, planning, inter-generational co-operation.',
+            'Rejecting family. Disputes over inheritance or property. Family quarrels. Feeling like an outsider. Elderly relative needing care. Equity and savings devalued or lost. Gambling losses. Material insecurity.',  # noqa
+            'Pentacles10.raw'
         ],
-    '60 ':
+    '60 Page Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Student, curiosity, focus. Messenger, or message arriving by post.',
+            'Lost interest in school or college. Underlying and hidden issues. Hating your choice of course. Preoccupied with material possessions and appearance. Stress and exhaustion caused by overwork.',  # noqa
+            'Pentacles11.raw'
         ],
-    '61 ':
+    '61 Knight Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Hard worker, loyal, reliable, quiet man with hidden depths.',
+            'Workaholic or its opposite; work-shy and lazy. Obsession with one person or topic. Weight issues, lack of exercise, chronic fatigue. Bore. Socially inept.',  # noqa
+            'Pentacles12.raw'
         ],
-    '62 ':
+    '62 Queen Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Comforting, practical, efficient woman. Motherhood, career woman.',
+            'Extremely house-proud, or extremely slovenly. Possessions mean more than people. Hoarder, or fixated on designer goods. Helicopter parenting. More concerned with children’s attainments than their well-being. Doubt, mistrust.',  # noqa
+            'Pentacles13.raw'
         ],
-    '63 ':
+    '63 King Of Pentacles':
         [
-            '',
-            '',  # noqa
-            ''
+            'Businessman, magnanimous, proud, self-educated, self-made.',
+            'Exploitive, mean, or ineffective employer. Misuse of power and money. Abuse of people for gain or personal gratification. Corruption. Overeating, indigestion, gout, rheumatism. Careless of the wellbeing of others. Unloved by family.',  # noqa
+            'Pentacles14.raw'
         ],
-    '64 ':
+    '64 Ace Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Clarity, decision made, insight, understanding, truth revealed.',
+            'Restraint, patience. Writer’s block. Conception. Violation. Surgery.',  # noqa
+            'Swords01.raw'
         ],
-    '65 ':
+    '65 Two Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Indecision, not acknowledging the truth, afraid to face reality.',
+            'Torn in two directions. Victim of lies, betrayal, duplicity. Ready to make a decision.',  # noqa
+            'Swords02.raw'
         ],
-    '66 ':
+    '66 Three Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Miscommunication, rejection, hurtful words, painful realization.',
+            'Fast recovery after break-up or hiding the true extent of your pain.',  # noqa
+            'Swords03.raw'
         ],
-    '67 ':
+    '67 Four Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Withdrawal, resting the mind, time-out, meditation.',
+            'Unwanted isolation. Insomnia. Lack of self-care. Strange dreams; out of body experience.',  # noqa
+            'Swords04.raw'
         ],
-    '68 ':
+    '68 Five Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Conflict, tension, mental challenge, bullying.',
+            'Weakened or magnified energy of the upright card. Funeral. Mourning for situations or people.',  # noqa
+            'Swords05.raw'
         ],
-    '69 ':
+    '69 Six Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Transition, recovery, moving on, travel.',
+            'Wanting to leave but unable. Travel delays or cancellations. Floods, storms, power outages.',  # noqa
+            'Swords06.raw'
         ],
-    '70 ':
+    '70 Seven Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Stealth, reclaiming something lost, mental trickery, betrayal, theft.',
+            'Shame after trying to steal or deceive. Returning that which doesn’t belong to you. Community service. Giving back or paying forward.',  # noqa
+            'Swords07.raw'
         ],
-    '71 ':
+    '71 Eight Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Self-entrapment, perceived imprisonment, isolation.',
+            'A new vision of the future. Able to see a way forward. Hard but rewarding work.',  # noqa
+            'Swords08.raw'
         ],
-    '72 ':
+    '72 Nine Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Anxiety, depression, nightmares, endless negative thought.',
+            'Recovery from depression. Open to new ideas. Ready to explore possibilities.',  # noqa
+            'Swords09.raw'
         ],
-    '73 ':
+    '73 Ten Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Defeat, ending, death. End of life cycle/beginning of the next.',
+            'Rebirth, recovery, relief. The end was not as bad as it seemed. New horizons.',  # noqa
+            'Swords10.raw'
         ],
-    '74 ':
+    '74 Page Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Mentally agile, restless, experimenting. Messenger (or message arriving fast).',
+            'Slanderous, salacious gossip. Difficult childhood. Personality disorders.',  # noqa
+            'Swords11.raw'
         ],
-    '75 ':
+    '75 Knight Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Incisive, decisive, impulsive, political. Fights for the underdog.',
+            'Fanatic. Fundamentalist. Delusional. Cruelty. Bad news arrives by text or email.',  # noqa
+            'Swords12.raw'
         ],
-    '76 ':
+    '76 Queen Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
+            'Perceptive, quick thinker, seeker of truth. Tells it like it is.',
+            'Manipulative, self-centered woman. Narrow-mindedness, bigotry, intolerance.',  # noqa
+            'Swords13.raw'
         ],
-    '77 ':
+    '77 King Of Swords':
         [
-            '',
-            '',  # noqa
-            ''
-        ],
-    '78 ':
-        [
-            '',
-            '',  # noqa
-            ''
-        ],
-    '79 ':
-        [
-            '',
-            '',  # noqa
-            ''
-        ],
-    '80 ':
-        [
-            '',
-            '',  # noqa
-            ''
-        ],
-    '81 ':
-        [
-            '',
-            '',  # noqa
-            ''
-        ],
-    '82 ':
-        [
-            '',
-            '',  # noqa
-            ''
+            'Authoritative, intellectually powerful, truthful, direct.',
+            'Dangerous, ill-intentioned man. Controlling and manipulative. Sadistic, perverse, inhumane.',  # noqa
+            'Swords14.raw'
         ],
 }
 
