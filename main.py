@@ -98,6 +98,7 @@ def questions():
     display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
 
 
+
 # sd_test()
 # img_test()
 # questions()
