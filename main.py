@@ -42,7 +42,7 @@ import random
 import gc
 
 import game
-from config import display, neo_pixel
+from config import display, neo_pixel, nrf
 from data import ham_radio_questions
 
 
@@ -97,9 +97,23 @@ def questions():
     """
     display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
 
-
-
 # sd_test()
 # img_test()
 # questions()
 # game.questions(ham_radio_questions)
+
+
+import utime
+
+
+def recv():
+    nrf.modeRX()
+    print(bin(nrf.readReg(0)[0]))
+    if nrf.newMessage() > 0:
+        print("msg: ", "".join([chr(i) for i in nrf.readMessage()]))
+
+
+def send():
+    for _ in range(100):
+        nrf.sendMessage("From 2: ")
+        utime.sleep(0.001)

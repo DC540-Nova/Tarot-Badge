@@ -29,20 +29,48 @@
 # pyright: reportUndefinedVariable=false
 
 import utime
-from machine import SPI, Pin
-
+from machine import Pin, SPI
 
 
 class NRF:
-    def __init__(self, port=1, sck=10, mosi=11, miso=8, csn=3, ce=0, speed=4000000):
-        utime.sleep_ms(11)
-        self.ce = Pin(ce, 1)
-        self.csn = Pin(csn, 1)
+    """
+    Class to handle NRF driver
+    """
+    # def __init__(self, nrf_spi, csn, ce):  # noqa
+    #     """
+    #     Params:
+    #         nrf_spi: object
+    #         csn: object
+    #         ce: object
+    #     """
+    #     utime.sleep_ms(11)
+    #     self.ce = ce
+    #     self.csn = csn
+    #     self.spi = nrf_spi
+    #     # self.ce(1)
+    #     # self.csn(1)
+    #     # self.ce = Pin(ce, 1)
+    #     # self.csn = Pin(csn, 1)
+    #     # self.spi = SPI(port, baudrate, sck=Pin(sck), mosi=Pin(mosi), miso=Pin(miso), csn=Pin(csn), ce=Pin(ce))
+    #     self.ce(0)
+    #     self.csn(1)
+    #     self.config()
 
-        self.spi = SPI(port, speed, sck=Pin(sck), mosi=Pin(mosi), miso=Pin(miso))
+    # nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11),
+    #               miso=Pin(8))  # noqa
+    # from nrf24l01 import NRF  # noqa
+    # nrf = NRF(nrf_spi, csn=Pin(3), ce=Pin(0))
+
+    def __init__(self, spi_conf, csn, ce):
+        utime.sleep_ms(11)
+        self.ce = ce
+        self.csn = csn
+
+        self.spi = spi_conf
 
         self.ce(0)
         self.csn(1)
+        self.config()
 
     def readReg(self, reg, size=1):
         reg = [0b00011111 & reg]
@@ -71,7 +99,7 @@ class NRF:
         self.writeReg(0, 0b00001010)
         utime.sleep_ms(2)
 
-        # print(bin(self.readReg(0)[0]))
+        print(bin(self.readReg(0)[0]))
         utime.sleep_ms(2000)
 
         self.writeReg(1, 0b00000011)
@@ -166,22 +194,6 @@ class NRF:
 
         return result
 
-#sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11), miso=Pin(8))  # noqa
-nrf = NRF()  # noqa
-nrf.config()
-
-
-def recv():
-    nrf.modeRX()
-    print(bin(nrf.readReg(0)[0]))
-    led = Pin(25, 1)
-    led.toggle()
-    if nrf.newMessage() > 0:
-        print("msg: ", "".join([chr(i) for i in nrf.readMessage()]))
-
-
-def send():
-    #nrf.modeTX()
-    for _ in range(100):
-        nrf.sendMessage("From 2: ")
-        utime.sleep(0.001)
+# from machine import SPI, Pin
+# nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11), miso=Pin(8))  # noqa
+# nrf = NRF()  # noqa

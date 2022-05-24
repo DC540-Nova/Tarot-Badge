@@ -40,9 +40,9 @@ BUTTON_EXTRA = Pin(16, Pin.IN, Pin.PULL_UP)
 import button  # noqa
 
 # display config
-display_spi = SPI(0, baudrate=40000000, sck=Pin(6), mosi=Pin(7))
+display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))
 from ili9341 import Display  # noqa
-display = Display(display_spi, dc=Pin(15), cs=Pin(13, Pin.OUT), rst=Pin(14))
+display = Display(display_spi, dc=Pin(15, Pin.OUT), cs=Pin(13, Pin.OUT), rst=Pin(14, Pin.OUT))
 
 # neo_pixel config
 LED_PIN = 5
@@ -51,3 +51,6 @@ from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin)
 
 # nrf config
+nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))  # noqa
+from nrf24l01 import NRF  # noqa
+nrf = NRF(nrf_spi, csn=Pin(3, Pin.OUT), ce=Pin(0, Pin.OUT))
