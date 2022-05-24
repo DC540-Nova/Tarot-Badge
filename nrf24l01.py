@@ -48,7 +48,25 @@ class NRF:
         self.spi = spi_conf
         self.ce(0)
         self.csn(1)
-        self.config()
+        self.__config()
+
+    def __config(self):
+        """
+        Private method to handle config
+        """
+        self.csn(1)
+        self.ce(0)
+        self.__write_reg(0, 0b00001010)
+        utime.sleep_ms(2)
+        # print(bin(self.__read_reg(0)[0]))
+        utime.sleep_ms(2000)
+        self.__write_reg(1, 0b00000011)
+        self.__write_reg(3, 0b00000011)
+        self.__write_reg(5, 60)
+        self.__write_reg(6, 0b00001111)
+        self.__write_reg(0x0a, "DC540")
+        self.__write_reg(0x10, "DC540")
+        self.__write_reg(0x11, 32)
 
     def __read_reg(self, reg, size=1):
         """
@@ -75,40 +93,15 @@ class NRF:
         Params:
             reg: int
             size: int, optional
-
-        Returns:
-            object
         """
         reg = [0b00100000 | (0b00011111 & reg)]
-
-        value = [value] if type(value) == type(1) else value
-
+        value = [value] if type(value) == type(1) else value  # noqa
         self.csn(0)
         self.spi.write(bytearray(reg))
         self.spi.write(bytearray(value))
         self.csn(1)
 
-    def config(self):
-        self.csn(1)
-        self.ce(0)
 
-        self.__write_reg(0, 0b00001010)
-        utime.sleep_ms(2)
-
-        print(bin(self.__read_reg(0)[0]))
-        utime.sleep_ms(2000)
-
-        self.__write_reg(1, 0b00000011)
-        self.__write_reg(3, 0b00000011)
-
-        self.__write_reg(5, 60)
-
-        self.__write_reg(6, 0b00001111)
-
-        self.__write_reg(0x0a, "gyroc")
-        self.__write_reg(0x10, "gyroc")
-
-        self.__write_reg(0x11, 32)
 
     def modeTX(self):
         config = self.__read_reg(0)[0]
