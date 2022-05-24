@@ -49,7 +49,6 @@ class NRF:
         self.ce(0)
         self.csn(1)
         self.__config()
-        self.recv()  # to clear recv buffer for usage
 
     def __config(self):
         """
@@ -68,6 +67,7 @@ class NRF:
         self.__write_reg(0x0a, "DC540")
         self.__write_reg(0x10, "DC540")
         self.__write_reg(0x11, 32)
+        self.recv()
 
     def __read_reg(self, reg, size=1):
         """
