@@ -108,12 +108,13 @@ import utime
 
 def recv():
     nrf.modeRX()
-    print(bin(nrf.readReg(0)[0]))
+    # print(bin(nrf.readReg(0)[0]))
     if nrf.newMessage() > 0:
         print("msg: ", "".join([chr(i) for i in nrf.readMessage()]))
 
 
 def send():
+    nrf.modeTX()
     for _ in range(100):
         nrf.sendMessage("From 2: ")
         utime.sleep(0.001)

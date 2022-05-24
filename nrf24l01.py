@@ -29,60 +29,56 @@
 # pyright: reportUndefinedVariable=false
 
 import utime
-from machine import Pin, SPI
 
 
 class NRF:
     """
     Class to handle NRF driver
     """
-    # def __init__(self, nrf_spi, csn, ce):  # noqa
-    #     """
-    #     Params:
-    #         nrf_spi: object
-    #         csn: object
-    #         ce: object
-    #     """
-    #     utime.sleep_ms(11)
-    #     self.ce = ce
-    #     self.csn = csn
-    #     self.spi = nrf_spi
-    #     # self.ce(1)
-    #     # self.csn(1)
-    #     # self.ce = Pin(ce, 1)
-    #     # self.csn = Pin(csn, 1)
-    #     # self.spi = SPI(port, baudrate, sck=Pin(sck), mosi=Pin(mosi), miso=Pin(miso), csn=Pin(csn), ce=Pin(ce))
-    #     self.ce(0)
-    #     self.csn(1)
-    #     self.config()
-
-    # nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11),
-    #               miso=Pin(8))  # noqa
-    # from nrf24l01 import NRF  # noqa
-    # nrf = NRF(nrf_spi, csn=Pin(3), ce=Pin(0))
-
     def __init__(self, spi_conf, csn, ce):
+        """
+        Params:
+            nrf_spi: object
+            csn: object
+            ce: object
+        """
         utime.sleep_ms(11)
         self.ce = ce
         self.csn = csn
-
         self.spi = spi_conf
-
         self.ce(0)
         self.csn(1)
         self.config()
 
-    def readReg(self, reg, size=1):
-        reg = [0b00011111 & reg]
+    def __read_reg(self, reg, size=1):
+        """
+        Private method to read a register
 
+        Params:
+            reg: int
+            size: int, optional
+
+        Returns:
+            object
+        """
+        reg = [0b00011111 & reg]
         self.csn(0)
         self.spi.write(bytearray(reg))
         result = self.spi.read(size)
         self.csn(1)
-
         return result
 
-    def writeReg(self, reg, value):
+    def __write_reg(self, reg, value):
+        """
+        Private method to write to a register
+
+        Params:
+            reg: int
+            size: int, optional
+
+        Returns:
+            object
+        """
         reg = [0b00100000 | (0b00011111 & reg)]
 
         value = [value] if type(value) == type(1) else value
@@ -96,48 +92,46 @@ class NRF:
         self.csn(1)
         self.ce(0)
 
-        self.writeReg(0, 0b00001010)
+        self.__write_reg(0, 0b00001010)
         utime.sleep_ms(2)
 
-        print(bin(self.readReg(0)[0]))
+        print(bin(self.__read_reg(0)[0]))
         utime.sleep_ms(2000)
 
-        self.writeReg(1, 0b00000011)
-        self.writeReg(3, 0b00000011)
+        self.__write_reg(1, 0b00000011)
+        self.__write_reg(3, 0b00000011)
 
-        self.writeReg(5, 60)
+        self.__write_reg(5, 60)
 
-        self.writeReg(6, 0b00001111)
+        self.__write_reg(6, 0b00001111)
 
-        self.writeReg(0x0a, "gyroc")
-        self.writeReg(0x10, "gyroc")
+        self.__write_reg(0x0a, "gyroc")
+        self.__write_reg(0x10, "gyroc")
 
-        self.writeReg(0x11, 32)
+        self.__write_reg(0x11, 32)
 
     def modeTX(self):
-        config = self.readReg(0)[0]
+        config = self.__read_reg(0)[0]
         config &= ~(1 << 0)
-        self.writeReg(0, config)
+        self.__write_reg(0, config)
         self.ce(0)
         utime.sleep_us(130)
 
     def modeRX(self):
-        config = self.readReg(0)[0]
+        config = self.__read_reg(0)[0]
         config |= (1 << 0)
-        self.writeReg(0, config)
+        self.__write_reg(0, config)
         self.ce(1)
         utime.sleep_us(130)
 
     def sendMessage(self, msg):
-        self.modeTX()
-
         self.csn(0)
         self.spi.write(bytearray([0b11100001]))
         self.csn(1)
 
-        status = self.readReg(7)[0]
+        status = self.__read_reg(7)[0]
         status |= (1 << 4)
-        self.writeReg(7, status)
+        self.__write_reg(7, status)
 
         data = bytearray(msg)
         data.extend(bytearray(32 - len(msg)))
@@ -155,42 +149,43 @@ class NRF:
         utime.sleep_us(10)
 
         self.ce(0)
-        status = self.readReg(7)[0]
+        status = self.__read_reg(7)[0]
         while (status & (1 << 5)) == 0 and (status & (1 << 4)) == 0:
-            status = self.readReg(7)[0]
+            status = self.__read_reg(7)[0]
             # print()
             # print(bin(status))
-            # print(bin(self.readReg(0x17)[0]))
-            # print(bin(self.readReg(0x0)[0]))
+            # print(bin(self.__read_reg()(0x17)[0]))
+            # print(bin(self.__read_reg()(0x0)[0]))
             utime.sleep(1)
 
 
         status |= (1 << 4) | (1 << 5)
-        self.writeReg(7, status)
+        self.__write_reg(7, status)
 
         self.modeRX()
 
     def newMessage(self):
-        status = self.readReg(7)[0]  # 6
-        fstatus = self.readReg(0x17)[0]  # 1
+        status = self.__read_reg(7)[0]  # 6
+        fstatus = self.__read_reg(0x17)[0]  # 1
 
         result = (not (0b00000001 & fstatus)) or (0b01000000 & status)
 
         status |= (1 << 4) | (1 << 5)
-        self.writeReg(7, status)
+        self.__write_reg(7, status)
 
         return result
 
     def readMessage(self):
+        #self.modeRX()
         reg = [0b01100001]
 
         self.csn(0)
         self.spi.write(bytearray(reg))
         result = self.spi.read(32)
         self.csn(1)
-        status = self.readReg(7)[0]
+        status = self.__read_reg(7)[0]
         status |= (1 << 6)
-        self.writeReg(7, status)
+        self.__write_reg(7, status)
 
         return result
 
