@@ -49,6 +49,7 @@ class NRF:
         self.ce(0)
         self.csn(1)
         self.__config()
+        self.recv()  # to clear recv buffer for usage
 
     def __config(self):
         """
@@ -182,3 +183,25 @@ class NRF:
         status |= (1 << 6)
         self.__write_reg(7, status)
         return msg
+
+    def recv(self):
+        """
+        Method to receive a mssage
+        """
+        for _ in range(1):
+            self.__mode_rx()
+            if self.__new_msg() > 0:
+                print("".join([chr(i) for i in self.__read_msg()]))
+            utime.sleep(0.001)
+
+    def send(self, msg):
+        """
+        Method to send a message
+
+        Params:
+            msg: str
+        """
+        for _ in range(1):
+            self.__mode_tx()
+            self.__send_msg(msg)
+            utime.sleep(0.001)

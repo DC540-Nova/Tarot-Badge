@@ -102,24 +102,3 @@ def questions():
 # questions()
 # game.questions(ham_radio_questions)
 
-
-def recv():
-    """
-    Method to receive a mssage
-    """
-    nrf.__mode_rx()
-    if nrf.__new_msg() > 0:
-        print("".join([chr(i) for i in nrf.__read_msg()]))
-
-
-def send(msg):
-    """
-    Method to send a message
-
-    Params:
-        msg: str
-    """
-    nrf.__mode_tx()
-    for _ in range(5):
-        nrf.__send_msg(msg)
-        utime.sleep(0.001)
