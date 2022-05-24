@@ -101,16 +101,20 @@ class NRF:
         self.spi.write(bytearray(value))
         self.csn(1)
 
-
-
-    def modeTX(self):
+    def __mode_tx(self):
+        """
+        Private method to enable transmit mode
+        """
         config = self.__read_reg(0)[0]
         config &= ~(1 << 0)
         self.__write_reg(0, config)
         self.ce(0)
         utime.sleep_us(130)
 
-    def modeRX(self):
+    def __mode_rx(self):
+        """
+        Private method to enable receive mode
+        """
         config = self.__read_reg(0)[0]
         config |= (1 << 0)
         self.__write_reg(0, config)
@@ -155,7 +159,7 @@ class NRF:
         status |= (1 << 4) | (1 << 5)
         self.__write_reg(7, status)
 
-        self.modeRX()
+        self.__mode_rx()
 
     def newMessage(self):
         status = self.__read_reg(7)[0]  # 6
@@ -169,7 +173,7 @@ class NRF:
         return result
 
     def readMessage(self):
-        #self.modeRX()
+        #self.__mode_rx()
         reg = [0b01100001]
 
         self.csn(0)
