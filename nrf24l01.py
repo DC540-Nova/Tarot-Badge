@@ -121,56 +121,50 @@ class NRF:
         self.ce(1)
         utime.sleep_us(130)
 
-    def sendMessage(self, msg):
+    def __send_msg(self, msg):
+        """
+        Private method to send a raw message
+
+        Params:
+            msg: string
+        """
         self.csn(0)
         self.spi.write(bytearray([0b11100001]))
         self.csn(1)
-
         status = self.__read_reg(7)[0]
         status |= (1 << 4)
         self.__write_reg(7, status)
-
         data = bytearray(msg)
         data.extend(bytearray(32 - len(msg)))
-
         reg = [0b10100000]
         self.csn(0)
         self.spi.write(bytearray(reg))
-
         self.spi.write(bytearray(data))
-
         self.csn(1)
-
         self.ce(1)
-
         utime.sleep_us(10)
-
         self.ce(0)
         status = self.__read_reg(7)[0]
         while (status & (1 << 5)) == 0 and (status & (1 << 4)) == 0:
             status = self.__read_reg(7)[0]
-            # print()
-            # print(bin(status))
-            # print(bin(self.__read_reg()(0x17)[0]))
-            # print(bin(self.__read_reg()(0x0)[0]))
             utime.sleep(1)
-
-
         status |= (1 << 4) | (1 << 5)
         self.__write_reg(7, status)
-
         self.__mode_rx()
 
-    def newMessage(self):
+    def __new_msg(self):
+        """
+        Private method to check if there is a new message in the recieve queue
+
+        Returns:
+            bool
+        """
         status = self.__read_reg(7)[0]  # 6
         fstatus = self.__read_reg(0x17)[0]  # 1
-
-        result = (not (0b00000001 & fstatus)) or (0b01000000 & status)
-
+        has_new_message = (not (0b00000001 & fstatus)) or (0b01000000 & status)
         status |= (1 << 4) | (1 << 5)
         self.__write_reg(7, status)
-
-        return result
+        return has_new_message
 
     def readMessage(self):
         #self.__mode_rx()

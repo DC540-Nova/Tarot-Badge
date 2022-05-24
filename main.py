@@ -40,10 +40,10 @@
 import _thread
 import random
 import gc
+import utime
 
-import game
+
 from config import display, neo_pixel, nrf
-from data import ham_radio_questions
 
 
 def bg_task():
@@ -103,17 +103,23 @@ def questions():
 # game.questions(ham_radio_questions)
 
 
-import utime
-
-
 def recv():
+    """
+    Method to receive a mssage
+    """
     nrf.__mode_rx()
-    if nrf.newMessage() > 0:
-        print("msg: ", "".join([chr(i) for i in nrf.readMessage()]))
+    if nrf.__new_msg() > 0:
+        print("".join([chr(i) for i in nrf.readMessage()]))
 
 
-def send():
+def send(msg):
+    """
+    Method to send a message
+
+    Params:
+        msg: str
+    """
     nrf.__mode_tx()
-    for _ in range(100):
-        nrf.sendMessage("From 2: ")
+    for _ in range(10):
+        nrf.__send_msg(msg)
         utime.sleep(0.001)
