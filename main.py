@@ -109,7 +109,7 @@ def recv():
     """
     nrf.__mode_rx()
     if nrf.__new_msg() > 0:
-        print("".join([chr(i) for i in nrf.readMessage()]))
+        print("".join([chr(i) for i in nrf.__read_msg()]))
 
 
 def send(msg):
@@ -120,6 +120,6 @@ def send(msg):
         msg: str
     """
     nrf.__mode_tx()
-    for _ in range(10):
+    for _ in range(5):
         nrf.__send_msg(msg)
         utime.sleep(0.001)

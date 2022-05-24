@@ -166,20 +166,19 @@ class NRF:
         self.__write_reg(7, status)
         return has_new_message
 
-    def readMessage(self):
-        #self.__mode_rx()
-        reg = [0b01100001]
+    def __read_msg(self):
+        """
+        Private method to read a raw message
 
+        Returns:
+            bool
+        """
+        reg = [0b01100001]
         self.csn(0)
         self.spi.write(bytearray(reg))
-        result = self.spi.read(32)
+        msg = self.spi.read(32)
         self.csn(1)
         status = self.__read_reg(7)[0]
         status |= (1 << 6)
         self.__write_reg(7, status)
-
-        return result
-
-# from machine import SPI, Pin
-# nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10), mosi=Pin(11), miso=Pin(8))  # noqa
-# nrf = NRF()  # noqa
+        return msg
