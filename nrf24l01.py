@@ -29,12 +29,53 @@
 # pyright: reportUndefinedVariable=false
 
 import utime
+from micropython import const
 
 
 class NRF:
     """
     Class to handle NRF driver
     """
+
+    # nRF24l01 registers & commands
+    CONFIG = const(0x00)
+    EN_AA = const(0x01)
+    EN_RXADDR = const(0x02)
+    SETUP_AW = const(0x03)
+    SETUP_RETR = const(0x04)
+    RF_CH = const(0x05)
+    RF_SETUP = const(0x06)
+    STATUS = const(0x07)
+    OBSERVE_TX = const(0x08)
+    RPD = const(0x09)
+    RX_ADDR_P0 = const(0x0a)
+    RX_ADDR_P1 = const(0x0b)
+    RX_ADDR_P2 = const(0x0c)
+    RX_ADDR_P3 = const(0x0d)
+    RX_ADDR_P4 = const(0x0e)
+    RX_ADDR_P5 = const(0x0f)
+    TX_ADDR = const(0x10)
+    RX_PW_P0 = const(0x11)
+    RX_PW_P1 = const(0x12)
+    RX_PW_P2 = const(0x13)
+    RX_PW_P3 = const(0x14)
+    RX_PW_P4 = const(0x15)
+    RX_PW_P5 = const(0x16)
+    FIFO_STATUS = const(0x17)
+    DYNPD = const(0x1c)
+    FEATURE = const(0x1d)
+    R_REGISTER = const(0b00011111)
+    W_REGISTER = const(0b00111111)
+    R_RX_PAYLOAD = const(0b01100001)
+    W_TX_PAYLOAD = const(0b10100000)
+    FLUSH_TX = const(0b11100001)
+    FLUSH_RX = const(0b11100010)
+    REUSE_TX_PL = const(0b11100011)
+    R_RX_PL_WID = const(0b01100000)
+    W_ACK_PAYLOAD = const(0b10101111)
+    W_TX_PAYLOAD_NO_ACK = const(0b10110000)
+    NOP = const(0b11111111)
+
     def __init__(self, spi_conf, csn, ce):
         """
         Params:
@@ -56,35 +97,37 @@ class NRF:
         """
         self.csn(1)
         self.ce(0)
-        self.__write_reg(0, 0b00001010)
-        utime.sleep_ms(2)
-        # print(bin(self.__read_reg(0)[0]))
-        utime.sleep_ms(2000)
-        self.__write_reg(1, 0b00000011)
-        self.__write_reg(3, 0b00000011)
-        self.__write_reg(5, 60)
-        self.__write_reg(6, 0b00001111)
-        self.__write_reg(0x0a, "DC540")
-        self.__write_reg(0x10, "DC540")
-        self.__write_reg(0x11, 32)
+        utime.sleep_ms(11)  # per Radio Control State Diagram
+        self.__write_reg(self.CONFIG, 0b00001010)  # PWR_UP & EN_CRC
+        utime.sleep_ms(1500)  # per Radio Control State Diagram
+        self.__write_reg(self.EN_AA, 0b00000011)  # ENAA_P0 & ENAA_P1
+        self.__write_reg(self.SETUP_AW, 0b00000011)  # 11 = 5 bytes
+        self.__write_reg(self.RF_CH, 60)  # RF channel 60
+        self.__write_reg(self.RF_SETUP, 0b00001111)  #
+        self.__write_reg(self.RX_ADDR_P0, "DC540")  # channel name
+        self.__write_reg(self.TX_ADDR, "DC540")  # transmit address
+        self.__write_reg(self.RX_PW_P0, 32)  # number of bytes in RX payload in data pipe 0
         self.recv()
 
-    def __read_reg(self, reg, size=1):
+    def __read_reg(self, reg, size=1, debug=False):
         """
         Private method to read a register
 
         Params:
             reg: int
             size: int, optional
+            debug: bool, optional
 
         Returns:
             object
         """
-        reg = [0b00011111 & reg]
+        reg = [0b00011111 & reg]  # R_REGISTER command mask
         self.csn(0)
         self.spi.write(bytearray(reg))
         result = self.spi.read(size)
         self.csn(1)
+        if debug:
+            print([bin(value) for value in result])
         return result
 
     def __write_reg(self, reg, value):
@@ -95,8 +138,8 @@ class NRF:
             reg: int
             size: int, optional
         """
-        reg = [0b00100000 | (0b00011111 & reg)]
-        value = [value] if type(value) == type(1) else value  # noqa
+        reg = [0b00100000 | (0b00011111 & reg)]  # W_REGISTER command mask
+        value = [value] if type(value) == type(1) else value  # noqa; make sure value is a list type
         self.csn(0)
         self.spi.write(bytearray(reg))
         self.spi.write(bytearray(value))

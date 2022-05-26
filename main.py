@@ -40,7 +40,6 @@
 import _thread
 import random
 import gc
-import utime
 
 
 from config import display, neo_pixel, nrf
