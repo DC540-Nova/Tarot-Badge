@@ -149,9 +149,9 @@ class NRF:
         """
         Private method to enable transmit mode
         """
-        config = self.__read_reg(0)[0]
+        config = self.__read_reg(self.CONFIG)[0]
         config &= ~(1 << 0)
-        self.__write_reg(0, config)
+        self.__write_reg(self.CONFIG, config)
         self.ce(0)
         utime.sleep_us(130)
 
@@ -159,9 +159,9 @@ class NRF:
         """
         Private method to enable receive mode
         """
-        config = self.__read_reg(0)[0]
+        config = self.__read_reg(self.CONFIG)[0]
         config |= (1 << 0)
-        self.__write_reg(0, config)
+        self.__write_reg(self.CONFIG, config)
         self.ce(1)
         utime.sleep_us(130)
 
@@ -170,17 +170,17 @@ class NRF:
         Private method to send a raw message
 
         Params:
-            msg: string
+            msg: str
         """
         self.csn(0)
-        self.spi.write(bytearray([0b11100001]))
+        self.spi.write(bytearray([self.FLUSH_TX]))
         self.csn(1)
-        status = self.__read_reg(7)[0]
+        status = self.__read_reg(self.STATUS)[0]
         status |= (1 << 4)
-        self.__write_reg(7, status)
+        self.__write_reg(self.STATUS, status)
         data = bytearray(msg)
         data.extend(bytearray(32 - len(msg)))
-        reg = [0b10100000]
+        reg = [self.W_TX_PAYLOAD]
         self.csn(0)
         self.spi.write(bytearray(reg))
         self.spi.write(bytearray(data))
@@ -188,12 +188,12 @@ class NRF:
         self.ce(1)
         utime.sleep_us(10)
         self.ce(0)
-        status = self.__read_reg(7)[0]
+        status = self.__read_reg(self.STATUS)[0]
         while (status & (1 << 5)) == 0 and (status & (1 << 4)) == 0:
-            status = self.__read_reg(7)[0]
+            status = self.__read_reg(self.STATUS)[0]
             utime.sleep(1)
         status |= (1 << 4) | (1 << 5)
-        self.__write_reg(7, status)
+        self.__write_reg(self.STATUS, status)
         self.__mode_rx()
 
     def __new_msg(self):
@@ -203,11 +203,11 @@ class NRF:
         Returns:
             bool
         """
-        status = self.__read_reg(7)[0]  # 6
-        fstatus = self.__read_reg(0x17)[0]  # 1
+        status = self.__read_reg(self.STATUS)[0]  # 6
+        fstatus = self.__read_reg(self.FIFO_STATUS)[0]  # 1
         has_new_message = (not (0b00000001 & fstatus)) or (0b01000000 & status)
         status |= (1 << 4) | (1 << 5)
-        self.__write_reg(7, status)
+        self.__write_reg(self.STATUS, status)
         return has_new_message
 
     def __read_msg(self):
@@ -217,14 +217,14 @@ class NRF:
         Returns:
             bool
         """
-        reg = [0b01100001]
+        reg = [self.R_RX_PAYLOAD]
         self.csn(0)
         self.spi.write(bytearray(reg))
         msg = self.spi.read(32)
         self.csn(1)
-        status = self.__read_reg(7)[0]
+        status = self.__read_reg(self.STATUS)[0]
         status |= (1 << 6)
-        self.__write_reg(7, status)
+        self.__write_reg(self.STATUS, status)
         return msg
 
     def recv(self):
