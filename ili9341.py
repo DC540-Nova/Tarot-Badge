@@ -300,56 +300,73 @@ class Display:
             raise RuntimeError('rotation must be 0, 90, 180 or 270')
         else:
             self.rotation = self.ROTATE[rotation]
-        # init the display
-        self.__init_display()
+        self.__config()
 
-    def __init_display(self):
+    def __config(self):
         """
-        Private method to handle init of display
+        Private method to handle config
         """
-        # initialize GPIO pins and set implementation specific methods
         self.cs.init(self.cs.OUT, value=1)
         self.dc.init(self.dc.OUT, value=0)
         self.rst.init(self.rst.OUT, value=1)
-        # send initialization commands
-        self.__write_cmd(self.SWRESET)
+        self.__write_reg(self.SWRESET)  # software reset
         utime.sleep(.1)
-        self.__write_cmd(self.POWER_CONTROL_B, 0x00, 0xc1, 0x30)
-        self.__write_cmd(self.POWER_ON_SEQUENCE_CONTROL, 0x64, 0x03, 0x12, 0x81)
-        self.__write_cmd(self.DRIVER_TIMING_CONTROL_A1, 0x85, 0x00, 0x78)
-        self.__write_cmd(self.POWER_CONTROL_A, 0x39, 0x2c, 0x00, 0x34, 0x02)
-        self.__write_cmd(self.PUMP_RATIO_CONTROL, 0x20)
-        self.__write_cmd(self.DRIVER_TIMING_CONTROL_B, 0x00, 0x00)
-        self.__write_cmd(self.PWCTRL1, 0x23)
-        self.__write_cmd(self.PWCTRL2, 0x10)
-        self.__write_cmd(self.VMCTRL1, 0x3e, 0x28)
-        self.__write_cmd(self.VMCTRL2, 0x86)
-        self.__write_cmd(self.MADCTL, self.rotation)
-        self.__write_cmd(self.VSCRSADD, 0x00)
-        self.__write_cmd(self.PIXSET, 0x55)
-        self.__write_cmd(self.FRMCTR1, 0x00, 0x18)
-        self.__write_cmd(self.DISCTRL, 0x08, 0x82, 0x27)
-        self.__write_cmd(self.ENABLE_3G, 0x00)
-        self.__write_cmd(self.GAMSET, 0x01)
-        self.__write_cmd(self.PGAMCTRL, 0x0f, 0x31, 0x2b, 0x0c, 0x0e, 0x08, 0x4e, 0xf1, 0x37, 0x07, 0x10, 0x03, 0x0e, 0x09, 0x00)  # noqa
-        self.__write_cmd(self.NGAMCTRL, 0x00, 0x0e, 0x14, 0x03, 0x11, 0x07, 0x31, 0xc1, 0x48, 0x08, 0x0f, 0x0c, 0x31, 0x36, 0x0f)  # noqa
-        self.__write_cmd(self.SLPOUT)
+        self.__write_reg(self.POWER_CONTROL_B, 0x00, 0xc1, 0x30)  # 1,2,3 param values given in datasheet
+        self.__write_reg(self.POWER_ON_SEQUENCE_CONTROL, 0x64, 0x03, 0x12, 0x81)  # 1: soft start ctrl, 2,3: power on seq ctrl, 4: DDVDH enhance mode  # noqa
+        self.__write_reg(self.DRIVER_TIMING_CONTROL_A1, 0x85, 0x00, 0x78)  # 1: gate driver non-overlap timing control, 2: EQ timing control, 3: pre-charge timing control  # noqa
+        self.__write_reg(self.POWER_CONTROL_A, 0x39, 0x2c, 0x00, 0x34, 0x02)  # 1,2,3,4,5 param values given in datasheet  # noqa
+        self.__write_reg(self.PUMP_RATIO_CONTROL, 0x20)  # 1: ratio control
+        self.__write_reg(self.DRIVER_TIMING_CONTROL_B, 0x00, 0x00)  # 1: gate driver timing control, 2: param value given in datasheet  # noqa
+        self.__write_reg(self.PWCTRL1, 0x23)  # 1: set the GVDD level
+        self.__write_reg(self.PWCTRL2, 0x10)  # 1 param value given in datasheet
+        self.__write_reg(self.VMCTRL1, 0x3e, 0x28)  # 1: set the VCOMH voltage, 2: set the VCOML voltage
+        self.__write_reg(self.VMCTRL2, 0x86)  # 1: set the VCOM offset voltage
+        self.__write_reg(self.MADCTL, self.rotation)
+        self.__write_reg(self.VSCRSADD, 0x00)  # 1 param value given in datasheet
+        self.__write_reg(self.PIXSET, 0x55)  # 1: set the pixel format for the RGB image data used by the interface
+        self.__write_reg(self.FRMCTR1, 0x00, 0x18)  # 1 param value given in datasheet, 2: division ratio for internal clocks when Normal mode  # noqa
+        self.__write_reg(self.DISCTRL, 0x08, 0x82, 0x27)  # 1,2,3 param values given in datasheet
+        self.__write_reg(self.ENABLE_3G, 0x00)  # 1: enable 3 gamma control
+        self.__write_reg(self.GAMSET, 0x01)  # 1 param value given in datasheet
+        self.__write_reg(self.PGAMCTRL, 0x0f, 0x31, 0x2b, 0x0c, 0x0e, 0x08, 0x4e, 0xf1, 0x37, 0x07, 0x10, 0x03, 0x0e, 0x09, 0x00)  # params set the gray scale voltage to adjust the gamma characteristics of the TFT panel  # noqa
+        self.__write_reg(self.NGAMCTRL, 0x00, 0x0e, 0x14, 0x03, 0x11, 0x07, 0x31, 0xc1, 0x48, 0x08, 0x0f, 0x0c, 0x31, 0x36, 0x0f)  # params set the gray scale voltage to adjust the gamma characteristics of the TFT panel  # noqa
+        self.__write_reg(self.SLPOUT)  # sleep out
         utime.sleep(.1)
-        self.__write_cmd(self.DISPON)
+        self.__write_reg(self.DISPON)  # display on
         utime.sleep(.1)
         self.clear()
 
-    def __write_cmd(self, command, *args):
+    def __read_reg(self, reg, size=1, debug=False):
         """
-        Private method to write command to display
+        Private method to read a register
 
         Params:
-            command: bytes
+            reg: int
+            size: int, optional
+            debug: bool, optional
+
+        Returns:
+            object
+        """
+        self.cs(0)
+        self.spi.write(bytearray([reg]))
+        result = self.spi.read(size)
+        self.cs(1)
+        if debug:
+            print([bin(value) for value in result])
+        return result
+
+    def __write_reg(self, reg, *args):
+        """
+        Private method to write to a register
+
+        Params:
+            reg: int
             *args: bytes, optional
         """
         self.dc(0)
         self.cs(0)
-        self.spi.write(bytearray([command]))
+        self.spi.write(bytearray([reg]))
         self.cs(1)
         # handle any passed data
         if len(args) > 0:
@@ -378,9 +395,9 @@ class Display:
             y1: int
             data: bytes
         """
-        self.__write_cmd(self.CASET, *ustruct.pack('>HH', x0, x1))
-        self.__write_cmd(self.PASET, *ustruct.pack('>HH', y0, y1))
-        self.__write_cmd(self.RAMWR)
+        self.__write_reg(self.CASET, *ustruct.pack('>HH', x0, x1))
+        self.__write_reg(self.PASET, *ustruct.pack('>HH', y0, y1))
+        self.__write_reg(self.RAMWR)
         self.__write_data(data)
 
     def __letter(self, letter, color, font, x, y, background=0):

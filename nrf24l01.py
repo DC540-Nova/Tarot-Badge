@@ -97,9 +97,9 @@ class NRF:
         """
         self.csn(1)
         self.ce(0)
-        utime.sleep_ms(11)  # per Radio Control State Diagram
+        utime.sleep_ms(11)
         self.__write_reg(self.CONFIG, 0b00001010)  # PWR_UP & EN_CRC
-        utime.sleep_ms(1500)  # per Radio Control State Diagram
+        utime.sleep_ms(1500)
         self.__write_reg(self.EN_AA, 0b00000011)  # ENAA_P0 & ENAA_P1
         self.__write_reg(self.SETUP_AW, 0b00000011)  # 11 = 5 bytes
         self.__write_reg(self.RF_CH, 60)  # RF channel 60
@@ -139,7 +139,7 @@ class NRF:
             size: int, optional
         """
         reg = [0b00100000 | (0b00011111 & reg)]  # W_REGISTER command mask
-        value = [value] if type(value) == type(1) else value  # noqa; make sure value is a list type
+        value = [value] if type(value) == type(1) else value  # make sure value is a list type  # noqa
         self.csn(0)
         self.spi.write(bytearray(reg))
         self.spi.write(bytearray(value))
