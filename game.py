@@ -52,8 +52,7 @@ def questions(question_bank):
         question, answers = random.choice(list(question_bank.items()))
         display.text(question)
         correct_answer_index = answers[4]
-        # strip off correct_answer_index from being displayed
-        answers = answers[0:-1]
+        answers = answers[0:-1]   # strip off correct_answer_index from being displayed
         for answer in answers:
             display.text(answer)
         answer = button.press()
@@ -65,7 +64,7 @@ def questions(question_bank):
             display.text('INCORRECT')
         question_number += 1
         counter += 1
-        del ham_radio_questions[question]
+        del question_bank[question]
         if counter > 5:
             break
     answer_total = 0

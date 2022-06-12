@@ -313,7 +313,7 @@ cards = {
         ],
     '47 Knight Of Cups':
         [
-            'Romantic beau. Loves to love. Bisexuality.',
+            'Romantic beau. Loves to love. Bisexual.',
             'Deceitful in love. Unfaithfulness. Obsession with another. LGBT issues or celebration. Coming out.',  # noqa
             'Cups12.raw'
         ],
@@ -374,7 +374,7 @@ cards = {
     '57 Eight Of Pentacles':
         [
             'Education, training/retraining, change of career, focus on the job in hand.',
-            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Over-qualified for the job. Boredom and tedium at work and life in general.',  # noqa
+            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Over-qual for the job. Boredom and tedium at work and life in general.',  # noqa
             'Pentacles08.raw'
         ],
     '58 Nine Of Pentacles':

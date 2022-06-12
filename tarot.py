@@ -42,43 +42,43 @@ def reading(card_bank):
         card_bank, dict
     """
     reading = list(card_bank)  # noqa
-    # reading_number = 0
     counter = 1
     for _ in card_bank:
-        card_name, card_reading = random.choice(list(card_bank.items()))
+        card, card_reading = random.choice(list(card_bank.items()))
         meaning = random.randint(1, 2)  # randomize card up or down position
+        if counter == 1:
+            display.text('Querent', timed=False)
+        elif counter == 2:
+            display.text('Obstacle', timed=False)
+        elif counter == 3:
+            display.text('Influences', timed=False)
+        elif counter == 4:
+            display.text('Root', timed=False)
+        elif counter == 5:
+            display.text('Past', timed=False)
+        elif counter == 6:
+            display.text('Future', timed=False)
+        elif counter == 7:
+            display.text('Attitude', timed=False)
+        elif counter == 8:
+            display.text('Environment', timed=False)
+        elif counter == 9:
+            display.text('Hopes & Fears', timed=False)
+        elif counter == 10:
+            display.text('Outcome', timed=False)
+        button.press()
         if meaning == 1:
-            display.image('sd/' + card_reading[2])
+            display.image('sd/' + card_reading[2], timed=False)
         elif meaning == 2:
-            display.image('sd/' + card_reading[2], up=False)
+            display.image('sd/' + card_reading[2], up=False, timed=False)
         if meaning == 1:
-            display.text(card_reading[0])
+            display.text(card_reading[0], timed=False)
         elif meaning == 2:
-            display.text(card_reading[1])
-        #correct_answer_index = answers[4]
-        # strip off correct_answer_index from being displayed
-    #     answers = answers[0:-1]
-    #     for answer in answers:
-    #         display.text(answer)
-    #     answer = button.press()
-    #     if answer == correct_answer_index:
-    #         answer_list.append(1)
-    #         display.text('CORRECT')
-    #     else:
-    #         answer_list.append(0)
-    #         display.text('INCORRECT')
-    #     question_number += 1
-    #     counter += 1
-    #     del ham_radio_questions[question]
-    #     if counter > 5:
-    #         break
-    # answer_total = 0
-    # for answer in answer_list:
-    #     if answer == 1:
-    #         answer_total += 1
-    #     else:
-    #         pass
-    # if answer_total >= 2:
-    #     return True
-    # else:
-    #     return False
+            display.text(card_reading[1], timed=False)
+        button.press()
+        counter += 1
+        del card_bank[card]
+        if counter > 10:
+            display.POWER_DISPLAY.value(0)
+            display.clear()
+            break

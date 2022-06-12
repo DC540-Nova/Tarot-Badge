@@ -105,5 +105,6 @@ tarot.reading(data.cards)
 # sd_test()
 # img_test()
 # questions()
-# game.questions(ham_radio_questions)
+# import game
+# game.questions(data.ham_radio_questions)
 

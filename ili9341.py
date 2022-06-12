@@ -437,7 +437,7 @@ class Display:
             self.__block(0, y, width - 1, y + 7, line)
 
     def text(self, text, color=0b1111111111100000, font=UNISPACE_FONT, x=8, y=0, background=0, spacing=1,
-             sleep_time=3):
+             sleep_time=3, timed=True):
         """
         Method to draw text
 
@@ -450,22 +450,25 @@ class Display:
             background: int, optional
             spacing: int, optional
             sleep_time: int, optional
+            timed: bool, optional
         """
+        self.POWER_DISPLAY.value(0)
         self.rotation = self.ROTATE[0]
         self.__config()
         self.clear()
-        for letter in text:
+        for letter in text:  # wrap text as good as possible
             if letter == ' ' and x > 100:
                 x = 0
                 y += 24
-            # get letter array and letter dimension
-            width, height = self.__letter(letter, color, font, x, y, background)
+            width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
             x += (width + spacing)
         self.POWER_DISPLAY.value(1)
-        utime.sleep(sleep_time)
-        self.POWER_DISPLAY.value(0)
+        if timed:
+            utime.sleep(sleep_time)
+            self.POWER_DISPLAY.value(0)
 
-    def image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, up=True, multithreading=False):  # noqa
+    def image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, up=True, multithreading=False,
+              timed=True):
         """
         Method to draw image on display
 
@@ -480,6 +483,7 @@ class Display:
             up: bool, optional
             multithreading: bool, optional
         """
+        self.POWER_DISPLAY.value(0)
         if up:
             self.rotation = self.ROTATE[0]
             self.__config()
@@ -506,8 +510,9 @@ class Display:
                 self.__block(x, chunk_y, x2, chunk_y + remainder - 1, buf)
         if not multithreading:
             self.POWER_DISPLAY.value(1)
-            utime.sleep(sleep_time)
-            self.POWER_DISPLAY.value(0)
+            if timed:
+                utime.sleep(sleep_time)
+                self.POWER_DISPLAY.value(0)
 
     def handle_threading_setup(self):
         """
