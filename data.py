@@ -32,7 +32,7 @@ cards = {
     '0 The Fool':
         [
             'Taking a risk. Getting outside your comfort zone. Knowing the universe is looking after you.',
-            'Foolishness. Making a stupid choice. Disregarding good advice. Getting in with a bad crowd.'
+            'Foolishness. Making a stupid choice. Disregarding good advice. Getting in with a bad crowd.',
             '00-TheFool.raw',
         ],
     '1 The Magician':

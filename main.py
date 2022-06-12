@@ -41,6 +41,9 @@ import _thread
 import random
 import gc
 
+import data
+import tarot
+
 
 from config import display, neo_pixel, nrf
 
@@ -95,6 +98,9 @@ def questions():
     Function to test questions on display
     """
     display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
+
+
+tarot.reading(data.cards)
 
 # sd_test()
 # img_test()

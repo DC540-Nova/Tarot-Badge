@@ -28,3 +28,57 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import random
+
+from config import button, display
+from data import ham_radio_questions
+
+
+def reading(card_bank):
+    """
+    Function to handle a tarot reading
+
+    Params:
+        card_bank, dict
+    """
+    reading = list(card_bank)  # noqa
+    # reading_number = 0
+    counter = 1
+    for _ in card_bank:
+        card_name, card_reading = random.choice(list(card_bank.items()))
+        meaning = random.randint(1, 2)  # randomize card up or down position
+        if meaning == 1:
+            display.image('sd/' + card_reading[2])
+        elif meaning == 2:
+            display.image('sd/' + card_reading[2], up=False)
+        if meaning == 1:
+            display.text(card_reading[0])
+        elif meaning == 2:
+            display.text(card_reading[1])
+        #correct_answer_index = answers[4]
+        # strip off correct_answer_index from being displayed
+    #     answers = answers[0:-1]
+    #     for answer in answers:
+    #         display.text(answer)
+    #     answer = button.press()
+    #     if answer == correct_answer_index:
+    #         answer_list.append(1)
+    #         display.text('CORRECT')
+    #     else:
+    #         answer_list.append(0)
+    #         display.text('INCORRECT')
+    #     question_number += 1
+    #     counter += 1
+    #     del ham_radio_questions[question]
+    #     if counter > 5:
+    #         break
+    # answer_total = 0
+    # for answer in answer_list:
+    #     if answer == 1:
+    #         answer_total += 1
+    #     else:
+    #         pass
+    # if answer_total >= 2:
+    #     return True
+    # else:
+    #     return False

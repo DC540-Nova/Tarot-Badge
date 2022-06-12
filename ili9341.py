@@ -451,9 +451,11 @@ class Display:
             spacing: int, optional
             sleep_time: int, optional
         """
+        self.rotation = self.ROTATE[0]
+        self.__config()
         self.clear()
         for letter in text:
-            if letter == ' ' and x > 144:
+            if letter == ' ' and x > 100:
                 x = 0
                 y += 24
             # get letter array and letter dimension
@@ -463,7 +465,7 @@ class Display:
         utime.sleep(sleep_time)
         self.POWER_DISPLAY.value(0)
 
-    def image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, multithreading=False):
+    def image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, up=True, multithreading=False):  # noqa
         """
         Method to draw image on display
 
@@ -475,8 +477,15 @@ class Display:
             height: int, optional
             draw_speed: int, optional
             sleep_time: int, optional
+            up: bool, optional
             multithreading: bool, optional
         """
+        if up:
+            self.rotation = self.ROTATE[0]
+            self.__config()
+        if not up:
+            self.rotation = self.ROTATE[180]
+            self.__config()
         if not multithreading:
             self.clear()
         x2 = x + width - 1

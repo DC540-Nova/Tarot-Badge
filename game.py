@@ -49,7 +49,7 @@ def questions(question_bank):
     counter = 1
     answer_list = []
     for _ in questions:
-        question, answers = random.choice(list(ham_radio_questions.items()))
+        question, answers = random.choice(list(question_bank.items()))
         display.text(question)
         correct_answer_index = answers[4]
         # strip off correct_answer_index from being displayed
