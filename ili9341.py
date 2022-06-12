@@ -437,7 +437,7 @@ class Display:
             self.__block(0, y, width - 1, y + 7, line)
 
     def text(self, text, color=0b1111111111100000, font=UNISPACE_FONT, x=8, y=0, background=0, spacing=1,
-             sleep_time=3, timed=True):
+             sleep_time=3, clear=True, wrap=True, timed=True):
         """
         Method to draw text
 
@@ -450,24 +450,31 @@ class Display:
             background: int, optional
             spacing: int, optional
             sleep_time: int, optional
+            clear: bool, optional
             timed: bool, optional
         """
         self.POWER_DISPLAY.value(0)
         self.rotation = self.ROTATE[0]
         self.__config()
-        self.clear()
-        for letter in text:  # wrap text as good as possible
-            if letter == ' ' and x > 100:
-                x = 0
-                y += 24
-            width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
-            x += (width + spacing)
+        if clear:
+            self.clear()
+        if wrap:
+            for letter in text:
+                if letter == ' ' and x > 100:  # wrap text as good as possible
+                    x = 0
+                    y += 24
+                width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
+                x += (width + spacing)
+        elif not wrap:
+            for letter in text:
+                width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
+                x += (width + spacing)
         self.POWER_DISPLAY.value(1)
         if timed:
             utime.sleep(sleep_time)
             self.POWER_DISPLAY.value(0)
 
-    def image(self, path, x=0, y=0, width=240, height=320, draw_speed=1024, sleep_time=2, up=True, multithreading=False,
+    def image(self, path, x=0, y=0, width=240, height=320, draw_speed=4096, sleep_time=2, up=True, multithreading=False,
               timed=True):
         """
         Method to draw image on display

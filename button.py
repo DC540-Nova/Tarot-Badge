@@ -43,9 +43,9 @@ def press():
             return 1
         elif not BUTTON_DOWN.value():
             return 2
-        elif not BUTTON_RIGHT.value():
-            return 3
         elif not BUTTON_LEFT.value():
+            return 3
+        elif not BUTTON_RIGHT.value():
             return 4
         elif not BUTTON_SUBMIT.value():
             return 5

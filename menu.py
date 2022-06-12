@@ -28,9 +28,11 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import button
 import game
-from config import neo_pixel
-from data import ham_radio_questions
+import tarot
+from config import display, neo_pixel
+from data import ham_radio_questions, cards
 
 
 def system():
@@ -38,4 +40,10 @@ def system():
     Function to handle the menu system
     """
     neo_pixel.clear()
-    game.questions(ham_radio_questions)
+    display.text('main menu --------- left: game right: tarot', timed=False)
+    button_pressed = button.press()
+    print(button_pressed)
+    if button_pressed == 3:
+        game.questions(ham_radio_questions)
+    elif button_pressed == 4:
+        tarot.reading(cards)

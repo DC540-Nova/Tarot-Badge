@@ -68,7 +68,7 @@ cards = {
     '6 The Lovers':
         [
             'Life-changing choice, turning point. Union with another, two as one.',
-            'Inappropriate relationship. Immaturity, lack of love, possessiveness, infatuation/stalking. Lust rather than love. Bad choice, indecision, temptation, weakness, lack of trust, separation. Endless obsessive search for non-existent soul-mate.',   # noqa
+            'Inappropriate relationship. Immaturity, lack of love, possessiveness, infatuation/stalk. Lust rather than love. Bad choice, indecision, temptation, weakness, lack of trust.',   # noqa
             '06-TheLovers.raw'
         ],
     '7 The Chariot':

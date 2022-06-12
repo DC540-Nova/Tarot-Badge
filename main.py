@@ -43,9 +43,11 @@ import gc
 
 import data
 import tarot
-
+import menu
 
 from config import display, neo_pixel, nrf
+
+menu.system()
 
 
 def bg_task():
@@ -100,7 +102,7 @@ def questions():
     display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
 
 
-tarot.reading(data.cards)
+#tarot.reading(data.cards)
 
 # sd_test()
 # img_test()

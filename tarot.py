@@ -66,16 +66,17 @@ def reading(card_bank):
             display.text('Hopes & Fears', timed=False)
         elif counter == 10:
             display.text('Outcome', timed=False)
-        button.press()
+        _ = button.press()
         if meaning == 1:
             display.image('sd/' + card_reading[2], timed=False)
-        elif meaning == 2:
+        if meaning == 2:
             display.image('sd/' + card_reading[2], up=False, timed=False)
+        _ = button.press()
         if meaning == 1:
             display.text(card_reading[0], timed=False)
-        elif meaning == 2:
+        if meaning == 2:
             display.text(card_reading[1], timed=False)
-        button.press()
+        _ = button.press()
         counter += 1
         del card_bank[card]
         if counter > 10:
