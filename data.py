@@ -513,37 +513,246 @@ cards = {
         ],
 }
 
-ham_radio_questions = {
-    'What is the name for the distance a radio wave travels during one complete cycle?':
+flash_cards = {
+    '00-TheFool.raw':
         [
-            'A. Wave Speed',
-            'B. Waveform',
-            'C. Wavelength',
-            'D. Wave Spread',
+            'A. The Emperor',
+            'B. The Fool',
+            'C. The Priestess',
+            'D. The High Priestess',
+            1
+        ],
+    '01-TheMagician.raw':
+        [
+            'A. The Hierophant',
+            'B. The Fool',
+            'C. The Magician',
+            'D. The High Priestess',
             2
         ],
-    'What year was the first computer invented?':
+    '02-TheHighPriestess.raw':
         [
-            'A. 1954',
-            'B. 1943',
-            'C. 1961',
-            'D. 1948',
+            'A. The Hierophant',
+            'B. The Lovers',
+            'C. The Magician',
+            'D. The High Priestess',
+            3
+        ],
+    '03-TheEmpress.raw':
+        [
+            'A. The Emperor',
+            'B. The Empress',
+            'C. The Lovers',
+            'D. The High Priestess',
             1
         ],
-    'How fast does a radio wave travel through free space?':
+    '04-TheEmperor.raw':
         [
-            'A. At the speed of light.',
-            'B. At the speed of sound.',
-            'C. Its speed is inversely proportional to its wavelength.',
-            'D. Its speed increases as the frequency increases.',
+            'A. The Emperor',
+            'B. The Empress',
+            'C. The Lovers',
+            'D. The High Priestess',
             0
         ],
-    'How does the wavelength of a radio wave relate to its frequency?':
+    '05-TheHierophant.raw':
         [
-            'A. The wavelength gets longer as the frequency increases.',
-            'B. The wavelength gets shorter as the frequency increases.',
-            'C. There is no relationship between wavelength and frequency.',
-            'D. The wavelength depends on the bandwidth of the signal.',
+            'A. The Lovers',
+            'B. The Empress',
+            'C. The High Priest',
+            'D. The Hierophant',
+            3
+        ],
+    '06-TheLovers.raw':
+        [
+            'A. The Hermit',
+            'B. The Empress',
+            'C. The Lovers',
+            'D. The Hierophant',
+            2
+        ],
+    '07-TheChariot.raw':
+        [
+            'A. Strength',
+            'B. The Hermit',
+            'C. The Chariot',
+            'D. Justice',
+            2
+        ],
+    '08-Strength.raw':
+        [
+            'A. Wheel of Fortune',
+            'B. Death',
+            'C. Justice',
+            'D. Strength',
+            3
+        ],
+    '09-TheHermit.raw':
+        [
+            'A. Death',
+            'B. The Hermit',
+            'C. The High Priest',
+            'D. The Hierophant',
             1
-        ]
+        ],
+    'Swords14.raw':
+        [
+            'A. King of Swords',
+            'B. Queen of Swords',
+            'C. Page of Swords',
+            'D. Ten of Swords',
+            3
+        ],
+}
+
+
+tarot_trivia = {
+    'How many cards are there in a standard Rider-Waite tarot deck?':
+        [
+            'A. 22',
+            'B. 56',
+            'C. 78',
+            'D. 84',
+            2
+        ],
+    'What tarot suit is associated with thought/intelligence?':
+        [
+            'A. Wands',
+            'B. Swords',
+            'C. Clubs',
+            'D. Pentacles',
+            2
+        ],
+    'What tarot suit is associated with emotion/love?':
+        [
+            'A. Wands',
+            'B. Pentacles',
+            'C. Spades',
+            'D. Cups',
+            3
+        ],
+    'Who is the artist behind the Waite tarot deck?':
+        [
+            'A. Frida Kahlo',
+            'B. Berthe Moriso',
+            'C. Mary Cassatt',
+            'D. Pamela Coleman Smith',
+            3
+        ],
+    'What tarot suit is associated with the element, Earth?':
+        [
+            'A. Swords',
+            'B. Pentacles',
+            'C. cups',
+            'D. wands',
+            1
+        ],
+    'Which is the older tarot deck?':
+        [
+            'A. Thoth',
+            'B. Marseilles',
+            'C. Rider-Waite-Smith',
+            'D. Petit Etteilla',
+            1
+        ],
+    'Like common playing cards, what is the term of using only the suit symbol for identifying rank':
+        [
+            'A. PIP',
+            'B. POP',
+            'C. Rank',
+            'D. ANK',
+            0
+        ],
+    'Which tarot suit of the Tarot dMarselle does not typically number they cards':
+        [
+            'A. Swords',
+            'B. Coins',
+            'C. Cups',
+            'D. Wands',
+            1
+        ],
+    'The major arcana is commonly referred to as the?':
+        [
+            'A. The Fools Journey',
+            'B. Fortune Telling',
+            'C. Cosmic Egg',
+            'D. English Method',
+            0
+        ],
+    'Fortune telling with common playing cards is sometimes known as?':
+        [
+            'A. The Fools Journey',
+            'B. Fortune Telling',
+            'C. English Method',
+            'D. Divination',
+            2
+        ],
+    'How many points, Sephiroths, are on the Tree of Life?':
+        [
+            'A. 22',
+            'B. 78',
+            'C. 12',
+            'D. 10',
+            3
+        ],
+    'The major arcana tarot cards represent the _______ forces rather than individual people':
+        [
+            'A. Archetype',
+            'B. Cosmic',
+            'C. Trumps',
+            'D. Eminations',
+            0
+        ],
+    'Sephiroth 1 of the Tree of Life represents Upper Crown':
+        [
+            'A. Binah',
+            'B. Hod',
+            'C. Kether',
+            'D. Tiphereth',
+            2
+        ],
+    'Sephiroth 4 of the Tree of Life represents Love':
+        [
+            'A. Binah',
+            'B. Hescd',
+            'C. Hod',
+            'D. Tiphereth',
+            1
+        ],
+    'Sephiroth 6 of the Tree of Life represents Tiphereth':
+        [
+            'A. Love',
+            'B. Glory',
+            'C. Beauty',
+            'D. Intelligence',
+            2
+        ],
+    'On the Tree of Life, which major arcana tarot card represents the path (11) from Kethor to Chormah':
+        [
+            'A. The Magician',
+            'B. Strength',
+            'C. The Emperor',
+            'D. The Fool',
+            3
+        ],
+    'On the Tree of Life, which major arcana tarot card represents the path (16) from Chormah to Chesed':
+        [
+            'A. The Hierophant',
+            'B. The Magician',
+            'C. The Fool',
+            'D. The Emperor',
+            0
+        ],
+    'On the Tree of Life, which major arcana tarot card represents the path (20) from Chesed to Tifereth':
+        [
+            'A. The Fool',
+            'B. The Magician',
+            'C. The Hermit',
+            'D. The Hierophant',
+            2
+        ],
+}
+
+morse_code = {
+    'Why the fuck am I here?': 'dDdDDDDDdDdddDddD',
+    'Why the fuck am you here?': '343212',
 }

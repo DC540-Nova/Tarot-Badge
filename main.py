@@ -40,8 +40,10 @@ import _thread
 import random
 import gc
 
-
+import data
+import file_manager
 from config import display, neo_pixel
+import game
 
 
 def bg_task():
@@ -84,9 +86,23 @@ def img_test():
     display.image('sd/01-TheMagician.raw', multithreading=True)
     display.handle_threading_teardown()
     display.handle_threading_setup()
-    _thread.start_new_thread(bg_task, ())  # noqa]]]\\
+    _thread.start_new_thread(bg_task, ())  # noqa
     display.image('sd/02-TheHighPriestess.raw', multithreading=True)
     display.handle_threading_teardown()
+
+
+# refactor
+game_number = game.multiple_choice_questions(data.flash_cards, '01')
+file_manager.write_games_won_file(game_number)
+game_number = game.multiple_choice_questions(data.tarot_trivia, '02')
+file_manager.write_games_won_file(game_number)
+
+
+# flash cards will have two modes, one will be a practice and the other game mode, x out of y to win.
+# do not give feedback on games that are actual but give feedback on practice such as right just flash cards
+# morse_code also will have practice w/ feedback and the actual will be none
+# stego - game on badge will submit instructions and submit your answer (numeric sequence)
+# idea: we can use a button for dot and a button for dash and a third button for submit and a fourth button for backspace, fifth button for space
 
 
 # tarot.reading(data.cards)
@@ -96,5 +112,3 @@ def img_test():
 # questions()
 # import game
 # game.questions(data.ham_radio_questions)
-
-

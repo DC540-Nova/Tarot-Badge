@@ -40,10 +40,10 @@ def multiple_choice_questions(question_bank, game_number):
 
     Params:
         question_bank, dict
-        game_number: int
+        game_number: str
 
     Returns:
-        int or bool
+        str or bool
     """
     questions = list(question_bank)  # noqa
     question_number = 0
