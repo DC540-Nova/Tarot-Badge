@@ -35,19 +35,13 @@
 # mpremote connect /dev/tty.u* cp *.* :/sd/
 # mpremote connect /dev/tty.u* exec 'import main;main.img_test()'
 # screen /dev/tty.u*
-# ~/Documents/pico/micropython/mpy-cross/mpy-cross ili9341.py
 
 import _thread
 import random
 import gc
 
-import data
-import tarot
-import menu
 
-from config import display, neo_pixel, nrf
-
-menu.system()
+from config import display, neo_pixel
 
 
 def bg_task():
@@ -95,13 +89,6 @@ def img_test():
     display.handle_threading_teardown()
 
 
-def questions():
-    """
-    Function to test questions on display
-    """
-    display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
-
-
 # tarot.reading(data.cards)
 
 # sd_test()
@@ -109,4 +96,5 @@ def questions():
 # questions()
 # import game
 # game.questions(data.ham_radio_questions)
+
 

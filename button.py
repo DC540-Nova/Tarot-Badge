@@ -74,17 +74,31 @@ def multiple_choice():
     Function to handle a single multiple choice response from a button press
 
     Returns:
-        int
+        str
     """
     while True:
         if not BUTTON_UP.value():
-            return 1
+            return 'a'
         elif not BUTTON_DOWN.value():
-            return 2
+            return 'b'
         elif not BUTTON_LEFT.value():
-            return 3
+            return 'c'
         elif not BUTTON_RIGHT.value():
-            return 4
+            return 'd'
+
+
+def yes_no():
+    """
+    Function to handle a yes/no response from a button press
+
+    Returns:
+        str
+    """
+    while True:
+        if not BUTTON_UP.value():
+            return 'yes'
+        elif not BUTTON_DOWN.value():
+            return 'no'
 
 
 def press():

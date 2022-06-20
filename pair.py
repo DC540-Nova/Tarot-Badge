@@ -65,9 +65,10 @@ def check_for_boss():
         boss_names_index += 1
 
 
-def pair(interval=7500):
+def badge(interval=7500):
     """
     Method to pair badges
+
     Params:
         interval: int, optional
     """

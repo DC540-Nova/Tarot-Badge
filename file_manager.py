@@ -31,121 +31,110 @@
 import os
 from utime import sleep
 
-from config import *
+from config import display, neo_pixel
+import button
 
 
-def write_ids_file(str_ids):
+def write_ids_file(ids):
     """
-    Function to write the ids of the badges collected
+    Function to write to the ids file
 
     Params:
-        str_ids: str
+    ids: str
     """
     try:
-        with open('ids', 'w') as file:
-            file.write(str_ids)
+        with open('ids', 'w') as f:
+            f.write(ids)
     except OSError:
         pass
 
 
 def read_ids_file():
     """
-    Function to read the id's paired
+    Function to read the ids file
 
     Returns:
         str
     """
     try:
-        with open('ids', 'r') as file:
-            str_ids = file.read()
-            return str_ids
+        with open('ids', 'r') as f:
+            ids = f.read()
+            return ids
     except OSError:
         pass
 
 
-def write_status_file(str_status):
+def write_games_won_file(games_won):
     """
-    Function to write the game status
+    Function to write to the games_won file
 
     Params:
         str_status: str
     """
     try:
-        with open('status', 'w') as file:
-            file.write(str_status)
+        with open('games_won', 'w') as f:
+            f.write(games_won)
     except OSError:
         pass
 
 
-def read_status_file():
+def read_games_won_file():
     """
-    Function to read the overall status achieved
+    Function to read the games_won file
 
     Returns:
         str
     """
     try:
-        with open('status', 'r') as file:
-            str_status = file.read()
-            return str_status
+        with open('games_won', 'r') as f:
+            games_won = f.read()
+            return games_won
     except OSError:
         pass
 
 
-def update_status(got_correct_answer=False):
+def update_games_won():
     """
-    Function to update the status and set the LED's
-
-    Params:
-        got_correct_answer: bool, optional
+    Function to update the games won by getting the games_won from file and setting the relevant neopixels
     """
-    # Avoid circular import issue
-    from neo_pixel import NeoPixel
-    neo_pixel = NeoPixel(Pin)
     try:
-        with open('status', 'r') as file:
-            str_status = file.read()
-            str_status = list(str_status.split(' '))
-            str_status = str_status[0:-1]
-            status = [int(element) for element in str_status]
-            spheres = [0, 4, 9, 7, 15, 18, 20, 25, 27, 31]
-            if got_correct_answer:
-                most_recent_game_won = status[-1]
-                # Account for zero-index
-                most_recent_game_won -= 1
-                neo_pixel.breathing_led(spheres[most_recent_game_won])
-                # Display the remaining games without animation
-                for game in status:
-                    game_offset = game - 1
-                    neo_pixel.on(spheres[game_offset], RED)
-            else:
-                for game in status:
-                    game_offset = game - 1
-                    neo_pixel.on(spheres[game_offset], RED)
+        with open('games_won', 'r') as f:
+            games_won = f.read()
+            games_won = list(games_won.split(' '))
+            if '01' in games_won:
+                neo_pixel.on(0)
+            if '02' in games_won:
+                neo_pixel.on(1)
+            if '03' in games_won:
+                neo_pixel.on(3)
+            if '04' in games_won:
+                neo_pixel.on(4)
+            if '05' in games_won:
+                neo_pixel.on(5)
     except OSError:
         pass
 
 
 def clear_ids_file():
     """
-    Function to clear status file after winning a game
+    Function to clear the ids file by resetting it
     """
     try:
         os.remove('ids')
-        with open('ids', 'w') as file:
-            file.write('')
+        with open('ids', 'w') as f:
+            f.write('')
     except OSError:
         pass
 
 
-def clear_status_file():
+def clear_games_won_file():
     """
-    Function to clear status file after winning a game
+    Function to clear games_won file by resetting it
     """
     try:
-        os.remove('status')
-        with open('status', 'w') as file:
-            file.write('')
+        os.remove('games_won')
+        with open('games_won', 'w') as f:
+            f.write('')
     except OSError:
         pass
 
@@ -158,17 +147,17 @@ def check_files():
         bool
     """
     try:
-        with open('status', 'r') as file:  # noqa
+        with open('games_won', 'r') as f:  # noqa
             pass
     except OSError:
-        with open('status', 'w') as file:
-            file.write('')
+        with open('games_won', 'w') as f:
+            f.write('')
     try:
-        with open('ids', 'r') as file:  # noqa
+        with open('ids', 'r') as f:  # noqa
             pass
     except OSError:
-        with open('ids', 'w') as file:
-            file.write('')
+        with open('ids', 'w') as f:
+            f.write('')
 
 
 def reset(file, sleep_time=2):
@@ -179,20 +168,15 @@ def reset(file, sleep_time=2):
         file: str
         sleep_time: int, optional
     """
-    # Avoid circular import issue
-    from button import ButtonInput
-    from neo_pixel import NeoPixel
-    button_input = ButtonInput()
-    neo_pixel = NeoPixel(Pin)
-    if file == 'status':
+    if file == 'games_won':
         message = 'ARE YOU SURE YOU WANT TO RESET GAME?'
     elif file == 'ids':
         message = 'ARE YOU SURE YOU WANT TO RESET PAIRS?'
     display.scroll_text([[0,0,message]], len(message))  # noqa
     sleep(sleep_time)
-    reset = button_input.get_response(input_type='y_n_letters')  # noqa
-    if reset == 'Y':
-        if file == 'status':
+    reset = button.yes_no()  # noqa
+    if reset == 'yes':
+        if file == 'games_won':
             message = 'RESETTING GAME!'
         elif file == 'ids':
             message = 'RESETTING STATUS!'
@@ -200,10 +184,8 @@ def reset(file, sleep_time=2):
         sleep(sleep_time)
         if file == 'ids':
             clear_ids_file()
-        if file == 'status':
-            clear_status_file()
-    else:
-        pass
+        if file == 'games_won':
+            clear_games_won_file()
     neo_pixel.clear()
     display.clear()
-    update_status()
+    update_games_won()

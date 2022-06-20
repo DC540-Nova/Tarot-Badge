@@ -81,6 +81,36 @@ class TestCase:
     Class to handle unittest test case functionality
     """
 
+    @staticmethod
+    def assertAlmostEqual(x, y, places=None, msg='', delta=None):
+        """
+        Method to handle assert almost equal logic
+
+        Params:
+            x: any
+            y: any
+            places: NoneType, optional
+            msg: str, optional
+            delta: NoneType, optional
+        """
+        if x == y:
+            return
+        if delta is not None and places is not None:
+            raise TypeError('specify delta or places not both')
+        if delta is not None:
+            if abs(x - y) <= delta:
+                return
+            if not msg:
+                msg = '%r != %r within %r delta' % (x, y, delta)
+        else:
+            if places is None:
+                places = 7
+            if round(abs(y - x), places) == 0:
+                return
+            if not msg:
+                msg = '%r != %r within %r places' % (x, y, places)
+        assert False, msg
+
     def fail(self, msg=''):  # noqa
         """
         Method to handle fail logic
@@ -95,13 +125,12 @@ class TestCase:
         Method to handle assert equal logic
 
         Params:
-            x: ANY
-            y: ANY
+            x: any
+            y: any
             msg: str, optional
         """
         if not msg:  # noqa
             msg = '%r vs (expected) %r' % (x, y)
-
         assert x == y, msg
 
     def assertNotEqual(self, x, y, msg=''):  # noqa
@@ -109,81 +138,39 @@ class TestCase:
         Method to handle assert not equal logic
 
         Params:
-            x: ANY
-            y: ANY
+            x: any
+            y: any
             msg: str, optional
         """
         if not msg:
             msg = '%r not expected to be equal %r' % (x, y)
-
         assert x != y, msg
-
-    @staticmethod
-    def assertAlmostEqual(x, y, places=None, msg='', delta=None):
-        """
-        Method to handle assert almost equal logic
-
-        Params:
-            x: ANY
-            y: ANY
-            places: NoneType, optional
-            msg: str, optional
-            delta: NoneType, optional
-        """
-        if x == y:
-            return
-
-        if delta is not None and places is not None:
-            raise TypeError('specify delta or places not both')
-
-        if delta is not None:
-            if abs(x - y) <= delta:
-                return
-
-            if not msg:
-                msg = '%r != %r within %r delta' % (x, y, delta)
-        else:
-            if places is None:
-                places = 7
-
-            if round(abs(y - x), places) == 0:
-                return
-
-            if not msg:
-                msg = '%r != %r within %r places' % (x, y, places)
-
-        assert False, msg
 
     def assertNotAlmostEqual(self, x, y, places=None, msg='', delta=None):  # noqa
         """
         Method to handle assert not almost equal logic
 
         Params:
-            x: ANY
-            y: ANY
-            places: NoneType, optional
+            x: any
+            y: any
+            places: None, optional
             msg: str, optional
-            delta: NoneType, optional
+            delta: None, optional
         """
         if delta is not None and places is not None:
             raise TypeError("specify delta or places not both")
-
         if delta is not None:
             if not (x == y) and abs(x - y) > delta:
                 return
-
             if not msg:
                 msg = '%r == %r within %r delta' % (x, y, delta)
         else:
             if places is None:
                 places = 7
-
             if not (x == y) and round(abs(y - x), places) != 0:
                 return
-
             if not msg:
                 msg = '%r == %r within %r places' % (x, y, places)
-
         assert False, msg
 
     def assertIs(self, x, y, msg=''):  # noqa
@@ -191,13 +178,12 @@ class TestCase:
         Method to handle assert is logic
 
         Params:
-            x: ANY
-            y: ANY
+            x: any
+            y: any
             msg: str, optional
         """
         if not msg:
             msg = '%r is not %r' % (x, y)
-
         assert x is y, msg
 
     def assertIsNot(self, x, y, msg=''):  # noqa
@@ -205,13 +191,12 @@ class TestCase:
         Method to handle assert is not logic
 
         Params:
-            x: ANY
-            y: ANY
+            x: any
+            y: any
             msg: str, optional
         """
         if not msg:
             msg = '%r is %r' % (x, y)
-
         assert x is not y, msg
 
     def assertIsNone(self, x, msg=''):  # noqa
@@ -219,12 +204,11 @@ class TestCase:
         Method to handle assert is none logic
 
         Params:
-            x: ANY
+            x: any
             msg: str, optional
         """
         if not msg:
             msg = '%r is not None' % x
-
         assert x is None, msg
 
     def assertIsNotNone(self, x, msg=''):  # noqa
@@ -232,12 +216,11 @@ class TestCase:
         Method to handle assert is not none logic
 
         Params:
-            x: ANY
+            x: any
             msg: str, optional
         """
         if not msg:
             msg = '%r is None' % x
-
         assert x is not None, msg
 
     def assertTrue(self, x, msg=''):  # noqa
@@ -245,12 +228,11 @@ class TestCase:
         Method to handle assert true logic
 
         Params:
-            x: ANY
+            x: any
             msg: str, optional
         """
         if not msg:
             msg = 'Expected %r to be True' % x
-
         assert x, msg
 
     def assertFalse(self, x, msg=''):  # noqa
@@ -258,12 +240,11 @@ class TestCase:
         Method to handle assert false logic
 
         Params:
-            x: ANY
+            x: any
             msg: str, optional
         """
         if not msg:
             msg = 'Expected %r to be False' % x
-
         assert not x, msg
 
     def assertIn(self, x, y, msg=''):  # noqa
@@ -271,13 +252,12 @@ class TestCase:
         Method to handle assert in logic
 
         Params:
-            x: ANY
-            y: ANY
+            x: any
+            y: any
             msg: str, optional
         """
         if not msg:
             msg = 'Expected %r to be in %r' % (x, y)
-
         assert x in y, msg
 
     def assertIsInstance(self, x, y, msg=''):  # noqa
@@ -285,8 +265,8 @@ class TestCase:
         Method to handle assert is instance logic
 
         Params:
-            x: ANY
-            y: ANY
+            x: any
+            y: any
             msg: str, optional
         """
         assert isinstance(x, y), msg
@@ -299,12 +279,14 @@ class TestCase:
         Params:
             exc: str
             func: NoneType, optional
-            *args: ANY, optional
-            **kwargs: ANY, optional
+            *args: any, optional
+            **kwargs: any, optional
+
+        Returns:
+            object or None
         """
         if func is None:
             return AssertRaisesContext(exc)
-
         try:
             func(*args, **kwargs)
             assert False, "%r not raised" % exc
@@ -324,7 +306,6 @@ def skip(msg):  # noqa
     Returns:
         object
     """
-
     def _decor(msg):  # noqa
         """
         Inner function to handle private _decor logic
@@ -335,7 +316,6 @@ def skip(msg):  # noqa
         Returns:
             object
         """
-
         def _inner(self):  # noqa
             """
             Inner function to handle replacing original fun with _inner
@@ -347,9 +327,7 @@ def skip(msg):  # noqa
                 object
             """
             raise SkipTest(msg)
-
         return _inner
-
     return _decor
 
 
@@ -421,15 +399,13 @@ class TestRunner:
         res = TestResult()
         for c in suite.tests:
             run_class(c, res)
-
-        print("Ran %d tests\n" % res.testsRun)
-
+        print('Ran %d tests\n' % res.testsRun)
         if res.failuresNum > 0 or res.errorsNum > 0:
-            print("FAILED (failures=%d, errors=%d)" % (res.failuresNum, res.errorsNum))
+            print('FAILED (failures=%d, errors=%d)' % (res.failuresNum, res.errorsNum))
         else:
-            msg = "OK"
+            msg = 'OK'
             if res.skippedNum > 0:
-                msg += " (%d skipped)" % res.skippedNum
+                msg += ' (%d skipped)' % res.skippedNum
             print(msg)
         return res
 
@@ -466,14 +442,11 @@ def run_class(c, test_result):
     o = c()
     set_up = getattr(o, 'setUp', lambda: None)
     tear_down = getattr(o, 'tearDown', lambda: None)
-
     for name in dir(o):
         if name.startswith('test'):
             print('%s (%s) ...' % (name, c.__qualname__), end='')
-
             m = getattr(o, name)
             set_up()
-
             try:
                 test_result.testsRun += 1
                 m()

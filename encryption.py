@@ -36,7 +36,7 @@ def __random_number_generator(io):
     Random number generator method which takes a number between 0x0000 and 0xFFFF inclusive
     and outputs a new number between 0x0000 and 0xFFFF inclusive to which this will always
     return the same output for a given input where each output is derived from exactly
-    1 input and you can repeatedly feed in the output again to get a new number and
+    1 input, and you can repeatedly feed in the output again to get a new number and
     with the same starting number, you will always get the same pseudo-random sequence and
     this can be repeated 65,536 times before a number is output again
 
@@ -48,7 +48,7 @@ def __random_number_generator(io):
     io = abs(io)
     if io > 0xFFFF:
         io = io % 0x10000
-    # Ex: with input of 0xDEAF (1101111010101111)
+    # ex: with input of 0xDEAF (1101111010101111)
     # s0 = 0xDEAF00 (110111101010111100000000)
     s0 = io << 8
     # s0 = 0xAF00 (1010111100000000)
@@ -57,14 +57,14 @@ def __random_number_generator(io):
     s0 = s0 ^ io
     # io = 0xAF71 (1010111101110001) Swaps bytes
     io = ((s0 % 0x100) * 0x100) + (s0 // 0x100)
-    # Takes the right byte of s0 (0x00AF 0000000010101111)...
+    # takes the right byte of s0 (0x00AF 0000000010101111)
     s0_right_byte = s0 % 0x100
-    # Bitwise shifts by 1 digit (0x015E 0000000101011110)
+    # bitwise shifts by 1 digit (0x015E 0000000101011110)
     s0_shifted_right_byte = s0_right_byte << 1
     # XORs it with input to get (0xAE2F 1010111000101111)
     s0 = io ^ s0_shifted_right_byte
     constant = 0xFF80
-    # Bitwise shifts by 1 digit to the right
+    # bitwise shifts by 1 digit to the right
     # s0 becomes (0x5717 0101011100010111)
     # then XOR with constant
     # s1 becomes (0xA897 1010100010010111)
@@ -104,31 +104,31 @@ def cipher(m_mode, m_message, m_key):
     m_hex_decrypted_message = ''
     m_enigma = m_key * m_key * 42  # Initial enigma value
     if m_mode[0] == 'e':
-        # Shift message
+        # shift message
         for _ in m_message:
             num = ord(_)
             num += m_key
             num = num % 128
             m_shifted_message += chr(num)
-        # Salt message
-        # For long messages
+        # salt message
+        # for long messages
         if len(m_shifted_message) > 8:
             while len(m_shifted_message) > 3:
-                # Separate first 3 chars of message
+                # separate first 3 chars of message
                 fragment = m_shifted_message[0:2]
-                # The m_shifted_message is now the remainder
+                # the m_shifted_message is now the remainder
                 m_shifted_message = m_shifted_message[2:]
-                # Randomly chooses A-Z or a-z
+                # randomly chooses A-Z or a-z
                 coin = randint(1, 2)
                 if coin == 1:
                     rand_char = chr(randint(65, 90))
                 else:
                     rand_char = chr(randint(97, 122))
-                # Build m_salted_message
+                # build m_salted_message
                 m_salted_message += fragment + rand_char
-            # Add whatever part of the m_shifted_message remains
+            # add whatever part of the m_shifted_message remains
             m_salted_message += m_shifted_message
-        # For short messages
+        # for short messages
         else:
             coin = randint(1, 2)
             if coin == 1:
@@ -136,31 +136,31 @@ def cipher(m_mode, m_message, m_key):
             else:
                 rand_char = chr(randint(97, 122))
             m_salted_message += rand_char + m_shifted_message + rand_char
-        # Enigma message
+        # enigma message
         for _ in m_salted_message:
-            # Increment enigma
+            # increment enigma
             m_enigma = __random_number_generator(m_enigma)
             num = ord(_)
             num += m_enigma
             num = num % 128
             m_encrypted_message += chr(num)
-        # Convert m_encrypted_message from chars to hex bytes
+        # convert m_encrypted_message from chars to hex bytes
         for _ in m_encrypted_message:
             m_hex_encrypted_message += hex(ord(_)) + ', '
         return m_hex_encrypted_message
     if m_mode[0] == 'd':
-        # Convert m_message from hex bytes to chars
+        # convert m_message from hex bytes to chars
         for _ in m_message:
             m_hex_decrypted_message += chr(_)
-        # De-enigma message
+        # de-enigma message
         for _ in m_hex_decrypted_message:
-            # Increment enigma
+            # increment enigma
             m_enigma = __random_number_generator(m_enigma)
             num = ord(_)
             num -= m_enigma
             num = num % 128
             m_salted_message += chr(num)
-        # Un-salt message
+        # un-salt message
         if len(m_salted_message) > 8:
             while len(m_salted_message) > 4:
                 m_unsalted_message += m_salted_message[0:2]
@@ -168,7 +168,7 @@ def cipher(m_mode, m_message, m_key):
         else:
             m_unsalted_message = m_salted_message[1:-1]
         m_unsalted_message += m_salted_message
-        # Un-shift message
+        # un-shift message
         for _ in m_unsalted_message:
             num = ord(_)
             num -= m_key

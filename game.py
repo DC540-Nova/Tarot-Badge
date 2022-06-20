@@ -30,20 +30,20 @@
 
 import random
 
-from data import ham_radio_questions
 from config import display
 import button
 
 
-def questions(question_bank):
+def multiple_choice_questions(question_bank, game_number):
     """
-    Function to handle a generic question loop
+    Function to handle a generic multiple choice question loop
 
     Params:
         question_bank, dict
+        game_number: int
 
     Returns:
-        bool
+        int or bool
     """
     questions = list(question_bank)  # noqa
     question_number = 0
@@ -75,6 +75,6 @@ def questions(question_bank):
         else:
             pass
     if answer_total >= 2:
-        return True
+        return game_number + ' '
     else:
         return False
