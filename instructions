@@ -1,0 +1,28 @@
+Instructions: Set Up Automation ONE-TIME OPERATION
+# cd to Tarot-Badge Directory
+./setup.sh
+
+Instructions: Copy Files To Pico
+# cd to Tarot-Badge directory
+# plug Pico into USB
+# source venv/bin/activate
+./copy_files_to_pico.sh
+
+Instructions: Convert Deck To 240x320
+# cd to Tarot-Badge directory
+# copy Tarot Card Images into the deck directory
+# NOTE: PLEASE NAME FILES EXACTLY AS THEY ARE IN deck FOLDER FOR NEW DECKS
+./convert.sh
+# NOTE: this will convert the files to 240x320 and overwrite the originals in the deck directory
+./convert_to_raw.sh
+# NOTE: this will convert all the files in deck and create a dir called deck-raw and copy .raw files into it
+# copy all the files in deck-raw to sd drive
+# OR
+cd deck-raw
+./copy_files_to_sd_card.sh
+# NOTE: this will copy files directly to the sd card without having to remove the card it and place in a sd reader
+
+Instructions: Convert Single Image File To .raw
+# manually convert the .png, jpg, etc. to 240x320
+./convert_image_to_raw.sh
+# NOTE: this will create a 240x320 .raw file

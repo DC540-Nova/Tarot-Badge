@@ -30,8 +30,9 @@
 
 import random
 
-from config import button, display
 from data import ham_radio_questions
+from config import display
+import button
 
 
 def questions(question_bank):
@@ -55,7 +56,7 @@ def questions(question_bank):
         answers = answers[0:-1]   # strip off correct_answer_index from being displayed
         for answer in answers:
             display.text(answer)
-        answer = button.press()
+        answer = button.multiple_choice()
         if answer == correct_answer_index:
             answer_list.append(1)
             display.text('CORRECT')

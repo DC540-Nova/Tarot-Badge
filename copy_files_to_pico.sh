@@ -1,4 +1,6 @@
 #!/bin/sh
+
+source venv/bin/activate
 mpremote connect /dev/tty.u* cp boot.py :
 mpremote connect /dev/tty.u* cp Unispace12x24.c :
 mpremote connect /dev/tty.u* cp config.py :

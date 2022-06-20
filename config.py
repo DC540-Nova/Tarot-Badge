@@ -37,7 +37,6 @@ BUTTON_DOWN = Pin(19, Pin.IN, Pin.PULL_UP)
 BUTTON_RIGHT = Pin(18, Pin.IN, Pin.PULL_UP)
 BUTTON_SUBMIT = Pin(17, Pin.IN, Pin.PULL_UP)
 BUTTON_EXTRA = Pin(16, Pin.IN, Pin.PULL_UP)
-import button  # noqa
 
 # display config
 display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))

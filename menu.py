@@ -42,7 +42,7 @@ def system():
     neo_pixel.clear()
     display.text('main menu --------- left: game right: tarot', timed=False)
     button_pressed = button.press()
-    print(button_pressed)
+    # print(button_pressed)
     if button_pressed == 3:
         game.questions(ham_radio_questions)
     elif button_pressed == 4:

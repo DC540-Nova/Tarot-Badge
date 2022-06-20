@@ -90,7 +90,7 @@ def img_test():
     display.image('sd/01-TheMagician.raw', multithreading=True)
     display.handle_threading_teardown()
     display.handle_threading_setup()
-    _thread.start_new_thread(bg_task, ())  # noqa
+    _thread.start_new_thread(bg_task, ())  # noqa]]]\\
     display.image('sd/02-TheHighPriestess.raw', multithreading=True)
     display.handle_threading_teardown()
 
@@ -102,7 +102,7 @@ def questions():
     display.text('This is a long message I do hope it will wrap i will cry badly if it does not and blame babba.')
 
 
-#tarot.reading(data.cards)
+# tarot.reading(data.cards)
 
 # sd_test()
 # img_test()

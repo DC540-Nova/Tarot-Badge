@@ -28,12 +28,50 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT
+from utime import sleep
+
+from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display
 
 
-def press():
+def numeric_sequence(press_time=0.10):
     """
-    Function to handle a button press
+    Function to handle the construction of four numeric numbers as a result of a series of button presses
+
+    Params:
+        press_time: float
+
+    Returns:
+        int
+    """
+    word = ''
+    while True:
+        if len(word) >= 4:
+            word = ''
+        if not BUTTON_UP.value():
+            word += '1'
+            display.text(word, timed=False)
+            sleep(press_time)
+        elif not BUTTON_DOWN.value():
+            word += '2'
+            display.text(word, timed=False)
+            sleep(press_time)
+        elif not BUTTON_LEFT.value():
+            word += '3'
+            display.text(word, timed=False)
+            sleep(press_time)
+        elif not BUTTON_RIGHT.value():
+            word += '4'
+            display.text(word, timed=False)
+            sleep(press_time)
+        elif not BUTTON_SUBMIT.value():
+            if word:
+                word = int(word)
+                return word
+
+
+def multiple_choice():
+    """
+    Function to handle a single multiple choice response from a button press
 
     Returns:
         int
@@ -47,5 +85,22 @@ def press():
             return 3
         elif not BUTTON_RIGHT.value():
             return 4
+
+
+def press():
+    """
+    Function to handle a button press
+    """
+    while True:
+        if not BUTTON_UP.value():
+            return
+        elif not BUTTON_DOWN.value():
+            return
+        elif not BUTTON_LEFT.value():
+            return
+        elif not BUTTON_RIGHT.value():
+            return
         elif not BUTTON_SUBMIT.value():
-            return 5
+            return
+        elif not BUTTON_EXTRA.value():
+            return

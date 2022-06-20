@@ -30,8 +30,8 @@
 
 import random
 
-from config import button, display
-from data import ham_radio_questions
+from config import display
+import button
 
 
 def reading(card_bank):
