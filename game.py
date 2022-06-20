@@ -33,14 +33,15 @@ import random
 from config import display
 import button
 
-
-def multiple_choice_questions(question_bank, game_number):
+# BREAKING CHANGES
+def multiple_choice_questions(question_bank, game_number, practice=False):
     """
     Function to handle a generic multiple choice question loop
 
     Params:
         question_bank, dict
         game_number: str
+        practice: bool, optional
 
     Returns:
         str or bool
@@ -49,6 +50,21 @@ def multiple_choice_questions(question_bank, game_number):
     question_number = 0
     counter = 1
     answer_list = []
+    if practice:
+        for _ in questions:
+            question, answers = random.choice(list(question_bank.items()))
+            display.text(question)
+            correct_answer_index = answers[4]
+            answers = answers[0:-1]  # strip off correct_answer_index from being displayed
+            for answer in answers:
+                display.text(answer)
+            answer = button.multiple_choice()
+            if answer == correct_answer_index:
+                answer_list.append(1)
+                display.text('CORRECT')
+            else:
+                answer_list.append(0)
+                display.text('INCORRECT')
     for _ in questions:
         question, answers = random.choice(list(question_bank.items()))
         display.text(question)

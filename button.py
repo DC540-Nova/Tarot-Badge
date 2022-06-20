@@ -45,7 +45,7 @@ def numeric_sequence(press_time=0.10):
     """
     word = ''
     while True:
-        if len(word) >= 4:
+        if len(word) >= 6:
             word = ''
         if not BUTTON_UP.value():
             word += '1'
@@ -99,6 +99,37 @@ def yes_no():
             return 'yes'
         elif not BUTTON_DOWN.value():
             return 'no'
+
+
+def morse_code(press_time=0.10):
+    """
+    Function to handle morse code button presses
+
+    Params:
+        press_time: float
+
+    Returns:
+        str
+    """
+    word = ''
+    while True:
+        if len(word) >= 6:
+            word = ''
+        if not BUTTON_UP.value():
+            word += '.'
+            display.text(word, timed=False)
+            sleep(press_time)
+        elif not BUTTON_DOWN.value():
+            word += '-'
+            display.text(word, timed=False)
+            sleep(press_time)
+        elif not BUTTON_DOWN.value():
+            word += ' '
+            display.text(word, timed=False)
+            sleep(press_time)
+        elif not BUTTON_SUBMIT.value():
+            if word:
+                return word
 
 
 def press():

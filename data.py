@@ -753,6 +753,6 @@ tarot_trivia = {
 }
 
 morse_code = {
-    'Why the fuck am I here?': 'dDdDDDDDdDdddDddD',
-    'Why the fuck am you here?': '343212',
+    'Why the fuck am I here?': 'dDdDDDDDdDdddDddDsDds',
+    'Why the fuck am you here?': 'DDDddDdDdDsDs',
 }
