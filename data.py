@@ -28,6 +28,20 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+boss_ids = []  # noqa
+boss_ids.append('e66038b7137a9935')
+boss_ids.append('e66038b7135fa935')
+boss_ids.append('e66038b71316902f')
+boss_ids.append('e66038b713338c2f')
+
+boss_names = []  # noqa
+boss_names.append('Baabalicious')
+boss_names.append('Banter')
+boss_names.append('Lyra')
+boss_names.append('Kevin')
+
+sos = 'SOS'
+
 cards = {
     '0 The Fool':
         [
