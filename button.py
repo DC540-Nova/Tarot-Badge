@@ -33,19 +33,20 @@ from utime import sleep
 from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display
 
 
-def numeric_sequence(press_time=0.10):
+def numeric_sequence(press_time=0.10, max_nums=6):
     """
     Function to handle the construction of four numeric numbers as a result of a series of button presses
 
     Params:
-        press_time: float
+        press_time: float, optional
+        max_nums: int, optional
 
     Returns:
         int
     """
     word = ''
     while True:
-        if len(word) >= 6:
+        if len(word) >= max_nums:
             word = ''
         if not BUTTON_UP.value():
             word += '1'
@@ -101,19 +102,20 @@ def yes_no():
             return 'no'
 
 
-def morse_code(press_time=0.10):
+def morse_code(press_time=0.10, max_chars=8):
     """
     Function to handle morse code button presses
 
     Params:
-        press_time: float
+        press_time: float, optional
+        max_chars: int, optional
 
     Returns:
         str
     """
     word = ''
     while True:
-        if len(word) >= 6:
+        if len(word) >= max_chars:
             word = ''
         if not BUTTON_UP.value():
             word += '.'

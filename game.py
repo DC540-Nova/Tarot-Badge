@@ -33,14 +33,16 @@ import random
 from config import display
 import button
 
-# BREAKING CHANGES
-def multiple_choice_questions(question_bank, game_number, practice=False):
+
+def multiple_choice_questions(question_bank, game_number, num_questions_to_win, image=False, practice=False):
     """
     Function to handle a generic multiple choice question loop
 
     Params:
         question_bank, dict
         game_number: str
+        num_questions_to_win: int
+        image: bool, optional
         practice: bool, optional
 
     Returns:
@@ -48,49 +50,49 @@ def multiple_choice_questions(question_bank, game_number, practice=False):
     """
     questions = list(question_bank)  # noqa
     question_number = 0
-    counter = 1
+    counter = 0
     answer_list = []
-    if practice:
-        for _ in questions:
-            question, answers = random.choice(list(question_bank.items()))
-            display.text(question)
-            correct_answer_index = answers[4]
-            answers = answers[0:-1]  # strip off correct_answer_index from being displayed
-            for answer in answers:
-                display.text(answer)
-            answer = button.multiple_choice()
-            if answer == correct_answer_index:
-                answer_list.append(1)
-                display.text('CORRECT')
-            else:
-                answer_list.append(0)
-                display.text('INCORRECT')
     for _ in questions:
         question, answers = random.choice(list(question_bank.items()))
-        display.text(question)
+        if not image:
+            display.text(question)
+        elif image:
+            display.image('sd/' + question)
         correct_answer_index = answers[4]
         answers = answers[0:-1]   # strip off correct_answer_index from being displayed
         for answer in answers:
             display.text(answer)
         answer = button.multiple_choice()
+        if not practice:
+            counter += 1
+            if counter == num_questions_to_win:
+                break
         if answer == correct_answer_index:
-            answer_list.append(1)
-            display.text('CORRECT')
+            if not practice:
+                answer_list.append(1)
+            elif practice:
+                display.text('CORRECT')
         else:
-            answer_list.append(0)
-            display.text('INCORRECT')
+            if not practice:
+                answer_list.append(0)
+            elif practice:
+                display.text('INCORRECT')
         question_number += 1
-        counter += 1
         del question_bank[question]
-        if counter > 5:
-            break
+        if practice:
+            display.text('Would you like to practice with another question? ')
+            response = button.yes_no()
+            if response == 'yes':
+                pass
+            elif response != 'yes':
+                return
     answer_total = 0
     for answer in answer_list:
         if answer == 1:
             answer_total += 1
         else:
             pass
-    if answer_total >= 2:
+    if answer_total >= num_questions_to_win:
         return game_number + ' '
     else:
         return False

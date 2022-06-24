@@ -92,10 +92,10 @@ def img_test():
 
 
 # refactor
-game_number = game.multiple_choice_questions(data.flash_cards, '01')
-file_manager.write_games_won_file(game_number)
-game_number = game.multiple_choice_questions(data.tarot_trivia, '02')
-file_manager.write_games_won_file(game_number)
+game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
+# file_manager.write_games_won_file(game_number)
+# game_number = game.multiple_choice_questions(data.tarot_trivia, '02')
+# file_manager.write_games_won_file(game_number)
 
 
 # flash cards will have two modes, one will be a practice and the other game mode, x out of y to win.
