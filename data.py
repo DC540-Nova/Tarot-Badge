@@ -875,7 +875,7 @@ morse_code_practice_medium = {
 }
 
 morse_code_practice_advanced = {
-    'Why the fuck am I here?': 'dDdDDDDDdDdddDddDsDds',
+    'Why the fuck am I here?': 'dDdDDDDDdDdddDddDsDds', # betsy change this
     'Why the fuck am you here?': 'DDDddDdDdDsDs',
 }
 
