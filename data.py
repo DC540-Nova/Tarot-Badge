@@ -40,8 +40,6 @@ boss_names.append('Banter')
 boss_names.append('Lyra')
 boss_names.append('Kevin')
 
-sos = 'SOS'
-
 cards = {
     '0 The Fool':
         [

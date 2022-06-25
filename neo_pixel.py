@@ -165,6 +165,31 @@ class NeoPixel:
             self.set(led, color)
             self.show(brightness)  # noqa
 
+    def flicker(self, color=RED, repeat=1):
+        """
+        Method to display a flicker animation
+
+        Params:
+            color: tuple, optional
+            repeat: int, optional
+        """
+        display.clear()
+        while repeat > 0:
+            step = 5
+            breath_amps = [ii for ii in range(0, 1000, step)]
+            breath_amps.extend([ii for ii in range(10, -1, -step)])
+            for ii in breath_amps:
+                # TODO: define spheres
+                for led in self.spheres:
+                    self.pixels_set(led, color)
+                for led in self.paths:
+                    self.pixels_set(led, color)
+                self.pixels_show(ii/25)
+            repeat -= 1
+        self.led_clear()
+        display.clear()
+        file_manager.update_status()
+
     def breathing_led(self, led, color=RED, repeat=1):
         """
         Method to handle a breathing led animation

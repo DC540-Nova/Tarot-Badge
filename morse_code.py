@@ -105,7 +105,7 @@ def dot(color=RED):
     Function to handle morse code dot on a neo_pixel display
 
     Params:
-        color: int, optional
+        color: tuple, optional
     """
     neo_pixel.on(color, all_on=True)
     sleep(B_RATE)
@@ -129,22 +129,26 @@ def pause():
     sleep(7 * B_RATE)
 
 
-def convert(sentence, encrypted=True):
+def display(sentence, color=RED, encrypted=False):
     """
-    Function to handle conversion to morse code
+    Function to handle conversion and display of morse code
 
     Params:
         sentence: str
+        color: tuple, optional
         encrypted: bool, optional
-
-    Returns:
-        str
     """
-    morse_code_encoded_sentence = ''
+    encoded_sentence = ''
     if encrypted:
         decrypted_sentence = encryption.cipher('d', sentence, 22)
     else:
         decrypted_sentence = sentence
     for character in decrypted_sentence:
-        morse_code_encoded_sentence += CODE[character] + ' '
-    return morse_code_encoded_sentence
+        encoded_sentence += CODE[character] + ' '
+    for letter in encoded_sentence:
+        if letter == '.':
+            dot(color)
+        elif letter == '-':
+            dash(color)
+        else:
+            pause()

@@ -28,10 +28,11 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-from data import boss_ids, boss_names, sos
+from data import boss_ids, boss_names
 from config import display, neo_pixel, nrf, BLUE, GREEN
 import microcontroller
 import file_manager
+import morse_code
 
 
 def boss_send_id():
@@ -50,7 +51,7 @@ def check_for_boss():
     Method to check for a boss badge
     """
     display.text('Scanning...')
-    foreign_unique_id = nrf.recv(interval=104000, display_word=False)
+    foreign_unique_id = nrf.recv()
     foreign_unique_id = str(foreign_unique_id)
     # there is an edge case where some NRF modules are appending the last char of their own
     # unique_id to the beginning of the foreign_unique_id string
@@ -59,29 +60,26 @@ def check_for_boss():
     boss_names_index = 0
     for id in boss_ids:  # noqa
         if foreign_unique_id == id:
-            display.scroll_text([[0, 0, boss_names[boss_names_index]]], len(boss_names[boss_names_index]))
-            neo_pixel.morse_code(sos, clear_display=False, encrypted=False)
+            display.text(boss_names[boss_names_index])
+            morse_code.display('SOS')
             break
         boss_names_index += 1
 
 
-def badge(interval=7500):
+def badge():
     """
     Method to pair badges
-
-    Params:
-        interval: int, optional
     """
     foreign_unique_id = None  # noqa
-    display.text(text='Pairing...')
+    display.text('Pairing...')
     unique_id = microcontroller.get_unique_id()
     nrf.send(unique_id)
-    foreign_unique_id = nrf.recv(interval, badge_id=True)
+    foreign_unique_id = nrf.recv()
     nrf.send(unique_id)
-    # try again 8 times to ensure the pairing is successful
-    for _ in range(8):
+    # try again 2 times to ensure the pairing is successful
+    for _ in range(2):
         if not foreign_unique_id:
-            foreign_unique_id = nrf.recv(interval, badge_id=True)
+            foreign_unique_id = nrf.recv()
         nrf.send(unique_id)
     if foreign_unique_id:
         foreign_unique_id = str(foreign_unique_id)
