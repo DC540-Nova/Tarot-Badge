@@ -44,6 +44,7 @@ import data
 import file_manager
 from config import display, neo_pixel
 import game
+import morse_code
 
 
 def bg_task():
@@ -92,10 +93,14 @@ def img_test():
 
 
 # refactor
-game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
+#game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
 # file_manager.write_games_won_file(game_number)
-# game_number = game.multiple_choice_questions(data.tarot_trivia, '02')
-# file_manager.write_games_won_file(game_number)
+
+
+# game_won = game.multiple_choice_questions(data.tarot_trivia, '02', 1, practice=False)
+# print(game_won)
+# if game_won:
+#     game.won(game_won)
 
 
 # flash cards will have two modes, one will be a practice and the other game mode, x out of y to win.
@@ -112,3 +117,8 @@ game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=Tr
 # questions()
 # import game
 # game.questions(data.ham_radio_questions)
+
+morse_code.dash()
+morse_code.dot()
+morse_code.space()
+morse_code.pause()

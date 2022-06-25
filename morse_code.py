@@ -30,8 +30,8 @@
 
 from utime import sleep
 
+from config import neo_pixel, RED
 import encryption
-from config import *
 
 CODE = {
     ' ': '',
@@ -94,12 +94,9 @@ def dash(color=RED):
     Params:
         color: int, optional
     """
-    # avoid circular import issue
-    from neo_pixel import NeoPixel
-    neo_pixel = NeoPixel(Pin)
-    neo_pixel.led_on(color, all_on=True)
+    neo_pixel.on(color, all_on=True)
     sleep(3 * B_RATE)
-    neo_pixel.led_clear(hard_clear=True)
+    neo_pixel.clear(hard_clear=True)
     sleep(B_RATE)
 
 
@@ -110,12 +107,9 @@ def dot(color=RED):
     Params:
         color: int, optional
     """
-    # avoid circular import issue
-    from neo_pixel import NeoPixel
-    neo_pixel = NeoPixel(Pin)
-    neo_pixel.led_on(color, all_on=True)
+    neo_pixel.on(color, all_on=True)
     sleep(B_RATE)
-    neo_pixel.led_clear(hard_clear=True)
+    neo_pixel.clear(hard_clear=True)
     sleep(B_RATE)
 
 
@@ -123,10 +117,7 @@ def space():
     """
     Function to handle morse code space on a neo_pixel display
     """
-    # avoid circular import issue
-    from neo_pixel import NeoPixel
-    neo_pixel = NeoPixel(Pin)
-    neo_pixel.led_clear(hard_clear=True)
+    neo_pixel.clear(hard_clear=True)
     sleep(B_RATE)
 
 
@@ -134,10 +125,7 @@ def pause():
     """
     Function to handle morse code pause on a neo_pixel display
     """
-    # avoid circular import issue
-    from neo_pixel import NeoPixel
-    neo_pixel = NeoPixel(Pin)
-    neo_pixel.led_clear(hard_clear=True)
+    neo_pixel.clear(hard_clear=True)
     sleep(7 * B_RATE)
 
 

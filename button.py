@@ -79,13 +79,13 @@ def multiple_choice():
     """
     while True:
         if not BUTTON_UP.value():
-            return 'a'
+            return 0
         elif not BUTTON_DOWN.value():
-            return 'b'
+            return 1
         elif not BUTTON_LEFT.value():
-            return 'c'
+            return 2
         elif not BUTTON_RIGHT.value():
-            return 'd'
+            return 3
 
 
 def yes_no():

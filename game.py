@@ -31,6 +31,7 @@
 import random
 
 from config import display
+import file_manager
 import button
 
 
@@ -62,6 +63,7 @@ def multiple_choice_questions(question_bank, game_number, num_questions_to_win, 
         answers = answers[0:-1]   # strip off correct_answer_index from being displayed
         for answer in answers:
             display.text(answer)
+        display.text('CHOOSE...')
         answer = button.multiple_choice()
         if not practice:
             counter += 1
@@ -81,6 +83,7 @@ def multiple_choice_questions(question_bank, game_number, num_questions_to_win, 
         del question_bank[question]
         if practice:
             display.text('Would you like to practice with another question? ')
+            display.text('CHOOSE...')
             response = button.yes_no()
             if response == 'yes':
                 pass
@@ -96,3 +99,18 @@ def multiple_choice_questions(question_bank, game_number, num_questions_to_win, 
         return game_number + ' '
     else:
         return False
+
+
+def won(game_won):
+    """
+    Function to handle a single game win
+
+    Params:
+        game_won: int
+    """
+    games_won = file_manager.read_games_won_file()
+    games_won += game_won
+    file_manager.write_games_won_file(games_won)
+    # TEMP FOR TESTING
+    games_won = file_manager.read_games_won_file()
+    print(games_won)

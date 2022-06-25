@@ -17,3 +17,5 @@ mpremote connect /dev/tty.u* cp menu.py :
 mpremote connect /dev/tty.u* cp tarot.py :
 mpremote connect /dev/tty.u* cp pair.py :
 mpremote connect /dev/tty.u* cp unittest.py :
+mpremote connect /dev/tty.u* cp morse_code.py :
+mpremote connect /dev/tty.u* cp encryption.py :

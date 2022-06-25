@@ -654,7 +654,7 @@ tarot_trivia = {
             'D. Petit Etteilla',
             1
         ],
-    'Like common playing cards, what is the term of using only the suit symbol for identifying rank':
+    'Like common playing cards, what is the term of using only the suit symbol for identifying rank?':
         [
             'A. PIP',
             'B. POP',
@@ -662,7 +662,7 @@ tarot_trivia = {
             'D. ANK',
             0
         ],
-    'Which tarot suit of the Tarot dMarselle does not typically number they cards':
+    'Which tarot suit of the Tarot Marselle does not typically number they cards?':
         [
             'A. Swords',
             'B. Coins',
@@ -694,7 +694,7 @@ tarot_trivia = {
             'D. 10',
             3
         ],
-    'The major arcana tarot cards represent the _______ forces rather than individual people':
+    'The major arcana tarot cards represent the what forces rather than individual people?':
         [
             'A. Archetype',
             'B. Cosmic',
@@ -702,7 +702,7 @@ tarot_trivia = {
             'D. Eminations',
             0
         ],
-    'Sephiroth 1 of the Tree of Life represents Upper Crown':
+    'Sephiroth 1 of the Tree of Life represents Upper Crown?':
         [
             'A. Binah',
             'B. Hod',
@@ -710,7 +710,7 @@ tarot_trivia = {
             'D. Tiphereth',
             2
         ],
-    'Sephiroth 4 of the Tree of Life represents Love':
+    'Sephiroth 4 of the Tree of Life represents Love?':
         [
             'A. Binah',
             'B. Hescd',
@@ -718,7 +718,7 @@ tarot_trivia = {
             'D. Tiphereth',
             1
         ],
-    'Sephiroth 6 of the Tree of Life represents Tiphereth':
+    'Sephiroth 6 of the Tree of Life represents Tiphereth?':
         [
             'A. Love',
             'B. Glory',
@@ -726,7 +726,7 @@ tarot_trivia = {
             'D. Intelligence',
             2
         ],
-    'On the Tree of Life, which major arcana tarot card represents the path (11) from Kethor to Chormah':
+    'On the Tree of Life, which major arcana tarot card represents the path (11) from Kethor to Chormah?':
         [
             'A. The Magician',
             'B. Strength',
@@ -734,7 +734,7 @@ tarot_trivia = {
             'D. The Fool',
             3
         ],
-    'On the Tree of Life, which major arcana tarot card represents the path (16) from Chormah to Chesed':
+    'On the Tree of Life, which major arcana tarot card represents the path (16) from Chormah to Chesed?':
         [
             'A. The Hierophant',
             'B. The Magician',
@@ -742,7 +742,7 @@ tarot_trivia = {
             'D. The Emperor',
             0
         ],
-    'On the Tree of Life, which major arcana tarot card represents the path (20) from Chesed to Tifereth':
+    'On the Tree of Life, which major arcana tarot card represents the path (20) from Chesed to Tifereth?':
         [
             'A. The Fool',
             'B. The Magician',
