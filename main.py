@@ -92,6 +92,10 @@ def img_test():
     display.handle_threading_teardown()
 
 
+game.morse_code(data.morse_code_practice_easy)
+
+
+
 # refactor
 #game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
 # file_manager.write_games_won_file(game_number)

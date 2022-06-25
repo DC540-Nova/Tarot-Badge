@@ -101,6 +101,28 @@ def multiple_choice_questions(question_bank, game_number, num_questions_to_win, 
         return False
 
 
+def morse_code(question_bank):
+    """
+
+    """
+    questions = list(question_bank)  # noqa
+    question_number = 0
+    counter = 0
+    answer_list = []
+    for _ in questions:
+        question, answers = random.choice(list(question_bank.items()))
+        display.text(question)
+        correct_answer_index = answers[0]
+        # answers = answers[0:-1]   # strip off correct_answer_index from being displayed
+        # for answer in answers:
+        #     display.text(answer)
+        display.text('CHOOSE...')
+        answer = button.morse_code()
+        if answer == correct_answer_index:
+            # do something to advance
+            pass
+
+
 def won(game_won):
     """
     Function to handle a single game win

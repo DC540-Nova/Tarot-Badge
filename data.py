@@ -511,98 +511,6 @@ cards = {
         ],
 }
 
-flash_cards = {
-    '00-TheFool.raw':
-        [
-            'A. The Emperor',
-            'B. The Fool',
-            'C. The Priestess',
-            'D. The High Priestess',
-            1
-        ],
-    '01-TheMagician.raw':
-        [
-            'A. The Hierophant',
-            'B. The Fool',
-            'C. The Magician',
-            'D. The High Priestess',
-            2
-        ],
-    '02-TheHighPriestess.raw':
-        [
-            'A. The Hierophant',
-            'B. The Lovers',
-            'C. The Magician',
-            'D. The High Priestess',
-            3
-        ],
-    '03-TheEmpress.raw':
-        [
-            'A. The Emperor',
-            'B. The Empress',
-            'C. The Lovers',
-            'D. The High Priestess',
-            1
-        ],
-    '04-TheEmperor.raw':
-        [
-            'A. The Emperor',
-            'B. The Empress',
-            'C. The Lovers',
-            'D. The High Priestess',
-            0
-        ],
-    '05-TheHierophant.raw':
-        [
-            'A. The Lovers',
-            'B. The Empress',
-            'C. The High Priest',
-            'D. The Hierophant',
-            3
-        ],
-    '06-TheLovers.raw':
-        [
-            'A. The Hermit',
-            'B. The Empress',
-            'C. The Lovers',
-            'D. The Hierophant',
-            2
-        ],
-    '07-TheChariot.raw':
-        [
-            'A. Strength',
-            'B. The Hermit',
-            'C. The Chariot',
-            'D. Justice',
-            2
-        ],
-    '08-Strength.raw':
-        [
-            'A. Wheel of Fortune',
-            'B. Death',
-            'C. Justice',
-            'D. Strength',
-            3
-        ],
-    '09-TheHermit.raw':
-        [
-            'A. Death',
-            'B. The Hermit',
-            'C. The High Priest',
-            'D. The Hierophant',
-            1
-        ],
-    'Swords14.raw':
-        [
-            'A. King of Swords',
-            'B. Queen of Swords',
-            'C. Page of Swords',
-            'D. Ten of Swords',
-            3
-        ],
-}
-
-
 tarot_trivia = {
     'How many cards are there in a standard Rider-Waite tarot deck?':
         [
@@ -750,7 +658,248 @@ tarot_trivia = {
         ],
 }
 
-morse_code = {
+flash_cards = {
+    '00-TheFool.raw':
+        [
+            'A. The Emperor',
+            'B. The Fool',
+            'C. The Priestess',
+            'D. The High Priestess',
+            1
+        ],
+    '01-TheMagician.raw':
+        [
+            'A. The Hierophant',
+            'B. The Fool',
+            'C. The Magician',
+            'D. The High Priestess',
+            2
+        ],
+    '02-TheHighPriestess.raw':
+        [
+            'A. The Hierophant',
+            'B. The Lovers',
+            'C. The Magician',
+            'D. The High Priestess',
+            3
+        ],
+    '03-TheEmpress.raw':
+        [
+            'A. The Emperor',
+            'B. The Empress',
+            'C. The Lovers',
+            'D. The High Priestess',
+            1
+        ],
+    '04-TheEmperor.raw':
+        [
+            'A. The Emperor',
+            'B. The Empress',
+            'C. The Lovers',
+            'D. The High Priestess',
+            0
+        ],
+    '05-TheHierophant.raw':
+        [
+            'A. The Lovers',
+            'B. The Empress',
+            'C. The High Priest',
+            'D. The Hierophant',
+            3
+        ],
+    '06-TheLovers.raw':
+        [
+            'A. The Hermit',
+            'B. The Empress',
+            'C. The Lovers',
+            'D. The Hierophant',
+            2
+        ],
+    '07-TheChariot.raw':
+        [
+            'A. Strength',
+            'B. The Hermit',
+            'C. The Chariot',
+            'D. Justice',
+            2
+        ],
+    '08-Strength.raw':
+        [
+            'A. Wheel of Fortune',
+            'B. Death',
+            'C. Justice',
+            'D. Strength',
+            3
+        ],
+    '09-TheHermit.raw':
+        [
+            'A. Death',
+            'B. The Hermit',
+            'C. The High Priest',
+            'D. The Hierophant',
+            1
+        ],
+    '10-WheelOfFortune.raw':
+        [
+            'A. The Hanged Man',
+            'B. The Hermit',
+            'C. Wheel of Fortune',
+            'D. Temperance',
+            2
+        ],
+    '11-Justice.raw':
+        [
+            'A. The Devil',
+            'B. Justice',
+            'C. Death',
+            'D. The Star',
+            1
+        ],
+    '12-TheHangedMan.raw':
+        [
+            'A. Death',
+            'B. The Hermit',
+            'C. The Devil',
+            'D. The Hanged Man',
+            3
+        ],
+    '13-Death.raw':
+        [
+            'A. Death',
+            'B. The Hermit',
+            'C. The Devil',
+            'D. The Hanged Man',
+            0
+        ],
+    '14-Temperance.raw':
+        [
+            'A. The Tower',
+            'B. The Hermit',
+            'C. Temperance',
+            'D. The Star',
+            2
+        ],
+    '15-TheDevil.raw':
+        [
+            'A. The Hanged Man',
+            'B. Death',
+            'C. The Devil',
+            'D. Strength',
+            2
+        ],
+    '16-TheTower.raw':
+        [
+            'A. The Hanged Man',
+            'B. Death',
+            'C. The Devil',
+            'D. Strength',
+            2
+        ],
+    '17-TheStar.raw':
+        [
+            'A. The Hanged Man',
+            'B. Death',
+            'C. The Devil',
+            'D. Strength',
+            2
+        ],
+    '18-TheMoon.raw':
+        [
+            'A. The Hanged Man',
+            'B. Death',
+            'C. The Devil',
+            'D. Strength',
+            2
+        ],
+    '19-TheSun.raw':
+        [
+            'A. The Hanged Man',
+            'B. Death',
+            'C. The Devil',
+            'D. Strength',
+            2
+        ],
+    'Swords14.raw':
+        [
+            'A. King of Swords',
+            'B. Queen of Swords',
+            'C. Page of Swords',
+            'D. Ten of Swords',
+            3
+        ],
+}
+
+morse_code_practice_easy = {
+    'A': '.-', # betsy here is an example OR you can use 'A'
+    'B': 'Dddd',
+    'C': 'DdDd',
+    'D': 'Ddd',
+    'E': 'd',
+    'F': 'ddDd',
+    'G': 'DDd',
+    'H': 'dddd',
+    'I': 'dd',
+    'J': 'dDDD',
+    'K': 'DdD',
+    'L': 'dDdd',
+    'M': 'DD',
+    'N': 'Dd',
+    'O': 'DDD',
+    'P': 'dDDd',
+    'Q': 'DDdD',
+    'R': 'dDd',
+    'S': 'ddd',
+    'T': 'D',
+    'U': 'ddD',
+    'V': 'dddD',
+    'W': 'dDD',
+    'X': 'DddD',
+    'Y': 'DdDD',
+    'Z': 'DDdd',
+    '0': 'DDDDD',
+    '1': 'dDDDD',
+    '2': 'ddDDD',
+    '3': 'dddDD',
+    '4': 'ddddD',
+    '5': 'ddddd',
+    '6': 'Ddddd',
+    '7': 'DDddd',
+    '8': 'DDDdd',
+    '9': 'DDDDd',
+}
+
+morse_code_practice_medium = {
+    'sos': 'SOS', # betsy you can do 'SOS' or '--- ... ---'
+    'hello': 'HELLO',
+    'DEFCON30': 'DEFCON30'
+}
+
+morse_code_practice_advanced = {
     'Why the fuck am I here?': 'dDdDDDDDdDdddDddDsDds',
     'Why the fuck am you here?': 'DDDddDdDdDsDs',
+}
+
+morse_code_game = {
+    'Decode This Answer': 'ddddDpdddDpddDDDpdDDDDpdddDDpddDDDD',
+}
+
+
+stego_game2_answer = {
+    'The Answer For Game 2 is': '343421',
+}
+reenactment_game3_answer = {
+    'The Answer For Game 3 is': '441211'
+}
+SavengerHunt_game4_answer = {
+    'The Answer For Game 3 is': '141431'
+}
+ShittyDeck_game7_answer = {
+    'The Answer for Game 7 is': '333212',
+}
+morsecode_game8_answer = {
+    'The Answer for Game 8 is': '442132',
+}
+
+crypto_game10_answer = {
+    'The Answer for Game 8 is': '234122',
 }
