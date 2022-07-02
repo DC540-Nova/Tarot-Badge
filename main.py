@@ -40,14 +40,16 @@ import _thread
 import random
 import gc
 
-from config import display, neo_pixel, nrf
-import data
-import button
+from config import display, neo_pixel, nrf, BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, \
+    BUTTON_EXTRA
 import game
 import tarot
+from button import Button
 from menu import Menu
+import data
 
-menu = Menu(display, neo_pixel, data, button, game, tarot)
+button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+menu = Menu(display, neo_pixel, button, game, tarot, data)
 
 
 def bg_task():

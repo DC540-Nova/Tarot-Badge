@@ -30,124 +30,143 @@
 
 from utime import sleep
 
-from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display
 
-
-def numeric_sequence(press_time=0.10, max_nums=6):
+class Button:
     """
-    Function to handle the construction of four numeric numbers as a result of a series of button presses
-
-    Params:
-        press_time: float, optional
-        max_nums: int, optional
-
-    Returns:
-        int
+    Base class to handle button presses
     """
-    word = ''
-    while True:
-        if len(word) >= max_nums:
-            word = ''
-        if not BUTTON_UP.value():
-            word += '1'
-            display.text(word, timed=False)
-            sleep(press_time)
-        elif not BUTTON_DOWN.value():
-            word += '2'
-            display.text(word, timed=False)
-            sleep(press_time)
-        elif not BUTTON_LEFT.value():
-            word += '3'
-            display.text(word, timed=False)
-            sleep(press_time)
-        elif not BUTTON_RIGHT.value():
-            word += '4'
-            display.text(word, timed=False)
-            sleep(press_time)
-        elif not BUTTON_SUBMIT.value():
-            if word:
-                word = int(word)
-                return word
 
+    def __init__(self, button_up, button_down, button_left, button_right, button_submit, button_extra, display,
+                 press_time=0.10):
+        """
+        Params:
+            button_up: object
+            button_down: object
+            button_left: object
+            button_right: object
+            button_submit: object
+            button_extra: object
+            display: object
+            press_time: float, optional
+        """
+        self.button_up = button_up
+        self.button_down = button_down
+        self.button_left = button_left
+        self.button_right = button_right
+        self.button_submit = button_submit
+        self.button_extra = button_extra
+        self.display = display
+        self.press_time = press_time
 
-def multiple_choice():
-    """
-    Function to handle a single multiple choice response from a button press
+    def numeric_sequence(self, max_nums=6):
+        """
+        Method to handle the construction of four numeric numbers as a result of a series of button presses
 
-    Returns:
-        str
-    """
-    while True:
-        if not BUTTON_UP.value():
-            return 0
-        elif not BUTTON_DOWN.value():
-            return 1
-        elif not BUTTON_LEFT.value():
-            return 2
-        elif not BUTTON_RIGHT.value():
-            return 3
+        Params:
+            max_nums: int, optional
 
+        Returns:
+            int
+        """
+        word = ''
+        while True:
+            if len(word) >= max_nums:
+                word = ''
+            if not self.button_up.value():
+                word += '1'
+                self.display.text(word, timed=False)
+                sleep(self.press_time)
+            elif not self.button_down.value():
+                word += '2'
+                self.display.text(word, timed=False)
+                sleep(self.press_time)
+            elif not self.button_left.value():
+                word += '3'
+                self.display.text(word, timed=False)
+                sleep(self.press_time)
+            elif not self.button_right.value():
+                word += '4'
+                self.display.text(word, timed=False)
+                sleep(self.press_time)
+            elif not self.button_submit.value():
+                if word:
+                    word = int(word)
+                    return word
 
-def yes_no():
-    """
-    Function to handle a yes/no response from a button press
+    def multiple_choice(self):
+        """
+        Method to handle a single multiple choice response from a button press
 
-    Returns:
-        str
-    """
-    while True:
-        if not BUTTON_UP.value():
-            return 'yes'
-        elif not BUTTON_DOWN.value():
-            return 'no'
+        Returns:
+            str
+        """
+        while True:
+            if not self.button_up.value():
+                return 0
+            elif not self.button_down.value():
+                return 1
+            elif not self.button_left.value():
+                return 2
+            elif not self. button_right.value():
+                return 3
 
+    def yes_no(self):
+        """
+        Method to handle a yes/no response from a button press
 
-def morse_code(press_time=0.10, max_chars=8):
-    """
-    Function to handle morse code button presses
+        Returns:
+            str
+        """
+        while True:
+            if not self.button_up.value():
+                return 'yes'
+            elif not self.button_down.value():
+                return 'no'
 
-    Params:
-        press_time: float, optional
-        max_chars: int, optional
+    def morse_code(self, max_chars=8):
+        """
+        Method to handle morse code button presses
 
-    Returns:
-        str
-    """
-    word = ''
-    while True:
-        if len(word) >= max_chars:
-            word = ''
-        if not BUTTON_UP.value():
-            word += '.'
-            display.text(word, timed=False)
-            sleep(press_time)
-        elif not BUTTON_DOWN.value():
-            word += '-'
-            display.text(word, timed=False)
-            sleep(press_time)
-        elif not BUTTON_DOWN.value():
-            word += ' '
-            display.text(word, timed=False)
-            sleep(press_time)
-        elif not BUTTON_SUBMIT.value():
-            if word:
-                return word
+        Params:
+            max_chars: int, optional
 
+        Returns:
+            str
+        """
+        word = ''
+        while True:
+            if len(word) >= max_chars:
+                word = ''
+            if not self.button_up.value():
+                word += '.'
+                self.display.text(word, timed=False)
+                sleep(self.press_time)
+            elif not self.button_down.value():
+                word += '-'
+                self.display.text(word, timed=False)
+                sleep(self.press_time)
+            elif not self.button_down.value():
+                word += ' '
+                self.display.text(word, timed=False)
+                sleep(self.press_time)
+            elif not self.button_submit.value():
+                if word:
+                    return word
 
-def press():
-    """
-    Function to handle a button press
-    """
-    while True:
-        if not BUTTON_UP.value():
-            return 1
-        elif not BUTTON_DOWN.value():
-            return 2
-        elif not BUTTON_LEFT.value():
-            return 3
-        elif not BUTTON_RIGHT.value():
-            return 4
-        elif not BUTTON_SUBMIT.value():
-            return 5
-        elif not BUTTON_EXTRA.value():
-            return 6
+    def press(self):
+        """
+        Method to handle a button press
+        """
+        while True:
+            if not self.button_up.value():
+                return 1
+            elif not self.button_down.value():
+                return 2
+            elif not self.button_left.value():
+                return 3
+            elif not self.button_right.value():
+                return 4
+            elif not self.button_submit.value():
+                return 5
+            elif not self.button_extra.value():
+                return 6

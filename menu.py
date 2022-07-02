@@ -34,15 +34,15 @@ class Menu:
     Base class to handle a menu system
     """
 
-    def __init__(self, display, neo_pixel, data, button, game, tarot):
+    def __init__(self, display, neo_pixel, button, game, tarot, data):
         """
         Params:
             display: object
             neo_pixel: object
-            data: object
             button: object
             game: object
             tarot: object
+            data: object
         """
         self.display = display
         self.neo_pixel = neo_pixel
