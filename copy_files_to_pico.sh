@@ -20,4 +20,5 @@ mpremote connect /dev/tty.u* cp unittest.py :
 mpremote connect /dev/tty.u* cp morse_code.py :
 mpremote connect /dev/tty.u* cp encryption.py :
 mpremote connect /dev/tty.u* cp nrf24l01.py :
+mpremote connect /dev/tty.u* cp demo.py :
 mpremote connect /dev/tty.u* cp dc540_logo.raw :

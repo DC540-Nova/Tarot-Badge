@@ -36,10 +36,6 @@
 # mpremote connect /dev/tty.u* exec 'import main;main.img_test()'
 # screen /dev/tty.u*
 
-import _thread
-import random
-import gc
-
 from config import display, neo_pixel, nrf, BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, \
     BUTTON_EXTRA
 import game
@@ -47,46 +43,15 @@ import tarot
 from button import Button
 from menu import Menu
 import data
+from demo import Demo
 
 button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 menu = Menu(display, neo_pixel, button, game, tarot, data)
-
-
-def bg_task():
-    """
-    Function to test demo multi-threadded functionality
-    """
-    gc.collect()
-    hex1 = [32, 31, 30, 27, 28, 29, 32]
-    paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
-    for count in range(20):
-        for my_LED in hex1:
-            neo_pixel.on(paths[my_LED - 11], neo_pixel.COLORS[random.randint(1, 7)])
-            if count == 19:
-                neo_pixel.clear()
-                _thread.exit()  # noqa
-
-
-def img_test():
-    """
-    Function to test img display functionality
-    """
-    display.handle_threading_setup()
-    _thread.start_new_thread(bg_task, ())  # noqa
-    display.image('sd/00-TheFool.raw', multithreading=True)
-    display.handle_threading_teardown()
-    display.handle_threading_setup()
-    _thread.start_new_thread(bg_task, ())  # noqa
-    display.image('sd/01-TheMagician.raw', multithreading=True)
-    display.handle_threading_teardown()
-    display.handle_threading_setup()
-    _thread.start_new_thread(bg_task, ())  # noqa
-    display.image('sd/02-TheHighPriestess.raw', multithreading=True)
-    display.handle_threading_teardown()
+demo = Demo(display, neo_pixel)
 
 
 if __name__ == '__main__':
-    img_test()
+    demo.play()
     menu.system()
 
 
