@@ -28,22 +28,111 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-import button
-import game
-import tarot
-from config import display, neo_pixel
-from data import ham_radio_questions, cards
 
+class Menu:
+    """
+    Base class to handle a menu system
+    """
 
-def system():
-    """
-    Function to handle the menu system
-    """
-    neo_pixel.clear()
-    display.text('main menu --------- left: game right: tarot', timed=False)
-    button_pressed = button.press()
-    # print(button_pressed)
-    if button_pressed == 3:
-        game.questions(ham_radio_questions)
-    elif button_pressed == 4:
-        tarot.reading(cards)
+    def __init__(self, display, neo_pixel, data, button, game, tarot):
+        """
+        Params:
+            display: object
+            neo_pixel: object
+            data: object
+            button: object
+            game: object
+            tarot: object
+        """
+        self.display = display
+        self.neo_pixel = neo_pixel
+        self.data = data
+        self.button = button
+        self.game = game
+        self.tarot = tarot
+        self.text = None
+        self.button_pressed = None
+
+    def __tarot_reading_menu(self):
+        """
+        Private method to handle the tarot reading
+        """
+        self.tarot.reading(self.data.cards)
+
+    def __game_menu_1(self):
+        """
+        Private method to handle the game menu 1
+        """
+        self.text = 'game menu 1 --------- U: games  D: foo'
+        self.display.text(self.text, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
+        elif self.button_pressed == 3:
+            pass
+
+    def __game_menu_2(self):
+        """
+        Private method to handle the game menu 2
+        """
+        self.text = 'game menu 2 --------- U: games  D: foo'
+        self.display.text(self.text, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
+        elif self.button_pressed == 3:
+            pass
+
+    def __extras_menu(self):
+        """
+        Private method to handle the extras menu
+        """
+        self.text = 'extras menu --------- U: games  D: foo'
+        self.display.text(self.text, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
+        elif self.button_pressed == 3:
+            pass
+
+    def __bad_advice_menu(self):
+        """
+        Private method to handle the bad advice menu
+        """
+        self.text = 'bad advice menu --------- U: games  D: foo'
+        self.display.text(self.text, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
+        elif self.button_pressed == 3:
+            pass
+
+    def __main_menu(self):
+        """
+        Private method to handle the main menu
+        """
+        self.text = 'main menu --------- U: games menu D: tarot reading L: foo     R: bar'
+        self.display.text(self.text, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.instructions)
+        elif self.button_pressed == 2:
+            self.__game_menu_1()
+        # elif self.button_press() == 3:
+        #     __game_menu_2()
+        # elif button_pressed == 4:
+        #     __tarot_reading_menu()
+        # elif button_pressed == 6:
+        #     __bad_advice_menu()
+        # elif button_pressed == 5:
+        #     __extras_menu()
+
+    def system(self):
+        """
+        Method to handle the menu system
+        """
+        self.display.text('welcome DC540 Badge Owner')
+        while True:
+            self.neo_pixel.clear()
+            self.__main_menu()
+

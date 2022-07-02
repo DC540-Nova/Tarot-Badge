@@ -140,14 +140,14 @@ def press():
     """
     while True:
         if not BUTTON_UP.value():
-            return
+            return 1
         elif not BUTTON_DOWN.value():
-            return
+            return 2
         elif not BUTTON_LEFT.value():
-            return
+            return 3
         elif not BUTTON_RIGHT.value():
-            return
+            return 4
         elif not BUTTON_SUBMIT.value():
-            return
+            return 5
         elif not BUTTON_EXTRA.value():
-            return
+            return 6

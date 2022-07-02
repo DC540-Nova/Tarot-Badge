@@ -19,3 +19,4 @@ mpremote connect /dev/tty.u* cp pair.py :
 mpremote connect /dev/tty.u* cp unittest.py :
 mpremote connect /dev/tty.u* cp morse_code.py :
 mpremote connect /dev/tty.u* cp encryption.py :
+mpremote connect /dev/tty.u* cp nrf24l01.py :

@@ -436,30 +436,39 @@ class Display:
         for y in range(0, height, 8):
             self.__block(0, y, width - 1, y + 7, line)
 
-    def text(self, text, color=0b1111111111100000, font=UNISPACE_FONT, background=0, sleep_time=3, timed=True):
+    def text(self, text, x=8, y=0, color=0b1111111111100000, font=UNISPACE_FONT, wrap=True, clear=True, sleep_time=3,
+             timed=True):
         """
         Method to draw text
 
         Params:
             text: str
+            x: int, optional
+            y: int, optional
             color: int, optional
             font: object, optional
+            wrap: bool, optional
+            clear: bool, optional
             sleep_time: int, optional
             timed: bool, optional
         """
-        self.POWER_DISPLAY.value(0)
-        self.rotation = self.ROTATE[0]
-        self.__config()
-        x = 8
-        y = 0
+        if clear:
+            self.POWER_DISPLAY.value(0)
+            self.rotation = self.ROTATE[0]
+            self.__config()
         spacing = 1
         background = 0
-        for letter in text:
-            if letter == ' ' and x > 100:  # wrap text as good as possible
-                x = 0
-                y += 24
-            width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
-            x += (width + spacing)
+        if wrap:
+            for letter in text:
+                if letter == ' ' and x > 100:  # wrap text as good as possible
+                    x = 0
+                    y += 24
+                width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
+                x += (width + spacing)
+        else:
+            for letter in text:
+                width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
+                x += (width + spacing)
         self.POWER_DISPLAY.value(1)
         if timed:
             utime.sleep(sleep_time)

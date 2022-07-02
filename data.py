@@ -28,6 +28,8 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+instructions = 'Welcome to the DC540 Tarot Badge.  Here you can play games and get a tarot reading and do all sorts of stuff stay tuned.  Bla bla foo.'  # noqa
+
 boss_ids = []  # noqa
 boss_ids.append('e66038b7137a9935')
 boss_ids.append('e66038b7135fa935')
@@ -829,77 +831,92 @@ flash_cards = {
         ],
 }
 
+# user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
 morse_code_practice_easy = {
-    'A': '.-', # betsy here is an example OR you can use 'A'
-    'B': 'Dddd',
-    'C': 'DdDd',
-    'D': 'Ddd',
-    'E': 'd',
-    'F': 'ddDd',
-    'G': 'DDd',
-    'H': 'dddd',
-    'I': 'dd',
-    'J': 'dDDD',
-    'K': 'DdD',
-    'L': 'dDdd',
-    'M': 'DD',
-    'N': 'Dd',
-    'O': 'DDD',
-    'P': 'dDDd',
-    'Q': 'DDdD',
-    'R': 'dDd',
-    'S': 'ddd',
-    'T': 'D',
-    'U': 'ddD',
-    'V': 'dddD',
-    'W': 'dDD',
-    'X': 'DddD',
-    'Y': 'DdDD',
-    'Z': 'DDdd',
-    '0': 'DDDDD',
-    '1': 'dDDDD',
-    '2': 'ddDDD',
-    '3': 'dddDD',
-    '4': 'ddddD',
-    '5': 'ddddd',
-    '6': 'Ddddd',
-    '7': 'DDddd',
-    '8': 'DDDdd',
-    '9': 'DDDDd',
+    'A': 'A',
+    'B': 'B',
+    'C': 'C',
+    'D': 'D',
+    'E': 'E',
+    'F': 'F',
+    'G': 'G',
+    'H': 'H',
+    'I': 'I',
+    'J': 'J',
+    'K': 'K',
+    'L': 'L',
+    'M': 'M',
+    'N': 'N',
+    'O': 'O',
+    'P': 'P',
+    'Q': 'Q',
+    'R': 'R',
+    'S': 'S',
+    'T': 'T',
+    'U': 'U',
+    'V': 'V',
+    'W': 'W',
+    'X': 'X',
+    'Y': 'Y',
+    'Z': 'Z',
+    '0': '0',
+    '1': '1',
+    '2': '2',
+    '3': '3',
+    '4': '4',
+    '5': '5',
+    '6': '6',
+    '7': '7',
+    '8': '8',
+    '9': '9',
 }
 
+# user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
 morse_code_practice_medium = {
     'sos': 'SOS', # betsy you can do 'SOS' or '--- ... ---'
     'hello': 'HELLO',
     'DEFCON30': 'DEFCON30'
 }
 
+# user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
 morse_code_practice_advanced = {
-    'Why the fuck am I here?': 'dDdDDDDDdDdddDddDsDds', # betsy change this
-    'Why the fuck am you here?': 'DDDddDdDdDsDs',
+    'MAJOR ARCANE': 'MAJOR ARCANE', # betsy change this
+    'WHEEL OF FORTUNE': 'WHEEL OF FORTUNE',
+    'THE HANGED MAN': 'THE HANGED MAN',
 }
 
+
 morse_code_game = {
-    'Decode This Answer': 'ddddDpdddDpddDDDpdDDDDpdddDDpddDDDD',
+    'Decode This Answer': 'FOO',
 }
+
+# there will be instructions - decipher all three ciphers and put them in order
+# press A BUTTON to submit answer
+ciphers101_game = {
+    'Cipher 1': 'Hsle td esp yfxmpc ehpyej-escpp',
+    'Cipher 2': 'dGhlIGFuc3dlciB0byBsaWZlIHRoZSB1bml2ZXJzZSBhbmQgZXZlcnl0aGluZw==',
+    'Cipher 3': 'this will be a vignere cipher',
+}
+
+
+
 
 
 stego_game2_answer = {
-    'The Answer For Game 2 is': '343421',
+    'Please enter the answer for Game 1': '343421',
 }
 reenactment_game3_answer = {
-    'The Answer For Game 3 is': '441211'
+    'Please enter the answer for Game 2': '441211'
 }
 SavengerHunt_game4_answer = {
-    'The Answer For Game 3 is': '141431'
+    'Please enter the answer for Game 3': '141431'
 }
 ShittyDeck_game7_answer = {
-    'The Answer for Game 7 is': '333212',
+    'Please enter the answer for Game 4': '333212',
 }
 morsecode_game8_answer = {
-    'The Answer for Game 8 is': '442132',
+    'Please enter the answer for Game 5 ': '442132',
 }
-
-crypto_game10_answer = {
-    'The Answer for Game 8 is': '234122',
+ciphers101_game10_answer = {
+    'Please enter the answer for Game 9': '234222',
 }

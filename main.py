@@ -40,11 +40,14 @@ import _thread
 import random
 import gc
 
+from config import display, neo_pixel, nrf
 import data
-import file_manager
-from config import display, neo_pixel
+import button
 import game
-import morse_code
+import tarot
+from menu import Menu
+
+menu = Menu(display, neo_pixel, data, button, game, tarot)
 
 
 def bg_task():
@@ -60,18 +63,6 @@ def bg_task():
             if count == 19:
                 neo_pixel.clear()
                 _thread.exit()  # noqa
-
-
-def sd_test():
-    """
-    Function to test sd card functionality
-    """
-    with open('sd/test01.txt', 'w') as f:
-        f.write('Hello, Baab!\r\n')
-        f.write('This is the United States calling are we reaching?\r\n')
-    with open('sd/test01.txt', 'r') as f:
-        data = f.read()
-        print(data)
 
 
 def img_test():
@@ -92,12 +83,38 @@ def img_test():
     display.handle_threading_teardown()
 
 
-game.morse_code(data.morse_code_practice_easy)
+if __name__ == '__main__':
+    img_test()
+    menu.system()
 
 
 
-# refactor
-#game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
+
+
+
+# def sd_test():
+#     """
+#     Function to test sd card functionality
+#     """
+#     with open('sd/test01.txt', 'w') as f:
+#         f.write('Hello, Baab!\r\n')
+#         f.write('This is the United States calling are we reaching?\r\n')
+#     with open('sd/test01.txt', 'r') as f:
+#         data = f.read()
+#         print(data)
+
+
+
+
+
+
+
+#game.morse_code(data.morse_code_practice_easy)
+
+
+
+
+# game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
 # file_manager.write_games_won_file(game_number)
 
 
@@ -107,22 +124,10 @@ game.morse_code(data.morse_code_practice_easy)
 #     game.won(game_won)
 
 
-# flash cards will have two modes, one will be a practice and the other game mode, x out of y to win.
-# do not give feedback on games that are actual but give feedback on practice such as right just flash cards
-# morse_code also will have practice w/ feedback and the actual will be none
-# stego - game on badge will submit instructions and submit your answer (numeric sequence)
-# idea: we can use a button for dot and a button for dash and a third button for submit and a fourth button for backspace, fifth button for space
 
 
-# tarot.reading(data.cards)
-
-# sd_test()
-# img_test()
-# questions()
-# import game
-# game.questions(data.ham_radio_questions)
-
-morse_code.dash()
-morse_code.dot()
-morse_code.space()
-morse_code.pause()
+# create fake instruction placeholder (press button to advance)
+# build out tarot trivia and flash cards for betsy next time we meet and demo it
+# game_won = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
+# if game_won:
+#     game.won(game_won)
