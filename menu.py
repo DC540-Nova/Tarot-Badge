@@ -131,8 +131,7 @@ class Menu:
         """
         Method to handle the menu system
         """
-        self.display.text('welcome DC540 Badge Owner')
+        self.display.image('dc540_logo.raw')
         while True:
             self.neo_pixel.clear()
             self.__main_menu()
-
