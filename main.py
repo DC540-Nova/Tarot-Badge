@@ -38,16 +38,17 @@
 
 from config import display, neo_pixel, nrf, BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, \
     BUTTON_EXTRA
+
+from button import Button
+from demo import Demo
+from menu import Menu
 import game
 import tarot
-from button import Button
-from menu import Menu
 import data
-from demo import Demo
 
 button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
-menu = Menu(display, neo_pixel, button, game, tarot, data)
 demo = Demo(display, neo_pixel)
+menu = Menu(display, neo_pixel, button, game, tarot, data)
 
 
 if __name__ == '__main__':
