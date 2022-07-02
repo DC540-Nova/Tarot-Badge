@@ -182,4 +182,7 @@ class Encryption:
                     num += 128
                 un_shifted_message += chr(num)
                 decrypted_message = un_shifted_message
-            return decrypted_message[:int(message_length / 2)]
+            if message_length == 1 or message_length == 5:
+                return decrypted_message[:int((message_length / 2) + 1)]
+            else:
+                return decrypted_message[:int(message_length / 2)]
