@@ -102,17 +102,17 @@ class Button:
         """
         while True:
             if not self.button_left.value():
-                return 1
+                return 0
             elif not self.button_right.value():
-                return 2
+                return 1
             elif not self.button_up.value():
-                return 3
+                return 2
             elif not self. button_down.value():
-                return 4
+                return 3
             elif not self. button_submit.value():
-                return 5
+                return 4
             elif not self. button_extra.value():
-                return 6
+                return 5
 
     def yes_no(self):
         """

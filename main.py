@@ -30,9 +30,11 @@
 
 # pip install mpremote
 # mpremote connect /dev/tty.u* cp main.py :
-# mpremote connect /dev/tty.u* rm ili9341.py :
+# mpremote connect /dev/tty.u* rm ili9341.py
 # mpremote connect /dev/tty.u* cp main.py :/sd/
 # mpremote connect /dev/tty.u* cp *.* :/sd/
+# mpremote connect /dev/tty.u* ls
+# mpremote connect /dev/tty.u* cat games_won
 # mpremote connect /dev/tty.u* exec 'import main;main.img_test()'
 # screen /dev/tty.u*
 
@@ -43,17 +45,21 @@ from button import Button
 from demo import Demo
 from tarot import Tarot
 from menu import Menu
-import game
+from game import Game
+from file_manager import FileManager
 import data
 
 button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+file_manager = FileManager(display, neo_pixel, button)
 demo = Demo(display, neo_pixel)
+game = Game(display, file_manager, button)
 tarot = Tarot(display, button, data.cards)
 menu = Menu(display, neo_pixel, button, game, tarot, data)
 
 
 if __name__ == '__main__':
     # demo.play()
+    file_manager.update_games_won()
     menu.system()
 
 

@@ -46,10 +46,10 @@ class Menu:
         """
         self.display = display
         self.neo_pixel = neo_pixel
-        self.data = data
         self.button = button
         self.game = game
         self.tarot = tarot
+        self.data = data
         self.text = None
         self.button_pressed = None
 
@@ -63,25 +63,33 @@ class Menu:
         """
         Private method to handle the game menu 1
         """
-        self.text = 'game menu 1 --------- L: tarot trivia  R: flash cards'
+        self.text = 'games 1   -------   L: tarot trivia R: flash cards'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+            won_game = self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 1)
+            print(won_game)
+            print(type(won_game))
+            if won_game:
+                self.game.won(won_game)
         elif self.button_pressed == 2:
-            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
+            won_game = self.game.multiple_choice_questions(self.data.flash_cards, '2', 1)
+            print(won_game)
+            print(type(won_game))
+            if won_game:
+                self.game.won(won_game)
 
     def __game_menu_2(self):
         """
         Private method to handle the game menu 2
         """
-        self.text = 'game menu 2 --------- L: tarot trivia  R: flash cards'
+        self.text = 'games w   -------   L: tarot trivia R: flash cards'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+            self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 1)
         elif self.button_pressed == 2:
-            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
+            self.game.multiple_choice_questions(self.data.flash_cards, '2', 1)
 
     def __bad_advice_menu(self):
         """
@@ -91,9 +99,9 @@ class Menu:
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+            self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 2)
         elif self.button_pressed == 2:
-            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
+            self.game.multiple_choice_questions(self.data.flash_cards, '2', 2)
 
     def __extras_menu(self):
         """
@@ -103,9 +111,9 @@ class Menu:
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+            self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 2)
         elif self.button_pressed == 2:
-            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
+            self.game.multiple_choice_questions(self.data.flash_cards, '2', 2)
 
     def __main_menu(self):
         """
@@ -114,8 +122,6 @@ class Menu:
         self.text = 'main menu --------- L: instructions R: games 1 U: games 2 D: tarot reading'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
-        print(self.button_pressed)
-        return
         if self.button_pressed == 1:
             self.display.text(self.data.instructions)
         elif self.button_pressed == 2:
@@ -135,5 +141,4 @@ class Menu:
         """
         self.display.image('dc540_logo.raw')
         while True:
-            self.neo_pixel.clear()
             self.__main_menu()

@@ -522,7 +522,7 @@ tarot_trivia = {
             'D. 84',
             2
         ],
-    'What tarot suit is associated with thought/intelligence?':
+    'What tarot suit is associated with thought intelligence?':
         [
             'A. Wands',
             'B. Swords',
@@ -530,7 +530,7 @@ tarot_trivia = {
             'D. Pentacles',
             2
         ],
-    'What tarot suit is associated with emotion/love?':
+    'What tarot suit is associated with emotion or love?':
         [
             'A. Wands',
             'B. Pentacles',

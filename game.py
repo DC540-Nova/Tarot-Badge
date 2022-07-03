@@ -36,44 +36,41 @@ class Game:
     Base class to handle a game
     """
 
-    def __init__(self, display, file_manager, button, question_bank, game_number, num_questions_to_win, image=False,
-                 practice=False):
+    def __init__(self, display, file_manager, button):
         """
         Params:
             display: object
             button: object
             file_manager: object
+
+        """
+        self.display = display
+        self.button = button
+        self.file_manager = file_manager
+
+    def multiple_choice_questions(self, question_bank, game_number, num_questions_to_win, image=False, practice=False):
+        """
+        Method to handle a generic multiple choice question loop
+
+        Params:
             question_bank: dict
             game_number: str
             num_questions_to_win: int
             image: bool, optional
             practice: bool, optional
-        """
-        self.display = display
-        self.button = button
-        self.file_manager = file_manager
-        self.question_bank = question_bank
-        self.game_number = game_number
-        self.num_questions_to_win = num_questions_to_win
-        self.image = image
-        self.practice = practice
-
-    def multiple_choice_questions(self):
-        """
-        Method to handle a generic multiple choice question loop
 
         Returns:
             str or bool
         """
-        questions = list(self.question_bank)
+        questions = list(question_bank)
         question_number = 0
         counter = 0
         answer_list = []
         for _ in questions:
-            question, answers = random.choice(list(self.question_bank.items()))
-            if not self.image:
+            question, answers = random.choice(list(question_bank.items()))
+            if not image:
                 self.display.text(question)
-            elif self.image:
+            else:
                 self.display.image('sd/' + question)
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
@@ -81,23 +78,21 @@ class Game:
                 self.display.text(answer)
             self.display.text('CHOOSE...')
             answer = self.button.multiple_choice()
-            if not self.practice:
+            if not practice:
                 counter += 1
-                if counter == self.num_questions_to_win:
-                    break
             if answer == correct_answer_index:
-                if not self.practice:
+                if not practice:
                     answer_list.append(1)
-                elif self.practice:
+                elif practice:
                     self.display.text('CORRECT')
             else:
-                if not self.practice:
+                if not practice:
                     answer_list.append(0)
-                elif self.practice:
+                elif practice:
                     self.display.text('INCORRECT')
             question_number += 1
-            del self.question_bank[question]
-            if self.practice:
+            del question_bank[question]
+            if practice:
                 self.display.text('Would you like to practice with another question? ')
                 self.display.text('CHOOSE...')
                 response = self.button.yes_no()
@@ -105,16 +100,17 @@ class Game:
                     pass
                 elif response != 'yes':
                     return
-        answer_total = 0
-        for answer in answer_list:
-            if answer == 1:
-                answer_total += 1
-            else:
-                pass
-        if answer_total >= self.num_questions_to_win:
-            return self.game_number + ' '
-        else:
-            return False
+            answer_total = 0
+            for answer in answer_list:
+                if answer == 1:
+                    answer_total += 1
+                else:
+                    pass
+            if counter == num_questions_to_win:
+                if answer_total >= num_questions_to_win:
+                    return game_number + ' '
+                else:
+                    return False
 
     # def morse_code(self):
     #     """
@@ -124,13 +120,14 @@ class Game:
     #         str or bool
     #     """
 
-    def won(self):
+    def won(self, game_won):
         """
         Method to handle a single game win
 
         Params:
-            game_won: int
+            game_won: str
         """
         games_won = self.file_manager.read_games_won_file()
-        games_won += self.game_number
+        games_won += game_won
         self.file_manager.write_games_won_file(games_won)
+        self.file_manager.update_games_won()
