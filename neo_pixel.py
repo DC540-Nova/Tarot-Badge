@@ -52,19 +52,20 @@ class NeoPixel:
     GRAY = (128, 128, 128)
     COLORS = (BLACK, RED, YELLOW, GREEN, CYAN, BLUE, PURPLE, WHITE, BROWN, ORANGE, GRAY)
 
-    def __init__(self, pin, LED_COUNT=LED_COUNT):  # noqa
+    def __init__(self, pin, led_pin, led_count):  # noqa
         """
         Params:
             pin: object
-            LED_COUNT: int
+            led_pin: int
+            led_count: int
         """
-        # create the StateMachine with the ws2812 program, outputting on Pin(LED_PIN)
-        sm = rp2.StateMachine(0, self.__ws2812, freq=8_000_000, sideset_base=pin(LED_PIN))  # noqa
+        # create the StateMachine with the ws2812 program, outputting on Pin(led_pin)
+        sm = rp2.StateMachine(0, self.__ws2812, freq=8_000_000, sideset_base=pin(led_pin))  # noqa
         # start the StateMachine, it will wait for data on its FIFO
         sm.active(1)  # noqa
         # display a pattern on the LEDs via an array of LED RGB values
-        ar = array.array('I', [0 for _ in range(LED_COUNT)])
-        self.num_leds = LED_COUNT
+        ar = array.array('I', [0 for _ in range(led_count)])
+        self.num_leds = led_count
         self.sm = sm
         self.ar = ar
         self.spheres = [31, 27, 25, 20, 18, 15, 7, 9, 4, 0]
@@ -161,7 +162,19 @@ class NeoPixel:
             self.__show()
         else:
             self.__set(led, color)
-            self.__show(brightness)  # noqa
+            self.__show(int(brightness))
+
+    def off(self, led, color=BLACK, brightness=1.0):
+        """
+        Method to handle a clear of an individual neo pixel
+
+        Params:
+            led: int
+            color: tuple, optional
+            brightness: float, optional
+        """
+        self.__set(led, color)
+        self.__show(int(brightness))
 
     def flicker(self, color=RED, repeat=1):
         """

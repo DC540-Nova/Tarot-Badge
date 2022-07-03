@@ -99,34 +99,34 @@ class MorseCode:
         self.color = color
         self.B_RATE = 0.25
 
-    def dash(self):
+    def __dash(self):
         """
-        Method to handle morse code dash on a neo_pixel display
+        Private method to handle morse code dash on a neo_pixel display
         """
         self.neo_pixel.on(self.color, all_on=True)
         sleep(3 * self.B_RATE)
         self.neo_pixel.clear(hard_clear=True)
         sleep(self.B_RATE)
 
-    def dot(self):
+    def __dot(self):
         """
-        Method to handle morse code dot on a neo_pixel display
+        Private method to handle morse code dot on a neo_pixel display
         """
         self.neo_pixel.on(self.color, all_on=True)
         sleep(self.B_RATE)
         self.neo_pixel.clear(hard_clear=True)
         sleep(self.B_RATE)
 
-    def space(self):
+    def __space(self):
         """
-        Method to handle morse code space on a neo_pixel display
+        Private method to handle morse code space on a neo_pixel display
         """
         self.neo_pixel.clear(hard_clear=True)
         sleep(self.B_RATE)
 
-    def pause(self):
+    def __pause(self):
         """
-        Method to handle morse code pause on a neo_pixel display
+        Private Mmethod to handle morse code pause on a neo_pixel display
         """
         self.neo_pixel.clear(hard_clear=True)
         sleep(7 * self.B_RATE)
@@ -149,8 +149,8 @@ class MorseCode:
             encoded_sentence += self.CODE[character] + ' '
         for letter in encoded_sentence:
             if letter == '.':
-                self.dot()
+                self.__dot()
             elif letter == '-':
-                self.dash()
+                self.__dash()
             else:
-                self.pause()
+                self.__pause()
