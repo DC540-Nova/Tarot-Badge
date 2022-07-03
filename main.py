@@ -38,8 +38,8 @@
 # mpremote connect /dev/tty.u* exec 'import main;main.img_test()'
 # screen /dev/tty.u*
 
-from config import display, neo_pixel, nrf, BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, \
-    BUTTON_EXTRA
+from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel, \
+    nrf
 
 from button import Button
 from demo import Demo
@@ -61,36 +61,3 @@ if __name__ == '__main__':
     # demo.play()
     file_manager.update_games_won()
     menu.system()
-
-
-
-
-
-
-
-
-
-
-
-#game.morse_code(data.morse_code_practice_easy)
-
-
-
-
-# game_number = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
-# file_manager.write_games_won_file(game_number)
-
-
-# game_won = game.multiple_choice_questions(data.tarot_trivia, '02', 1, practice=False)
-# print(game_won)
-# if game_won:
-#     game.won(game_won)
-
-
-
-
-# create fake instruction placeholder (press button to advance)
-# build out tarot trivia and flash cards for betsy next time we meet and demo it
-# game_won = game.multiple_choice_questions(data.flash_cards, '01', 2, image=True)
-# if game_won:
-#     game.won(game_won)
