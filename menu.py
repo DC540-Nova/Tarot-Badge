@@ -118,10 +118,10 @@ class Menu:
             self.display.text(self.data.instructions)
         elif self.button_pressed == 2:
             self.__game_menu_1()
-        # elif self.button_press() == 3:
-        #     __game_menu_2()
-        # elif button_pressed == 4:
-        #     __tarot_reading_menu()
+        elif self.button_pressed == 3:
+            self.__game_menu_2()
+        elif self.button_pressed == 4:
+            self.__tarot_reading_menu()
         # elif button_pressed == 6:
         #     __bad_advice_menu()
         # elif button_pressed == 5:

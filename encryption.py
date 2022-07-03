@@ -153,6 +153,9 @@ class Encryption:
             # convert encrypted_message from chars to hex bytes
             for _ in encrypted_message:
                 hex_encrypted_message += hex(ord(_)) + ', '
+            if message_length >= 34:
+                return 'message must be less than 38 chars'
+            print(message_length)
             return hex_encrypted_message
         if mode[0] == 'd':
             # convert message from hex bytes to chars
@@ -184,5 +187,7 @@ class Encryption:
                 decrypted_message = un_shifted_message
             if message_length == 1 or message_length == 5:
                 return decrypted_message[:int((message_length / 2) + 1)]
+            elif message_length >= 34:
+                return 'message must be less than 34 chars'
             else:
                 return decrypted_message[:int(message_length / 2)]
