@@ -20,9 +20,7 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# y
 # SOFTWARE.
 
 # pyright: reportMissingImports=false
@@ -30,56 +28,69 @@
 
 import random
 
-from config import display
-import button
 
-
-def reading(card_bank):
+class Tarot:
     """
-    Function to handle a tarot reading
-
-    Params:
-        card_bank, dict
+    Base class to handle tarot card reading/s
     """
-    reading = list(card_bank)  # noqa
-    counter = 1
-    for _ in card_bank:
-        card, card_reading = random.choice(list(card_bank.items()))
-        meaning = random.randint(1, 2)  # randomize card up or down position
-        if counter == 1:
-            display.text('Querent', timed=False)
-        elif counter == 2:
-            display.text('Obstacle', timed=False)
-        elif counter == 3:
-            display.text('Influences', timed=False)
-        elif counter == 4:
-            display.text('Root', timed=False)
-        elif counter == 5:
-            display.text('Past', timed=False)
-        elif counter == 6:
-            display.text('Future', timed=False)
-        elif counter == 7:
-            display.text('Attitude', timed=False)
-        elif counter == 8:
-            display.text('Environment', timed=False)
-        elif counter == 9:
-            display.text('Hopes & Fears', timed=False)
-        elif counter == 10:
-            display.text('Outcome', timed=False)
-        _ = button.press()
-        if meaning == 1:
-            display.image('sd/' + card_reading[2], timed=False)
-        if meaning == 2:
-            display.image('sd/' + card_reading[2], up=False, timed=False)
-        _ = button.press()
-        if meaning == 1:
-            display.text(card_reading[0], timed=False)
-        if meaning == 2:
-            display.text(card_reading[1], timed=False)
-        _ = button.press()
-        counter += 1
-        del card_bank[card]
-        if counter > 10:
-            display.POWER_DISPLAY.value(0)
-            display.clear()
-            break
+
+    def __init__(self, display, button, card_bank):
+        """
+        Params:
+            display: object
+            button: object
+            card_bank: dict
+        """
+        self.display = display
+        self.button = button
+        self.card_bank = card_bank
+
+    def reading(self):
+        """
+        Function to handle a tarot reading
+
+        Params:
+            card_bank, dict
+        """
+        # reading = list(self.card_bank)  # noqa
+        counter = 1
+        for _ in self.card_bank:
+            card, card_reading = random.choice(list(self.card_bank.items()))
+            meaning = random.randint(1, 2)  # randomize card up or down position
+            if counter == 1:
+                self.display.text('Querent', timed=False)
+            elif counter == 2:
+                self.display.text('Obstacle', timed=False)
+            elif counter == 3:
+                self.display.text('Influences', timed=False)
+            elif counter == 4:
+                self.display.text('Root', timed=False)
+            elif counter == 5:
+                self.display.text('Past', timed=False)
+            elif counter == 6:
+                self.display.text('Future', timed=False)
+            elif counter == 7:
+                self.display.text('Attitude', timed=False)
+            elif counter == 8:
+                self.display.text('Environment', timed=False)
+            elif counter == 9:
+                self.display.text('Hopes & Fears', timed=False)
+            elif counter == 10:
+                self.display.text('Outcome', timed=False)
+            _ = self.button.press()
+            if meaning == 1:
+                self.display.image('sd/' + card_reading[2], timed=False)
+            if meaning == 2:
+                self.display.image('sd/' + card_reading[2], up=False, timed=False)
+            _ = self.button.press()
+            if meaning == 1:
+                self.display.text(card_reading[0], timed=False)
+            if meaning == 2:
+                self.display.text(card_reading[1], timed=False)
+            _ = self.button.press()
+            counter += 1
+            del self.card_bank[card]
+            if counter > 10:
+                self.display.POWER_DISPLAY.value(0)
+                self.display.clear()
+                break

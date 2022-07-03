@@ -41,35 +41,24 @@ from config import display, neo_pixel, nrf, BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT,
 
 from button import Button
 from demo import Demo
+from tarot import Tarot
 from menu import Menu
 import game
-import tarot
 import data
 
 button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 demo = Demo(display, neo_pixel)
+tarot = Tarot(display, button, data.cards)
 menu = Menu(display, neo_pixel, button, game, tarot, data)
 
 
 if __name__ == '__main__':
-    demo.play()
+    # demo.play()
     menu.system()
 
 
 
 
-
-
-# def sd_test():
-#     """
-#     Function to test sd card functionality
-#     """
-#     with open('sd/test01.txt', 'w') as f:
-#         f.write('Hello, Baab!\r\n')
-#         f.write('This is the United States calling are we reaching?\r\n')
-#     with open('sd/test01.txt', 'r') as f:
-#         data = f.read()
-#         print(data)
 
 
 

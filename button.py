@@ -72,19 +72,19 @@ class Button:
         while True:
             if len(word) >= max_nums:
                 word = ''
-            if not self.button_up.value():
+            if not self.button_left.value():
                 word += '1'
                 self.display.text(word, timed=False)
                 sleep(self.press_time)
-            elif not self.button_down.value():
+            elif not self.button_right.value():
                 word += '2'
                 self.display.text(word, timed=False)
                 sleep(self.press_time)
-            elif not self.button_left.value():
+            elif not self.button_up.value():
                 word += '3'
                 self.display.text(word, timed=False)
                 sleep(self.press_time)
-            elif not self.button_right.value():
+            elif not self.button_down.value():
                 word += '4'
                 self.display.text(word, timed=False)
                 sleep(self.press_time)
@@ -101,14 +101,18 @@ class Button:
             str
         """
         while True:
-            if not self.button_up.value():
-                return 0
-            elif not self.button_down.value():
+            if not self.button_left.value():
                 return 1
-            elif not self.button_left.value():
+            elif not self.button_right.value():
                 return 2
-            elif not self. button_right.value():
+            elif not self.button_up.value():
                 return 3
+            elif not self. button_down.value():
+                return 4
+            elif not self. button_submit.value():
+                return 5
+            elif not self. button_extra.value():
+                return 6
 
     def yes_no(self):
         """
@@ -118,9 +122,9 @@ class Button:
             str
         """
         while True:
-            if not self.button_up.value():
+            if not self.button_left.value():
                 return 'yes'
-            elif not self.button_down.value():
+            elif not self.button_right.value():
                 return 'no'
 
     def morse_code(self, max_chars=8):
@@ -137,15 +141,15 @@ class Button:
         while True:
             if len(word) >= max_chars:
                 word = ''
-            if not self.button_up.value():
+            if not self.button_left.value():
                 word += '.'
                 self.display.text(word, timed=False)
                 sleep(self.press_time)
-            elif not self.button_down.value():
+            elif not self.button_right.value():
                 word += '-'
                 self.display.text(word, timed=False)
                 sleep(self.press_time)
-            elif not self.button_down.value():
+            elif not self.button_up.value():
                 word += ' '
                 self.display.text(word, timed=False)
                 sleep(self.press_time)
@@ -158,15 +162,15 @@ class Button:
         Method to handle a button press
         """
         while True:
-            if not self.button_up.value():
+            if not self.button_left.value():
                 return 1
-            elif not self.button_down.value():
-                return 2
-            elif not self.button_left.value():
-                return 3
             elif not self.button_right.value():
+                return 2
+            elif not self.button_up.value():
+                return 3
+            elif not self. button_down.value():
                 return 4
-            elif not self.button_submit.value():
+            elif not self. button_submit.value():
                 return 5
-            elif not self.button_extra.value():
+            elif not self. button_extra.value():
                 return 6

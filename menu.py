@@ -63,57 +63,59 @@ class Menu:
         """
         Private method to handle the game menu 1
         """
-        self.text = 'game menu 1 --------- U: games  D: foo'
+        self.text = 'game menu 1 --------- L: tarot trivia  R: flash cards'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
-        elif self.button_pressed == 3:
-            pass
+            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+        elif self.button_pressed == 2:
+            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
 
     def __game_menu_2(self):
         """
         Private method to handle the game menu 2
         """
-        self.text = 'game menu 2 --------- U: games  D: foo'
+        self.text = 'game menu 2 --------- L: tarot trivia  R: flash cards'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
-        elif self.button_pressed == 3:
-            pass
-
-    def __extras_menu(self):
-        """
-        Private method to handle the extras menu
-        """
-        self.text = 'extras menu --------- U: games  D: foo'
-        self.display.text(self.text, timed=False)
-        self.button_pressed = self.button.press()
-        if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
-        elif self.button_pressed == 3:
-            pass
+            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+        elif self.button_pressed == 2:
+            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
 
     def __bad_advice_menu(self):
         """
         Private method to handle the bad advice menu
         """
-        self.text = 'bad advice menu --------- U: games  D: foo'
+        self.text = 'bad advice menu --------- L: tarot trivia  R: flash cards'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.flash_cards, '01', 2)
-        elif self.button_pressed == 3:
-            pass
+            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+        elif self.button_pressed == 2:
+            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
+
+    def __extras_menu(self):
+        """
+        Private method to handle the extras menu
+        """
+        self.text = 'extras menu --------- L: tarot trivia  R: flash cards'
+        self.display.text(self.text, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.game.multiple_choice_questions(self.data.tarot_trivia, '01', 2)
+        elif self.button_pressed == 2:
+            self.game.multiple_choice_questions(self.data.flash_cards, '02', 2)
 
     def __main_menu(self):
         """
         Private method to handle the main menu
         """
-        self.text = 'main menu --------- U: games menu D: tarot reading L: foo     R: bar'
+        self.text = 'main menu --------- L: instructions R: games 1 U: games 2 D: tarot reading'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
+        print(self.button_pressed)
+        return
         if self.button_pressed == 1:
             self.display.text(self.data.instructions)
         elif self.button_pressed == 2:
@@ -122,10 +124,10 @@ class Menu:
             self.__game_menu_2()
         elif self.button_pressed == 4:
             self.__tarot_reading_menu()
-        # elif button_pressed == 6:
-        #     __bad_advice_menu()
-        # elif button_pressed == 5:
-        #     __extras_menu()
+        elif self.button_pressed == 5:
+            self.__bad_advice_menu()
+        elif self.button_pressed == 6:
+            self.__extras_menu()
 
     def system(self):
         """

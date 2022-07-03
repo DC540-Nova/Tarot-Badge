@@ -32,9 +32,9 @@ from machine import Pin, SPI
 
 # button config
 BUTTON_LEFT = Pin(21, Pin.IN, Pin.PULL_UP)
-BUTTON_UP = Pin(20, Pin.IN, Pin.PULL_UP)
-BUTTON_DOWN = Pin(19, Pin.IN, Pin.PULL_UP)
-BUTTON_RIGHT = Pin(18, Pin.IN, Pin.PULL_UP)
+BUTTON_RIGHT = Pin(20, Pin.IN, Pin.PULL_UP)
+BUTTON_UP = Pin(19, Pin.IN, Pin.PULL_UP)
+BUTTON_DOWN = Pin(18, Pin.IN, Pin.PULL_UP)
 BUTTON_SUBMIT = Pin(17, Pin.IN, Pin.PULL_UP)
 BUTTON_EXTRA = Pin(16, Pin.IN, Pin.PULL_UP)
 

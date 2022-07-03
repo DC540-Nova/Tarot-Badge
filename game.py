@@ -30,109 +30,107 @@
 
 import random
 
-from config import display
-import file_manager
-import button
 
-
-def multiple_choice_questions(question_bank, game_number, num_questions_to_win, image=False, practice=False):
+class Game:
     """
-    Function to handle a generic multiple choice question loop
-
-    Params:
-        question_bank, dict
-        game_number: str
-        num_questions_to_win: int
-        image: bool, optional
-        practice: bool, optional
-
-    Returns:
-        str or bool
+    Base class to handle a game
     """
-    questions = list(question_bank)  # noqa
-    question_number = 0
-    counter = 0
-    answer_list = []
-    for _ in questions:
-        question, answers = random.choice(list(question_bank.items()))
-        if not image:
-            display.text(question)
-        elif image:
-            display.image('sd/' + question)
-        correct_answer_index = answers[4]
-        answers = answers[0:-1]   # strip off correct_answer_index from being displayed
-        for answer in answers:
-            display.text(answer)
-        display.text('CHOOSE...')
-        answer = button.multiple_choice()
-        if not practice:
-            counter += 1
-            if counter == num_questions_to_win:
-                break
-        if answer == correct_answer_index:
-            if not practice:
-                answer_list.append(1)
-            elif practice:
-                display.text('CORRECT')
-        else:
-            if not practice:
-                answer_list.append(0)
-            elif practice:
-                display.text('INCORRECT')
-        question_number += 1
-        del question_bank[question]
-        if practice:
-            display.text('Would you like to practice with another question? ')
-            display.text('CHOOSE...')
-            response = button.yes_no()
-            if response == 'yes':
+
+    def __init__(self, display, file_manager, button, question_bank, game_number, num_questions_to_win, image=False,
+                 practice=False):
+        """
+        Params:
+            display: object
+            button: object
+            file_manager: object
+            question_bank: dict
+            game_number: str
+            num_questions_to_win: int
+            image: bool, optional
+            practice: bool, optional
+        """
+        self.display = display
+        self.button = button
+        self.file_manager = file_manager
+        self.question_bank = question_bank
+        self.game_number = game_number
+        self.num_questions_to_win = num_questions_to_win
+        self.image = image
+        self.practice = practice
+
+    def multiple_choice_questions(self):
+        """
+        Method to handle a generic multiple choice question loop
+
+        Returns:
+            str or bool
+        """
+        questions = list(self.question_bank)
+        question_number = 0
+        counter = 0
+        answer_list = []
+        for _ in questions:
+            question, answers = random.choice(list(self.question_bank.items()))
+            if not self.image:
+                self.display.text(question)
+            elif self.image:
+                self.display.image('sd/' + question)
+            correct_answer_index = answers[4]
+            answers = answers[0:-1]   # strip off correct_answer_index from being displayed
+            for answer in answers:
+                self.display.text(answer)
+            self.display.text('CHOOSE...')
+            answer = self.button.multiple_choice()
+            if not self.practice:
+                counter += 1
+                if counter == self.num_questions_to_win:
+                    break
+            if answer == correct_answer_index:
+                if not self.practice:
+                    answer_list.append(1)
+                elif self.practice:
+                    self.display.text('CORRECT')
+            else:
+                if not self.practice:
+                    answer_list.append(0)
+                elif self.practice:
+                    self.display.text('INCORRECT')
+            question_number += 1
+            del self.question_bank[question]
+            if self.practice:
+                self.display.text('Would you like to practice with another question? ')
+                self.display.text('CHOOSE...')
+                response = self.button.yes_no()
+                if response == 'yes':
+                    pass
+                elif response != 'yes':
+                    return
+        answer_total = 0
+        for answer in answer_list:
+            if answer == 1:
+                answer_total += 1
+            else:
                 pass
-            elif response != 'yes':
-                return
-    answer_total = 0
-    for answer in answer_list:
-        if answer == 1:
-            answer_total += 1
+        if answer_total >= self.num_questions_to_win:
+            return self.game_number + ' '
         else:
-            pass
-    if answer_total >= num_questions_to_win:
-        return game_number + ' '
-    else:
-        return False
+            return False
 
+    # def morse_code(self):
+    #     """
+    #     Method to handle a morse code question loop
+    #
+    #     Returns:
+    #         str or bool
+    #     """
 
-def morse_code(question_bank):
-    """
+    def won(self):
+        """
+        Method to handle a single game win
 
-    """
-    questions = list(question_bank)  # noqa
-    question_number = 0
-    counter = 0
-    answer_list = []
-    for _ in questions:
-        question, answers = random.choice(list(question_bank.items()))
-        display.text(question)
-        correct_answer_index = answers[0]
-        # answers = answers[0:-1]   # strip off correct_answer_index from being displayed
-        # for answer in answers:
-        #     display.text(answer)
-        display.text('CHOOSE...')
-        answer = button.morse_code()
-        if answer == correct_answer_index:
-            # do something to advance
-            pass
-
-
-def won(game_won):
-    """
-    Function to handle a single game win
-
-    Params:
-        game_won: int
-    """
-    games_won = file_manager.read_games_won_file()
-    games_won += game_won
-    file_manager.write_games_won_file(games_won)
-    # TEMP FOR TESTING
-    games_won = file_manager.read_games_won_file()
-    print(games_won)
+        Params:
+            game_won: int
+        """
+        games_won = self.file_manager.read_games_won_file()
+        games_won += self.game_number
+        self.file_manager.write_games_won_file(games_won)
