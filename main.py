@@ -50,7 +50,7 @@ from file_manager import FileManager
 import data
 
 button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
-file_manager = FileManager(display, neo_pixel, button)
+file_manager = FileManager(button, display, neo_pixel)
 demo = Demo(display, neo_pixel)
 game = Game(button, file_manager, display)
 tarot = Tarot(button, display, data.cards)

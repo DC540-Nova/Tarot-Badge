@@ -30,127 +30,127 @@
 
 from utime import sleep
 
-from config import neo_pixel, RED
-import encryption
 
-# TODO: make a class
-
-CODE = {
-    ' ': '',
-    "'": '.----.',
-    '(': '-.--.-',
-    ')': '-.--.-',
-    ',': '--..--',
-    '-': '-....-',
-    '.': '.-.-.-',
-    '/': '-..-.',
-    '0': '-----',
-    '1': '.----',
-    '2': '..---',
-    '3': '...--',
-    '4': '....-',
-    '5': '.....',
-    '6': '-....',
-    '7': '--...',
-    '8': '---..',
-    '9': '----.',
-    ':': '---...',
-    ';': '-.-.-.',
-    '?': '..--..',
-    'A': '.-',
-    'B': '-...',
-    'C': '-.-.',
-    'D': '-..',
-    'E': '.',
-    'F': '..-.',
-    'G': '--.',
-    'H': '....',
-    'I': '..',
-    'J': '.---',
-    'K': '-.-',
-    'L': '.-..',
-    'M': '--',
-    'N': '-.',
-    'O': '---',
-    'P': '.--.',
-    'Q': '--.-',
-    'R': '.-.',
-    'S': '...',
-    'T': '-',
-    'U': '..-',
-    'V': '...-',
-    'W': '.--',
-    'X': '-..-',
-    'Y': '-.--',
-    'Z': '--..',
-    '': '..--.-'
-}
-
-B_RATE = 0.25
-
-
-def dash(color=RED):
+class MorseCode:
     """
-    Function to handle morse code dash on a neo_pixel display
-
-    Params:
-        color: int, optional
+    Base class to handle morse code functionality
     """
-    neo_pixel.on(color, all_on=True)
-    sleep(3 * B_RATE)
-    neo_pixel.clear(hard_clear=True)
-    sleep(B_RATE)
 
+    CODE = {
+        ' ': '',
+        "'": '.----.',
+        '(': '-.--.-',
+        ')': '-.--.-',
+        ',': '--..--',
+        '-': '-....-',
+        '.': '.-.-.-',
+        '/': '-..-.',
+        '0': '-----',
+        '1': '.----',
+        '2': '..---',
+        '3': '...--',
+        '4': '....-',
+        '5': '.....',
+        '6': '-....',
+        '7': '--...',
+        '8': '---..',
+        '9': '----.',
+        ':': '---...',
+        ';': '-.-.-.',
+        '?': '..--..',
+        'A': '.-',
+        'B': '-...',
+        'C': '-.-.',
+        'D': '-..',
+        'E': '.',
+        'F': '..-.',
+        'G': '--.',
+        'H': '....',
+        'I': '..',
+        'J': '.---',
+        'K': '-.-',
+        'L': '.-..',
+        'M': '--',
+        'N': '-.',
+        'O': '---',
+        'P': '.--.',
+        'Q': '--.-',
+        'R': '.-.',
+        'S': '...',
+        'T': '-',
+        'U': '..-',
+        'V': '...-',
+        'W': '.--',
+        'X': '-..-',
+        'Y': '-.--',
+        'Z': '--..',
+        '': '..--.-'
+    }
 
-def dot(color=RED):
-    """
-    Function to handle morse code dot on a neo_pixel display
+    def __init__(self, encryption, neo_pixel, color):
+        """
+        Params:
+            encrpytion: object
+            neo_pixel: object
+            color: tuple
+        """
+        self.encryption = encryption
+        self.neo_pixel = neo_pixel
+        self.color = color
+        self.B_RATE = 0.25
 
-    Params:
-        color: tuple, optional
-    """
-    neo_pixel.on(color, all_on=True)
-    sleep(B_RATE)
-    neo_pixel.clear(hard_clear=True)
-    sleep(B_RATE)
+    def dash(self):
+        """
+        Method to handle morse code dash on a neo_pixel display
+        """
+        self.neo_pixel.on(self.color, all_on=True)
+        sleep(3 * self.B_RATE)
+        self.neo_pixel.clear(hard_clear=True)
+        sleep(self.B_RATE)
 
+    def dot(self):
+        """
+        Method to handle morse code dot on a neo_pixel display
+        """
+        self.neo_pixel.on(self.color, all_on=True)
+        sleep(self.B_RATE)
+        self.neo_pixel.clear(hard_clear=True)
+        sleep(self.B_RATE)
 
-def space():
-    """
-    Function to handle morse code space on a neo_pixel display
-    """
-    neo_pixel.clear(hard_clear=True)
-    sleep(B_RATE)
+    def space(self):
+        """
+        Method to handle morse code space on a neo_pixel display
+        """
+        self.neo_pixel.clear(hard_clear=True)
+        sleep(self.B_RATE)
 
+    def pause(self):
+        """
+        Method to handle morse code pause on a neo_pixel display
+        """
+        self.neo_pixel.clear(hard_clear=True)
+        sleep(7 * self.B_RATE)
 
-def pause():
-    """
-    Function to handle morse code pause on a neo_pixel display
-    """
-    neo_pixel.clear(hard_clear=True)
-    sleep(7 * B_RATE)
+    def display(self, sentence, encrypted=False):
+        """
+        Function to handle conversion and display of morse code
 
-
-def display(sentence, color=RED, encrypted=False):
-    """
-    Function to handle conversion and display of morse code
-
-    Params:
-        sentence: str
-        color: tuple, optional
-        encrypted: bool, optional
-    """
-    encoded_sentence = ''
-    if encrypted:
-        decrypted_sentence = encryption.cipher('d', sentence, 22)
-    else:
-        decrypted_sentence = sentence
-    for character in decrypted_sentence:
-        encoded_sentence += CODE[character] + ' '
-    for letter in encoded_sentence:
-        if letter == '.':
-            dot(color)
-        elif letter == '-':
-            dash(color)
+        Params:
+            sentence: str
+            color: tuple, optional
+            encrypted: bool, optional
+        """
+        encoded_sentence = ''
+        if encrypted:
+            decrypted_sentence = self.encryption.cipher('d', sentence, 22)
         else:
-            pause()
+            decrypted_sentence = sentence
+        for character in decrypted_sentence:
+            encoded_sentence += self.CODE[character] + ' '
+        for letter in encoded_sentence:
+            if letter == '.':
+                self.dot()
+            elif letter == '-':
+                self.dash()
+            else:
+                self.pause()

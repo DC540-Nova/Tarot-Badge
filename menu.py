@@ -63,17 +63,21 @@ class Menu:
         """
         Private method to handle the game menu 1
         """
-        self.text = 'games 1   -------   L: tarot trivia R: flash cards'
+        self.text = 'games 1   -------   L: tarot trivia R: practice U: flash cards D: practice'
         self.display.text(self.text, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            won_game = self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 1)
+            won_game = self.game.multiple_choice(self.data.tarot_trivia, '1', 1)
             if won_game:
                 self.game.won(won_game)
         elif self.button_pressed == 2:
-            won_game = self.game.multiple_choice_questions(self.data.flash_cards, '2', 1)
+            self.game.practice(self.data.tarot_trivia)
+        elif self.button_pressed == 3:
+            won_game = self.game.multiple_choice(self.data.flash_cards, '2', 1, False)
             if won_game:
                 self.game.won(won_game)
+        elif self.button_pressed == 4:
+            self.game.practice(self.data.flash_cards)
 
     def __game_menu_2(self):
         """

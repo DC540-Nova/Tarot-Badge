@@ -146,8 +146,6 @@ class FileManager:
             with open('games_won', 'r') as f:
                 games_won = f.read()
                 games_won = list(games_won.split(' '))
-                print(games_won)
-                print(type(games_won))
                 if '1' in games_won:
                     self.neo_pixel.on(0)
                 if '2' in games_won:

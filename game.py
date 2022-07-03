@@ -48,7 +48,7 @@ class Game:
         self.file_manager = file_manager
         self.display = display
 
-    def multiple_choice_questions(self, question_bank, game_number, num_questions_to_win, image=False, practice=False):
+    def multiple_choice(self, question_bank, game_number, num_questions_to_win, text=True):
         """
         Method to handle a generic multiple choice question loop
 
@@ -56,8 +56,7 @@ class Game:
             question_bank: dict
             game_number: str
             num_questions_to_win: int
-            image: bool, optional
-            practice: bool, optional
+            text: bool, optional
 
         Returns:
             str or bool
@@ -68,7 +67,7 @@ class Game:
         answer_list = []
         for _ in questions:
             question, answers = random.choice(list(question_bank.items()))
-            if not image:
+            if text:
                 self.display.text(question)
             else:
                 self.display.image('sd/' + question)
@@ -78,28 +77,13 @@ class Game:
                 self.display.text(answer)
             self.display.text('CHOOSE...')
             answer = self.button.multiple_choice()
-            if not practice:
-                counter += 1
+            counter += 1
             if answer == correct_answer_index:
-                if not practice:
-                    answer_list.append(1)
-                elif practice:
-                    self.display.text('CORRECT')
+                answer_list.append(1)
             else:
-                if not practice:
-                    answer_list.append(0)
-                elif practice:
-                    self.display.text('INCORRECT')
+                answer_list.append(0)
             question_number += 1
             del question_bank[question]
-            if practice:
-                self.display.text('Would you like to practice with another question? ')
-                self.display.text('CHOOSE...')
-                response = self.button.yes_no()
-                if response == 'yes':
-                    pass
-                elif response != 'yes':
-                    return
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -111,6 +95,39 @@ class Game:
                     return game_number + ' '
                 else:
                     return False
+
+    def practice(self, question_bank, text=True):
+        """
+        Method to handle practicing a generic multiple choice question loop
+
+        Params:
+            question_bank: dict
+            test: bool, optional
+        """
+        questions = list(question_bank)
+        for _ in questions:
+            question, answers = random.choice(list(question_bank.items()))
+            if text:
+                self.display.text(question)
+            else:
+                self.display.image('sd/' + question)
+            correct_answer_index = answers[4]
+            answers = answers[0:-1]   # strip off correct_answer_index from being displayed
+            for answer in answers:
+                self.display.text(answer)
+            self.display.text('CHOOSE...')
+            answer = self.button.multiple_choice()
+            if answer == correct_answer_index:
+                self.display.text('CORRECT')
+            else:
+                self.display.text('INCORRECT')
+            self.display.text('Would you like to practice with another question? ')
+            self.display.text('CHOOSE...')
+            response = self.button.yes_no()
+            if response == 'yes':
+                pass
+            else:
+                return
 
     def won(self, game_won):
         """
