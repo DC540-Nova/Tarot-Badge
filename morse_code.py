@@ -33,6 +33,8 @@ from utime import sleep
 from config import neo_pixel, RED
 import encryption
 
+# TODO: make a class
+
 CODE = {
     ' ': '',
     "'": '.----.',

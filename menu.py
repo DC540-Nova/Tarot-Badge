@@ -34,19 +34,19 @@ class Menu:
     Base class to handle a menu system
     """
 
-    def __init__(self, display, neo_pixel, button, game, tarot, data):
+    def __init__(self, button, display, neo_pixel, game, tarot, data):
         """
         Params:
+            button: object
             display: object
             neo_pixel: object
-            button: object
             game: object
             tarot: object
             data: object
         """
+        self.button = button
         self.display = display
         self.neo_pixel = neo_pixel
-        self.button = button
         self.game = game
         self.tarot = tarot
         self.data = data
@@ -68,14 +68,10 @@ class Menu:
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             won_game = self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 1)
-            print(won_game)
-            print(type(won_game))
             if won_game:
                 self.game.won(won_game)
         elif self.button_pressed == 2:
             won_game = self.game.multiple_choice_questions(self.data.flash_cards, '2', 1)
-            print(won_game)
-            print(type(won_game))
             if won_game:
                 self.game.won(won_game)
 

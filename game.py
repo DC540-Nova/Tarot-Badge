@@ -36,17 +36,17 @@ class Game:
     Base class to handle a game
     """
 
-    def __init__(self, display, file_manager, button):
+    def __init__(self, button, file_manager, display):
         """
         Params:
-            display: object
             button: object
             file_manager: object
+            display: object
 
         """
-        self.display = display
         self.button = button
         self.file_manager = file_manager
+        self.display = display
 
     def multiple_choice_questions(self, question_bank, game_number, num_questions_to_win, image=False, practice=False):
         """
@@ -111,14 +111,6 @@ class Game:
                     return game_number + ' '
                 else:
                     return False
-
-    # def morse_code(self):
-    #     """
-    #     Method to handle a morse code question loop
-    #
-    #     Returns:
-    #         str or bool
-    #     """
 
     def won(self, game_won):
         """

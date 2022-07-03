@@ -34,15 +34,15 @@ class Tarot:
     Base class to handle tarot card reading/s
     """
 
-    def __init__(self, display, button, card_bank):
+    def __init__(self, button, display, card_bank):
         """
         Params:
-            display: object
             button: object
+            display: object
             card_bank: dict
         """
-        self.display = display
         self.button = button
+        self.display = display
         self.card_bank = card_bank
 
     def reading(self):

@@ -37,16 +37,16 @@ class FileManager:
     Base class to handle a file manager object and functionality for persistence
     """
 
-    def __init__(self, display, neo_pixel, button):
+    def __init__(self, button, display, neo_pixel):
         """
         Params:
+            button: object
             display: object
             neo_pixel: object
-            button: object
         """
+        self.button = button
         self.display = display
         self.neo_pixel = neo_pixel
-        self.button = button
 
     @staticmethod
     def write_ids_file(ids):

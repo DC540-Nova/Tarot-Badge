@@ -34,6 +34,7 @@ import microcontroller
 import file_manager
 import morse_code
 
+# TODO: make class
 
 def boss_send_id():
     """

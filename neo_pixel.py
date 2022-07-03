@@ -32,8 +32,6 @@ import array
 from utime import sleep_ms, sleep
 import rp2
 
-from config import *
-
 
 class NeoPixel:
     """
@@ -90,9 +88,9 @@ class NeoPixel:
         nop().side(0)[T2 - 1]  # noqa
         wrap()  # noqa
 
-    def set(self, led, color):
+    def __set(self, led, color):
         """
-        Method to set 24-bit color set neopixel
+        Private method to set 24-bit color set neopixel
 
         Params:
             led: int
@@ -100,9 +98,9 @@ class NeoPixel:
         """
         self.ar[led] = (color[1] << 16) + (color[0] << 8) + color[2]  # set 24-bit color
 
-    def show(self, brightness=1):
+    def __show(self, brightness=1):
         """
-        Method to show 24-bit color show neopixel
+        Private method to show 24-bit color show neopixel
 
         Params:
             brightness: float, optional
@@ -159,11 +157,11 @@ class NeoPixel:
         """
         if all_on:
             for led in range(self.num_leds):
-                self.set(led, color)
-            self.show()
+                self.__set(led, color)
+            self.__show()
         else:
-            self.set(led, color)
-            self.show(brightness)  # noqa
+            self.__set(led, color)
+            self.__show(brightness)  # noqa
 
     def flicker(self, color=RED, repeat=1):
         """
@@ -181,14 +179,12 @@ class NeoPixel:
             for ii in breath_amps:
                 # TODO: define spheres
                 for led in self.spheres:
-                    self.pixels_set(led, color)
+                    self.__set(led, color)
                 for led in self.paths:
-                    self.pixels_set(led, color)
-                self.pixels_show(ii/25)
+                    self.__set(led, color)
+                self.__show(ii/25)  # noqa
             repeat -= 1
-        self.led_clear()
-        display.clear()
-        file_manager.update_status()
+        self.clear()
 
     def breathing_led(self, led, color=RED, repeat=1):
         """
@@ -205,7 +201,7 @@ class NeoPixel:
             breath_amps = [ii for ii in range(0, 1000, step)]
             breath_amps.extend([ii for ii in range(1000, -1, -step)])
             for ii in breath_amps:
-                self.set(led, color)
-                self.show(ii / 255)  # noqa
+                self.__set(led, color)
+                self.__show(ii / 255)  # noqa
                 sleep(0.02)
             repeat -= 1
