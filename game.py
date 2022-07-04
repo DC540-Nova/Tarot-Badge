@@ -48,13 +48,14 @@ class Game:
         self.file_manager = file_manager
         self.display = display
 
-    def multiple_choice(self, question_bank, game_number, num_questions_to_win, text=True):
+    def multiple_choice(self, question_bank, game_number, num_questions, num_questions_to_win, text=True):
         """
         Method to handle a generic multiple choice question loop
 
         Params:
             question_bank: dict
             game_number: str
+            num_questions: int
             num_questions_to_win: int
             text: bool, optional
 
@@ -90,7 +91,7 @@ class Game:
                     answer_total += 1
                 else:
                     pass
-            if counter == num_questions_to_win:
+            if counter == num_questions:
                 if answer_total >= num_questions_to_win:
                     return game_number + ' '
                 else:

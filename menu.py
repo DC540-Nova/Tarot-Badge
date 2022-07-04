@@ -53,18 +53,58 @@ class Menu:
         self.text = None
         self.button_pressed = None
 
-    def __tarot_reading_menu(self):
-        """
-        Private method to handle the tarot reading
-        """
-        self.tarot.reading(self.data.cards)
-
     def __game_menu_1(self):
         """
-        Private method to handle the game menu 1
+        Private method to handle the game menu
         """
-        self.text = 'games 1   -------   L: tarot trivia R: practice U: flash cards D: practice'
-        self.display.text(self.text, timed=False)
+        self.text = 'games 1'
+        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
+        self.text = 'L: tarot trivia R: stego  U: reenactment D: hunt   S: flash card E: main menu'
+        self.display.text(self.text, y=48, clear=False, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.__game_menu_tarot_trivia()
+        elif self.button_pressed == 2:
+            self.__game_menu_stego()
+        elif self.button_pressed == 2:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
+
+    def __game_menu_tarot_trivia(self):
+        """
+        Private method to handle the tarot trivia
+        """
+        self.text = 'tarot trivia'
+        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
+        self.text = 'L: instructions R: play U: practice D: main menu'
+        self.display.text(self.text, y=48, clear=False, timed=False)
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.tarot_trivia_instructions)
+        elif self.button_pressed == 2:
+            won_game = self.game.multiple_choice(self.data.tarot_trivia, '2', '1', 1, False)
+            if won_game:
+                self.game.won(won_game)
+        elif self.button_pressed == 3:
+            self.game.practice(self.data.tarot_trivia)
+        elif self.button_pressed == 6:
+            self.__main_menu()
+
+    def __game_menu_stego(self):
+        """
+        Private method to handle the stego game
+        """
+        pass
+
+    def __game_menu_2(self):
+        """
+        Private method to handle the game menu 2
+        """
+        self.text = 'games 2'
+        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
+        self.text = 'L: fun deck R: morse code U: decryption D: boss pairing S: help me E: main menu'
+        self.display.text(self.text, y=48, clear=False, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             won_game = self.game.multiple_choice(self.data.tarot_trivia, '1', 1)
@@ -79,17 +119,11 @@ class Menu:
         elif self.button_pressed == 4:
             self.game.practice(self.data.flash_cards)
 
-    def __game_menu_2(self):
+    def __tarot_reading_menu(self):
         """
-        Private method to handle the game menu 2
+        Private method to handle the tarot reading
         """
-        self.text = 'games w   -------   L: tarot trivia R: flash cards'
-        self.display.text(self.text, timed=False)
-        self.button_pressed = self.button.press()
-        if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 1)
-        elif self.button_pressed == 2:
-            self.game.multiple_choice_questions(self.data.flash_cards, '2', 1)
+        self.tarot.reading(self.data.cards)
 
     def __bad_advice_menu(self):
         """
@@ -119,8 +153,10 @@ class Menu:
         """
         Private method to handle the main menu
         """
-        self.text = 'main menu --------- L: instructions R: games 1 U: games 2 D: tarot reading'
-        self.display.text(self.text, timed=False)
+        self.text = 'main menu'
+        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
+        self.text = 'L: instructions R: games 1 U: games 2 D: tarot reading S: pair   E: extras'
+        self.display.text(self.text, y=48, clear=False, timed=False)
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             self.display.text(self.data.instructions)
@@ -139,6 +175,6 @@ class Menu:
         """
         Method to handle the menu system
         """
-        self.display.image('dc540_logo.raw')
+        # self.display.image('dc540_logo.raw')
         while True:
             self.__main_menu()

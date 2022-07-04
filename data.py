@@ -29,6 +29,7 @@
 # pyright: reportUndefinedVariable=false
 
 instructions = 'Welcome to the DC540 Tarot Badge.  Here you can play games and get a tarot reading and do all sorts of stuff stay tuned.  Bla bla foo.'  # noqa
+tarot_trivia_instructions = 'Answer 15 of the 20 trivia questions correctly to pass this game.'
 
 boss_ids = []  # noqa
 boss_ids.append('e66038b7137a9935')

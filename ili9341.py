@@ -437,7 +437,7 @@ class Display:
             self.__block(0, y, width - 1, y + 7, line)
 
     def text(self, text, x=8, y=0, color=0b1111111111100000, font=UNISPACE_FONT, wrap=True, clear=True, sleep_time=3,
-             timed=True):
+             timed=True, off=False):
         """
         Method to draw text
 
@@ -451,6 +451,7 @@ class Display:
             clear: bool, optional
             sleep_time: int, optional
             timed: bool, optional
+            off: bool, optional
         """
         if clear:
             self.POWER_DISPLAY.value(0)
@@ -469,7 +470,8 @@ class Display:
             for letter in text:
                 width, height = self.__letter(letter, color, font, x, y, background)  # get letter array and letter dimension  # noqa
                 x += (width + spacing)
-        self.POWER_DISPLAY.value(1)
+        if not off:
+            self.POWER_DISPLAY.value(1)
         if timed:
             utime.sleep(sleep_time)
             self.POWER_DISPLAY.value(0)
