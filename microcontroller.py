@@ -32,14 +32,22 @@ import ubinascii
 from machine import unique_id
 
 
-def get_unique_id():
+class Microcontroller:
     """
-    Function to obtain unique_id
+    Base class to handle getting a unique ID from a microcontroller
+    """
 
-    Returns:
-        my_id_hex: str
-    """
-    my_id = unique_id()
-    my_id_hex = ubinascii.hexlify(my_id).decode('utf-8')
-    my_id_hex = str(my_id_hex)
-    return my_id_hex
+    def __init__(self):
+        self.my_id = None
+
+    def get_unique_id(self):
+        """
+        Static method to obtain unique_id
+
+        Returns:
+            my_id_hex: str
+        """
+        self.my_id = unique_id()
+        my_id_hex = ubinascii.hexlify(self.my_id).decode('utf-8')
+        my_id_hex = str(my_id_hex)
+        return my_id_hex

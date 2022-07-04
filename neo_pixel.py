@@ -184,13 +184,11 @@ class NeoPixel:
             color: tuple, optional
             repeat: int, optional
         """
-        display.clear()
         while repeat > 0:
             step = 5
             breath_amps = [ii for ii in range(0, 1000, step)]
             breath_amps.extend([ii for ii in range(10, -1, -step)])
             for ii in breath_amps:
-                # TODO: define spheres
                 for led in self.spheres:
                     self.__set(led, color)
                 for led in self.paths:
