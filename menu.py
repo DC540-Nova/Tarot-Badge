@@ -59,8 +59,9 @@ class Menu:
         """
         self.text = 'games 1'
         self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
-        self.text = 'L: tarot trivia R: stego  U: reenactment D: hunt   S: flash card E: main menu'
-        self.display.text(self.text, y=48, clear=False, timed=False)
+        # self.text = 'L: tarot trivia R: stego  U: reenactment D: hunt   S: flash card E: main menu'
+        self.display.text(self.text, y=48, wrap=False, clear=False, timed=False, off=True)
+
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             self.__game_menu_tarot_trivia()
