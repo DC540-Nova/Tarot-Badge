@@ -52,22 +52,70 @@ class Menu:
         self.data = data
         self.text = None
         self.button_pressed = None
+        self.title = 8
+        self.line_2 = 32
+        self.line_3 = 56
+        self.line_4 = 80
+        self.line_5 = 104
+        self.line_6 = 128
+        self.line_7 = 152
+        self.line_8 = 176
+        self.line_9 = 200
+        self.line_10 = 224
+
+    def __populate(self, title, line_3='', line_4='', line_5='', line_6='', line_7='', line_8='', line_9='', line_10='',
+                   title_color=0b11001111011011111010001):
+        """
+        Private method to populate a menu
+
+        Params:
+            title: str
+            line_3: str, optional
+            line_4: str, optional
+            line_5: str, optional
+            line_6: str, optional
+            line_7: str, optional
+            line_8: str, optional
+            line_9: str, optional
+            line_10: str, optional
+            title_color: int, optional
+        """
+        self.text = title
+        self.display.text(self.text, y=self.title, color=title_color, wrap=False, clear=True,
+                          timed=False, off=True)
+        self.text = line_3
+        self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_4
+        self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_5
+        self.display.text(self.text, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_6
+        self.display.text(self.text, y=self.line_6, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_7
+        self.display.text(self.text, y=self.line_7, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_8
+        self.display.text(self.text, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_9
+        self.display.text(self.text, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_10
+        self.display.text(self.text, y=self.line_8, wrap=False, clear=False, timed=False, off=False)
 
     def __game_menu_1(self):
         """
         Private method to handle the game menu
         """
-        self.text = 'games 1'
-        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
-        # self.text = 'L: tarot trivia R: stego  U: reenactment D: hunt   S: flash card E: main menu'
-        self.display.text(self.text, y=48, wrap=False, clear=False, timed=False, off=True)
-
+        self.__populate('game menu 1', 'l: tarot trivia', 'r: stego', 'u: re-enactment', 'd: hunt', 's: flash card',
+                        'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             self.__game_menu_tarot_trivia()
         elif self.button_pressed == 2:
             self.__game_menu_stego()
-        elif self.button_pressed == 2:
+        elif self.button_pressed == 3:
+            pass
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
             pass
         elif self.button_pressed == 6:
             self.__main_menu()
@@ -76,10 +124,7 @@ class Menu:
         """
         Private method to handle the tarot trivia
         """
-        self.text = 'tarot trivia'
-        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
-        self.text = 'L: instructions R: play U: practice D: main menu'
-        self.display.text(self.text, y=48, clear=False, timed=False)
+        self.__populate('tarot trivia', 'l: instructions', 'r: play', 'u: practice', 'd: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             self.display.text(self.data.tarot_trivia_instructions)
@@ -89,8 +134,12 @@ class Menu:
                 self.game.won(won_game)
         elif self.button_pressed == 3:
             self.game.practice(self.data.tarot_trivia)
-        elif self.button_pressed == 6:
+        elif self.button_pressed == 4:
             self.__main_menu()
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            pass
 
     def __game_menu_stego(self):
         """
@@ -102,23 +151,21 @@ class Menu:
         """
         Private method to handle the game menu 2
         """
-        self.text = 'games 2'
-        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
-        self.text = 'L: fun deck R: morse code U: decryption D: boss pairing S: help me E: main menu'
-        self.display.text(self.text, y=48, clear=False, timed=False)
+        self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption', 'd: boss paring', 's: help me',
+                        'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            won_game = self.game.multiple_choice(self.data.tarot_trivia, '1', 1)
-            if won_game:
-                self.game.won(won_game)
+            pass
         elif self.button_pressed == 2:
-            self.game.practice(self.data.tarot_trivia)
+            pass
         elif self.button_pressed == 3:
-            won_game = self.game.multiple_choice(self.data.flash_cards, '2', 1, False)
-            if won_game:
-                self.game.won(won_game)
+            pass
         elif self.button_pressed == 4:
-            self.game.practice(self.data.flash_cards)
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
 
     def __tarot_reading_menu(self):
         """
@@ -130,34 +177,46 @@ class Menu:
         """
         Private method to handle the bad advice menu
         """
-        self.text = 'bad advice menu --------- L: tarot trivia  R: flash cards'
-        self.display.text(self.text, timed=False)
+        self.__populate('bad advice menu', '', '', '', '', '', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 2)
+            pass
         elif self.button_pressed == 2:
-            self.game.multiple_choice_questions(self.data.flash_cards, '2', 2)
+            pass
+        elif self.button_pressed == 3:
+            pass
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
 
     def __extras_menu(self):
         """
         Private method to handle the extras menu
         """
-        self.text = 'extras menu --------- L: tarot trivia  R: flash cards'
-        self.display.text(self.text, timed=False)
+        self.__populate('extras menu', '', '', '', '', '', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.game.multiple_choice_questions(self.data.tarot_trivia, '1', 2)
+            pass
         elif self.button_pressed == 2:
-            self.game.multiple_choice_questions(self.data.flash_cards, '2', 2)
+            pass
+        elif self.button_pressed == 3:
+            pass
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
 
     def __main_menu(self):
         """
         Private method to handle the main menu
         """
-        self.text = 'main menu'
-        self.display.text(self.text, color=0b11001111011011111010001, timed=False, off=True)
-        self.text = 'L: instructions R: games 1 U: games 2 D: tarot reading S: pair   E: extras'
-        self.display.text(self.text, y=48, clear=False, timed=False)
+        self.__populate('main menu', 'l: instructions', 'r: games 1 menu', 'u: games 2 menu', 'd: tarot reading',
+                        's: bad advice menu', 'e: extras menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             self.display.text(self.data.instructions)
