@@ -235,6 +235,6 @@ class Menu:
         """
         Method to handle the menu system
         """
-        # self.display.image('dc540_logo.raw')
+        self.display.image('dc540_logo.raw')
         while True:
             self.__main_menu()

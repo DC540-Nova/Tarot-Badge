@@ -907,7 +907,7 @@ stego_game2_answer = {
     'Please enter the answer for Game 1': '343421',
 }
 reenactment_game3_answer = {
-    'Please enter the answer for Game 2': '441211'
+    'Please enter the answer for Game 2': '441211',
 }
 SavengerHunt_game4_answer = {
     'Please enter the answer for Game 3': '141431'

@@ -127,24 +127,24 @@ class NeoPixel:
         """
         if hard_clear:
             for led in range(self.num_leds):
-                self.set(led, self.BLACK)
-            self.show()
+                self.__set(led, self.BLACK)
+            self.__show()
         if clear_only_spheres:
             for led in self.spheres:
-                self.set(led, self.BLACK)
-                self.show()
+                self.__set(led, self.BLACK)
+                self.__show()
         if clear_only_paths:
             for led in self.paths:
-                self.set(led, self.BLACK)
-                self.show()
+                self.__set(led, self.BLACK)
+                self.__show()
         if reverse:
             for led in reversed(range(self.num_leds)):
-                self.set(led, BLACK)
-                self.show()
+                self.__set(led, BLACK)
+                self.__show()
         else:
             for led in range(self.num_leds):
-                self.set(led, self.BLACK)
-                self.show()
+                self.__set(led, self.BLACK)
+                self.__show()
 
     def on(self, led, color=RED, all_on=False, brightness=1.0):
         """
