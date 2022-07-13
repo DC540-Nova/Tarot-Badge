@@ -232,7 +232,7 @@ class Menu:
         if self.button_pressed == 1:
             self.__game_menu_fun_deck()
         elif self.button_pressed == 2:
-            pass
+            self.__game_menu_morse_code()
         elif self.button_pressed == 3:
             pass
         elif self.button_pressed == 4:
