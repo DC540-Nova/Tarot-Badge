@@ -45,12 +45,12 @@ class Tarot:
         self.display = display
         self.card_bank = card_bank
 
-    def reading(self):
+    def reading(self, deck):
         """
         Function to handle a tarot reading
 
         Params:
-            card_bank, dict
+            deck: int
         """
         # reading = list(self.card_bank)  # noqa
         counter = 1
@@ -79,9 +79,17 @@ class Tarot:
                 self.display.text('Outcome', timed=False)
             _ = self.button.press()
             if meaning == 1:
-                self.display.image('sd/' + card_reading[2], timed=False)
+                try:
+                    self.display.image('sd/' + deck + '/' + card_reading[2], timed=False)
+                except FileNotFoundError:
+                    self.display.text('please re-copy files to sd')
+                    break
             if meaning == 2:
-                self.display.image('sd/' + card_reading[2], up=False, timed=False)
+                try:
+                    self.display.image('sd/' + deck + '/' + card_reading[2], up=False, timed=False)
+                except FileNotFoundError:
+                    self.display.text('please re-copy files to sd')
+                    break
             _ = self.button.press()
             if meaning == 1:
                 self.display.text(card_reading[0], timed=False)

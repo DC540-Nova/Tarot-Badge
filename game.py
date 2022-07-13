@@ -36,17 +36,19 @@ class Game:
     Base class to handle a game
     """
 
-    def __init__(self, button, file_manager, display):
+    def __init__(self, button, file_manager, display, tarot):
         """
         Params:
             button: object
             file_manager: object
             display: object
+            tarot: object
 
         """
         self.button = button
         self.file_manager = file_manager
         self.display = display
+        self.tarot = tarot
 
     def multiple_choice(self, question_bank, game_number, num_questions, num_questions_to_win, text=True):
         """
@@ -71,7 +73,11 @@ class Game:
             if text:
                 self.display.text(question)
             else:
-                self.display.image('sd/' + question)
+                try:
+                    self.display.image('sd/' + self.tarot.deck + '/' + question)
+                except FileNotFoundError:
+                    self.display.text('please re-copy files to sd')
+                    break
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
             for answer in answers:
@@ -111,7 +117,11 @@ class Game:
             if text:
                 self.display.text(question)
             else:
-                self.display.image('sd/' + question)
+                try:
+                    self.display.image('sd/' + self.tarot.deck + '/' + question)
+                except FileNotFoundError:
+                    self.display.text('please re-copy files to sd')
+                    break
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
             for answer in answers:

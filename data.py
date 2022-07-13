@@ -874,14 +874,14 @@ morse_code_practice_easy = {
 
 # user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
 morse_code_practice_medium = {
-    'sos': 'SOS', # betsy you can do 'SOS' or '--- ... ---'
+    'sos': 'SOS',  # betsy you can do 'SOS' or '--- ... ---'
     'hello': 'HELLO',
     'DEFCON30': 'DEFCON30'
 }
 
 # user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
 morse_code_practice_advanced = {
-    'MAJOR ARCANE': 'MAJOR ARCANE', # betsy change this
+    'MAJOR ARCANE': 'MAJOR ARCANE',  # betsy change this
     'WHEEL OF FORTUNE': 'WHEEL OF FORTUNE',
     'THE HANGED MAN': 'THE HANGED MAN',
 }

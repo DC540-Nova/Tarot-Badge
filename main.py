@@ -39,8 +39,7 @@
 # screen /dev/tty.u*
 
 from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel, \
-    nrf
-
+    nrf, deck
 from microcontroller import Microcontroller
 from button import Button
 from encryption import Encryption
@@ -62,7 +61,7 @@ game = Game(button, file_manager, display)
 tarot = Tarot(button, display, data.cards)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
 pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, data)
-menu = Menu(button, display, neo_pixel, game, tarot, data)
+menu = Menu(button, display, neo_pixel, game, tarot, data, deck)
 
 
 if __name__ == '__main__':

@@ -15,9 +15,7 @@ Instructions: Convert To .raw & Copy Files To SD Card
 ./convert_to_raw.sh
 # NOTE: this will convert all the files in deck and create a dir called deck-raw and copy the .raw files into it
 # copy all the files in deck-raw to sd drive
-# OR
-cd deck-raw
-./copy_files_to_sd_card.sh
+./copy_files_to_sd_card.sh decks/1/deck-raw/ 1
 # NOTE: this will copy files directly to the sd card without having to remove the card it and place in a sd reader
 
 Instructions: Convert Single Image File To .raw

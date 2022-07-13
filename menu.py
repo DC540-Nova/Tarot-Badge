@@ -34,7 +34,7 @@ class Menu:
     Base class to handle a menu system
     """
 
-    def __init__(self, button, display, neo_pixel, game, tarot, data):
+    def __init__(self, button, display, neo_pixel, game, tarot, data, deck=1):
         """
         Params:
             button: object
@@ -43,6 +43,7 @@ class Menu:
             game: object
             tarot: object
             data: object
+            deck: int
         """
         self.button = button
         self.display = display
@@ -50,6 +51,7 @@ class Menu:
         self.game = game
         self.tarot = tarot
         self.data = data
+        self.deck = deck
         self.text = None
         self.button_pressed = None
         self.title = 8
@@ -169,9 +171,23 @@ class Menu:
 
     def __tarot_reading_menu(self):
         """
-        Private method to handle the tarot reading
+        Private method to handle the tarot reading menu
         """
-        self.tarot.reading(self.data.cards)
+        self.__populate('tarot reading menu', 'l: load deck 1', 'load deck 2', 'load deck 3', 'load deck 4', '',
+                        'e: main menu')
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.deck = 1
+        elif self.button_pressed == 2:
+            self.deck = 2
+        elif self.button_pressed == 3:
+            self.deck = 3
+        elif self.button_pressed == 4:
+            self.deck = 4
+        elif self.button_pressed == 5:
+            self.tarot.reading(self.data.cards, self.deck)
+        elif self.button_pressed == 6:
+            self.__main_menu()
 
     def __bad_advice_menu(self):
         """
