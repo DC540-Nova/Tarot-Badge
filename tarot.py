@@ -52,7 +52,6 @@ class Tarot:
         Params:
             deck: int
         """
-        # reading = list(self.card_bank)  # noqa
         counter = 1
         for _ in self.card_bank:
             card, card_reading = random.choice(list(self.card_bank.items()))

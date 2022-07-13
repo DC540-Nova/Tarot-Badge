@@ -173,8 +173,8 @@ class Menu:
         """
         Private method to handle the tarot reading menu
         """
-        self.__populate('tarot reading menu', 'l: load deck 1', 'load deck 2', 'load deck 3', 'load deck 4', '',
-                        'e: main menu')
+        self.__populate('tarot reading menu', 'l: load deck 1', 'r: load deck 2', 'u: load deck 3',
+                        'd: load deck 4', 's: tarot reading', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             self.deck = 1
@@ -185,7 +185,7 @@ class Menu:
         elif self.button_pressed == 4:
             self.deck = 4
         elif self.button_pressed == 5:
-            self.tarot.reading(self.data.cards, self.deck)
+            self.tarot.reading(self.deck)
         elif self.button_pressed == 6:
             self.__main_menu()
 

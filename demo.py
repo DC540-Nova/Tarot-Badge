@@ -67,13 +67,13 @@ class Demo:
         """
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
-        self.display.image('sd/00-TheFool.raw', multithreading=True)
+        self.display.image('sd/1/00-TheFool.raw', multithreading=True)
         self.display.handle_threading_teardown()
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
-        self.display.image('sd/01-TheMagician.raw', multithreading=True)
+        self.display.image('sd/1/01-TheMagician.raw', multithreading=True)
         self.display.handle_threading_teardown()
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
-        self.display.image('sd/02-TheHighPriestess.raw', multithreading=True)
+        self.display.image('sd/1/02-TheHighPriestess.raw', multithreading=True)
         self.display.handle_threading_teardown()

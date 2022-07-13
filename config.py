@@ -32,7 +32,8 @@ from machine import Pin, SPI
 
 # button config
 BUTTON_LEFT = Pin(21, Pin.IN, Pin.PULL_UP)
-BUTTON_RIGHT = Pin(20, Pin.IN, Pin.PULL_UP)
+# BUTTON_RIGHT = Pin(20, Pin.IN, Pin.PULL_UP)
+BUTTON_RIGHT = Pin(22, Pin.IN, Pin.PULL_UP)
 BUTTON_UP = Pin(19, Pin.IN, Pin.PULL_UP)
 BUTTON_DOWN = Pin(18, Pin.IN, Pin.PULL_UP)
 BUTTON_SUBMIT = Pin(17, Pin.IN, Pin.PULL_UP)
@@ -50,6 +51,7 @@ from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin, LED_PIN, LED_COUNT)
 
 # nrf config
-nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))  # noqa
+nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
+              mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
 from nrf24l01 import NRF  # noqa
 nrf = NRF(nrf_spi, csn=Pin(3, Pin.OUT), ce=Pin(0, Pin.OUT))

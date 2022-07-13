@@ -34,7 +34,8 @@ import uos
 from sd_card import SDCard
 
 # sd card config
-sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))  # noqa
+sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
+                  mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
 
 # init sd card
 sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
