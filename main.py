@@ -65,6 +65,6 @@ menu = Menu(button, display, neo_pixel, game, tarot, data)
 
 
 if __name__ == '__main__':
-    demo.play()
+    # demo.play()
     file_manager.update_games_won()
     menu.system()

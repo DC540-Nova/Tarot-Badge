@@ -83,8 +83,7 @@ class Menu:
             title_color: int, optional
         """
         self.text = title
-        self.display.text(self.text, y=self.title, color=title_color, wrap=False, clear=True,
-                          timed=False, off=True)
+        self.display.text(self.text, y=self.title, color=title_color, wrap=False, clear=True, timed=False, off=True)
         self.text = line_3
         self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
         self.text = line_4
@@ -106,58 +105,132 @@ class Menu:
         """
         Private method to handle the game menu
         """
-        self.__populate('game menu 1', 'l: tarot trivia', 'r: stego', 'u: re-enactment', 'd: hunt', 's: flash card',
-                        'e: main menu')
+        self.__populate('game menu 1', 'l: tarot trivia', 'r: stego', 'u: re-enactment',
+                        'd: scavenger hunt', 's: flash cards', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
             self.__game_menu_tarot_trivia()
         elif self.button_pressed == 2:
             self.__game_menu_stego()
         elif self.button_pressed == 3:
-            pass
+            self.__game_menu_reenactment()
         elif self.button_pressed == 4:
-            pass
+            self.__game_menu_scavenger_hunt()
         elif self.button_pressed == 5:
-            pass
+            self.__game_menu_flash_cards()
         elif self.button_pressed == 6:
             self.__main_menu()
 
     def __game_menu_tarot_trivia(self):
         """
-        Private method to handle the tarot trivia
+        Private method to handle the tarot trivia game
         """
-        self.__populate('tarot trivia', 'l: instructions', 'r: play', 'u: practice', 'd: main menu')
+        self.__populate('tarot trivia menu', 'l: instructions', 'r: play', 'u: practice', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.display.text(self.data.tarot_trivia_instructions)
+            self.display.text(self.data.tarot_trivia_game_instructions)
         elif self.button_pressed == 2:
-            won_game = self.game.multiple_choice(self.data.tarot_trivia, '2', '1', 1, False)
+            won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '2', '1', 1, False)
             if won_game:
                 self.game.won(won_game)
         elif self.button_pressed == 3:
-            self.game.practice(self.data.tarot_trivia)
+            self.game.practice(self.data.tarot_trivia_game)
         elif self.button_pressed == 4:
-            self.__main_menu()
+            pass
         elif self.button_pressed == 5:
             pass
         elif self.button_pressed == 6:
-            pass
+            self.__main_menu()
 
     def __game_menu_stego(self):
         """
         Private method to handle the stego game
         """
-        pass
+        self.__populate('stego menu', 'l: instructions', 'r: play', 'e: main menu')
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.stego_game_instructions)
+        elif self.button_pressed == 2:
+            # TODO: work this out with Betsy
+            pass
+        elif self.button_pressed == 3:
+            pass
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
+
+    def __game_menu_reenactment(self):
+        """
+        Private method to handle the reenactment game
+        """
+        self.__populate('reenactment menu', 'l: instructions', 'r: play', 'e: main menu')
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.reenactment_game_instructions)
+        elif self.button_pressed == 2:
+            # TODO: work this out with Betsy
+            pass
+        elif self.button_pressed == 3:
+            pass
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
+
+    def __game_menu_scavenger_hunt(self):
+        """
+        Private method to handle the scavenger hunt game
+        """
+        self.__populate('scavenger hunt menu', 'l: instructions', 'r: play', 'e: main menu')
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.scavenger_hunt_game_instructions)
+        elif self.button_pressed == 2:
+            # TODO: work this out with Betsy
+            pass
+        elif self.button_pressed == 3:
+            pass
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
+
+    def __game_menu_flash_cards(self):
+        """
+        Private method to handle the flash cards game
+        """
+        self.__populate('flash cards menu', 'l: instructions', 'r: play', 'u: practice', 'e: main menu')
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.flash_cards_game_instructions)
+        elif self.button_pressed == 2:
+            won_game = self.game.multiple_choice(self.data.flash_cards_game, '2', '1', 1, False)
+            if won_game:
+                self.game.won(won_game)
+        elif self.button_pressed == 3:
+            self.game.practice(self.data.flash_cards_game)
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
 
     def __game_menu_2(self):
         """
         Private method to handle the game menu 2
         """
-        self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption', 'd: boss paring', 's: help me',
-                        'e: main menu')
+        self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            pass
+            self.__game_menu_fun_deck()
         elif self.button_pressed == 2:
             pass
         elif self.button_pressed == 3:
@@ -166,6 +239,49 @@ class Menu:
             pass
         elif self.button_pressed == 5:
             pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
+
+    def __game_menu_fun_deck(self):
+        """
+        Private method to handle the fun deck game
+        """
+        self.__populate('fun deck menu', 'l: instructions', 'r: play', 'u: practice', 'e: main menu')
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.fun_deck_game_instructions)
+        elif self.button_pressed == 2:
+            won_game = self.game.multiple_choice(self.data.fun_deck_game, '2', '1', 1, False)
+            if won_game:
+                self.game.won(won_game)
+        elif self.button_pressed == 3:
+            self.game.practice(self.data.fun_deck_game)
+        elif self.button_pressed == 4:
+            pass
+        elif self.button_pressed == 5:
+            pass
+        elif self.button_pressed == 6:
+            self.__main_menu()
+
+    def __game_menu_morse_code(self):
+        """
+        Private method to handle the morse code game
+        """
+        self.__populate('morse code menu', 'l: instructions', 'r: play', 'u: practice-easy', 'd: practice-medium',
+                        's: practice-advanced', 'e: main menu')
+        self.button_pressed = self.button.press()
+        if self.button_pressed == 1:
+            self.display.text(self.data.morse_code_game_instructions)
+        elif self.button_pressed == 2:
+            won_game = self.game.multiple_choice(self.data.morse_code_game, '2', '1', 1, False)
+            if won_game:
+                self.game.won(won_game)
+        elif self.button_pressed == 3:
+            self.game.practice(self.data.morse_code_game_practice_easy)
+        elif self.button_pressed == 4:
+            self.game.practice(self.data.morse_code_game_practice_medium)
+        elif self.button_pressed == 5:
+            self.game.practice(self.data.morse_code_game_practice_advanced)
         elif self.button_pressed == 6:
             self.__main_menu()
 
@@ -235,7 +351,12 @@ class Menu:
                         's: bad advice menu', 'e: extras menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.display.text(self.data.instructions)
+            self.display.text(self.data.badge_instructions_1, timed=False)
+            self.button_pressed = self.button.press()
+            self.display.text(self.data.badge_instructions_2, timed=False)
+            self.button_pressed = self.button.press()
+            self.display.text(self.data.badge_instructions_3, timed=False)
+            self.button_pressed = self.button.press()
         elif self.button_pressed == 2:
             self.__game_menu_1()
         elif self.button_pressed == 3:
@@ -251,6 +372,6 @@ class Menu:
         """
         Method to handle the menu system
         """
-        self.display.image('dc540_logo.raw')
+        # self.display.image('dc540_logo.raw')
         while True:
             self.__main_menu()

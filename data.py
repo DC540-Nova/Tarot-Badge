@@ -28,20 +28,31 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-instructions = 'Welcome to the DC540 Tarot Badge.  Here you can play games and get a tarot reading and do all sorts of stuff stay tuned.  Bla bla foo.'  # noqa
-tarot_trivia_instructions = 'Answer 15 of the 20 trivia questions correctly to pass this game.'
+badge_instructions_1 = 'There are more details can be found on the webpage dc540.org. Some games require you to submit to the DC540 discord channel.'  # noqa
+badge_instructions_2 = 'For those you will be sent a code to input. Other games are automatic.'  # noqa
+badge_instructions_3 = 'Stuff'  # noqa
+tarot_trivia_game_instructions = 'Answer 15 of the 20 trivia questions correctly to pass this game.'
+stego_game_instructions = 'Go to the DC540 website and find the game labeled stego.'
+reenactment_game_instructions = 'Re-enact a Tarot Card picture using yourself. Take a picture and submit on the DC540 Tartot badge channel'  # noqa
+scavenger_hunt_game_instructions = 'Find ten items that can be found on the tarot deck. Submit a picture of all ten items to the DC540 Tarot badge channel'  # noqa
+flash_cards_game_instructions = 'Answer 15 of the 20 flashcards correctly to pass this game.'
+fun_deck_game_instructions = 'We at DC540 created our own terrible Tarot deck. To get credit for this quest, create your own deck.  It must be original and post to XXX to share with the world. Send us a message on our discord channel DC540 to recieve a code and you can enter here.'  # noqa
+morse_code_game_instructions = 'decode the morse code for the answer'
+decryption_game_instructions = 'decode these three encryptions and add them together for the answer'
+help_someone_game_instructions = 'find another player wearing this badge and offer to help them'
+# boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
 
-boss_ids = []  # noqa
-boss_ids.append('e66038b7137a9935')
-boss_ids.append('e66038b7135fa935')
-boss_ids.append('e66038b71316902f')
-boss_ids.append('e66038b713338c2f')
-
-boss_names = []  # noqa
-boss_names.append('Baabalicious')
-boss_names.append('Banter')
-boss_names.append('Lyra')
-boss_names.append('Kevin')
+# boss_ids = []  # noqa
+# boss_ids.append('e66038b7137a9935')
+# boss_ids.append('e66038b7135fa935')
+# boss_ids.append('e66038b71316902f')
+# boss_ids.append('e66038b713338c2f')
+#
+# boss_names = []  # noqa
+# boss_names.append('Baabalicious')
+# boss_names.append('Banter')
+# boss_names.append('Lyra')
+# boss_names.append('Kevin')
 
 cards = {
     '0 The Fool':
@@ -514,7 +525,7 @@ cards = {
         ],
 }
 
-tarot_trivia = {
+tarot_trivia_game = {
     'How many cards are there in a standard Rider-Waite tarot deck?':
         [
             'A. 22',
@@ -661,7 +672,7 @@ tarot_trivia = {
         ],
 }
 
-flash_cards = {
+flash_cards_game = {
     '00-TheFool.raw':
         [
             'A. The Emperor',
@@ -822,6 +833,246 @@ flash_cards = {
             'D. Strength',
             2
         ],
+    '20-Judgement.raw':
+        [
+            'A. Divination',
+            'B. Death',
+            'C. Wisdom',
+            'D. Judgment',
+            3
+        ],
+    '21-TheWorld.raw':
+        [
+            'A. The World',
+            'B. The Moon',
+            'C. The Universe',
+            'D. The Sun',
+            0
+        ],
+    'Wands01.raw':
+        [
+            'A. Two of Wands',
+            'B. Page of Wands',
+            'C. Ace of Wands',
+            'D. Knight of Wands',
+            2
+        ],
+    'Wands02.raw':
+        [
+            'A. Two of Wands',
+            'B. Page of Wands',
+            'C. Ace of Wands',
+            'D. Knight of Wands',
+            0
+        ],
+    'Wands03.raw':
+        [
+            'A. Two of Wands',
+            'B. Page of Wands',
+            'C. Queen of Wands',
+            'D. Three of Wands',
+            3
+        ],
+    'Wands04.raw':
+        [
+            'A. Two of Wands',
+            'B. Four of Wands',
+            'C. Three of Wands',
+            'D. Ace of Wands',
+            1
+        ],
+    'Wands05.raw':
+        [
+            'A. Five of Wands',
+            'B. Page of Wands',
+            'C. Ace of Wands',
+            'D. Knight of Wands',
+            0
+        ],
+    'Wands06.raw':
+        [
+            'A. Six of Wands',
+            'B. Five of Wands',
+            'C. Seven of Wands',
+            'D. Four of Wands',
+            0
+        ],
+    'Wands07.raw':
+        [
+            'A. Two of Wands',
+            'B. Page of Wands',
+            'C. Seven of Wands',
+            'D. Knight of Wands',
+            2
+        ],
+    'Wands08.raw':
+        [
+            'A. Ace of Wands',
+            'B. Page of Wands',
+            'C. Seven of Wands',
+            'D. Eight of Wands',
+            3
+        ],
+    'Wands09.raw':
+        [
+            'A. Queen of Wands',
+            'B. Nine of Wands',
+            'C. Seven of Wands',
+            'D. Knight of Wands',
+            1
+        ],
+    'Wands10.raw':
+        [
+            'A. Jack of Wands',
+            'B. Page of Wands',
+            'C. Ten of Wands',
+            'D. Knight of Wands',
+            2
+        ],
+    'Wands11.raw':
+        [
+            'A. King of Wands',
+            'B. Page of Wands',
+            'C. Queen of Wands',
+            'D. Knight of Wands',
+            1
+        ],
+    'Wands12.raw':
+        [
+            'A. Knight of Wands',
+            'B. Page of Wands',
+            'C. King of Wands',
+            'D. Queen of Wands',
+            0
+        ],
+    'Wands13.raw':
+        [
+            'A. Queen of Wands',
+            'B. Page of Wands',
+            'C. King of Wands',
+            'D. Ace of Wands',
+            0
+        ],
+    'Wands14.raw':
+        [
+            'A. Ace of Wands',
+            'B. King of Wands',
+            'C. Page of Wands',
+            'D. Knight of Wands',
+            1
+        ],
+    'Cups01.raw':
+        [
+            'A. Ace of Cups',
+            'B. Page of Cups',
+            'C. Queen of Goblets',
+            'D. Ace of Goblets',
+            0
+        ],
+    'Cups02.raw':
+        [
+            'A. Ace of Cups',
+            'B. Two of Cups',
+            'C. Page of Goblets',
+            'D. Ace of Goblets',
+            1
+        ],
+    'Cups03.raw':
+        [
+            'A. Knight of Goblets',
+            'B. Page of Cups',
+            'C. King of Cups',
+            'D. Three of Goblets',
+            1
+        ],
+    'Cups04.raw':
+        [
+            'A. Five of Cups',
+            'B. Three of Cups',
+            'C. Six of Cups',
+            'D. Four of Cupts',
+            3
+        ],
+    'Cups05.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. Queen of Cups',
+            'C. Five of Cups',
+            'D. Ace of Wands',
+            2
+        ],
+    'Cups06.raw':
+        [
+            'A. Six of Cups',
+            'B. Eight of Cups',
+            'C. Queen of Cups',
+            'D. Ace of Cups',
+            0
+        ],
+    'Cups07.raw':
+        [
+            'A. Seven of Goblets',
+            'B. Six of Goblets',
+            'C. Six of Cups',
+            'D. Seven of Cups',
+            3
+        ],
+    'Cups08.raw':
+        [
+            'A. Eight of Goblets',
+            'B. Six of Goblets',
+            'C. Seven of Cups',
+            'D. Eight of Cups',
+            3
+        ],
+    'Cups09.raw':
+        [
+            'A. Nine of Goblets',
+            'B. Nine of Chalices',
+            'C. Nine of Cups',
+            'D. Nine of Mugs',
+            2
+        ],
+    'Cups10.raw':
+        [
+            'A. Ten of Goblets',
+            'B. Ten of Chalices',
+            'C. Page of Cups',
+            'D. Ten of Cups',
+            3
+        ],
+    'Cups11.raw':
+        [
+            'A. Seven of Pages',
+            'B. Seven of Goblets',
+            'C. Page of Cups',
+            'D. Queen of Cups',
+            2
+        ],
+    'Cups12.raw':
+        [
+            'A. Knight of Cups',
+            'B. Night of Goblets',
+            'C. Night of Cups',
+            'D. Knight of Goblets',
+            0
+        ],
+    'Cups13.raw':
+        [
+            'A. Knight of Chalices',
+            'B. Queen of Cups',
+            'C. King of Goblets',
+            'D. Ace of Chalices',
+            1
+        ],
+    'Cups14.raw':
+        [
+            'A. King of Cups',
+            'B. Queen of Goblets',
+            'C. Jack of Goblets',
+            'D. Page of Cups',
+            0
+        ],
     'Swords14.raw':
         [
             'A. King of Swords',
@@ -832,8 +1083,7 @@ flash_cards = {
         ],
 }
 
-# user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
-morse_code_practice_easy = {
+morse_code_game_practice_easy = {
     'A': 'A',
     'B': 'B',
     'C': 'C',
@@ -872,20 +1122,26 @@ morse_code_practice_easy = {
     '9': '9',
 }
 
-# user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
-morse_code_practice_medium = {
-    'sos': 'SOS',  # betsy you can do 'SOS' or '--- ... ---'
+morse_code_game_practice_medium = {
+    'sos': 'SOS',
     'hello': 'HELLO',
-    'DEFCON30': 'DEFCON30'
+    'DEFCON30': 'DEFCON30',
+    'ace': 'ACE',
+    'page': 'PAGE',
+    'knights': 'KNIGHTS',
+    'queen': 'QUEEN',
+    'king': 'KING',
+    'Pentacles': 'PENTACLES',
+    'swords': 'SWORDS',
+    'cups': 'CUPS',
+    'wands': 'WANDS',
 }
 
-# user will be shown 'A' and will input '... - ..' and if correct get a successful answer - no game
-morse_code_practice_advanced = {
-    'MAJOR ARCANE': 'MAJOR ARCANE',  # betsy change this
+morse_code_game_practice_advanced = {
+    'MAJOR ARCANE': 'MAJOR ARCANE',
     'WHEEL OF FORTUNE': 'WHEEL OF FORTUNE',
     'THE HANGED MAN': 'THE HANGED MAN',
 }
-
 
 morse_code_game = {
     'Decode This Answer': 'FOO',
@@ -899,15 +1155,12 @@ ciphers101_game = {
     'Cipher 3': 'this will be a vignere cipher',
 }
 
-
-
-
-
 stego_game2_answer = {
     'Please enter the answer for Game 1': '343421',
 }
+
 reenactment_game3_answer = {
-    'Please enter the answer for Game 2': '441211',
+    'Please enter the answer for Game 2': '441211'
 }
 SavengerHunt_game4_answer = {
     'Please enter the answer for Game 3': '141431'
