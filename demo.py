@@ -67,13 +67,22 @@ class Demo:
         """
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
-        self.display.image('sd/1/00-TheFool.raw', multithreading=True)
+        try:
+            self.display.image('sd/1/00-TheFool.raw', multithreading=True)
+        except OSError:
+            self.display.text('please re-copy files to sd')
         self.display.handle_threading_teardown()
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
-        self.display.image('sd/1/01-TheMagician.raw', multithreading=True)
+        try:
+            self.display.image('sd/1/01-TheMagician.raw', multithreading=True)
+        except OSError:
+            self.display.text('please re-copy files to sd')
         self.display.handle_threading_teardown()
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
-        self.display.image('sd/1/02-TheHighPriestess.raw', multithreading=True)
+        try:
+            self.display.image('sd/1/02-TheHighPriestess.raw', multithreading=True)
+        except OSError:
+            self.display.text('please re-copy files to sd')
         self.display.handle_threading_teardown()

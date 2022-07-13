@@ -75,7 +75,7 @@ class Game:
             else:
                 try:
                     self.display.image('sd/' + self.tarot.deck + '/' + question)
-                except FileNotFoundError:
+                except OSError:
                     self.display.text('please re-copy files to sd')
                     break
             correct_answer_index = answers[4]
@@ -119,7 +119,7 @@ class Game:
             else:
                 try:
                     self.display.image('sd/' + self.tarot.deck + '/' + question)
-                except FileNotFoundError:
+                except OSError:
                     self.display.text('please re-copy files to sd')
                     break
             correct_answer_index = answers[4]

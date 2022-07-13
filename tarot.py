@@ -80,13 +80,13 @@ class Tarot:
             if meaning == 1:
                 try:
                     self.display.image('sd/' + deck + '/' + card_reading[2], timed=False)
-                except FileNotFoundError:
+                except OSError:
                     self.display.text('please re-copy files to sd')
                     break
             if meaning == 2:
                 try:
                     self.display.image('sd/' + deck + '/' + card_reading[2], up=False, timed=False)
-                except FileNotFoundError:
+                except OSError:
                     self.display.text('please re-copy files to sd')
                     break
             _ = self.button.press()

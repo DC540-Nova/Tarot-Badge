@@ -177,13 +177,13 @@ class Menu:
                         'd: load deck 4', 's: tarot reading', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.deck = 1
+            self.deck = '1'
         elif self.button_pressed == 2:
-            self.deck = 2
+            self.deck = '2'
         elif self.button_pressed == 3:
-            self.deck = 3
+            self.deck = '3'
         elif self.button_pressed == 4:
-            self.deck = 4
+            self.deck = '4'
         elif self.button_pressed == 5:
             self.tarot.reading(self.deck)
         elif self.button_pressed == 6:
@@ -231,7 +231,7 @@ class Menu:
         """
         Private method to handle the main menu
         """
-        self.__populate('main menu', 'l: instructions', 'r: games 1 menu', 'u: games 2 menu', 'd: tarot reading',
+        self.__populate('main menu', 'l: instructions', 'r: games 1 menu', 'u: games 2 menu', 'd: tarot menu',
                         's: bad advice menu', 'e: extras menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
