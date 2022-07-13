@@ -1147,30 +1147,33 @@ morse_code_game = {
     'Decode This Answer': 'FOO',
 }
 
-# there will be instructions - decipher all three ciphers and put them in order
-# press A BUTTON to submit answer
-ciphers101_game = {
-    'Cipher 1': 'Hsle td esp yfxmpc ehpyej-escpp',
-    'Cipher 2': 'dGhlIGFuc3dlciB0byBsaWZlIHRoZSB1bml2ZXJzZSBhbmQgZXZlcnl0aGluZw==',
-    'Cipher 3': 'this will be a vignere cipher',
-}
+# # there will be instructions - decipher all three ciphers and put them in order
+# # press A BUTTON to submit answer
+# ciphers101_game = {
+#     'Cipher 1': 'Hsle td esp yfxmpc ehpyej-escpp',
+#     'Cipher 2': 'dGhlIGFuc3dlciB0byBsaWZlIHRoZSB1bml2ZXJzZSBhbmQgZXZlcnl0aGluZw==',
+#     'Cipher 3': 'this will be a vignere cipher',
+# }
 
-stego_game2_answer = {
+stego_game = {
     'Please enter the answer for Game 1': '343421',
 }
 
-reenactment_game3_answer = {
+reenactment_game = {
     'Please enter the answer for Game 2': '441211'
 }
-SavengerHunt_game4_answer = {
+
+scavenger_hunt_game = {
     'Please enter the answer for Game 3': '141431'
 }
-ShittyDeck_game7_answer = {
-    'Please enter the answer for Game 4': '333212',
-}
-morsecode_game8_answer = {
-    'Please enter the answer for Game 5 ': '442132',
-}
-ciphers101_game10_answer = {
-    'Please enter the answer for Game 9': '234222',
-}
+
+# ShittyDeck_game7_answer = {
+#     'Please enter the answer for Game 4': '333212',
+# }
+#
+# morsecode_game8_answer = {
+#     'Please enter the answer for Game 5 ': '442132',
+# }
+# ciphers101_game10_answer = {
+#     'Please enter the answer for Game 9': '234222',
+# }
