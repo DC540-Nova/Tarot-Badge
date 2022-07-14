@@ -134,7 +134,7 @@ class Menu:
             if won_game:
                 self.game.won(won_game)
         elif self.button_pressed == 3:
-            self.game.practice(self.data.tarot_trivia_game)
+            self.game.multiple_choice_practice(self.data.tarot_trivia_game)
         elif self.button_pressed == 4:
             pass
         elif self.button_pressed == 5:
@@ -255,7 +255,7 @@ class Menu:
             if won_game:
                 self.game.won(won_game)
         elif self.button_pressed == 3:
-            self.game.practice(self.data.fun_deck_game)
+            self.game.multiple_choice_practice(self.data.fun_deck_game)
         elif self.button_pressed == 4:
             pass
         elif self.button_pressed == 5:
@@ -277,11 +277,11 @@ class Menu:
             if won_game:
                 self.game.won(won_game)
         elif self.button_pressed == 3:
-            self.game.practice(self.data.morse_code_game_practice_easy)
+            self.game.(self.data.morse_code_game_practice_easy)
         elif self.button_pressed == 4:
-            self.game.practice(self.data.morse_code_game_practice_medium)
+            self.game.(self.data.morse_code_game_practice_medium)
         elif self.button_pressed == 5:
-            self.game.practice(self.data.morse_code_game_practice_advanced)
+            self.game.(self.data.morse_code_game_practice_advanced)
         elif self.button_pressed == 6:
             self.__main_menu()
 

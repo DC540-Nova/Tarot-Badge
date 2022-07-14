@@ -127,7 +127,7 @@ class Button:
             elif not self.button_right.value():
                 return 'no'
 
-    def morse_code(self, max_chars=8):
+    def morse_code(self, max_chars=20):
         """
         Method to handle morse code button presses
 
@@ -137,25 +137,25 @@ class Button:
         Returns:
             str
         """
-        word = ''
+        sentence = ''
         while True:
-            if len(word) >= max_chars:
-                word = ''
+            if len(sentence) >= max_chars:
+                sentence = ''
             if not self.button_left.value():
-                word += '.'
-                self.display.text(word, timed=False)
+                sentence += '.'
+                self.display.text(sentence, timed=False)
                 sleep(self.press_time)
             elif not self.button_right.value():
-                word += '-'
-                self.display.text(word, timed=False)
+                sentence += '-'
+                self.display.text(sentence, timed=False)
                 sleep(self.press_time)
             elif not self.button_up.value():
-                word += ' '
-                self.display.text(word, timed=False)
+                sentence += ' '
+                self.display.text(sentence, timed=False)
                 sleep(self.press_time)
             elif not self.button_submit.value():
-                if word:
-                    return word
+                if sentence:
+                    return sentence
 
     def press(self):
         """

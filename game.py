@@ -36,18 +36,20 @@ class Game:
     Base class to handle a game
     """
 
-    def __init__(self, button, file_manager, display, tarot):
+    def __init__(self, button, file_manager, display, tarot, morse_code):
         """
         Params:
             button: object
             file_manager: object
             display: object
             tarot: object
+            morse_code: object
         """
         self.button = button
         self.file_manager = file_manager
         self.display = display
         self.tarot = tarot
+        self.morse_code = morse_code
 
     def multiple_choice(self, question_bank, game_number, num_questions, num_questions_to_win, text=True):
         """
@@ -102,7 +104,7 @@ class Game:
                 else:
                     return False
 
-    def practice(self, question_bank, text=True):
+    def multiple_choice_practice(self, question_bank, text=True):
         """
         Method to handle practicing a generic multiple choice question loop
 
@@ -139,15 +141,24 @@ class Game:
             else:
                 return
 
-    def morse_code_practice_easy(self):
+    def morse_code_practice_easy(self, question_bank):
         """
-        Method to handle a morse code easy practice
+        Method to handle a morse code easy practice loop
+
+        Params:
+            question_bank: dict
         """
-        # the letter to display on the screen
-        # at the same time, have the letter flash on the neopixels
-        # then the user will enter in with a button either a - . or space series of chars
-        # if they get it right say CORRECT or INCORRECT
-        pass
+        questions = list(question_bank)
+        for _ in questions:
+            question, answer = random.choice(list(question_bank.items()))
+            self.display.text(question)
+            self.morse_code.display(answer)
+            encrypted_sentence = self.morse_code.encrypt(answer)
+            answer = self.button.morse_code()
+            if answer == encrypted_sentence:
+                self.display.text('CORRECT')
+            else:
+                self.display.text('INCORRECT')
 
     def morse_code_practice_medium(self):
         """
