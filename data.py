@@ -1125,7 +1125,7 @@ morse_code_game_practice_easy = {
 morse_code_game_practice_medium = {
     'sos': 'SOS',
     'hello': 'HELLO',
-    'DEFCON30': 'DEFCON30',
+    'defcon30': 'DEFCON30',
     'ace': 'ACE',
     'page': 'PAGE',
     'knights': 'KNIGHTS',
@@ -1138,9 +1138,9 @@ morse_code_game_practice_medium = {
 }
 
 morse_code_game_practice_advanced = {
-    'MAJOR ARCANE': 'MAJOR ARCANE',
-    'WHEEL OF FORTUNE': 'WHEEL OF FORTUNE',
-    'THE HANGED MAN': 'THE HANGED MAN',
+    'major arcane': 'MAJOR ARCANE',
+    'wheel of fortune': 'WHEEL OF FORTUNE',
+    'the hanged man': 'THE HANGED MAN',
 }
 
 morse_code_game = {

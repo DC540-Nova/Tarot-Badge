@@ -160,15 +160,24 @@ class Game:
             else:
                 self.display.text('INCORRECT')
 
-    def morse_code_practice_medium(self):
+    def morse_code_practice_medium(self, question_bank):
         """
-        Method to handle a morse code medium practice
+        Method to handle a morse code medium practice loop
+
+        Params:
+            question_bank: dict
         """
-        # the word to display on the screen
-        # at the same time, have the letter flash on the neopixels
-        # then the user will enter in with a button either a - . or space series of chars
-        # if they get it right say CORRECT or INCORRECT
-        pass
+        questions = list(question_bank)
+        for _ in questions:
+            question, answer = random.choice(list(question_bank.items()))
+            self.display.text(question)
+            self.morse_code.display(answer)
+            encrypted_sentence = self.morse_code.encrypt(answer)
+            answer = self.button.morse_code()
+            if answer == encrypted_sentence:
+                self.display.text('CORRECT')
+            else:
+                self.display.text('INCORRECT')
 
     def morse_code(self):
         """
