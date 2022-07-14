@@ -81,7 +81,7 @@ class Tarot:
                 try:
                     self.display.image('sd/' + deck + '/' + card_reading[2], timed=False)
                 except OSError:
-                    self.display.text('please re-copy files to sd')
+                    self.display.text('sd card is damaged')
                     break
             if meaning == 2:
                 try:
@@ -89,7 +89,7 @@ class Tarot:
                     self.display.image(card, up=False, timed=False)
                 except OSError as e:
                     print(e)
-                    self.display.text('please re-copy files to sd')
+                    self.display.text('sd card is damaged')
                     break
             _ = self.button.press()
             if meaning == 1:

@@ -70,19 +70,19 @@ class Demo:
         try:
             self.display.image('sd/Rider-Waite/00-TheFool.raw', multithreading=True)
         except OSError:
-            self.display.text('please re-copy files to sd')
+            self.display.text('sd card is damaged')
         self.display.handle_threading_teardown()
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
         try:
             self.display.image('sd/Rider-Waite/01-TheMagician.raw', multithreading=True)
         except OSError:
-            self.display.text('please re-copy files to sd')
+            self.display.text('sd card is damaged')
         self.display.handle_threading_teardown()
         self.display.handle_threading_setup()
         _thread.start_new_thread(self.__bg_task, ())  # noqa
         try:
             self.display.image('sd/Rider-Waite/02-TheHighPriestess.raw', multithreading=True)
         except OSError:
-            self.display.text('please re-copy files to sd')
+            self.display.text('sd card is damaged')
         self.display.handle_threading_teardown()

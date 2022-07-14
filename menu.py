@@ -297,20 +297,23 @@ class Menu:
         self.__populate('tarot reading menu', 'l: choose deck', 's: tarot reading', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            uos.chdir('sd')
-            folders = uos.listdir()
-            for folder in folders:
-                if folder == 'System Volume Information' or folder == '.fseventsd' or folder == '.Spotlight-V100' or folder == '.Trashes':
-                    pass
-                else:
-                    self.display.text(folder, timed=False)
-                    self.button_pressed = self.button.press()
-                    if self.button_pressed == 1:
-                        self.deck = folder
-                        self.display.text('DECK CHANGED')
-                        break
+            try:
+                uos.chdir('sd')
+                folders = uos.listdir()
+                for folder in folders:
+                    if folder == 'System Volume Information' or folder == '.fseventsd' or folder == '.Spotlight-V100' or folder == '.Trashes':
+                        pass
                     else:
-                        continue
+                        self.display.text(folder, timed=False)
+                        self.button_pressed = self.button.press()
+                        if self.button_pressed == 1:
+                            self.deck = folder
+                            self.display.text('DECK CHANGED')
+                            break
+                        else:
+                            continue
+            except OSError:
+                self.display.text('sd card is damaged')
         elif self.button_pressed == 2:
             pass
         elif self.button_pressed == 3:

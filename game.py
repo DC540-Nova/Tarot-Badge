@@ -77,7 +77,7 @@ class Game:
                 try:
                     self.display.image('sd/' + self.tarot.deck + '/' + question)
                 except OSError:
-                    self.display.text('please re-copy files to sd')
+                    self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
@@ -121,7 +121,7 @@ class Game:
                 try:
                     self.display.image('sd/' + self.tarot.deck + '/' + question)
                 except OSError:
-                    self.display.text('please re-copy files to sd')
+                    self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
