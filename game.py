@@ -43,7 +43,6 @@ class Game:
             file_manager: object
             display: object
             tarot: object
-
         """
         self.button = button
         self.file_manager = file_manager
@@ -139,6 +138,36 @@ class Game:
                 pass
             else:
                 return
+
+    def morse_code_practice_easy(self):
+        """
+        Method to handle a morse code easy practice
+        """
+        # the letter to display on the screen
+        # at the same time, have the letter flash on the neopixels
+        # then the user will enter in with a button either a - . or space series of chars
+        # if they get it right say CORRECT or INCORRECT
+        pass
+
+    def morse_code_practice_medium(self):
+        """
+        Method to handle a morse code medium practice
+        """
+        # the word to display on the screen
+        # at the same time, have the letter flash on the neopixels
+        # then the user will enter in with a button either a - . or space series of chars
+        # if they get it right say CORRECT or INCORRECT
+        pass
+
+    def morse_code(self):
+        """
+        Method to handle a morse code game
+        """
+        # the words to display on the screen
+        # then the user will enter in with a button either a - . or space series of chars
+        # if they get it right say CORRECT or INCORRECT
+        # must get all right
+        pass
 
     def won(self, game_won):
         """

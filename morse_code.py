@@ -126,14 +126,14 @@ class MorseCode:
 
     def __pause(self):
         """
-        Private Mmethod to handle morse code pause on a neo_pixel display
+        Private Method to handle morse code pause on a neo_pixel display
         """
         self.neo_pixel.clear(hard_clear=True)
         sleep(7 * self.B_RATE)
 
     def display(self, sentence, encrypted=False):
         """
-        Function to handle conversion and display of morse code
+        Method to handle conversion and display of morse code
 
         Params:
             sentence: str
@@ -147,10 +147,54 @@ class MorseCode:
             decrypted_sentence = sentence
         for character in decrypted_sentence:
             encoded_sentence += self.CODE[character] + ' '
-        for letter in encoded_sentence:
-            if letter == '.':
+        for symbol in encoded_sentence:
+            if symbol == '.':
                 self.__dot()
-            elif letter == '-':
+            elif symbol == '-':
                 self.__dash()
             else:
                 self.__pause()
+
+    def encrypt(self, sentence):
+        """
+        Method to encrypt a morse code sentence
+
+        Params:
+            sentence: str
+
+        Returns:
+            str
+        """
+        encrypted_sentence = ''
+        for letter in sentence:
+            if letter != ' ':
+                encrypted_sentence += self.CODE[letter] + ' '
+            else:
+                encrypted_sentence += ' '
+        return encrypted_sentence
+
+    def decrypt(self, encrypted_sentence):
+        """
+        Method to decrypt a morse code sentence
+
+        Params:
+            encrypted_sentence: str
+
+        Returns:
+            str
+        """
+        encrypted_sentence += ' '
+        decrypted_sentence = ''
+        character = ''
+        counter = 0
+        for symbol in encrypted_sentence:
+            if symbol != ' ':
+                character += symbol
+            else:
+                counter += 1
+                if counter == 2:
+                    decrypted_sentence += ' '
+                else:
+                    decrypted_sentence += list(self.CODE.keys())[list(self.CODE.values()).index(character)]
+                    character = ''
+        return decrypted_sentence
