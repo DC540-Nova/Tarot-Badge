@@ -70,31 +70,31 @@ cards = {
     '2 The High Priestess':
         [
             'Intuition. Going within. Inner knowing.',
-            'Emerging from depression. Extreme shyness or over-confidence, denying intuition, predatory sexual behavior, superficiality, disclosure of secrets.',  # noqa
+            'Emerging from depression. Extreme shyness or over-confidence, denying intuition, predatory sexual behavior, disclosure of secrets.',  # noqa
             '02-TheHighPriestess.raw'
         ],
     '3 The Empress':
         [
             'Growth, fertility, pregnancy, motherhood. New project. Dominant female.',
-            'Famine, drought. Neglected land. Smother-love, living through your children. Vanity, empty nest syndrome, feeling useless, infidelity, unloving, unsupportive. Fertility issues. Failing business. Problems with adoption or step-parenting.',  # noqa
+            'Famine, drought. smother love. Vanity, feeling useless, infidelity, unloving, unsupportive. Fertility issues. Failing business.',  # noqa
             '03-TheEmpress.raw'
         ],
     '4 The Emperor':
         [
             'Structure, organization, rules. Dominant male.',
-            'Nature controlled. Urban sprawl and degeneration. Authoritarian, tyrant, dictator, domination, rigid, unyielding, fatherhood problems, loss of control, obstruction, misuse of power.',  # noqa
+            'Nature controlled. Urban sprawl and degeneration. Tyrant, dictator, domination, rigid, unyielding, loss of control, misuse of power.',  # noqa
             '04-TheEmperor.raw'
         ],
     '5 The Hierophant':
         [
             'Learning path, religion, spirituality, spiritual mentor, guide.',
-            'Rejection of the establishment. A mentor with ulterior motives. Expulsion, excommunication. Sexual misdemeanors. Inappropriate behavior. Rejecting one’s faith.',  # noqa
+            'Rejection of the establishment. A mentor with ulterior motives. Expulsion. Sexual misdemeanors. Inappropriate behavior. Rejecting one’s faith.',  # noqa
             '05-TheHierophant.raw'
         ],
     '6 The Lovers':
         [
             'Life-changing choice, turning point. Union with another, two as one.',
-            'Inappropriate relationship. Immaturity, lack of love, possessiveness, infatuation/stalk. Lust rather than love. Bad choice, indecision, temptation, weakness, lack of trust.',   # noqa
+            'Inappropriate relationship. Immaturity, lack of love, possessiveness, lust rather than love. Bad choice, indecision, temptation, weakness, lack of trust.',   # noqa
             '06-TheLovers.raw'
         ],
     '7 The Chariot':
@@ -106,7 +106,7 @@ cards = {
     '8 Strength':
         [
             'Persuasion, gentle strength. Patience, control, compassion.',
-            'Mental problems. Too overbearing or too weak. Not knowing when to stop. Government vs citizens. Cruelty. Disregarding the well-being of others in order to achieve your desire.',  # noqa
+            'Mental problems. Too overbearing or too weak. Not knowing when to stop. Government vs citizens. Cruelty. Disregarding the well-being of others.',  # noqa
             '08-Strength.raw'
         ],
     '9 The Hermit':
@@ -136,25 +136,25 @@ cards = {
     '13 Death':
         [
             'Endings and new beginnings, transformation, transition. Death.',
-            'Attempting to avoid an inevitable end. Chronic illness. Extreme depression or pessimism. Coming back from the dead (NDE). Obsession with death. Accident (narrowly escaping death).',  # noqa
+            'Attempting to avoid an inevitable end. Chronic illness. Extreme depression or pessimism. Obsession with death. Accident (narrowly escaping death).',  # noqa
             '13-Death.raw'
         ],
     '14 Temperance':
         [
             'Chemistry, moderation, balance. Getting it right.',
-            'Out of balance, non-cooperation, conflicting ideas/positions. Emotional extremes. Procrastination. Digestive problems. Mind/body health out of whack.',  # noqa
+            'Out of balance, conflicting ideas & positions. Emotional extremes. Procrastination. Digestive problems. Mind & body health out of whack.',  # noqa
             '14-Temperance.raw'
         ],
     '15 The Devil':
         [
             'Addiction, bad habits, co-dependency, materialism.',
-            'Extremes of the upright meaning: Life-threatening addiction, psychopathic personality disorder. Abuse (mental and physical). Escape, release, moving forward, taking control of your problems and your life.',  # noqa
+            'Extremes, life threatening addiction, psychopathic personality disorder. Abuse. Escape, release, moving forward, taking control of your problems and your life.',  # noqa
             '15-TheDevil.raw'
         ],
     '16 The Tower':
         [
             'Chaos, destruction, upheaval. Unexpected and possibly unwanted change.',
-            'Weakened energy of upright card. Irritations, things going wrong, setbacks, pressure, stress. Accidents, cuts, burns, surgery. Need to visit the doctor. Can\'t see the way through all the problems.',  # noqa
+            'Weakened energy of upright card. Irritations, things going wrong, setbacks, pressure, stress. Accidents, cuts, burns, surgery. Need to visit the doctor.',  # noqa
             '16-TheTower.raw'
         ],
     '17 The Star':
@@ -166,7 +166,7 @@ cards = {
     '18 The Moon':
         [
             'Insecurity, anxiety, illusion, fear, health issues.',
-            'Resistance to anything spiritual. Self-delusion. Closed mind. Mental health issues, and things like fibromyalgia and urinary tract problems.',  # noqa
+            'Resistance to anything spiritual. Delusion. Closed mind. Mental health issues, and things like fibromyalgia and urinary tract problems.',  # noqa
             '18-TheMoon.raw'
         ],
     '19 The Sun':
@@ -184,19 +184,19 @@ cards = {
     '21 The World':
         [
             'In the right place. Accomplishment, completion. Pause before the next stage.',
-            'Slightly weakened energy of upright card so generally positive. Completion of projects delayed. Wanting to move forward but held back. Overdue birth. Issues with weight loss. Having to wait for test results.',  # noqa
+            'Slightly weakened energy of upright card so generally positive. Wanting to move forward but held back. Overdue birth. Issues with weight loss.',  # noqa
             '21-TheWorld.raw'
         ],
     '22 Ace Of Wands':
         [
             'Rush of energy, inspiration, passion, creativity.',
-            'Weakened energy of upright meaning. Inappropriate attraction/affair. Lack of growth and expansion.',  # noqa
+            'Weakened energy of upright meaning. Inappropriate attraction or affair. Lack of growth and expansion.',  # noqa
             'Wands01.raw'
         ],
     '23 Two Of Wands':
         [
             'Planning, decisions, delays.',
-            'Unexpected turn of events. A new perspective on an old problem. Reluctance, self-imposed restriction.',  # noqa
+            'Unexpected turn of events. A new perspective on an old problem. Reluctance.',  # noqa
             'Wands02.raw'
         ],
     '24 Three Of Wands':
@@ -280,7 +280,7 @@ cards = {
     '37 Two Of Cups':
         [
             'Attraction, love, commitment.',
-            'Difficulty making a romantic connection. Obstacles to love. Finding yourself in the friend-zone. Losing contact. Separation.',  # noqa
+            'Difficulty making a romantic connection. Obstacles to love. Finding yourself in the friend zone. Losing contact. Separation.',  # noqa
             'Cups02.raw'
         ],
     '38 Three Of Cups':
@@ -322,7 +322,7 @@ cards = {
     '44 Nine Of Cups':
         [
             'Emotional security. Comfort, satisfaction, happiness.',
-            'Weakened energy of upright card. Contentment may be reduced, or satisfaction fleeting. Letting go of material concerns. Overcoming mistakes. Overindulgence of food and drink.',  # noqa
+            'Weakened energy of upright card. Letting go of material concerns. Overcoming mistakes. Overindulgence of food and drink.',  # noqa
             'Cups09.raw'
         ],
     '45 Ten Of Cups':
@@ -334,7 +334,7 @@ cards = {
     '46 Page Of Cups':
         [
             'Explorer of feelings, creative, messenger (or message arriving from overseas).',
-            'Teen experiencing emotional distress. Possible gender confusion. Someone afraid of love, or emotional involvement. Young person not fitting in with family. An emotional and possibly upsetting message.',  # noqa
+            'Teen experiencing emotional distress. Possible gender confusion. Someone afraid of love, or emotional involvement.',  # noqa
             'Cups11.raw'
         ],
     '47 Knight Of Cups':
@@ -346,7 +346,7 @@ cards = {
     '48 Queen Of Cups':
         [
             'Intuitive, compassionate woman. Good friend.',
-            'A delicate woman. Perhaps with health issues and/or emotional problems. Someone who needs physical and emotional support. Withdrawal of love from a partner.',  # noqa
+            'A delicate woman. Perhaps with health issues or emotional problems. Someone who needs physical and emotional support. Withdrawal of love from a partner.',  # noqa
             'Cups13.raw'
         ],
     '49 King Of Cups':
@@ -364,7 +364,7 @@ cards = {
     '51 Two Of Pentacles':
         [
             'Making ends meet. Balancing time and resources.',
-            'Paperwork/to-do list overload; too much to deal with. Data crashes. Learning difficulties. Student struggles with making ends meet, meeting deadlines, understanding the work.',  # noqa
+            'Paperwork. Too much to deal with. Data crashes. Learning difficulties. Student struggles with making ends meet, meeting deadlines, understanding the work.',  # noqa
             'Pentacles02.raw'
         ],
     '52 Three Of Pentacles':
@@ -400,7 +400,7 @@ cards = {
     '57 Eight Of Pentacles':
         [
             'Education, training/retraining, change of career, focus on the job in hand.',
-            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Over-qual for the job. Boredom and tedium at work and life in general.',  # noqa
+            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Overqualified for the job. Boredom and tedium at work and life in general.',  # noqa
             'Pentacles08.raw'
         ],
     '58 Nine Of Pentacles':
@@ -412,13 +412,13 @@ cards = {
     '59 Ten Of Pentacles':
         [
             'Family structure, wealth, business, planning, inter-generational co-operation.',
-            'Rejecting family. Disputes over inheritance or property. Family quarrels. Feeling like an outsider. Elderly relative needing care. Equity and savings devalued or lost. Gambling losses. Material insecurity.',  # noqa
+            'Rejecting family. Disputes over inheritance or property. Family quarrels. Feeling like an outsider. Elderly relative needing care. Gambling losses. Material insecurity.',  # noqa
             'Pentacles10.raw'
         ],
     '60 Page Of Pentacles':
         [
             'Student, curiosity, focus. Messenger, or message arriving by post.',
-            'Lost interest in school or college. Underlying and hidden issues. Hating your choice of course. Preoccupied with material possessions and appearance. Stress and exhaustion caused by overwork.',  # noqa
+            'Lost interest in school or college. Underlying and hidden issues. Preoccupied with material possessions and appearance. Stress and exhaustion caused by overwork.',  # noqa
             'Pentacles11.raw'
         ],
     '61 Knight Of Pentacles':
@@ -430,13 +430,13 @@ cards = {
     '62 Queen Of Pentacles':
         [
             'Comforting, practical, efficient woman. Motherhood, career woman.',
-            'Extremely house-proud, or extremely slovenly. Possessions mean more than people. Hoarder, or fixated on designer goods. Helicopter parenting. More concerned with children’s attainments than their well-being. Doubt, mistrust.',  # noqa
+            'Extremely house proud, or extremely slovenly. Possessions mean more than people. Hoarder, or fixated on designer goods. Helicopter parenting. Doubt, mistrust.',  # noqa
             'Pentacles13.raw'
         ],
     '63 King Of Pentacles':
         [
             'Businessman, magnanimous, proud, self-educated, self-made.',
-            'Exploitive, mean, or ineffective employer. Misuse of power and money. Abuse of people for gain or personal gratification. Corruption. Overeating, indigestion, gout, rheumatism. Careless of the wellbeing of others. Unloved by family.',  # noqa
+            'Misuse of power and money. Abuse of people for gain or personal gratification. Corruption. Overeating, indigestion, gout, rheumatism. Careless of the wellbeing of others. Unloved by family.',  # noqa
             'Pentacles14.raw'
         ],
     '64 Ace Of Swords':
@@ -1123,50 +1123,50 @@ morse_code_game_practice_easy = {
 }
 
 morse_code_game_practice_medium = {
-    'sos': 'SOS',
-    'hello': 'HELLO',
-    'defcon30': 'DEFCON30',
-    'ace': 'ACE',
-    'page': 'PAGE',
-    'knights': 'KNIGHTS',
-    'queen': 'QUEEN',
-    'king': 'KING',
-    'pentacles': 'PENTACLES',
-    'swords': 'SWORDS',
-    'cups': 'CUPS',
-    'wands': 'WANDS',
+    'SOS': 'SOS',
+    'HELLO': 'HELLO',
+    'DEFCON30': 'DEFCON30',
+    'ACE': 'ACE',
+    'v': 'PAGE',
+    'KNIGHTS': 'KNIGHTS',
+    'QUEEN': 'QUEEN',
+    'KING': 'KING',
+    'PENTACLES': 'PENTACLES',
+    'SWORDS': 'SWORDS',
+    'CUPS': 'CUPS',
+    'WANDS': 'WANDS',
 }
 
 morse_code_game_practice_advanced = {
-    'major arcane': 'MAJOR ARCANE',
-    'wheel of fortune': 'WHEEL OF FORTUNE',
-    'the hanged man': 'THE HANGED MAN',
+    'MAJOR ARCANE': 'MAJOR ARCANE',
+    'WHEEL OF FORTUNE': 'WHEEL OF FORTUNE',
+    'THE HANGED MAN': 'THE HANGED MAN',
 }
 
 morse_code_game = {
-    'Decode This Answer': 'FOO',
+    'Decode Answer': 'FOO',
 }
 
 decryption_game = {
     'Cipher 1': 'Hsle td esp yfxmpc ehpyej-escpp',
     'Cipher 2': 'dGhlIGFuc3dlciB0byBsaWZlIHRoZSB1bml2ZXJzZSBhbmQgZXZlcnl0aGluZw==',
     'Cipher 3': 'this will be a vignere cipher',
-    'Please enter the answer for Game 9': '234222',
+    'Please Enter Game 9 Answer': '234222',
 }
 
 stego_game = {
-    'Please enter the answer for Game 1': '343421',
+    'Please Enter Game 1 Answer': '343421',
 }
 
 reenactment_game = {
-    'Please enter the answer for Game 2': '441211'
+    'Please Enter Game 2 Answer': '441211'
 }
 
 scavenger_hunt_game = {
-    'Please enter the answer for Game 3': '141431'
+    'Please Enter Game 3 Answer': '141431'
 }
 
 fun_deck_game = {
-    'Please enter the answer for Game 4': '333212',
+    'Please Enter Game 4 Answer': '333212',
 }
 
