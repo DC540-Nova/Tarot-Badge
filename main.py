@@ -63,7 +63,6 @@ game = Game(button, file_manager, display, tarot, morse_code)
 pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, data)
 menu = Menu(button, display, neo_pixel, game, tarot, data)
 
-
 if __name__ == '__main__':
     # demo.play()
     file_manager.update_games_won()

@@ -85,8 +85,10 @@ class Tarot:
                     break
             if meaning == 2:
                 try:
-                    self.display.image('sd/' + deck + '/' + card_reading[2], up=False, timed=False)
-                except OSError:
+                    card = 'sd/' + deck + '/' + card_reading[2]
+                    self.display.image(card, up=False, timed=False)
+                except OSError as e:
+                    print(e)
                     self.display.text('please re-copy files to sd')
                     break
             _ = self.button.press()
@@ -96,7 +98,10 @@ class Tarot:
                 self.display.text(card_reading[1], timed=False)
             _ = self.button.press()
             counter += 1
-            del self.card_bank[card]
+            try:
+                del self.card_bank[card]
+            except KeyError:
+                pass
             if counter > 10:
                 self.display.POWER_DISPLAY.value(0)
                 self.display.clear()

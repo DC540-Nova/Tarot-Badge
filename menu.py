@@ -28,13 +28,15 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import uos
+
 
 class Menu:
     """
     Base class to handle a menu system
     """
 
-    def __init__(self, button, display, neo_pixel, game, tarot, data, deck=1):
+    def __init__(self, button, display, neo_pixel, game, tarot, data, deck='Rider-Waite'):
         """
         Params:
             button: object
@@ -43,7 +45,7 @@ class Menu:
             game: object
             tarot: object
             data: object
-            deck: int
+            deck: None
         """
         self.button = button
         self.display = display
@@ -277,11 +279,14 @@ class Menu:
             if won_game:
                 self.game.won(won_game)
         elif self.button_pressed == 3:
-            self.game.(self.data.morse_code_game_practice_easy)
+            pass
+            #self.game.(self.data.morse_code_game_practice_easy)
         elif self.button_pressed == 4:
-            self.game.(self.data.morse_code_game_practice_medium)
+            pass
+            #self.game.(self.data.morse_code_game_practice_medium)
         elif self.button_pressed == 5:
-            self.game.(self.data.morse_code_game_practice_advanced)
+            pass
+            #self.game.(self.data.morse_code_game_practice_advanced)
         elif self.button_pressed == 6:
             self.__main_menu()
 
@@ -289,17 +294,29 @@ class Menu:
         """
         Private method to handle the tarot reading menu
         """
-        self.__populate('tarot reading menu', 'l: load deck 1', 'r: load deck 2', 'u: load deck 3',
-                        'd: load deck 4', 's: tarot reading', 'e: main menu')
+        self.__populate('tarot reading menu', 'l: choose deck', 's: tarot reading', 'e: main menu')
         self.button_pressed = self.button.press()
         if self.button_pressed == 1:
-            self.deck = '1'
+            uos.chdir('sd')
+            folders = uos.listdir()
+            for folder in folders:
+                if folder == 'System Volume Information' or folder == '.fseventsd' or folder == '.Spotlight-V100' or folder == '.Trashes':
+                    pass
+                else:
+                    self.display.text(folder, timed=False)
+                    self.button_pressed = self.button.press()
+                    if self.button_pressed == 1:
+                        self.deck = folder
+                        self.display.text('DECK CHANGED')
+                        break
+                    else:
+                        continue
         elif self.button_pressed == 2:
-            self.deck = '2'
+            pass
         elif self.button_pressed == 3:
-            self.deck = '3'
+            pass
         elif self.button_pressed == 4:
-            self.deck = '4'
+            pass
         elif self.button_pressed == 5:
             self.tarot.reading(self.deck)
         elif self.button_pressed == 6:
