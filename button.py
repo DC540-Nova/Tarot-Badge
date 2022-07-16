@@ -162,7 +162,7 @@ class Button:
         Method to handle a button press
         """
         while True:
-            if not self.button_left.value():
+            if self.button_left.value():
                 return 1
             elif not self.button_right.value():
                 return 2

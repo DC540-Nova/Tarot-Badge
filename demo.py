@@ -38,12 +38,14 @@ class Demo:
     Base class to handle the demo
     """
 
-    def __init__(self, display, neo_pixel):
+    def __init__(self, touch, display, neo_pixel):
         """
         Params:
+            touch: object
             display: object
             neo_pixel: object
         """
+        self.touch = touch
         self.display = display
         self.neo_pixel = neo_pixel
 
@@ -65,24 +67,35 @@ class Demo:
         """
         Method to handle demo play
         """
-        self.display.handle_threading_setup()
-        _thread.start_new_thread(self.__bg_task, ())  # noqa
-        try:
-            self.display.image('sd/Rider-Waite/00-TheFool.raw', multithreading=True)
-        except OSError:
-            self.display.text('sd card is damaged')
-        self.display.handle_threading_teardown()
-        self.display.handle_threading_setup()
-        _thread.start_new_thread(self.__bg_task, ())  # noqa
-        try:
-            self.display.image('sd/Rider-Waite/01-TheMagician.raw', multithreading=True)
-        except OSError:
-            self.display.text('sd card is damaged')
-        self.display.handle_threading_teardown()
-        self.display.handle_threading_setup()
-        _thread.start_new_thread(self.__bg_task, ())  # noqa
-        try:
-            self.display.image('sd/Rider-Waite/02-TheHighPriestess.raw', multithreading=True)
-        except OSError:
-            self.display.text('sd card is damaged')
+        while True:
+            self.display.handle_threading_setup()
+            _thread.start_new_thread(self.__bg_task, ())  # noqa
+            touched = self.touch.press(self.touch.button_left, 1)
+            if touched:
+                break
+            try:
+                self.display.image('sd/Rider-Waite/00-TheFool.raw', multithreading=True)
+            except OSError:
+                self.display.text('sd card is damaged')
+            self.display.handle_threading_teardown()
+            self.display.handle_threading_setup()
+            _thread.start_new_thread(self.__bg_task, ())  # noqa
+            touched = self.touch.press(self.touch.button_left, 1)
+            if touched:
+                break
+            try:
+                self.display.image('sd/Rider-Waite/01-TheMagician.raw', multithreading=True)
+            except OSError:
+                self.display.text('sd card is damaged')
+            self.display.handle_threading_teardown()
+            self.display.handle_threading_setup()
+            _thread.start_new_thread(self.__bg_task, ())  # noqa
+            touched = self.touch.press(self.touch.button_left, 1)
+            if touched:
+                break
+            try:
+                self.display.image('sd/Rider-Waite/02-TheHighPriestess.raw', multithreading=True)
+            except OSError:
+                self.display.text('sd card is damaged')
+            self.display.handle_threading_teardown()
         self.display.handle_threading_teardown()

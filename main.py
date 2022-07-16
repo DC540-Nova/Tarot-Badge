@@ -42,6 +42,7 @@ from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUB
     nrf
 from microcontroller import Microcontroller
 from button import Button
+from touch import Touch
 from encryption import Encryption
 from file_manager import FileManager
 from demo import Demo
@@ -53,17 +54,18 @@ from menu import Menu
 import data
 
 microcontroller = Microcontroller()
-button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+# button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 encryption = Encryption()
-file_manager = FileManager(button, display, neo_pixel)
-demo = Demo(display, neo_pixel)
-tarot = Tarot(button, display, data.cards)
+file_manager = FileManager(touch, display, neo_pixel)
+demo = Demo(touch, display, neo_pixel)
+tarot = Tarot(touch, display, data.cards)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
-game = Game(button, file_manager, display, tarot, morse_code)
+game = Game(touch, file_manager, display, tarot, morse_code)
 pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, data)
-menu = Menu(button, display, neo_pixel, game, tarot, data)
+menu = Menu(touch, display, neo_pixel, game, tarot, data)
 
 if __name__ == '__main__':
-    # demo.play()
-    file_manager.update_games_won()
+    #demo.play()
+    #file_manager.update_games_won()
     menu.system()
