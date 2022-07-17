@@ -11,7 +11,7 @@ mpremote connect /dev/tty.u* cp sd_card.py :
 mpremote connect /dev/tty.u* cp file_manager.py :
 mpremote connect /dev/tty.u* cp microcontroller.py :
 mpremote connect /dev/tty.u* cp game.py :
-mpremote connect /dev/tty.u* cp button.py :
+mpremote connect /dev/tty.u* cp touch.py :
 mpremote connect /dev/tty.u* cp data.py :
 mpremote connect /dev/tty.u* cp menu.py :
 mpremote connect /dev/tty.u* cp tarot.py :

@@ -64,6 +64,6 @@ pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, 
 menu = Menu(touch, display, neo_pixel, game, tarot, data)
 
 if __name__ == '__main__':
-    demo.play()
-    #file_manager.update_games_won()
-    #menu.system()
+    # demo.play()
+    file_manager.update_games_won()
+    menu.system()

@@ -57,54 +57,84 @@ class Tarot:
             card, card_reading = random.choice(list(self.card_bank.items()))
             meaning = random.randint(1, 2)  # randomize card up or down position
             if counter == 1:
-                self.display.text('Querent', timed=False)
+                self.display.text('Querent')
             elif counter == 2:
-                self.display.text('Obstacle', timed=False)
+                self.display.text('Obstacle')
             elif counter == 3:
-                self.display.text('Influences', timed=False)
+                self.display.text('Influences')
             elif counter == 4:
-                self.display.text('Root', timed=False)
+                self.display.text('Root')
             elif counter == 5:
-                self.display.text('Past', timed=False)
+                self.display.text('Past')
             elif counter == 6:
-                self.display.text('Future', timed=False)
+                self.display.text('Future')
             elif counter == 7:
-                self.display.text('Attitude', timed=False)
+                self.display.text('Attitude')
             elif counter == 8:
-                self.display.text('Environment', timed=False)
+                self.display.text('Environment')
             elif counter == 9:
-                self.display.text('Hopes & Fears', timed=False)
+                self.display.text('Hopes & Fears')
             elif counter == 10:
-                self.display.text('Outcome', timed=False)
-            while True:
-                if self.touch.press(self.touch.button_left, 1):
-                    if meaning == 1:
-                        try:
-                            self.display.image('sd/' + deck + '/' + card_reading[2], timed=False)
-                        except OSError:
-                            self.display.text('sd card is damaged')
+                self.display.text('Outcome')
+            if meaning == 1:
+                try:
+                    card = 'sd/' + deck + '/' + card_reading[2]
+                    self.display.image(card, timed=False)
+                    while True:
+                        if self.touch.press(self.touch.button_left, 1):
                             break
-                    if meaning == 2:
-                        try:
-                            card = 'sd/' + deck + '/' + card_reading[2]
-                            self.display.image(card, up=False, timed=False)
-                        except OSError as e:
-                            print(e)
-                            self.display.text('sd card is damaged')
+                except OSError:
+                    self.display.text('sd card is damaged')
+            if meaning == 2:
+                try:
+                    card = 'sd/' + deck + '/' + card_reading[2]
+                    self.display.image(card, up=False, timed=False)
+                    while True:
+                        if self.touch.press(self.touch.button_left, 1):
                             break
-            while True:
-                if self.touch.press(self.touch.button_left, 1):
-                    if meaning == 1:
-                        self.display.text(card_reading[0], timed=False)
-                    if meaning == 2:
-                        self.display.text(card_reading[1], timed=False)
-                    _ = self.button.press()
-                    counter += 1
-                    try:
-                        del self.card_bank[card]
-                    except KeyError:
-                        pass
-                    if counter > 10:
-                        self.display.POWER_DISPLAY.value(0)
-                        self.display.clear()
+                except OSError:
+                    self.display.text('sd card is damaged')
+            if meaning == 1:
+                self.display.text(card_reading[0], timed=False)
+                while True:
+                    if self.touch.press(self.touch.button_left, 1):
                         break
+            if meaning == 2:
+                self.display.text(card_reading[1], timed=False)
+                while True:
+                    if self.touch.press(self.touch.button_left, 1):
+                        break
+            counter += 1
+            try:
+                del self.card_bank[card]
+            except KeyError:
+                pass
+            if counter > 10:
+                self.display.POWER_DISPLAY.value(0)
+                self.display.clear()
+                break
+
+    def scroll(self, deck):
+        """
+        Function to handle a tarot scroll
+
+        Params:
+            deck: int
+        """
+        for _ in self.card_bank:
+            touched = self.touch.press(self.touch.button_left, 1)
+            if touched:
+                break
+            card, card_reading = random.choice(list(self.card_bank.items()))
+            try:
+                card = 'sd/' + deck + '/' + card_reading[2]
+                self.display.image(card)
+            except OSError:
+                self.display.text('sd card is damaged')
+            touched = self.touch.press(self.touch.button_left, 1)
+            if touched:
+                break
+            try:
+                del self.card_bank[card]
+            except KeyError:
+                pass

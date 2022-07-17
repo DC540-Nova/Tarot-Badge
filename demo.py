@@ -29,6 +29,7 @@
 # pyright: reportUndefinedVariable=false
 
 import _thread
+from utime import sleep
 import random
 import gc
 
@@ -99,3 +100,4 @@ class Demo:
                 self.display.text('sd card is damaged')
             self.display.handle_threading_teardown()
         self.display.handle_threading_teardown()
+        sleep(1)

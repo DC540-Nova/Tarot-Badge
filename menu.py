@@ -29,6 +29,7 @@
 # pyright: reportUndefinedVariable=false
 
 import uos
+from utime import sleep
 
 
 class Menu:
@@ -293,7 +294,8 @@ class Menu:
         """
         Private method to handle the tarot reading menu
         """
-        self.__populate('tarot reading menu', 'l: choose deck', 's: tarot reading', 'e: main menu')
+        self.__populate('tarot reading menu', 'l: choose deck', 'r: tarot reading', 'u: tarot scroll', 'e: main menu')
+        deck_selected = False
         while True:
             if self.touch.press(self.touch.button_left, 1):
                 try:
@@ -305,24 +307,29 @@ class Menu:
                             pass
                         else:
                             self.display.text(folder, timed=False)
-                            self.button_pressed = self.button.press()
-                            if self.touch.press(self.touch.button_left, 1):
-                                self.deck = folder
-                                self.display.text('DECK CHANGED')
-                                break
-                            else:
-                                continue
+                            while True:
+                                if self.touch.press(self.touch.button_left, 1):
+                                    self.deck = folder
+                                    self.display.text('DECK CHANGED')
+                                    deck_selected = True
+                                    break
+                                elif self.touch.press(self.touch.button_right, 2):
+                                    break
+                        if deck_selected:
+                            break
                 except OSError:
                     self.display.text('sd card is damaged')
             elif self.touch.press(self.touch.button_right, 2):
-                pass
+                self.tarot.reading(self.deck)
+                self.__main_menu()
             elif self.touch.press(self.touch.button_up, 3):
-                pass
+                self.tarot.scroll(self.deck)
+                self.__main_menu()
             elif self.touch.press(self.touch.button_down, 4):
                 pass
             elif self.touch.press(self.touch.button_submit, 5):
-                self.tarot.reading(self.deck)
-            elif self.touch.press(self.touch.button_extra, 6):
+                pass
+            elif self.touch.press(self.touch.button_extra, 6) or deck_selected:
                 self.__main_menu()
 
     def __bad_advice_menu(self):
