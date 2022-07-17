@@ -36,16 +36,16 @@ class Game:
     Base class to handle a game
     """
 
-    def __init__(self, button, file_manager, display, tarot, morse_code):
+    def __init__(self, touch, file_manager, display, tarot, morse_code):
         """
         Params:
-            button: object
+            touch: object
             file_manager: object
             display: object
             tarot: object
             morse_code: object
         """
-        self.button = button
+        self.touch = touch
         self.file_manager = file_manager
         self.display = display
         self.tarot = tarot
@@ -84,7 +84,7 @@ class Game:
             for answer in answers:
                 self.display.text(answer)
             self.display.text('CHOOSE...')
-            answer = self.button.multiple_choice()
+            answer = self.touch.multiple_choice()
             counter += 1
             if answer == correct_answer_index:
                 answer_list.append(1)
@@ -128,14 +128,14 @@ class Game:
             for answer in answers:
                 self.display.text(answer)
             self.display.text('CHOOSE...')
-            answer = self.button.multiple_choice()
+            answer = self.touch.multiple_choice()
             if answer == correct_answer_index:
                 self.display.text('CORRECT')
             else:
                 self.display.text('INCORRECT')
             self.display.text('Would you like to practice with another question? ')
             self.display.text('CHOOSE...')
-            response = self.button.yes_no()
+            response = self.touch.yes_no()
             if response == 'yes':
                 pass
             else:
@@ -154,7 +154,7 @@ class Game:
             self.display.text(question)
             self.morse_code.display(answer)
             encrypted_sentence = self.morse_code.encrypt(answer)
-            answer = self.button.morse_code()
+            answer = self.touch.morse_code()
             if answer == encrypted_sentence:
                 self.display.text('CORRECT')
             else:
@@ -173,7 +173,7 @@ class Game:
             self.display.text(question)
             self.morse_code.display(answer)
             encrypted_sentence = self.morse_code.encrypt(answer)
-            answer = self.button.morse_code()
+            answer = self.touch.morse_code()
             if answer == encrypted_sentence:
                 self.display.text('CORRECT')
             else:

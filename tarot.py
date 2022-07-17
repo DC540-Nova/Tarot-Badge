@@ -34,14 +34,14 @@ class Tarot:
     Base class to handle tarot card reading/s
     """
 
-    def __init__(self, button, display, card_bank):
+    def __init__(self, touch, display, card_bank):
         """
         Params:
-            button: object
+            touch: object
             display: object
             card_bank: dict
         """
-        self.button = button
+        self.touch = touch
         self.display = display
         self.card_bank = card_bank
 
@@ -76,33 +76,35 @@ class Tarot:
                 self.display.text('Hopes & Fears', timed=False)
             elif counter == 10:
                 self.display.text('Outcome', timed=False)
-            _ = self.button.press()
-            if meaning == 1:
-                try:
-                    self.display.image('sd/' + deck + '/' + card_reading[2], timed=False)
-                except OSError:
-                    self.display.text('sd card is damaged')
-                    break
-            if meaning == 2:
-                try:
-                    card = 'sd/' + deck + '/' + card_reading[2]
-                    self.display.image(card, up=False, timed=False)
-                except OSError as e:
-                    print(e)
-                    self.display.text('sd card is damaged')
-                    break
-            _ = self.button.press()
-            if meaning == 1:
-                self.display.text(card_reading[0], timed=False)
-            if meaning == 2:
-                self.display.text(card_reading[1], timed=False)
-            _ = self.button.press()
-            counter += 1
-            try:
-                del self.card_bank[card]
-            except KeyError:
-                pass
-            if counter > 10:
-                self.display.POWER_DISPLAY.value(0)
-                self.display.clear()
-                break
+            while True:
+                if self.touch.press(self.touch.button_left, 1):
+                    if meaning == 1:
+                        try:
+                            self.display.image('sd/' + deck + '/' + card_reading[2], timed=False)
+                        except OSError:
+                            self.display.text('sd card is damaged')
+                            break
+                    if meaning == 2:
+                        try:
+                            card = 'sd/' + deck + '/' + card_reading[2]
+                            self.display.image(card, up=False, timed=False)
+                        except OSError as e:
+                            print(e)
+                            self.display.text('sd card is damaged')
+                            break
+            while True:
+                if self.touch.press(self.touch.button_left, 1):
+                    if meaning == 1:
+                        self.display.text(card_reading[0], timed=False)
+                    if meaning == 2:
+                        self.display.text(card_reading[1], timed=False)
+                    _ = self.button.press()
+                    counter += 1
+                    try:
+                        del self.card_bank[card]
+                    except KeyError:
+                        pass
+                    if counter > 10:
+                        self.display.POWER_DISPLAY.value(0)
+                        self.display.clear()
+                        break

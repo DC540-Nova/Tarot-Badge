@@ -41,9 +41,8 @@
 from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel, \
     nrf
 from microcontroller import Microcontroller
-from button import Button
-from touch import Touch
 from encryption import Encryption
+from touch import Touch
 from file_manager import FileManager
 from demo import Demo
 from tarot import Tarot
@@ -54,9 +53,8 @@ from menu import Menu
 import data
 
 microcontroller = Microcontroller()
-# button = Button(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
-touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 encryption = Encryption()
+touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 file_manager = FileManager(touch, display, neo_pixel)
 demo = Demo(touch, display, neo_pixel)
 tarot = Tarot(touch, display, data.cards)
@@ -66,6 +64,6 @@ pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, 
 menu = Menu(touch, display, neo_pixel, game, tarot, data)
 
 if __name__ == '__main__':
-    #demo.play()
+    demo.play()
     #file_manager.update_games_won()
-    menu.system()
+    #menu.system()

@@ -37,14 +37,14 @@ class FileManager:
     Base class to handle a file manager object and functionality for persistence
     """
 
-    def __init__(self, button, display, neo_pixel):
+    def __init__(self, touch, display, neo_pixel):
         """
         Params:
-            button: object
+            touch: object
             display: object
             neo_pixel: object
         """
-        self.button = button
+        self.touch = touch
         self.display = display
         self.neo_pixel = neo_pixel
 
@@ -175,7 +175,7 @@ class FileManager:
             message = 'ARE YOU SURE YOU WANT TO RESET PAIRS?'
         self.display.scroll_text([[0, 0, message]], len(message))  # noqa
         sleep(sleep_time)
-        reset = self.button.yes_no()
+        reset = self.touch.yes_no()
         if reset == 'yes':
             if file == 'games_won':
                 message = 'RESETTING GAME!'

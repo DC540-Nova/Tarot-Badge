@@ -42,7 +42,7 @@ class Microcontroller:
 
     def get_unique_id(self):
         """
-        Static method to obtain unique_id
+        Method to obtain unique_id
 
         Returns:
             my_id_hex: str

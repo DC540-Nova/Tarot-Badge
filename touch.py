@@ -91,3 +91,67 @@ class Touch:
             print(self.button_total_value)
             sleep(self.wait)
             return 0
+
+    def yes_no(self):
+        """
+        Method to handle a yes/no response from a touch button press
+
+        Returns:
+            str
+        """
+        while True:
+            if self.press(self.touch.button_left, 1):
+                return 'yes'
+            elif self.touch.press(self.touch.button_right, 2):
+                return 'no'
+
+    def multiple_choice(self):
+        """
+        Method to handle a single multiple choice response from a touch button press
+
+        Returns:
+            str
+        """
+        while True:
+            if self.press(self.touch.button_left, 1):
+                return 0
+            elif self.touch.press(self.touch.button_right, 2):
+                return 1
+            elif self.touch.press(self.touch.button_up, 3):
+                return 2
+            elif self.touch.press(self.touch.button_down, 4):
+                return 3
+            elif self.touch.press(self.touch.button_submit, 5):
+                return 4
+            elif self.touch.press(self.touch.button_extra, 6):
+                return 5
+
+    def morse_code(self, max_chars=20):
+        """
+        Method to handle morse code touch button presses
+
+        Params:
+            max_chars: int, optional
+
+        Returns:
+            str
+        """
+        sentence = ''
+        while True:
+            if len(sentence) >= max_chars:
+                sentence = ''
+            if self.press(self.touch.button_left, 1):
+                sentence += '.'
+                self.display.text(sentence, timed=False)
+                sleep(self.press_time)
+            elif self.touch.press(self.touch.button_right, 2):
+                sentence += '-'
+                self.display.text(sentence, timed=False)
+                sleep(self.press_time)
+            elif self.touch.press(self.touch.button_up, 3):
+                sentence += ' '
+                self.display.text(sentence, timed=False)
+                sleep(self.press_time)
+            elif self.touch.press(self.touch.button_submit, 5):
+                if sentence:
+                    return sentence
