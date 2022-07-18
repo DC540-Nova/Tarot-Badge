@@ -85,6 +85,7 @@ class Tarot:
                             break
                 except OSError:
                     self.display.text('sd card is damaged')
+                    break
             if meaning == 2:
                 try:
                     card = 'sd/' + deck + '/' + card_reading[2]
@@ -94,6 +95,7 @@ class Tarot:
                             break
                 except OSError:
                     self.display.text('sd card is damaged')
+                    break
             if meaning == 1:
                 self.display.text(card_reading[0], timed=False)
                 while True:
@@ -131,6 +133,7 @@ class Tarot:
                 self.display.image(card)
             except OSError:
                 self.display.text('sd card is damaged')
+                break
             touched = self.touch.press(self.touch.button_left, 1)
             if touched:
                 break

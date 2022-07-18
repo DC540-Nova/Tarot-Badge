@@ -66,4 +66,4 @@ STEP 9 - make
     edit CMakeLists.txt
         line 324
             # -Werror
-STEP 10 - copy firmware.uf2 to device
+STEP 10 - cp build-PICO/firmware.uf2 /Volumes/RPI-RP2/
