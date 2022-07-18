@@ -5,7 +5,7 @@
 # Developer: Kevin Thomas
 # Developer: Corinne "Rinn" Neidig
 #
-# Copyright (c) 2021 DC540 Defcon Group
+# Copyright (c) 2022 DC540 Defcon Group
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
