@@ -376,9 +376,13 @@ class Menu:
         """
         Private method to handle the tarot reading menu
         """
-        self.__populate('tarot reading menu', 'l: choose deck', 'r: tarot reading', 'u: tarot scroll', 'e: main menu')
+        show_menu = True
         deck_selected = False
         while True:
+            if show_menu:
+                self.__populate('tarot reading menu', 'l: choose deck', 'r: tarot reading', 'u: tarot scroll',
+                                'e: main menu')
+                show_menu = False
             if self.touch.press(self.touch.button_left):
                 try:
                     uos.chdir('sd')
@@ -392,26 +396,29 @@ class Menu:
                             while True:
                                 if self.touch.press(self.touch.button_left):
                                     self.deck = folder
+                                    uos.chdir('/')
                                     self.display.text('DECK CHANGED')
                                     deck_selected = True
                                     break
                                 elif self.touch.press(self.touch.button_right):
                                     break
                         if deck_selected:
-                            return
+                            break
+                        show_menu = True
                 except OSError:
                     self.display.text('sd card is damaged')
+                    show_menu = True
             elif self.touch.press(self.touch.button_right):
                 self.tarot.reading(self.deck)
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_up):
                 self.tarot.scroll(self.deck)
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_down):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_submit):
-                break
-            elif self.touch.press(self.touch.button_extra) or deck_selected:
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
                 break
 
     def __bad_advice_menu(self):
