@@ -398,7 +398,7 @@ class Menu:
                                 elif self.touch.press(self.touch.button_right):
                                     break
                         if deck_selected:
-                            break
+                            return
                 except OSError:
                     self.display.text('sd card is damaged')
             elif self.touch.press(self.touch.button_right):

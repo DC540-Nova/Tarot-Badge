@@ -89,7 +89,7 @@ cards = {
     '5 The Hierophant':
         [
             'Learning path, religion, spirituality, spiritual mentor, guide.',
-            'Rejection of the establishment. A mentor with ulterior motives. Expulsion. Sexual misdemeanors. Inappropriate behavior. Rejecting one’s faith.',  # noqa
+            'Rejection of the establishment. A mentor with ulterior motives. Expulsion. Sexual misdemeanors. Inappropriate behavior. Rejecting faith.',  # noqa
             '05-TheHierophant.raw'
         ],
     '6 The Lovers':
@@ -233,13 +233,13 @@ cards = {
     '29 Eight Of Wands':
         [
             'Change, getting organized, motivation, travel, possible pregnancy.',
-            'Unforeseen, difficult event. Shock. Family or business problems. Think of this reversal as the Tower’s baby brother.',  # noqa
+            'Unforeseen, difficult event. Shock. Family or business problems.',  # noqa
             'Wands08.raw'
         ],
     '30 Nine Of Wands':
         [
             'Courage, determination, resilience.',
-            'Overwhelmed. Ready to give up. Illness, nagging pain. Can’t see the the wood for the trees.',  # noqa
+            'Overwhelmed. Ready to give up. Illness, nagging pain. Cannot see the the wood for the trees.',  # noqa
             'Wands09.raw'
         ],
     '31 Ten Of Wands':
@@ -286,7 +286,7 @@ cards = {
         ],
     '38 Three Of Cups':
         [
-            'Friendship, fun, community, girls’ night out, celebration.',
+            'Friendship, fun, community, girls night out, celebration.',
             'Over-indulgence. Bored with partying. Disenchanted with close friends. Lack of support or cooperation.',  # noqa
             'Cups03.raw'
         ],
@@ -377,7 +377,7 @@ cards = {
     '53 Four Of Pentacles':
         [
             'Stability, security, isolation, holding on to resources.',
-            'Resisting letting go of resources. Uneasiness outside of comfort zone. Blockages both mental and actual. Writer’s block. Hindrances and delays. Late payment.',  # noqa
+            'Resisting letting go of resources. Uneasiness outside of comfort zone. Blockages both mental and actual. Writers block. Hindrances and delays. Late payment.',  # noqa
             'Pentacles04.raw'
         ],
     '54 Five Of Pentacles':
@@ -443,7 +443,7 @@ cards = {
     '64 Ace Of Swords':
         [
             'Clarity, decision made, insight, understanding, truth revealed.',
-            'Restraint, patience. Writer’s block. Conception. Violation. Surgery.',  # noqa
+            'Restraint, patience. Writers block. Conception. Violation. Surgery.',  # noqa
             'Swords01.raw'
         ],
     '65 Two Of Swords':
@@ -479,7 +479,7 @@ cards = {
     '70 Seven Of Swords':
         [
             'Stealth, reclaiming something lost, mental trickery, betrayal, theft.',
-            'Shame after trying to steal or deceive. Returning that which doesn’t belong to you. Community service. Giving back or paying forward.',  # noqa
+            'Shame after trying to steal or deceive. Returning that which does not belong to you. Community service. Giving back or paying forward.',  # noqa
             'Swords07.raw'
         ],
     '71 Eight Of Swords':

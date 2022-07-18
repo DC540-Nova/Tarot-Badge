@@ -78,20 +78,22 @@ class Tarot:
                 self.display.text('Outcome')
             if meaning == 1:
                 try:
+                    print('sd/' + deck + '/' + card_reading[2])
                     card = 'sd/' + deck + '/' + card_reading[2]
                     self.display.image(card, timed=False)
                     while True:
-                        if self.touch.press(self.touch.button_left, 1):
+                        if self.touch.press(self.touch.button_left):
                             break
                 except OSError:
                     self.display.text('sd card is damaged')
                     break
             if meaning == 2:
                 try:
+                    print('sd/' + deck + '/' + card_reading[2])
                     card = 'sd/' + deck + '/' + card_reading[2]
                     self.display.image(card, up=False, timed=False)
                     while True:
-                        if self.touch.press(self.touch.button_left, 1):
+                        if self.touch.press(self.touch.button_left):
                             break
                 except OSError:
                     self.display.text('sd card is damaged')
@@ -99,12 +101,12 @@ class Tarot:
             if meaning == 1:
                 self.display.text(card_reading[0], timed=False)
                 while True:
-                    if self.touch.press(self.touch.button_left, 1):
+                    if self.touch.press(self.touch.button_left):
                         break
             if meaning == 2:
                 self.display.text(card_reading[1], timed=False)
                 while True:
-                    if self.touch.press(self.touch.button_left, 1):
+                    if self.touch.press(self.touch.button_left):
                         break
             counter += 1
             try:
@@ -124,7 +126,7 @@ class Tarot:
             deck: int
         """
         for _ in self.card_bank:
-            touched = self.touch.press(self.touch.button_left, 1)
+            touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
             card, card_reading = random.choice(list(self.card_bank.items()))
@@ -134,7 +136,7 @@ class Tarot:
             except OSError:
                 self.display.text('sd card is damaged')
                 break
-            touched = self.touch.press(self.touch.button_left, 1)
+            touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
             try:
