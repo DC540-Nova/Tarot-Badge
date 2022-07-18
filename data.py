@@ -36,10 +36,11 @@ stego_game_instructions = 'Go to the DC540 website and find the game labeled ste
 reenactment_game_instructions = 'Re-enact a Tarot Card picture using yourself. Take a picture and submit on the DC540 Tartot badge channel'  # noqa
 scavenger_hunt_game_instructions = 'Find ten items that can be found on the tarot deck. Submit a picture of all ten items to the DC540 Tarot badge channel'  # noqa
 flash_cards_game_instructions = 'Answer 15 of the 20 flashcards correctly to pass this game.'
-fun_deck_game_instructions = 'We at DC540 created our own terrible Tarot deck. To get credit for this quest, create your own deck.  It must be original and post to XXX to share with the world. Send us a message on our discord channel DC540 to recieve a code and you can enter here.'  # noqa
-morse_code_game_instructions = 'decode the morse code for the answer'
+fun_deck_game_instructions = 'We at DC540 created our own terrible Tarot deck. Create your own original deck and post to our DC540 discord #Tarot channel.'  # noqa
+morse_code_game_instructions = 'complete all three morse code challenges to pass this game'
 decryption_game_instructions = 'decode these three encryptions and add them together for the answer'
 help_someone_game_instructions = 'find another player wearing this badge and offer to help them'
+# boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
 # boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
 
 # boss_ids = []  # noqa
@@ -1073,13 +1074,229 @@ flash_cards_game = {
             'D. Page of Cups',
             0
         ],
+    'Pentacles01.raw':
+        [
+            'A. Ace of Cups',
+            'B. Ace of Goblets',
+            'C. Ace of Pentacles',
+            'D. Ace of Swords',
+            2
+        ],
+    'Pentacles02.raw':
+        [
+            'A. Two of Cups',
+            'B. Two of Pentacles',
+            'C. Two of Wands',
+            'D. Two of Towers',
+            1
+        ],
+    'Pentacles03.raw':
+        [
+            'A. Three of Swords',
+            'B. Three of Stars',
+            'C. Three of Cups',
+            'D. Three of Pentacles',
+            3
+        ],
+    'Pentacles04.raw':
+        [
+            'A. Four of Pentacles',
+            'B. Four of Stars',
+            'C. Four of Temperance',
+            'D. Four of Kings',
+            0
+        ],
+    'Pentacles05.raw':
+        [
+            'A. Ace of Cups',
+            'B. Five of Swords',
+            'C. Ace of Pentacles',
+            'D. Five of Pentacles',
+            3
+        ],
+    'Pentacles06.raw':
+        [
+            'A. Six of Pentacles',
+            'B. Six of Goblets',
+            'C. Six of Knights',
+            'D. Six of Swords',
+            0
+        ],
+    'Pentacles07.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Seven of Pentacles',
+            3
+        ],
+    'Pentacles08.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Eight of Pentacles',
+            3
+        ],
+    'Pentacles09.raw':
+        [
+            'A. Nine of Pentacles',
+            'B. Eight of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Seven of Pentacles',
+            0
+        ],
+    'Pentacles10.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Page of Pentacles',
+            3
+        ],
+    'Pentacles11.raw':
+        [
+            'A. Queen of Pentacles',
+            'B. Page of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Ace of Pentacles',
+            1
+        ],
+    'Pentacles12.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Seven of Pentacles',
+            2
+        ],
+    'Pentacles13.raw':
+        [
+            'A. Queen of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Seven of Pentacles',
+            0
+        ],
+    'Pentacles14.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Queen of Pentacles',
+            1
+        ],
+    'Swords01.raw':
+        [
+            'A. Ace of Swords',
+            'B. King of Swords',
+            'C. Knight of Swords',
+            'D. Seven of Swords',
+            0
+        ],
+    'Swords02.raw':
+        [
+            'A. Ace of Swords',
+            'B. Two of Swords',
+            'C. Knight of Swords',
+            'D. Seven of Swords',
+            1
+        ],
+    'Swords03.raw':
+        [
+            'A. Three of Swords',
+            'B. Seven of Swords',
+            'C. Four of Swords',
+            'D. Eight of Swords',
+            0
+        ],
+    'Swords04.raw':
+        [
+            'A. Ten of Swords',
+            'B. Three of Swords',
+            'C. Four of Swords',
+            'D. Nine of Swords',
+            2
+        ],
+    'Swords05.raw':
+        [
+            'A. Twelve of Swords',
+            'B. Four of Swords',
+            'C. Six of Swords',
+            'D. Five of Swords',
+            3
+        ],
+    'Swords06.raw':
+        [
+            'A. Six of Swords',
+            'B. Five of Swords',
+            'C. Four of Swords',
+            'D. Seven of Swords',
+            0
+        ],
+    'Swords07.raw':
+        [
+            'A. Eight of Swords',
+            'B. King of Swords',
+            'C. Six of Swords',
+            'D. Seven of Swords',
+            3
+        ],
+    'Swords08.raw':
+        [
+            'A. Three of Swords',
+            'B. Eight of Swords',
+            'C. Ace of Swords',
+            'D. Two of Swords',
+            1
+        ],
+    'Swords09.raw':
+        [
+            'A. Nine of Swords',
+            'B. Eight of Swords',
+            'C. Page of Swords',
+            'D. Two of Swords',
+            0
+        ],
+    'Swords10.raw':
+        [
+            'A. King of Swords',
+            'B. Queen of Swords',
+            'C. Ten of Swords',
+            'D. Page of Swords',
+            2
+        ],
+    'Swords11.raw':
+        [
+            'A. Paige of Swords',
+            'B. Queen of Swords',
+            'C. Night of Swords',
+            'D. Page of Swords',
+            3
+        ],
+    'Swords12.raw':
+        [
+            'A. Queen of Swords',
+            'B. Night of Swords',
+            'C. Knight of Swords',
+            'D. Page of Swords',
+            2
+        ],
+    'Swords13.raw':
+        [
+            'A. Knight of Swords',
+            'B. King of Swords',
+            'C. Ace of Swords',
+            'D. Queen of Swords',
+            3
+        ],
     'Swords14.raw':
         [
             'A. King of Swords',
             'B. Queen of Swords',
             'C. Page of Swords',
             'D. Ten of Swords',
-            3
+            0
         ],
 }
 
@@ -1127,7 +1344,7 @@ morse_code_game_practice_medium = {
     'HELLO': 'HELLO',
     'DEFCON30': 'DEFCON30',
     'ACE': 'ACE',
-    'v': 'PAGE',
+    'PAGE': 'PAGE',
     'KNIGHTS': 'KNIGHTS',
     'QUEEN': 'QUEEN',
     'KING': 'KING',
@@ -1137,36 +1354,34 @@ morse_code_game_practice_medium = {
     'WANDS': 'WANDS',
 }
 
-morse_code_game_practice_advanced = {
+morse_code_game = {
     'MAJOR ARCANE': 'MAJOR ARCANE',
     'WHEEL OF FORTUNE': 'WHEEL OF FORTUNE',
     'THE HANGED MAN': 'THE HANGED MAN',
 }
 
-morse_code_game = {
-    'Decode Answer': 'FOO',
+decryption_game_questions = {
+    'Cipher 1': 'Cipher 1: Hsle td esp yfxmpc ehpyej-escpp',
+    'Cipher 2': 'Cipher 2: dGhlIGFuc3dlciB0byB saWZlIHRoZSB1bml2ZX JzZSBhbmQgZXZl cnl0aGluZw==',
+    'Cipher 3': 'Cipher 3: Mhv bnfbvf rhu rfx eofybgg wck bs kvx ttfabv nlauxr ft mbtrbbnm.',
 }
 
 decryption_game = {
-    'Cipher 1': 'Hsle td esp yfxmpc ehpyej-escpp',
-    'Cipher 2': 'dGhlIGFuc3dlciB0byBsaWZlIHRoZSB1bml2ZXJzZSBhbmQgZXZlcnl0aGluZw==',
-    'Cipher 3': 'this will be a vignere cipher',
-    'Please Enter Game 9 Answer': '234222',
+    'Enter Game 9 Answer': '344222',
 }
 
 stego_game = {
-    'Please Enter Game 1 Answer': '343421',
+    'Enter Game 1 Answer': '341121',
 }
 
 reenactment_game = {
-    'Please Enter Game 2 Answer': '441211'
+    'Enter Game 2 Answer': '441211',
 }
 
 scavenger_hunt_game = {
-    'Please Enter Game 3 Answer': '141431'
+    'Enter Game 3 Answer': '141431',
 }
 
 fun_deck_game = {
-    'Please Enter Game 4 Answer': '333212',
+    'Enter Game 4 Answer': '333212',
 }
-

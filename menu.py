@@ -107,188 +107,270 @@ class Menu:
         """
         Private method to handle the game menu
         """
-        self.__populate('game menu 1', 'l: tarot trivia', 'r: stego', 'u: re-enactment',
-                        'd: scavenger hunt', 's: flash cards', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('game menu 1', 'l: tarot trivia', 'r: stego', 'u: re-enactment',
+                                'd: scavenger hunt', 's: flash cards', 'e: main menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.__game_menu_tarot_trivia()
-            elif self.touch.press(self.touch.button_right, 2):
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
                 self.__game_menu_stego()
-            elif self.touch.press(self.touch.button_up, 3):
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
                 self.__game_menu_reenactment()
-            elif self.touch.press(self.touch.button_down, 4):
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
                 self.__game_menu_scavenger_hunt()
-            elif self.touch.press(self.touch.button_submit, 5):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
                 self.__game_menu_flash_cards()
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __game_menu_tarot_trivia(self):
         """
         Private method to handle the tarot trivia game
         """
-        self.__populate('tarot trivia menu', 'l: instructions', 'r: play', 'u: practice', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('tarot trivia menu', 'l: instructions', 'r: play', 'u: practice', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.tarot_trivia_game_instructions)
-            elif self.touch.press(self.touch.button_right, 2):
-                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '2', '1', 1, False)
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '1', 1, 1)
                 if won_game:
                     self.game.won(won_game)
-            elif self.touch.press(self.touch.button_up, 3):
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
                 self.game.multiple_choice_practice(self.data.tarot_trivia_game)
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __game_menu_stego(self):
         """
         Private method to handle the stego game
         """
-        self.__populate('stego menu', 'l: instructions', 'r: play', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('stego menu', 'l: instructions', 'r: play', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.stego_game_instructions)
-            elif self.touch.press(self.touch.button_right, 2):
-                # TODO: work this out with Betsy
-                pass
-            elif self.touch.press(self.touch.button_up, 3):
-                pass
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.sequence(self.data.stego_game, '2', 1, 1)
+                if won_game:
+                    self.game.won(won_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                show_menu = True
 
     def __game_menu_reenactment(self):
         """
         Private method to handle the reenactment game
         """
-        self.__populate('reenactment menu', 'l: instructions', 'r: play', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('reenactment menu', 'l: instructions', 'r: play', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.reenactment_game_instructions)
-            elif self.touch.press(self.touch.button_right, 2):
-                # TODO: work this out with Betsy
-                pass
-            elif self.touch.press(self.touch.button_up, 3):
-                pass
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.sequence(self.data.reeanactment, '3', 1, 1)
+                if won_game:
+                    self.game.won(won_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __game_menu_scavenger_hunt(self):
         """
         Private method to handle the scavenger hunt game
         """
-        self.__populate('scavenger hunt menu', 'l: instructions', 'r: play', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('scavenger hunt menu', 'l: instructions', 'r: play', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.scavenger_hunt_game_instructions)
-            elif self.touch.press(self.touch.button_right, 2):
-                # TODO: work this out with Betsy
-                pass
-            elif self.touch.press(self.touch.button_up, 3):
-                pass
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.sequence(self.data.scavenger_hunt_game, '4', 1, 1)
+                if won_game:
+                    self.game.won(won_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __game_menu_flash_cards(self):
         """
         Private method to handle the flash cards game
         """
-        self.__populate('flash cards menu', 'l: instructions', 'r: play', 'u: practice', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('flash cards menu', 'l: instructions', 'r: play', 'u: practice', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.flash_cards_game_instructions)
-            elif self.touch.press(self.touch.button_right, 2):
-                won_game = self.game.multiple_choice(self.data.flash_cards_game, '2', '1', 1, False)
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.multiple_choice(self.data.flash_cards_game, '5', '1', 1, False)
                 if won_game:
                     self.game.won(won_game)
-            elif self.touch.press(self.touch.button_up, 3):
-                self.game.practice(self.data.flash_cards_game)
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                self.game.multiple_choice_practice(self.data.flash_cards_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __game_menu_2(self):
         """
         Private method to handle the game menu 2
         """
-        self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption', 'e: main menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.__game_menu_fun_deck()
-            elif self.touch.press(self.touch.button_right, 2):
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
                 self.__game_menu_morse_code()
-            elif self.touch.press(self.touch.button_up, 3):
-                pass
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                self.__game_menu_decryption()
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __game_menu_fun_deck(self):
         """
         Private method to handle the fun deck game
         """
-        self.__populate('fun deck menu', 'l: instructions', 'r: play', 'u: practice', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('fun deck menu', 'l: instructions', 'r: play', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.fun_deck_game_instructions)
-            elif self.touch.press(self.touch.button_right, 2):
-                won_game = self.game.multiple_choice(self.data.fun_deck_game, '2', '1', 1, False)
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.sequence(self.data.fun_deck_game, '6', 1, 1)
                 if won_game:
                     self.game.won(won_game)
-            elif self.touch.press(self.touch.button_up, 3):
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
                 self.game.multiple_choice_practice(self.data.fun_deck_game)
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __game_menu_morse_code(self):
         """
         Private method to handle the morse code game
         """
-        self.__populate('morse code menu', 'l: instructions', 'r: play', 'u: practice-easy', 'd: practice-medium',
-                        's: practice-advanced', 'e: main menu')
+        show_menu = True
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if show_menu:
+                self.__populate('morse code menu', 'l: instructions', 'r: play', 'u: practice-easy',
+                                'd: practice-medium', 's: practice-advanced', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.morse_code_game_instructions)
-            elif self.touch.press(self.touch.button_right, 2):
-                won_game = self.game.multiple_choice(self.data.morse_code_game, '2', '1', 1, False)
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                # won_game = self.game.multiple_choice(self.data.morse_code_game, '7', '1', 1, False)
+                # if won_game:
+                #     self.game.won(won_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
+
+    def __game_menu_decryption(self):
+        """
+        Private method to handle the decryption game
+        """
+        show_menu = True
+        while True:
+            if show_menu:
+                self.__populate('decryption menu', 'l: instructions', 'r: play', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
+                self.display.text(self.data.decryption_game_instructions)
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                self.display.text(self.data.decryption_game_questions['Cipher 1'])
+                self.display.text(self.data.decryption_game_questions['Cipher 2'])
+                self.display.text(self.data.decryption_game_questions['Cipher 3'])
+                won_game = self.game.sequence(self.data.decryption_game, '8', 1, 1)
                 if won_game:
                     self.game.won(won_game)
-            elif self.touch.press(self.touch.button_up, 3):
-                pass
-                #self.game.(self.data.morse_code_game_practice_easy)
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-                #self.game.(self.data.morse_code_game_practice_medium)
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-                #self.game.(self.data.morse_code_game_practice_advanced)
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                self.game.multiple_choice_practice(self.data.fun_deck_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __tarot_reading_menu(self):
         """
@@ -297,7 +379,7 @@ class Menu:
         self.__populate('tarot reading menu', 'l: choose deck', 'r: tarot reading', 'u: tarot scroll', 'e: main menu')
         deck_selected = False
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if self.touch.press(self.touch.button_left):
                 try:
                     uos.chdir('sd')
                     folders = uos.listdir()
@@ -308,29 +390,29 @@ class Menu:
                         else:
                             self.display.text(folder, timed=False)
                             while True:
-                                if self.touch.press(self.touch.button_left, 1):
+                                if self.touch.press(self.touch.button_left):
                                     self.deck = folder
                                     self.display.text('DECK CHANGED')
                                     deck_selected = True
                                     break
-                                elif self.touch.press(self.touch.button_right, 2):
+                                elif self.touch.press(self.touch.button_right):
                                     break
                         if deck_selected:
                             break
                 except OSError:
                     self.display.text('sd card is damaged')
-            elif self.touch.press(self.touch.button_right, 2):
+            elif self.touch.press(self.touch.button_right):
                 self.tarot.reading(self.deck)
-                self.__main_menu()
-            elif self.touch.press(self.touch.button_up, 3):
+                break
+            elif self.touch.press(self.touch.button_up):
                 self.tarot.scroll(self.deck)
-                self.__main_menu()
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6) or deck_selected:
-                self.__main_menu()
+                break
+            elif self.touch.press(self.touch.button_down):
+                break
+            elif self.touch.press(self.touch.button_submit):
+                break
+            elif self.touch.press(self.touch.button_extra) or deck_selected:
+                break
 
     def __bad_advice_menu(self):
         """
@@ -338,18 +420,18 @@ class Menu:
         """
         self.__populate('bad advice menu', '', '', '', '', '', 'e: main menu')
         while True:
-            if self.touch.press(self.touch.button_left, 1):
-                pass
-            elif self.touch.press(self.touch.button_right, 2):
-                pass
-            elif self.touch.press(self.touch.button_up, 3):
-                pass
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+            if self.touch.press(self.touch.button_left):
+                break
+            elif self.touch.press(self.touch.button_right):
+                break
+            elif self.touch.press(self.touch.button_up):
+                break
+            elif self.touch.press(self.touch.button_down):
+                break
+            elif self.touch.press(self.touch.button_submit):
+                break
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __extras_menu(self):
         """
@@ -357,18 +439,18 @@ class Menu:
         """
         self.__populate('extras menu', '', '', '', '', '', 'e: main menu')
         while True:
-            if self.touch.press(self.touch.button_left, 1):
-                pass
-            elif self.touch.press(self.touch.button_right, 2):
-                pass
-            elif self.touch.press(self.touch.button_up, 3):
-                pass
-            elif self.touch.press(self.touch.button_down, 4):
-                pass
-            elif self.touch.press(self.touch.button_submit, 5):
-                pass
-            elif self.touch.press(self.touch.button_extra, 6):
-                self.__main_menu()
+            if self.touch.press(self.touch.button_left):
+                break
+            elif self.touch.press(self.touch.button_right):
+                break
+            elif self.touch.press(self.touch.button_up):
+                break
+            elif self.touch.press(self.touch.button_down):
+                break
+            elif self.touch.press(self.touch.button_submit):
+                break
+            elif self.touch.press(self.touch.button_extra):
+                break
 
     def __main_menu(self):
         """
@@ -377,21 +459,26 @@ class Menu:
         self.__populate('main menu', 'l: instructions', 'r: games 1 menu', 'u: games 2 menu', 'd: tarot menu',
                         's: bad advice menu', 'e: extras menu')
         while True:
-            if self.touch.press(self.touch.button_left, 1):
+            if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.badge_instructions_1)
                 self.display.text(self.data.badge_instructions_2)
                 self.display.text(self.data.badge_instructions_3)
                 break
-            elif self.touch.press(self.touch.button_right, 2):
+            elif self.touch.press(self.touch.button_right):
                 self.__game_menu_1()
-            elif self.touch.press(self.touch.button_up, 3):
+                break
+            elif self.touch.press(self.touch.button_up):
                 self.__game_menu_2()
-            elif self.touch.press(self.touch.button_down, 4):
+                break
+            elif self.touch.press(self.touch.button_down):
                 self.__tarot_reading_menu()
-            elif self.touch.press(self.touch.button_submit, 5):
+                break
+            elif self.touch.press(self.touch.button_submit):
                 self.__bad_advice_menu()
-            elif self.touch.press(self.touch.button_extra, 6):
+                break
+            elif self.touch.press(self.touch.button_extra):
                 self.__extras_menu()
+                break
 
     def system(self):
         """

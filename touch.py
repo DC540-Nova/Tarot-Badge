@@ -38,7 +38,7 @@ class Touch:
     """
 
     def __init__(self, button_up, button_down, button_left, button_right, button_submit, button_extra, display,
-                 wait=0.1, sensitivity=6):
+                 wait=0.05, sensitivity=6):
         """
         Params:
             button_up: int
@@ -63,16 +63,15 @@ class Touch:
         self.start_time = 0
         self.button_total_value = 0
 
-    def press(self, gpio, return_value):
+    def press(self, gpio):
         """
         Method to handle a capacitive touch button press
 
         Params:
             gpio: int
-            return_value: object
 
         Returns:
-            int
+            bool
         """
         self.start_time = 0
         self.button_total_value = 0
@@ -84,13 +83,13 @@ class Touch:
             self.button_total_value += button_value
             self.start_time += 1
         if self.button_total_value == self.sensitivity:
-            print(self.button_total_value)
+            # print(self.button_total_value)
             sleep(self.wait)
-            return return_value
+            return True
         else:
-            print(self.button_total_value)
+            # print(self.button_total_value)
             sleep(self.wait)
-            return 0
+            return False
 
     def yes_no(self):
         """
@@ -100,9 +99,9 @@ class Touch:
             str
         """
         while True:
-            if self.press(self.touch.button_left, 1):
+            if self.press(self.button_left):
                 return 'yes'
-            elif self.touch.press(self.touch.button_right, 2):
+            elif self.press(self.button_right):
                 return 'no'
 
     def multiple_choice(self):
@@ -113,17 +112,17 @@ class Touch:
             str
         """
         while True:
-            if self.press(self.touch.button_left, 1):
+            if self.press(self.button_left):
                 return 0
-            elif self.touch.press(self.touch.button_right, 2):
+            elif self.press(self.button_right):
                 return 1
-            elif self.touch.press(self.touch.button_up, 3):
+            elif self.press(self.button_up):
                 return 2
-            elif self.touch.press(self.touch.button_down, 4):
+            elif self.press(self.button_down):
                 return 3
-            elif self.touch.press(self.touch.button_submit, 5):
+            elif self.press(self.button_submit):
                 return 4
-            elif self.touch.press(self.touch.button_extra, 6):
+            elif self.press(self.button_extra):
                 return 5
 
     def morse_code(self, max_chars=20):
@@ -140,18 +139,51 @@ class Touch:
         while True:
             if len(sentence) >= max_chars:
                 sentence = ''
-            if self.press(self.touch.button_left, 1):
+            if self.press(self.button_left):
                 sentence += '.'
                 self.display.text(sentence, timed=False)
-                sleep(self.press_time)
-            elif self.touch.press(self.touch.button_right, 2):
+            elif self.press(self.button_right):
                 sentence += '-'
                 self.display.text(sentence, timed=False)
-                sleep(self.press_time)
-            elif self.touch.press(self.touch.button_up, 3):
+            elif self.press(self.button_up):
                 sentence += ' '
                 self.display.text(sentence, timed=False)
-                sleep(self.press_time)
-            elif self.touch.press(self.touch.button_submit, 5):
+            elif self.press(self.button_down):
+                pass
+            elif self.press(self.button_submit):
+                pass
+            elif self.press(self.button_extra):
                 if sentence:
                     return sentence
+
+    def numeric_sequence(self, max_nums=6):
+        """
+        Method to handle the construction of four numeric numbers as a result of a series of button presses
+
+        Params:
+            max_nums: int, optional
+
+        Returns:
+            int
+        """
+        numeric_sequence = ''
+        while True:
+            if self.press(self.button_left):
+                numeric_sequence += '1'
+                self.display.text(numeric_sequence, timed=False)
+            elif self.press(self.button_right):
+                numeric_sequence += '2'
+                self.display.text(numeric_sequence, timed=False)
+            elif self.press(self.button_up):
+                numeric_sequence += '3'
+                self.display.text(numeric_sequence, timed=False)
+            elif self.press(self.button_down):
+                numeric_sequence += '4'
+                self.display.text(numeric_sequence, timed=False)
+            elif self.press(self.button_submit):
+                pass
+            elif self.press(self.button_extra):
+                if numeric_sequence:
+                    return numeric_sequence
+            if len(numeric_sequence) > max_nums:
+                numeric_sequence = ''

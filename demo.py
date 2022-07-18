@@ -71,7 +71,7 @@ class Demo:
         while True:
             self.display.handle_threading_setup()
             _thread.start_new_thread(self.__bg_task, ())  # noqa
-            touched = self.touch.press(self.touch.button_left, 1)
+            touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
             try:
@@ -81,7 +81,7 @@ class Demo:
             self.display.handle_threading_teardown()
             self.display.handle_threading_setup()
             _thread.start_new_thread(self.__bg_task, ())  # noqa
-            touched = self.touch.press(self.touch.button_left, 1)
+            touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
             try:
@@ -91,7 +91,7 @@ class Demo:
             self.display.handle_threading_teardown()
             self.display.handle_threading_setup()
             _thread.start_new_thread(self.__bg_task, ())  # noqa
-            touched = self.touch.press(self.touch.button_left, 1)
+            touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
             try:

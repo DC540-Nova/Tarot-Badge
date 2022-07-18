@@ -75,7 +75,7 @@ class Game:
                 self.display.text(question)
             else:
                 try:
-                    self.display.image('sd/' + self.tarot.deck + '/' + question)
+                    self.display.image('sd/Rider-Waite/' + question)
                 except OSError:
                     self.display.text('sd card is damaged')
                     break
@@ -87,8 +87,10 @@ class Game:
             answer = self.touch.multiple_choice()
             counter += 1
             if answer == correct_answer_index:
+                self.display.text('ANSWER SUBMITTED')
                 answer_list.append(1)
             else:
+                self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
             question_number += 1
             del question_bank[question]
@@ -119,7 +121,7 @@ class Game:
                 self.display.text(question)
             else:
                 try:
-                    self.display.image('sd/' + self.tarot.deck + '/' + question)
+                    self.display.image('sd/Rider-Waite/' + question)
                 except OSError:
                     self.display.text('sd card is damaged')
                     break
@@ -188,6 +190,48 @@ class Game:
         # if they get it right say CORRECT or INCORRECT
         # must get all right
         pass
+
+    def sequence(self, question_bank, game_number, num_questions, num_questions_to_win):
+        """
+        Method to handle a sequence game
+
+        Params:
+            question_bank: int
+            game_number: int
+            num_questions: int
+            num_questions_to_win: int
+
+        Returns:
+            int
+        """
+        questions = list(question_bank)
+        question_number = 0
+        counter = 0
+        answer_list = []
+        for _ in questions:
+            question, answers = random.choice(list(question_bank.items()))
+            correct_answer_index = answers
+            self.display.text(question)
+            self.display.text('CHOOSE...')
+            answer = self.touch.numeric_sequence()
+            counter += 1
+            if answer == correct_answer_index:
+                answer_list.append(1)
+            else:
+                answer_list.append(0)
+            question_number += 1
+            del question_bank[question]
+            answer_total = 0
+            for answer in answer_list:
+                if answer == 1:
+                    answer_total += 1
+                else:
+                    pass
+            if counter == num_questions:
+                if answer_total >= num_questions_to_win:
+                    return game_number + ' '
+                else:
+                    return False
 
     def won(self, game_won):
         """
