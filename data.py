@@ -1385,3 +1385,22 @@ scavenger_hunt_game = {
 fun_deck_game = {
     'Enter Game 4 Answer': '333212',
 }
+
+bad_advice = {
+    'ba1.raw':
+        [
+            'Bad Advice 1',
+        ],
+    'ba2.raw':
+        [
+            'Bad Advice 2',
+        ],
+    'ba3.raw':
+        [
+            'Bad Advice 3',
+        ],
+    'ba4.raw':
+        [
+            'Bad Advice 4',
+        ],
+}

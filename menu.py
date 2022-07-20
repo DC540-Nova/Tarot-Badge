@@ -323,19 +323,21 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('morse code menu', 'l: instructions', 'r: play', 'u: practice-easy',
-                                'd: practice-medium', 's: practice-advanced', 'e: prior menu')
+                                'd: practice-medium', 'e: prior menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.morse_code_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                # won_game = self.game.multiple_choice(self.data.morse_code_game, '7', '1', 1, False)
-                # if won_game:
-                #     self.game.won(won_game)
+                won_game = self.game.morse_code(self.data.morse_code_game, '7', 3, 3)
+                if won_game:
+                    self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
+                self.game.morse_code_practice(self.data.morse_code_game_practice_easy)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
+                self.game.morse_code_practice(self.data.morse_code_game_practice_medium)
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
                 show_menu = True
@@ -389,7 +391,7 @@ class Menu:
                     folders = uos.listdir()
                     for folder in folders:
                         if folder == 'System Volume Information' or folder == '.fseventsd' or \
-                                folder == '.Spotlight-V100' or folder == '.Trashes':
+                                folder == '.Spotlight-V100' or folder == '.Trashes' or 'bad_advice':
                             pass
                         else:
                             self.display.text(folder, timed=False)
@@ -425,10 +427,13 @@ class Menu:
         """
         Private method to handle the bad advice menu
         """
-        self.__populate('bad advice menu', '', '', '', '', '', 'e: main menu')
+        show_menu = True
         while True:
+            if show_menu:
+                self.__populate('bad advice menu', 'l: bad advice scroll', 'e: main menu')
             if self.touch.press(self.touch.button_left):
-                break
+                self.bad_advice.scroll(self.data.bad_advice)
+                show_menu = True
             elif self.touch.press(self.touch.button_right):
                 break
             elif self.touch.press(self.touch.button_up):

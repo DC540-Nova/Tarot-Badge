@@ -143,9 +143,9 @@ class Game:
             else:
                 return
 
-    def morse_code_practice_easy(self, question_bank):
+    def morse_code_practice(self, question_bank):
         """
-        Method to handle a morse code easy practice loop
+        Method to handle a morse code practice loop
 
         Params:
             question_bank: dict
@@ -155,25 +155,7 @@ class Game:
             question, answer = random.choice(list(question_bank.items()))
             self.display.text(question)
             self.morse_code.display(answer)
-            encrypted_sentence = self.morse_code.encrypt(answer)
-            answer = self.touch.morse_code()
-            if answer == encrypted_sentence:
-                self.display.text('CORRECT')
-            else:
-                self.display.text('INCORRECT')
-
-    def morse_code_practice_medium(self, question_bank):
-        """
-        Method to handle a morse code medium practice loop
-
-        Params:
-            question_bank: dict
-        """
-        questions = list(question_bank)
-        for _ in questions:
-            question, answer = random.choice(list(question_bank.items()))
-            self.display.text(question)
-            self.morse_code.display(answer)
+            self.display.text('ENTER MORSE CODE...')
             encrypted_sentence = self.morse_code.encrypt(answer)
             answer = self.touch.morse_code()
             if answer == encrypted_sentence:
@@ -185,11 +167,38 @@ class Game:
         """
         Method to handle a morse code game
         """
-        # the words to display on the screen
-        # then the user will enter in with a button either a - . or space series of chars
-        # if they get it right say CORRECT or INCORRECT
-        # must get all right
-        pass
+        questions = list(question_bank)
+        question_number = 0
+        counter = 0
+        answer_list = []
+        for _ in questions:
+            question, answer = random.choice(list(question_bank.items()))
+            self.display.text(question)
+            self.display.text('ENTER MORSE CODE..')
+            encrypted_sentence = self.morse_code.encrypt(answer)
+            answer = self.touch.morse_code()
+            if answer == encrypted_sentence:
+                self.display.text('CORRECT')
+            else:
+                self.display.text('INCORRECT')
+            counter += 1
+            if answer == correct_answer_index:
+                answer_list.append(1)
+            else:
+                answer_list.append(0)
+            question_number += 1
+            del question_bank[question]
+            answer_total = 0
+            for answer in answer_list:
+                if answer == 1:
+                    answer_total += 1
+                else:
+                    pass
+            if counter == num_questions:
+                if answer_total >= num_questions_to_win:
+                    return game_number + ' '
+                else:
+                    return False
 
     def sequence(self, question_bank, game_number, num_questions, num_questions_to_win):
         """
