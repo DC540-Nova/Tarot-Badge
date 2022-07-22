@@ -437,15 +437,15 @@ class Menu:
                 self.bad_advice.scroll(self.data.bad_advice)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_up):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_down):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_submit):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_extra):
-                break
+                show_menu = True
 
     def __extras_menu(self):
         """
