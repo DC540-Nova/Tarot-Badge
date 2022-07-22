@@ -12,10 +12,10 @@ Instructions: Convert To .raw & Copy Files To SD Card
 # copy Tarot Card Images into the deck directory (KEEP A BACKUP OF ORIGINALS!)
 # NOTE: PLEASE NAME FILES EXACTLY AS THEY ARE IN deck FOLDER FOR NEW DECKS
 # NOTE: this will convert the files to 240x320 and overwrite the originals in the deck directory
-./convert_to_raw.sh
+./convert_to_raw.sh decks/Shitty-Deck/deck/
 # NOTE: this will convert all the files in deck and create a dir called deck-raw and copy the .raw files into it
 # copy all the files in deck-raw to sd drive
-./copy_files_to_sd_card.sh decks/1/deck-raw/ Rider-Waite
+./copy_files_to_sd_card.sh decks/Shitty-Deck/deck/ Shitty-Deck
 # NOTE: this will copy files directly to the sd card without having to remove the card it and place in a sd reader
 
 Instructions: Convert Single Image File To .raw

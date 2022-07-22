@@ -63,27 +63,30 @@ def write_bin(f, pixel_list):  # noqa
 
 if __name__ == '__main__':
     args = sys.argv
-    if len(args) != 1:
+    if len(args) != 2:
         error('usage: python convert_to_raw.py')
 
-    directory = 'deck'
+    directory = args[1]
     if not os.path.exists(directory):  # noqa
         error('directory does not exist: ' + directory)
 
-    new_directory = 'deck-raw'
-    try:
-        os.mkdir(new_directory)
-    except (OSError, WindowsError) as error:
-        pass
+    new_directory = ''
     new_directory = os.path.abspath(new_directory) # noqa
-
+    new_directory += '/'
+    try:
+        os.mkdir(Path(new_directory))
+    except OSError as error:
+        pass
     files = Path(directory).glob('*')
     for filename in files:
         filename, ext = os.path.splitext(filename)  # noqa
         absolute_path = os.path.abspath(__file__)  # noqa
-        out_path = new_directory + filename[4:] + '.raw'  # noqa
-        img = Image.open(filename + ext).convert('RGB')
-        pixels = list(img.getdata())
-        with open(out_path, 'wb') as f:
-            write_bin(f, pixels)
-        print('saved: ' + out_path)
+        out_path = new_directory + filename + '.raw'  # noqa
+        try:
+            img = Image.open(filename + ext).convert('RGB')
+            pixels = list(img.getdata())
+            with open(out_path, 'wb') as f:
+                write_bin(f, pixels)
+            print('saved: ' + out_path)
+        except:  # noqa
+            pass

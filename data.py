@@ -671,6 +671,118 @@ tarot_trivia_game = {
             'D. The Hierophant',
             2
         ],
+    'What tarot suite is associated with the element, Water?':
+        [
+            'A. Swords',
+            'B. Pentacles',
+            'C. Cups',
+            'D. Wands',
+            2
+        ],
+    'What tarot suite is associated with the element, Fire?':
+        [
+            'A. Swords',
+            'B. Pentacles',
+            'C. Cups',
+            'D. Wands',
+            3
+        ],
+    'What tarot suite is associated with the element, Air?':
+        [
+            'A. Swords',
+            'B. Pentacles',
+            'C. Cups',
+            'D. Wands',
+            0
+        ],
+    'How many cards are there in the major arcana Rider-Waite tarot deck?':
+        [
+            'A. 22',
+            'B. 56',
+            'C. 78',
+            'D. 84',
+            0
+        ],
+    'How many cards are there in the minor arcana Rider-Waite tarot deck?':
+        [
+            'A. 22',
+            'B. 56',
+            'C. 78',
+            'D. 84',
+            1
+        ],
+    'How many cards are in each of the four suites of minor arcana?':
+        [
+            'A. 84',
+            'B. 14',
+            'C. 56',
+            'D. 22',
+            1
+        ],
+    'Which card typically replaces the female Pope from earlier Tarot decks?':
+        [
+            'A. Hierophant',
+            'B. Strength',
+            'C. Temperance',
+            'D. High Priestess',
+            3
+        ],
+    'What is the first card of the major arcana?':
+        [
+            'A. Magician',
+            'B. Fool',
+            'C. Ace',
+            'D. Death',
+            1
+        ],
+    'The major arcana card sometimes referred as unnumbered or XXII?':
+        [
+            'A. Magician',
+            'B. Fool',
+            'C. Ace',
+            'D. Death',
+            1
+        ],
+    'What is the last card of the major arcana?':
+        [
+            'A. World',
+            'B. King',
+            'C. Tower',
+            'D. justice',
+            0
+        ],
+    'Which of the following cards is not considered a court card?':
+        [
+            'A. King',
+            'B. Ace',
+            'C. Page',
+            'D. Knight',
+            1
+        ],
+    'The planet associated with the Fool in the major arcana?':
+        [
+            'A. Moon',
+            'B. Mars',
+            'C. Uranus',
+            'D. Venus',
+            2
+        ],
+    'The planet associated with the Magician in the major arcana?':
+        [
+            'A. Mercury',
+            'B. Mars',
+            'C. Uranus',
+            'D. Moon',
+            0
+        ],
+    'Which major arcana card symbolizes the bridge between heaven and earth?':
+        [
+            'A. Tower',
+            'B. Judgement',
+            'C. Hierophant',
+            'D. Emperor',
+            2
+        ],
 }
 
 flash_cards_game = {

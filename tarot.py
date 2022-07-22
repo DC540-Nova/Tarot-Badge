@@ -78,7 +78,6 @@ class Tarot:
                 self.display.text('Outcome')
             if meaning == 1:
                 try:
-                    print(deck)
                     card = 'sd/' + deck + '/' + card_reading[2]
                     self.display.image(card, timed=False)
                     while True:
@@ -89,7 +88,6 @@ class Tarot:
                     break
             if meaning == 2:
                 try:
-                    print(deck)
                     card = 'sd/' + deck + '/' + card_reading[2]
                     self.display.image(card, up=False, timed=False)
                     while True:

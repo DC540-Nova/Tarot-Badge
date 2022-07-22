@@ -411,6 +411,8 @@ class Menu:
                     self.display.text('sd card is damaged')
                     show_menu = True
             elif self.touch.press(self.touch.button_right):
+                print(self.deck)
+                print(type(self.deck))
                 self.tarot.reading(self.deck)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
