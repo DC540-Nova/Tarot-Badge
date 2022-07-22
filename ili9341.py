@@ -492,7 +492,7 @@ class Display:
         y = 0
         width = 240
         height = 320
-        draw_speed = 2048
+        draw_speed = 512
         if up:
             self.rotation = self.ROTATE[0]
             self.__config()

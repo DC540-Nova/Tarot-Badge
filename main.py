@@ -38,6 +38,8 @@
 # mpremote connect /dev/tty.u* exec 'import main;main.img_test()'
 # screen /dev/tty.u*
 
+import gc
+
 from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel, \
     nrf
 from microcontroller import Microcontroller
@@ -68,9 +70,13 @@ menu = Menu(touch, display, neo_pixel, game, tarot, bad_advice, data)
 if __name__ == '__main__':
     while True:
         try:
+            gc.collect()
             demo.play()
+            gc.collect()
             file_manager.update_games_won()
+            gc.collect()
             menu.system()
         except KeyboardInterrupt:
             pass
+    # pass
 
