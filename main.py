@@ -68,7 +68,7 @@ menu = Menu(touch, display, neo_pixel, game, tarot, bad_advice, data)
 if __name__ == '__main__':
     while True:
         try:
-            demo.play()
+            # demo.play()
             file_manager.update_games_won()
             menu.system()
         except KeyboardInterrupt:

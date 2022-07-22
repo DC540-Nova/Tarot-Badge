@@ -391,7 +391,7 @@ class Menu:
                     folders = uos.listdir()
                     for folder in folders:
                         if folder == 'System Volume Information' or folder == '.fseventsd' or \
-                                folder == '.Spotlight-V100' or folder == '.Trashes' or 'bad_advice':
+                                folder == '.Spotlight-V100' or folder == '.Trashes' or folder == 'bad_advice':
                             pass
                         else:
                             self.display.text(folder, timed=False)
