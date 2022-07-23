@@ -28,6 +28,8 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import random
+
 
 class BadAdvice:
     """

@@ -37,7 +37,7 @@ class Menu:
     Base class to handle a menu system
     """
 
-    def __init__(self, touch, display, neo_pixel, game, tarot, data, deck='Rider-Waite'):
+    def __init__(self, touch, display, neo_pixel, game, tarot, bad_advice, data, deck='Rider-Waite'):
         """
         Params:
             touch: object
@@ -45,6 +45,7 @@ class Menu:
             neo_pixel: object
             game: object
             tarot: object
+            bad_advice: object
             data: object
             deck: None
         """
@@ -53,6 +54,7 @@ class Menu:
         self.neo_pixel = neo_pixel
         self.game = game
         self.tarot = tarot
+        self.bad_advice = bad_advice
         self.data = data
         self.deck = deck
         self.text = None
@@ -433,8 +435,9 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('bad advice menu', 'l: bad advice scroll', 'e: main menu')
+                show_menu = False
             if self.touch.press(self.touch.button_left):
-                self.bad_advice.scroll(self.data.bad_advice)
+                self.bad_advice.scroll()
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
                 show_menu = True
@@ -445,24 +448,27 @@ class Menu:
             elif self.touch.press(self.touch.button_submit):
                 show_menu = True
             elif self.touch.press(self.touch.button_extra):
-                show_menu = True
+                break
 
     def __extras_menu(self):
         """
         Private method to handle the extras menu
         """
-        self.__populate('extras menu', '', '', '', '', '', 'e: main menu')
+        show_menu = True
         while True:
+            if show_menu:
+                self.__populate('extras menu', '', '', '', '', '', 'e: main menu')
+                show_menu = False
             if self.touch.press(self.touch.button_left):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_right):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_up):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_down):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_submit):
-                break
+                show_menu = True
             elif self.touch.press(self.touch.button_extra):
                 break
 
