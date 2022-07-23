@@ -66,12 +66,12 @@ pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, 
 menu = Menu(touch, display, neo_pixel, game, tarot, bad_advice, data)
 
 if __name__ == '__main__':
-    while True:
-        try:
-            # demo.play()
-            file_manager.update_games_won()
-            menu.system()
-        except KeyboardInterrupt:
-            pass
-    # pass
+    # while True:
+    #     try:
+    #         # demo.play()
+    #         file_manager.update_games_won()
+    #         menu.system()
+    #     except KeyboardInterrupt:
+    #         pass
+    pass
 

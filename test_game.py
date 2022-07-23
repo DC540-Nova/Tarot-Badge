@@ -71,61 +71,68 @@ class TestGame(unittest.TestCase):
         """
         pass
 
-    def test_multiple_choice_won(self):
-        """
-        test multiple_choice won functionality
-
-        Interactive Response:  [RANDOM MANUAL VALIDATION]
-        """
-        # Params
-        question_bank = data.tarot_trivia_game
-        game_number = '1'
-        num_questions = 3
-        num_questions_to_win = 2
-        # Returns
-        return_1 = '1 '
-        # Calls
-        won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
-        if won_game:
-            self.game.won(won_game)
-        # Asserts
-        self.assertEqual(won_game, return_1)
-
-    def test_multiple_choice_lose(self):
-        """
-        test multiple_choice lose functionality
-
-        Interactive Response:  [RANDOM MANUAL VALIDATION]
-        """
-        # Params
-        question_bank = data.tarot_trivia_game
-        game_number = '1'
-        num_questions = 3
-        num_questions_to_win = 2
-        # Returns
-        return_1 = False
-        # Calls
-        won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
-        if won_game:
-            self.game.won(won_game)
-        # Asserts
-        self.assertEqual(won_game, return_1)
-
-    # def test_question_loop_question_seven_incorrect_answer_interactive(self):
+    # def test_multiple_choice_won(self):
     #     """
-    #     test question_loop question seven incorrect answer functionality
+    #     test multiple_choice won functionality
     #
     #     Interactive Response:  [RANDOM MANUAL VALIDATION]
     #     """
     #     # Params
-    #     question_number = '7'
+    #     question_bank = data.tarot_trivia_game
+    #     game_number = '1'
+    #     num_questions = 3
+    #     num_questions_to_win = 2
     #     # Returns
-    #     return_1 = None
+    #     return_1 = '1 '
     #     # Calls
-    #     question = game.question_loop(question_number)
+    #     won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
+    #     if won_game:
+    #         self.game.won(won_game)
     #     # Asserts
-    #     self.assertEqual(question, return_1)
+    #     self.assertEqual(won_game, return_1)
     #
+    # def test_multiple_choice_lose(self):
+    #     """
+    #     test multiple_choice lose functionality
+    #
+    #     Interactive Response:  [RANDOM MANUAL VALIDATION]
+    #     """
+    #     # Params
+    #     question_bank = data.tarot_trivia_game
+    #     game_number = '1'
+    #     num_questions = 3
+    #     num_questions_to_win = 2
+    #     # Returns
+    #     return_1 = False
+    #     # Calls
+    #     won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
+    #     if won_game:
+    #         self.game.won(won_game)
+    #     # Asserts
+    #     self.assertEqual(won_game, return_1)
+
+# TODO: practice unit test
+
+    def test_morse_code_won(self):
+        """
+        test morse_code won functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.morse_code_game
+        game_number = '7'
+        num_questions = 3
+        num_questions_to_win = 3
+        # Returns
+        return_1 = '7 '
+        # Calls
+        won_game = self.game.morse_code_sequence(question_bank, game_number, num_questions, num_questions_to_win)
+        if won_game:
+            self.game.won(won_game)
+        # Asserts
+        self.assertEqual(won_game, return_1)
+
     # def test_question_loop_win_interactive(self):
     #     """
     #     test question_loop win functionality

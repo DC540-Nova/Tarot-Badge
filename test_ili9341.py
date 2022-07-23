@@ -47,6 +47,7 @@ class TestDisplay(unittest.TestCase):
         """
         setUp class
         """
+        # Init objects
         display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))
         self.display = Display(display_spi, dc=Pin(15, Pin.OUT), cs=Pin(13, Pin.OUT), rst=Pin(14, Pin.OUT))
         self.UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
@@ -61,43 +62,77 @@ class TestDisplay(unittest.TestCase):
         """
         test read_reg functionality
         """
-        want = b'\x00'
-        got = self.display.__read_reg(0x01)  # noqa
-        self.assertEqual(got, want)
+        # Params
+        reg = 0x01
+        # Returns
+        return_1 = b'\x00'
+        # Calls
+        result = self.display.__read_reg(reg)
+        # Asserts
+        self.assertEqual(result, return_1)
 
     def test_write_reg(self):
         """
         test write_reg functionality
         """
-        want = None
-        got = self.display.__write_reg(self.display.RAMWR)  # noqa
-        self.assertEqual(got, want)
+        # Params
+        reg = self.display.RAMWR
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.__write_reg(reg)
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_write_data(self):
         """
         test write_data functionality
         """
-        want = None
-        got = self.display.__write_data('foo')  # noqa
-        self.assertEqual(got, want)
+        # Params
+        data = 'foo'
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.__write_data(data)  # noqa
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_block(self):
         """
         test block functionality
         """
-        want = None
-        got = self.display.__block(1, 2, 3, 4, 'foo')  # noqa
-        self.assertEqual(got, want)
+        # Params
+        x0 = 1
+        y0 = 2
+        x1 = 3
+        y1 = 4
+        data = 'foo'
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.__block(x0, y0, x1, y1, data)
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_letter(self):
         """
         test letter functionality
         """
-        want_width = 11
-        want_height = 24
-        got_width, got_height = self.display.__letter('a', 0b1111111111100000, self.UNISPACE_FONT, 1, 2, 0)  # noqa
-        self.assertEqual(got_width, want_width)
-        self.assertEqual(got_height, want_height)
+        # Params
+        letter = 'a'
+        color = 0b1111111111100000
+        font = self.UNISPACE_FONT
+        x = 1
+        y = 2
+        background = 0
+        # Returns
+        return_1 = 11
+        return_2 = 24
+        # Calls
+        width, height = self.display.__letter(letter, color, font, x, y, background)
+        # Asserts
+        self.assertEqual(width, return_1)
+        self.assertEqual(height, return_2)
 
     def test_clear(self):
         """

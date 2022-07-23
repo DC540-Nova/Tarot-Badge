@@ -331,7 +331,7 @@ class Menu:
                 self.display.text(self.data.morse_code_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.morse_code(self.data.morse_code_game, '7', 3, 3)
+                won_game = self.game.morse_code_sequence(self.data.morse_code_game, '7', 3, 3)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
