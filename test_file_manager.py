@@ -56,11 +56,13 @@ class TestFileManager(unittest.TestCase):
         self.file_manager.clear_ids_file()
         self.file_manager.clear_games_won_file()
 
-    def tearDown(self):
+    @staticmethod
+    def tearDown():
         """
         tearDown class
         """
-        pass
+        # Clear leds
+        neo_pixel.clear(hard_clear=True)
 
     def test_write_ids_file(self):
         """
@@ -88,6 +90,99 @@ class TestFileManager(unittest.TestCase):
         ids = self.file_manager.read_ids_file()
         # Asserts
         self.assertEqual(ids, return_1)
+
+    def test_write_games_won_file(self):
+        """
+        test write_games_won functionality
+        """
+        # Params
+        games_won = '66 23 89 40 98 11 15 37 '
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.file_manager.write_games_won_file(games_won)
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test_read_games_won_file(self):
+        """
+        test read_games_won_file functionality
+        """
+        # Params
+        games_won = '66 23 89 40 98 11 15 37 '
+        # Returns
+        return_1 = '66 23 89 40 98 11 15 37 '
+        # Calls
+        self.file_manager.write_games_won_file(games_won)
+        games_won = self.file_manager.read_games_won_file()
+        # Asserts
+        self.assertEqual(games_won, return_1)
+
+    def test_clear_ids_file(self):
+        """
+        test clear_ids_file functionality
+        """
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.file_manager.clear_ids_file()
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test_clear_games_won_file(self):
+        """
+        test clear_games_won_file functionality
+        """
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.file_manager.clear_games_won_file()
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test_update_games_won(self):
+        """
+        test update_games_won functionality
+        """
+        # Params
+        games_won = '66 23 89 40 98 11 15 37 '
+        # Returns
+        return_1 = None
+        # Calls
+        self.file_manager.write_games_won_file(games_won)
+        none_1 = self.file_manager.update_games_won()
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test_reset_ids(self):
+        """
+        test reset ids file functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        file = 'ids'
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.file_manager.reset(file)
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test_reset_games_won(self):
+        """
+        test reset games_won file functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        file = 'games_won'
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.file_manager.reset(file)
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
 
 if __name__ == '__main__':

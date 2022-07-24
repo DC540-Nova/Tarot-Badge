@@ -173,11 +173,13 @@ class FileManager:
             file: str
             sleep_time: int, optional
         """
-        if file == 'games_won':
-            message = 'ARE YOU SURE YOU WANT TO RESET GAME?'
-        elif file == 'ids':
+        message = ''
+        if file == 'ids':
             message = 'ARE YOU SURE YOU WANT TO RESET PAIRS?'
-        self.display.scroll_text([[0, 0, message]], len(message))  # noqa
+        elif file == 'games_won':
+            message = 'ARE YOU SURE YOU WANT TO RESET GAME?'
+        self.display.text(message)
+        self.display.text('CHOOSE...')
         sleep(sleep_time)
         reset = self.touch.yes_no()
         if reset == 'yes':
@@ -185,7 +187,7 @@ class FileManager:
                 message = 'RESETTING GAME!'
             elif file == 'ids':
                 message = 'RESETTING STATUS!'
-            self.display.scroll_text([[0, 0, message]], len(message))
+            self.display.text(message)
             sleep(sleep_time)
             if file == 'ids':
                 self.clear_ids_file()
