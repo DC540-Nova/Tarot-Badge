@@ -1479,23 +1479,23 @@ decryption_game_questions = {
 }
 
 decryption_game = {
-    'Enter Game 9 Answer': '344222',
+    'Enter Game 9 Answer': b'\xc3\xc4\x1a\xa4\xb8`\x8bp\xa6[\xd2\x1bu\xcd\xf9\x17',
 }
 
 stego_game = {
-    'Enter Game 1 Answer': '341121',
+    'Enter Game 1 Answer': b'\x9ax\xde\x90\xb3\xaa?\xe2\x81u1=\r\xa6xd',
 }
 
 reenactment_game = {
-    'Enter Game 2 Answer': '441211',
+    'Enter Game 2 Answer': b'\x8fl\x07\xe1\xa5;=\xb9\'7\xabG\x86"b\xa4',
 }
 
 scavenger_hunt_game = {
-    'Enter Game 3 Answer': '141431',
+    'Enter Game 3 Answer': b'\x0b\xf2\xc5\xec\x96s\xad\xa0\x8c%\xb0\xdc\xdf\xddS\xc7',
 }
 
 fun_deck_game = {
-    'Enter Game 4 Answer': '333212',
+    'Enter Game 4 Answer': b'\x0b)\xa85\xcb\xf6\x89Wb\x1e2\xfd5.C\xa5',
 }
 
 bad_advice = {

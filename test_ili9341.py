@@ -138,41 +138,60 @@ class TestDisplay(unittest.TestCase):
         """
         test clear functionality
         """
-        want = None
-        got = self.display.clear()
-        self.assertEqual(got, want)
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.clear()
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_text(self):
         """
         test text functionality
         """
-        want = None
-        got = self.display.text('foo')
-        self.assertEqual(got, want)
+        # Params
+        text = 'foo'
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.text(text)
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_image(self):
         """
         test image functionality
         """
-        want = None
-        got = self.display.image('dc540_logo.raw')
-        self.assertEqual(got, want)
+        # Params
+        image = 'dc540_logo.raw'
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.image(image)
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_handle_threading_setup(self):
         """
         test handle_threading_setup functionality
         """
-        want = None
-        got = self.display.handle_threading_setup()
-        self.assertEqual(got, want)
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.handle_threading_setup()
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_handle_threading_teardown(self):
         """
         test handle_threading_teardown functionality
         """
-        want = None
-        got = self.display.handle_threading_teardown()
-        self.assertEqual(got, want)
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.display.handle_threading_teardown()
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
 
 if __name__ == '__main__':

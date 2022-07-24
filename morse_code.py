@@ -142,7 +142,7 @@ class MorseCode:
         """
         encoded_sentence = ''
         if encrypted:
-            decrypted_sentence = self.encryption.cipher('d', sentence, 22)
+            decrypted_sentence = self.encryption.cipher('d', sentence, 20)
         else:
             decrypted_sentence = sentence
         for character in decrypted_sentence:

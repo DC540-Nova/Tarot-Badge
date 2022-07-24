@@ -54,53 +54,92 @@ class TestEncryption(unittest.TestCase):
         """
         pass
 
-    def test_encryption_over_length_word(self):
-        """
-        test encryption over length word functionality
-        """
-        want = 'message must be less than 38 chars'
-        got = self.encryption.cipher('e', want, 10)
-        self.assertEqual(got, want)
-
     def test_decryption_small_length_word(self):
         """
         test decryption small length word functionality
         """
-        want = 0xd, 0x10, 0xd,
-        got = self.encryption.cipher('d', want, 10)
-        self.assertEqual(got, 'f')
+        # Params
+        mode = 'd'
+        message = 0xd, 0x10, 0xd,
+        key = 10
+        # Returns
+        return_1 = 'f'
+        # Calls
+        encrypted_message = self.encryption.cipher(mode, message, key)
+        self.assertEqual(encrypted_message, return_1)
 
     def test_decryption_medium_length_word(self):
         """
         test decryption medium length word functionality
         """
-        want = 0x71, 0x10, 0x19, 0x71,
-        got = self.encryption.cipher('d', want, 10)
-        self.assertEqual(got, 'fo')
+        # Params
+        mode = 'd'
+        message = 0x71, 0x10, 0x19, 0x71,
+        key = 10
+        # Returns
+        return_1 = 'fo'
+        # Calls
+        decrypted_message = self.encryption.cipher(mode, message, key)
+        # Asserts
+        self.assertEqual(decrypted_message, return_1)
 
     def test_decryption_large_length_word(self):
         """
         test decryption large length word functionality
         """
-        want = 0x9, 0x10, 0x19, 0x19, 0x9,
-        got = self.encryption.cipher('d', want, 10)
-        self.assertEqual(got, 'foo')
+        # Params
+        mode = 'd'
+        message = 0x9, 0x10, 0x19, 0x19, 0x9,
+        key = 10
+        # Returns
+        return_1 = 'foo'
+        # Calls
+        decrypted_message = self.encryption.cipher(mode, message, key)
+        # Asserts
+        self.assertEqual(decrypted_message, return_1)
 
     def test_decryption_extra_large_length_word(self):
         """
         test decryption extra large length word functionality
         """
-        want = 0x10, 0x19, 0x15, 0x19, 0x4a, 0x12, 0xc, 0xb, 0x73, 0x1c, 0x4a, 0xe, 0x10, 0xf, 0x6b, 0x4a, 0x10, 0x68, 0x19, 0x4a, 0x1a, 0x10, 0x1f, 0x77, 0x17, 0x4a, 0x79, 0xb, 0x18, 0xb, 0xe, 0x4a, 0x65, 0xb, 0x4a, 0x17, 0xc, 0x19, 0x62, 0x1e, 0x1e, 0x70, 0x16, 0xf, 0xc, 0x4a, 0x19, 0x10,  # noqa
-        got = self.encryption.cipher('d', want, 10)
-        self.assertEqual(got, 'foo bar fe fo fum and a bottle of')
+        # Params
+        mode = 'd'
+        message = 0x10, 0x19, 0x14, 0x19, 0x4a, 0x9, 0xc, 0xb, 0x63, 0x1c, 0x4a, 0xf, 0x10, 0xf, 0x75, 0x4a, 0x10, 0x13, 0x19, 0x4a, 0x6, 0x10, 0x1f, 0x14, 0x17, 0x4a, 0x15, 0xb, 0x18, 0x11, 0xe, 0x4a, 0x3, 0xb, 0x4a, 0x1, 0xc, 0x19, 0x61, 0x1e, 0x1e, 0xc, 0x16, 0xf,  # noqa
+        key = 10
+        # Returns
+        return_1 = 'foo bar fe fo fum and '
+        # Calls
+        decrypted_message = self.encryption.cipher(mode, message, key)
+        # Asserts
+        self.assertEqual(decrypted_message, return_1)
+
+    def test_encryption_over_length_word(self):
+        """
+        test encryption over length word functionality
+        """
+        # Params
+        mode = 'e'
+        message = 'message must be less than 38 chars'
+        key = 10
+        # Returns
+        return_1 = 'message must be less than 38 chars'
+        # Calls
+        decrypted_message = self.encryption.cipher(mode, message, key)
+        self.assertEqual(decrypted_message, return_1)
 
     def test_decryption_over_length_word(self):
         """
         test decryption over length word functionality
         """
-        want = 'message must be less than 34 chars'
-        got = self.encryption.cipher('d', want, 10)
-        self.assertEqual(got, want)
+        # Params
+        mode = 'd'
+        message = 0x10, 0x19, 0x14, 0x19, 0x4a, 0x9, 0xc, 0xb, 0x63, 0x1c, 0x4a, 0xf, 0x10, 0xf, 0x75, 0x4a, 0x10, 0x13, 0x19, 0x4a, 0x6, 0x10, 0x1f, 0x14, 0x17, 0x4a, 0x15, 0xb, 0x18, 0x11, 0xe, 0x4a, 0x3, 0xb, 0x4a, 0x1, 0xc, 0x19, 0x61, 0x1e, 0x1e, 0xc, 0x16, 0xf, 0x61, 0x1e, 0x1e, 0xc, 0x16,  # noqa
+        key = 10
+        # Returns
+        return_1 = 'message must be less than 44 chars'
+        # Calls
+        decrypted_message = self.encryption.cipher(mode, message, key)
+        self.assertEqual(decrypted_message, return_1)
 
 
 if __name__ == '__main__':

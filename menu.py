@@ -146,7 +146,7 @@ class Menu:
                 self.display.text(self.data.tarot_trivia_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '1', 1, 1)
+                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 1, 1)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -173,7 +173,7 @@ class Menu:
                 self.display.text(self.data.stego_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.sequence(self.data.stego_game, '2', 1, 1)
+                won_game = self.game.sequence(self.data.stego_game, '23', 1, 1)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -184,7 +184,7 @@ class Menu:
             elif self.touch.press(self.touch.button_submit):
                 show_menu = True
             elif self.touch.press(self.touch.button_extra):
-                show_menu = True
+                break
 
     def __game_menu_reenactment(self):
         """
@@ -199,7 +199,7 @@ class Menu:
                 self.display.text(self.data.reenactment_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.sequence(self.data.reeanactment, '3', 1, 1)
+                won_game = self.game.sequence(self.data.reeanactment, '89', 1, 1)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -225,7 +225,7 @@ class Menu:
                 self.display.text(self.data.scavenger_hunt_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.sequence(self.data.scavenger_hunt_game, '4', 1, 1)
+                won_game = self.game.sequence(self.data.scavenger_hunt_game, '40', 1, 1)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -251,7 +251,7 @@ class Menu:
                 self.display.text(self.data.flash_cards_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.multiple_choice(self.data.flash_cards_game, '5', '1', 1, False)
+                won_game = self.game.multiple_choice(self.data.flash_cards_game, '98', '1', 1, False)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -303,7 +303,7 @@ class Menu:
                 self.display.text(self.data.fun_deck_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.sequence(self.data.fun_deck_game, '6', 1, 1)
+                won_game = self.game.sequence(self.data.fun_deck_game, '11', 1, 1)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -331,7 +331,7 @@ class Menu:
                 self.display.text(self.data.morse_code_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.morse_code_sequence(self.data.morse_code_game, '7', 3, 3)
+                won_game = self.game.morse_code_sequence(self.data.morse_code_game, '15', 3, 3)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -362,7 +362,7 @@ class Menu:
                 self.display.text(self.data.decryption_game_questions['Cipher 1'])
                 self.display.text(self.data.decryption_game_questions['Cipher 2'])
                 self.display.text(self.data.decryption_game_questions['Cipher 3'])
-                won_game = self.game.sequence(self.data.decryption_game, '8', 1, 1)
+                won_game = self.game.sequence(self.data.decryption_game, '37', 1, 1)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True

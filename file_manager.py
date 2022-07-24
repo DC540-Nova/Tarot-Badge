@@ -146,20 +146,25 @@ class FileManager:
             with open('games_won', 'r') as f:
                 games_won = f.read()
                 games_won = list(games_won.split(' '))
-                if '1' in games_won:
+                if '66' in games_won:
                     self.neo_pixel.on(0)
-                if '2' in games_won:
+                if '23' in games_won:
                     self.neo_pixel.on(1)
+                if '89' in games_won:
+                    self.neo_pixel.on(2)
+                if '40' in games_won:
+                    self.neo_pixel.on(3)
+                if '98' in games_won:
+                    self.neo_pixel.on(4)
+                if '11' in games_won:
+                    self.neo_pixel.on(5)
+                if '15' in games_won:
+                    self.neo_pixel.on(6)
+                if '37' in games_won:
+                    self.neo_pixel.on(7)
         except OSError:
             with open('games_won', 'w') as f:
                 f.write('')
-            with open('games_won', 'r') as f:
-                games_won = f.read()
-                games_won = list(games_won.split(' '))
-                if '1' in games_won:
-                    self.neo_pixel.on(0)
-                if '2' in games_won:
-                    self.neo_pixel.on(1)
 
     def reset(self, file, sleep_time=2):
         """

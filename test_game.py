@@ -63,7 +63,7 @@ class TestGame(unittest.TestCase):
         setUp class
         """
         # Init objects
-        self.game = Game(touch, file_manager, display, tarot, morse_code)
+        self.game = Game(touch, file_manager, display, tarot, morse_code, encryption)
 
     def tearDown(self):
         """

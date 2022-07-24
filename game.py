@@ -36,7 +36,7 @@ class Game:
     Base class to handle a game
     """
 
-    def __init__(self, touch, file_manager, display, tarot, morse_code):
+    def __init__(self, touch, file_manager, display, tarot, morse_code, encryption):
         """
         Params:
             touch: object
@@ -44,12 +44,14 @@ class Game:
             display: object
             tarot: object
             morse_code: object
+            encryption: object
         """
         self.touch = touch
         self.file_manager = file_manager
         self.display = display
         self.tarot = tarot
         self.morse_code = morse_code
+        self.encryption = encryption
         self.text = None
         self.title = 8
         self.line_2 = 32
@@ -107,7 +109,7 @@ class Game:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
             question_number += 1
-            del question_bank[question]
+            # del question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -174,12 +176,12 @@ class Game:
         answer_list = []
         for _ in questions:
             question, answer = random.choice(list(question_bank.items()))
+            answer = self.encryption.decode(answer)
             self.display.text(question)
             self.display.text('ENTER MORSE CODE..')
-            encrypted_sentence = self.morse_code.encrypt(answer)
-            correct_answer_index = answer[0]
+            correct_answer_index = answer
             answer = self.touch.morse_code()
-            if answer == encrypted_sentence:
+            if answer == correct_answer_index:
                 self.display.text('CORRECT')
                 self.morse_code.display(question)
             else:
@@ -190,7 +192,7 @@ class Game:
             else:
                 answer_list.append(0)
             question_number += 1
-            del question_bank[question]
+            # del question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -241,18 +243,22 @@ class Game:
         counter = 0
         answer_list = []
         for _ in questions:
-            question, answers = random.choice(list(question_bank.items()))
-            correct_answer_index = answers
+            question, answer = random.choice(list(question_bank.items()))
+            answer = self.encryption.decode(answer)
+            print(answer)
+            correct_answer_index = answer
             self.display.text(question)
             self.display.text('CHOOSE...')
             answer = self.touch.numeric_sequence()
             counter += 1
             if answer == correct_answer_index:
+                self.display.text('CORRECT')
                 answer_list.append(1)
             else:
+                self.display.text('INCORRECT')
                 answer_list.append(0)
             question_number += 1
-            del question_bank[question]
+            # del question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -261,6 +267,7 @@ class Game:
                     pass
             if counter == num_questions:
                 if answer_total >= num_questions_to_win:
+                    print(game_number + ' ')
                     return game_number + ' '
                 else:
                     return False
