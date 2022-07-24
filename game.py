@@ -109,7 +109,6 @@ class Game:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
             question_number += 1
-            # del question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -192,7 +191,6 @@ class Game:
             else:
                 answer_list.append(0)
             question_number += 1
-            # del question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -258,7 +256,6 @@ class Game:
                 self.display.text('INCORRECT')
                 answer_list.append(0)
             question_number += 1
-            # del question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
