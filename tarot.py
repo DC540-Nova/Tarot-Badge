@@ -52,9 +52,10 @@ class Tarot:
         Params:
             deck: int
         """
+        temp_card_bank = self.card_bank
         counter = 1
-        for _ in self.card_bank:
-            card, card_reading = random.choice(list(self.card_bank.items()))
+        for _ in temp_card_bank:
+            card, card_reading = random.choice(list(temp_card_bank.items()))
             meaning = random.randint(1, 2)  # randomize card up or down position
             if counter == 1:
                 self.display.text('Querent')
@@ -108,7 +109,7 @@ class Tarot:
                         break
             counter += 1
             try:
-                del self.card_bank[card]
+                del temp_card_bank[card]
             except KeyError:
                 pass
             if counter > 10:
@@ -137,7 +138,3 @@ class Tarot:
             touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
-            try:
-                del self.card_bank[card]
-            except KeyError:
-                pass

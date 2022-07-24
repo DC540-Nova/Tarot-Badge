@@ -41,7 +41,6 @@ morse_code_game_instructions = 'complete all three morse code challenges to pass
 decryption_game_instructions = 'decode these three encryptions and add them together for the answer'
 help_someone_game_instructions = 'find another player wearing this badge and offer to help them'
 # boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
-# boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
 
 # boss_ids = []  # noqa
 # boss_ids.append('e66038b7137a9935')
