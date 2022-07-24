@@ -27,26 +27,34 @@
 # UNITTEST
 # --------
 # import unittest
-# unittest.main('test_encryption')
+# unittest.main('test_file_manager')
 
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
 import unittest
+import uos
 
-from encryption import Encryption
+from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel
+from touch import Touch
+from file_manager import FileManager
+
+touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 
 
-class TestEncryption(unittest.TestCase):
+class TestFileManager(unittest.TestCase):
     """
-    Test class to test encryption module
+    Test class to test file_manager module
     """
     def setUp(self):
         """
         setUp class
         """
         # Instantiate
-        self.encryption = Encryption()
+        self.file_manager = FileManager(touch, display, neo_pixel)
+        # Clear Files
+        self.file_manager.clear_ids_file()
+        self.file_manager.clear_games_won_file()
 
     def tearDown(self):
         """
@@ -54,31 +62,32 @@ class TestEncryption(unittest.TestCase):
         """
         pass
 
-    def test_encode(self):
+    def test_write_ids_file(self):
         """
-        test encode functionality
+        test write_ids_file functionality
         """
         # Params
-        decrypted_message = 'foo bar'
+        ids = 'e66038b7137a9935'
         # Returns
-        return_1 = b'\xd4\xb5\x86c\xc4\xec\xa5\xe0\x03Y\xaaz\xe4\xf2\x90\xe5'
+        return_1 = None
         # Calls
-        encrypted_message = self.encryption.encode(decrypted_message)
+        none_1 = self.file_manager.write_ids_file(ids)
         # Asserts
-        self.assertEqual(encrypted_message, return_1)
+        self.assertEqual(none_1, return_1)
 
-    def test_decode(self):
+    def test_read_ids_file(self):
         """
-        test decode functionality
+        test read_ids_file functionality
         """
         # Params
-        encrypted_message = b'\xd4\xb5\x86c\xc4\xec\xa5\xe0\x03Y\xaaz\xe4\xf2\x90\xe5'
+        ids = 'e66038b7137a9935'
         # Returns
-        return_1 = 'foo bar'
+        return_1 = 'e66038b7137a9935'
         # Calls
-        decrypted_message = self.encryption.decode(encrypted_message)
+        self.file_manager.write_ids_file(ids)
+        ids = self.file_manager.read_ids_file()
         # Asserts
-        self.assertEqual(decrypted_message, return_1)
+        self.assertEqual(ids, return_1)
 
 
 if __name__ == '__main__':

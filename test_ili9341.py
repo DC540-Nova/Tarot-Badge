@@ -47,7 +47,7 @@ class TestDisplay(unittest.TestCase):
         """
         setUp class
         """
-        # Init objects
+        # Instantiate
         display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))
         self.display = Display(display_spi, dc=Pin(15, Pin.OUT), cs=Pin(13, Pin.OUT), rst=Pin(14, Pin.OUT))
         self.UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font

@@ -3,6 +3,7 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
+# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -27,26 +28,31 @@
 # UNITTEST
 # --------
 # import unittest
-# unittest.main('test_encryption')
+# unittest.main('test_bad_advice')
 
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
 import unittest
 
-from encryption import Encryption
+from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display
+from touch import Touch
+from bad_advice import BadAdvice
+import data
+
+touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 
 
-class TestEncryption(unittest.TestCase):
+class TestBadAdvice(unittest.TestCase):
     """
-    Test class to test encryption module
+    Test class to test bad_advice module
     """
     def setUp(self):
         """
         setUp class
         """
         # Instantiate
-        self.encryption = Encryption()
+        self.bad_advice = BadAdvice(touch, display, data.bad_advice)
 
     def tearDown(self):
         """
@@ -54,32 +60,13 @@ class TestEncryption(unittest.TestCase):
         """
         pass
 
-    def test_encode(self):
+    def test_bad_advice_scroll(self):
         """
-        test encode functionality
+        test bad advice scroll functionality
         """
-        # Params
-        decrypted_message = 'foo bar'
         # Returns
-        return_1 = b'\xd4\xb5\x86c\xc4\xec\xa5\xe0\x03Y\xaaz\xe4\xf2\x90\xe5'
+        return_1 = None
         # Calls
-        encrypted_message = self.encryption.encode(decrypted_message)
+        none_1 = self.bad_advice.scroll()
         # Asserts
-        self.assertEqual(encrypted_message, return_1)
-
-    def test_decode(self):
-        """
-        test decode functionality
-        """
-        # Params
-        encrypted_message = b'\xd4\xb5\x86c\xc4\xec\xa5\xe0\x03Y\xaaz\xe4\xf2\x90\xe5'
-        # Returns
-        return_1 = 'foo bar'
-        # Calls
-        decrypted_message = self.encryption.decode(encrypted_message)
-        # Asserts
-        self.assertEqual(decrypted_message, return_1)
-
-
-if __name__ == '__main__':
-    unittest.main()
+        self.assertEqual(none_1, return_1)

@@ -3,7 +3,6 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -436,7 +435,7 @@ cards = {
     '63 King Of Pentacles':
         [
             'Businessman, magnanimous, proud, self-educated, self-made.',
-            'Misuse of power and money. Abuse of people for gain or personal gratification. Corruption. Overeating, indigestion, gout, rheumatism. Careless of the wellbeing of others. Unloved by family.',  # noqa
+            'Misuse of power and money. Abuse of people for gain or personal gratification. Corruption. Overeating, indigestion. Careless of the wellbeing of others. Unloved by family.',  # noqa
             'Pentacles14.raw'
         ],
     '64 Ace Of Swords':

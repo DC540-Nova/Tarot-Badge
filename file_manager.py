@@ -3,7 +3,6 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -28,7 +27,7 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-import os
+import uos
 from utime import sleep
 
 
@@ -120,7 +119,7 @@ class FileManager:
         Static method to clear the ids file by resetting it
         """
         try:
-            os.remove('ids')
+            uos.remove('ids')
             with open('ids', 'w') as f:
                 f.write('')
         except OSError:
@@ -132,7 +131,7 @@ class FileManager:
         Static method to clear games_won file by resetting it
         """
         try:
-            os.remove('games_won')
+            uos.remove('games_won')
             with open('games_won', 'w') as f:
                 f.write('')
         except OSError:
