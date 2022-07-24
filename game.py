@@ -52,6 +52,7 @@ class Game:
         self.tarot = tarot
         self.morse_code = morse_code
         self.encryption = encryption
+        self.question_bank = None
         self.text = None
         self.title = 8
         self.line_2 = 32
@@ -74,12 +75,13 @@ class Game:
         Returns:
             str or bool
         """
-        questions = list(question_bank)
+        self.question_bank = question_bank.copy()
+        questions = list(self.question_bank)
         question_number = 0
         counter = 0
         answer_list = []
         for _ in questions:
-            question, answers = random.choice(list(question_bank.items()))
+            question, answers = random.choice(list(self.question_bank.items()))
             if text:
                 self.display.text(question)
             else:
@@ -109,6 +111,7 @@ class Game:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
             question_number += 1
+            del self.question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -116,6 +119,7 @@ class Game:
                 else:
                     pass
             if counter == num_questions:
+                import data
                 if answer_total >= num_questions_to_win:
                     return game_number + ' '
                 else:
@@ -169,12 +173,13 @@ class Game:
         """
         Method to handle a morse code game
         """
-        questions = list(question_bank)
+        self.question_bank = question_bank.copy()
+        questions = list(self.question_bank)
         question_number = 0
         counter = 0
         answer_list = []
         for _ in questions:
-            question, answer = random.choice(list(question_bank.items()))
+            question, answer = random.choice(list(self.question_bank.items()))
             answer = self.encryption.decode(answer)
             self.display.text(question)
             self.display.text('ENTER MORSE CODE..')
@@ -191,6 +196,7 @@ class Game:
             else:
                 answer_list.append(0)
             question_number += 1
+            del self.question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -198,6 +204,7 @@ class Game:
                 else:
                     pass
             if counter == num_questions:
+                import data
                 if answer_total >= num_questions_to_win:
                     return game_number + ' '
                 else:
@@ -236,12 +243,13 @@ class Game:
         Returns:
             int
         """
-        questions = list(question_bank)
+        self.question_bank = question_bank.copy()
+        questions = list(self.question_bank)
         question_number = 0
         counter = 0
         answer_list = []
         for _ in questions:
-            question, answer = random.choice(list(question_bank.items()))
+            question, answer = random.choice(list(self.question_bank.items()))
             answer = self.encryption.decode(answer)
             print(answer)
             correct_answer_index = answer
@@ -256,6 +264,7 @@ class Game:
                 self.display.text('INCORRECT')
                 answer_list.append(0)
             question_number += 1
+            del self.question_bank[question]
             answer_total = 0
             for answer in answer_list:
                 if answer == 1:
@@ -264,7 +273,6 @@ class Game:
                     pass
             if counter == num_questions:
                 if answer_total >= num_questions_to_win:
-                    print(game_number + ' ')
                     return game_number + ' '
                 else:
                     return False
