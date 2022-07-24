@@ -40,19 +40,19 @@ fun_deck_game_instructions = 'We at DC540 created our own terrible Tarot deck. C
 morse_code_game_instructions = 'complete all three morse code challenges to pass this game'
 decryption_game_instructions = 'decode these three encryptions and add them together for the answer'
 help_someone_game_instructions = 'find another player wearing this badge and offer to help them'
-# boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
+boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
 
-# boss_ids = []  # noqa
-# boss_ids.append('e66038b7137a9935')
-# boss_ids.append('e66038b7135fa935')
-# boss_ids.append('e66038b71316902f')
-# boss_ids.append('e66038b713338c2f')
-#
-# boss_names = []  # noqa
-# boss_names.append('Baabalicious')
-# boss_names.append('Banter')
-# boss_names.append('Lyra')
-# boss_names.append('Kevin')
+boss_ids = []  # noqa
+boss_ids.append('e66038b7137a9935')
+boss_ids.append('e66038b7135fa935')
+boss_ids.append('e66038b71316902f')
+boss_ids.append('e66038b713338c2f')
+
+boss_names = []  # noqa
+boss_names.append('Baabalicious')
+boss_names.append('Banter')
+boss_names.append('Lyra')
+boss_names.append('Kevin')
 
 cards = {
     '0 The Fool':
@@ -606,14 +606,6 @@ tarot_trivia_game = {
             'D. Divination',
             2
         ],
-    'How many points, Sephiroths, are on the Tree of Life?':
-        [
-            'A. 22',
-            'B. 78',
-            'C. 12',
-            'D. 10',
-            3
-        ],
     'The major arcana tarot cards represent the what forces rather than individual people?':
         [
             'A. Archetype',
@@ -638,22 +630,6 @@ tarot_trivia_game = {
             'D. Tiphereth',
             1
         ],
-    'Sephiroth 6 of the Tree of Life represents Tiphereth?':
-        [
-            'A. Love',
-            'B. Glory',
-            'C. Beauty',
-            'D. Intelligence',
-            2
-        ],
-    'On the Tree of Life, which major arcana tarot card represents the path (11) from Kethor to Chormah?':
-        [
-            'A. The Magician',
-            'B. Strength',
-            'C. The Emperor',
-            'D. The Fool',
-            3
-        ],
     'On the Tree of Life, which major arcana tarot card represents the path (16) from Chormah to Chesed?':
         [
             'A. The Hierophant',
@@ -661,14 +637,6 @@ tarot_trivia_game = {
             'C. The Fool',
             'D. The Emperor',
             0
-        ],
-    'On the Tree of Life, which major arcana tarot card represents the path (20) from Chesed to Tifereth?':
-        [
-            'A. The Fool',
-            'B. The Magician',
-            'C. The Hermit',
-            'D. The Hierophant',
-            2
         ],
     'What tarot suite is associated with the element, Water?':
         [
@@ -728,17 +696,9 @@ tarot_trivia_game = {
         ],
     'What is the first card of the major arcana?':
         [
-            'A. Magician',
-            'B. Fool',
-            'C. Ace',
-            'D. Death',
-            1
-        ],
-    'The major arcana card sometimes referred as unnumbered or XXII?':
-        [
-            'A. Magician',
-            'B. Fool',
-            'C. Ace',
+            'A. The Magician',
+            'B. The Fool',
+            'C. The Empress',
             'D. Death',
             1
         ],
@@ -773,14 +733,6 @@ tarot_trivia_game = {
             'C. Uranus',
             'D. Moon',
             0
-        ],
-    'Which major arcana card symbolizes the bridge between heaven and earth?':
-        [
-            'A. Tower',
-            'B. Judgement',
-            'C. Hierophant',
-            'D. Emperor',
-            2
         ],
 }
 
