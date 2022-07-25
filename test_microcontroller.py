@@ -24,29 +24,43 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# UNITTEST
+# --------
+# import unittest
+# unittest.main('test_microcontroller')
+
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-import ubinascii
-from machine import unique_id
+import unittest
+
+from microcontroller import Microcontroller
 
 
-class Microcontroller:
+class TestMicrocontroller(unittest.TestCase):
     """
-    Base class to handle getting a unique ID from a microcontroller
+    Test class to test microcontroller module
     """
-
-    def __init__(self):
-        self.my_id = None
-
-    def get_unique_id(self):
+    def setUp(self):
         """
-        Method to obtain unique_id
-
-        Returns:
-            my_id_hex: str
+        setUp class
         """
-        self.my_id = unique_id()
-        my_id_hex = ubinascii.hexlify(self.my_id).decode('utf-8')
-        my_id_hex = str(my_id_hex)
-        return my_id_hex
+        # Instantiate
+        self.microcontroller = Microcontroller()
+
+    def tearDown(self):
+        """
+        tearDown class
+        """
+        pass
+
+    def test_get_unique_id(self):
+        """
+        test get_unique_id functionality
+        """
+        # Returns
+        return_1 = 'e66038b713902e33'
+        # Calls
+        my_id_hex = self.microcontroller.get_unique_id()
+        # Asserts
+        self.assertEqual(my_id_hex, return_1)

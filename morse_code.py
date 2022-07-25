@@ -3,7 +3,6 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -137,7 +136,6 @@ class MorseCode:
 
         Params:
             sentence: str
-            color: tuple, optional
             encrypted: bool, optional
         """
         encoded_sentence = ''
@@ -181,7 +179,7 @@ class MorseCode:
             encrypted_sentence: str
 
         Returns:
-            str
+            str or False
         """
         encrypted_sentence += ' '
         decrypted_sentence = ''
@@ -189,12 +187,16 @@ class MorseCode:
         counter = 0
         for symbol in encrypted_sentence:
             if symbol != ' ':
+                counter = 0
                 character += symbol
             else:
                 counter += 1
                 if counter == 2:
                     decrypted_sentence += ' '
                 else:
-                    decrypted_sentence += list(self.CODE.keys())[list(self.CODE.values()).index(character)]
-                    character = ''
+                    try:
+                        decrypted_sentence += list(self.CODE.keys())[list(self.CODE.values()).index(character)]
+                        character = ''
+                    except ValueError:
+                        return False
         return decrypted_sentence
