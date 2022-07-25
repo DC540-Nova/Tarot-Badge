@@ -3,7 +3,6 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -247,7 +246,7 @@ class SDCard:
         Method to handle reading of blocks on drive
 
         Params:
-            block_num: int
+            block_num: list
             buf: int
         """
         nblocks = len(buf) // 512
