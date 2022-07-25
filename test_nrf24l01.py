@@ -3,7 +3,6 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -28,35 +27,47 @@
 # UNITTEST
 # --------
 # import unittest
-# unittest.main('test_ili9341')
+# unittest.main('test_nrf24l01')
 
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import utime
 import unittest
+
 from machine import Pin, SPI
 
-from ili9341 import XglcdFont, Display
 
-
-class TestDisplay(unittest.TestCase):
+class TestNRF24l01(unittest.TestCase):
     """
-    Test class to test ili9341 module
+    Test class to test nrf24l01 module
     """
     def setUp(self):
         """
         setUp class
         """
         # Instantiate
-        display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))
-        self.display = Display(display_spi, dc=Pin(15, Pin.OUT), cs=Pin(13, Pin.OUT), rst=Pin(14, Pin.OUT))
-        self.UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
+        nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
+                      mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+        from nrf24l01 import NRF  # noqa
+        self.nrf = NRF(nrf_spi, csn=Pin(3, Pin.OUT), ce=Pin(0, Pin.OUT))
 
     def tearDown(self):
         """
         tearDown class
         """
         pass
+
+    def test___config(self):
+        """
+        test __config functionality
+        """
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.nrf.__config()
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test___read_reg(self):
         """
@@ -65,9 +76,9 @@ class TestDisplay(unittest.TestCase):
         # Params
         reg = 0x01
         # Returns
-        return_1 = b'\x00'
+        return_1 = b'\x03'
         # Calls
-        result = self.display.__read_reg(reg)
+        result = self.nrf.__read_reg(reg)
         # Asserts
         self.assertEqual(result, return_1)
 
@@ -76,123 +87,101 @@ class TestDisplay(unittest.TestCase):
         test __write_reg functionality
         """
         # Params
-        reg = self.display.RAMWR
+        reg = 0x01
+        value = 0x01
         # Returns
         return_1 = None
         # Calls
-        none_1 = self.display.__write_reg(reg)
+        none_1 = self.nrf.__write_reg(reg, value)
         # Asserts
         self.assertEqual(none_1, return_1)
 
-    def test___write_data(self):
+    def test___mode_tx(self):
         """
-        test __write_data functionality
+        test __mode_tx functionality
+        """
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.nrf.__mode_tx()
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test___mode_rx(self):
+        """
+        test __mode_rx functionality
+        """
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.nrf.__mode_rx()
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test___send_msg(self):
+        """
+        test __send_msg functionality
         """
         # Params
-        data = 'foo'
+        msg = 'foo'
         # Returns
         return_1 = None
         # Calls
-        none_1 = self.display.__write_data(data)  # noqa
+        self.nrf.__mode_tx()
+        none_1 = self.nrf.__send_msg(msg)
         # Asserts
         self.assertEqual(none_1, return_1)
 
-    def test___block(self):
+    def test___new_msg(self):
         """
-        test __block functionality
+        test __new_msg functionality
         """
         # Params
-        x0 = 1
-        y0 = 2
-        x1 = 3
-        y1 = 4
-        data = 'foo'
+        msg = 'foo'
+        # Returns
+        return_1 = False
+        # Calls
+        self.nrf.__mode_tx()
+        self.nrf.__send_msg(msg)
+        utime.sleep(0.001)
+        self.nrf.__mode_rx()
+        has_new_message = self.nrf.__new_msg()
+        utime.sleep(0.001)
+        # Asserts
+        self.assertEqual(has_new_message, return_1)
+
+    def test___read_msg(self):
+        """
+        test __read_msg functionality
+        """
+        # Returns
+        return_1 = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'  # noqa
+        # Calls
+        self.nrf.__mode_tx()
+        msg = self.nrf.__read_msg()
+        # Asserts
+        self.assertEqual(msg, return_1)
+
+    def test_recv(self):
+        """
+        test recv functionality
+        """
         # Returns
         return_1 = None
         # Calls
-        none_1 = self.display.__block(x0, y0, x1, y1, data)
+        none_1 = self.nrf.recv()
         # Asserts
         self.assertEqual(none_1, return_1)
 
-    def test_letter(self):
+    def test_send(self):
         """
-        test letter functionality
+        test send functionality
         """
         # Params
-        letter = 'a'
-        color = 0b1111111111100000
-        font = self.UNISPACE_FONT
-        x = 1
-        y = 2
-        background = 0
-        # Returns
-        return_1 = 11
-        return_2 = 24
-        # Calls
-        width, height = self.display.__letter(letter, color, font, x, y, background)
-        # Asserts
-        self.assertEqual(width, return_1)
-        self.assertEqual(height, return_2)
-
-    def test_clear(self):
-        """
-        test clear functionality
-        """
+        msg = 'foo'
         # Returns
         return_1 = None
         # Calls
-        none_1 = self.display.clear()
+        none_1 = self.nrf.send(msg)
         # Asserts
         self.assertEqual(none_1, return_1)
-
-    def test_text(self):
-        """
-        test text functionality
-        """
-        # Params
-        text = 'foo'
-        # Returns
-        return_1 = None
-        # Calls
-        none_1 = self.display.text(text)
-        # Asserts
-        self.assertEqual(none_1, return_1)
-
-    def test_image(self):
-        """
-        test image functionality
-        """
-        # Params
-        image = 'dc540_logo.raw'
-        # Returns
-        return_1 = None
-        # Calls
-        none_1 = self.display.image(image)
-        # Asserts
-        self.assertEqual(none_1, return_1)
-
-    def test_handle_threading_setup(self):
-        """
-        test handle_threading_setup functionality
-        """
-        # Returns
-        return_1 = None
-        # Calls
-        none_1 = self.display.handle_threading_setup()
-        # Asserts
-        self.assertEqual(none_1, return_1)
-
-    def test_handle_threading_teardown(self):
-        """
-        test handle_threading_teardown functionality
-        """
-        # Returns
-        return_1 = None
-        # Calls
-        none_1 = self.display.handle_threading_teardown()
-        # Asserts
-        self.assertEqual(none_1, return_1)
-
-
-if __name__ == '__main__':
-    unittest.main()
