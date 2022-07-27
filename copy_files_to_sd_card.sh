@@ -7,5 +7,5 @@ then
   echo "         DECK MUST BE LESS THAN OR EQUAL TO 12 CHARS AND NO SPACES"
 else
     mpremote connect /dev/tty.u* mkdir /sd/"$2" >/dev/null
-    mpremote connect /dev/tty.u* cp "$1"*.* :/sd/"$2"/
+    mpremote connect /dev/tty.u* cp "$1"*.raw :/sd/"$2"/
 fi
