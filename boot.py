@@ -30,6 +30,11 @@
 from machine import Pin, SPI
 import uos
 
+import neopixel
+np=neopixel.NeoPixel(Pin(5), 24)
+np[11]=(0,255,0)
+np.write()
+
 from sd_card import SDCard
 
 # sd card config
