@@ -30,7 +30,7 @@
 import _thread
 from utime import sleep
 import random
-import gc
+# import gc
 
 
 class Demo:
@@ -48,30 +48,44 @@ class Demo:
         self.touch = touch
         self.display = display
         self.neo_pixel = neo_pixel
+        self.thread = False
 
     def __bg_task(self):
         """
         Private method to handle multi-threadded functionality
         """
-        gc.collect()
+        self.thread = True
+        # gc.collect()
         hex1 = [32, 31, 30, 27, 28, 29, 32]
         paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
-        for count in range(20):
-            for my_LED in hex1:
-                self.neo_pixel.on(paths[my_LED - 11], self.neo_pixel.COLORS[random.randint(1, 7)])
-                if count == 19:
-                    self.neo_pixel.clear()
-                    _thread.exit()  # noqa
+        while True:
+            for _ in range(25):
+                for my_LED in hex1:
+                    self.neo_pixel.on(paths[my_LED - 11], self.neo_pixel.COLORS[random.randint(1, 7)])
+                    if not self.thread:
+                        _thread.exit()
+            for _ in range (5):
+                for _ in paths:
+                    self.neo_pixel.flicker()
+                    if not self.thread:
+                        _thread.exit()
+            for _ in range(5):
+                for my_LED in paths:
+                    self.neo_pixel.breathing_led_on(my_LED)
+                    if not self.thread:
+                        _thread.exit()
 
     def play(self):
         """
         Method to handle demo play
         """
+        _thread.start_new_thread(self.__bg_task, ())  # noqa
+        self.display.handle_threading_setup()
         while True:
-            self.display.handle_threading_setup()
-            _thread.start_new_thread(self.__bg_task, ())  # noqa
             touched = self.touch.press(self.touch.button_left)
             if touched:
+                self.thread = False
+                self.neo_pixel.clear(hard_clear=True)
                 break
             try:
                 self.display.image('sd/Rider-Waite/00-TheFool.raw', multithreading=True)
@@ -79,9 +93,11 @@ class Demo:
                 self.display.text('sd card is damaged')
             self.display.handle_threading_teardown()
             self.display.handle_threading_setup()
-            _thread.start_new_thread(self.__bg_task, ())  # noqa
+            #_thread.start_new_thread(self.__bg_task, ())  # noqa
             touched = self.touch.press(self.touch.button_left)
             if touched:
+                self.thread = False
+                self.neo_pixel.clear(hard_clear=True)
                 break
             try:
                 self.display.image('sd/Rider-Waite/01-TheMagician.raw', multithreading=True)
@@ -89,14 +105,18 @@ class Demo:
                 self.display.text('sd card is damaged')
             self.display.handle_threading_teardown()
             self.display.handle_threading_setup()
-            _thread.start_new_thread(self.__bg_task, ())  # noqa
+            #_thread.start_new_thread(self.__bg_task, ())  # noqa
             touched = self.touch.press(self.touch.button_left)
             if touched:
+                self.thread = False
+                self.neo_pixel.clear(hard_clear=True)
                 break
             try:
                 self.display.image('sd/Rider-Waite/02-TheHighPriestess.raw', multithreading=True)
             except OSError:
                 self.display.text('sd card is damaged')
             self.display.handle_threading_teardown()
-        self.display.handle_threading_teardown()
-        sleep(1)
+            self.display.handle_threading_setup()
+            #_thread.start_new_thread(self.__bg_task, ())  # noqa
+
+

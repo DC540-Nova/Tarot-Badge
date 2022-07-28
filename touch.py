@@ -83,11 +83,11 @@ class Touch:
             self.button_total_value += button_value
             self.start_time += 1
         if self.button_total_value == self.sensitivity:
-            # print(self.button_total_value)
+            print(self.button_total_value)
             sleep(self.wait)
             return True
         else:
-            # print(self.button_total_value)
+            print(self.button_total_value)
             sleep(self.wait)
             return False
 

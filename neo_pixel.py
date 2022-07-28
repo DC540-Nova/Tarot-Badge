@@ -175,3 +175,62 @@ class NeoPixel:
         """
         self.__set(led, color)
         self.__show(int(brightness))
+
+    def breathing_led_on(self, led, color=RED, repeat=1):
+        """
+        Method to handle a breathing led on animation
+
+        Params:
+            led: int
+            color: tuple, optional
+            repeat: int, optional
+        """
+        while repeat > 0:
+            step = 5
+            breath_amps = [ii for ii in range(0, 1000, step)]
+            breath_amps.extend([ii for ii in range(1000, -1, -step)])
+            for ii in breath_amps:
+                self.__set(led, color)
+                self.__show(ii/255)  # noqa
+                sleep(0.02)
+            repeat -= 1
+
+    def flicker(self, color=RED, repeat=1):
+        """
+        Method to display a flicker animation
+
+        Params:
+            color: tuple, optional
+            repeat: int, optional
+        """
+        while repeat > 0:
+            step = 5
+            breath_amps = [ii for ii in range(0, 1000, step)]
+            breath_amps.extend([ii for ii in range(10, -1, -step)])
+            for ii in breath_amps:
+                for led in self.spheres:
+                    self.__set(led, color)
+                for led in self.paths:
+                    self.__set(led, color)
+                self.__show(ii/25)  # noqa
+            repeat -= 1
+
+    def won(self, color=RED, repeat=5):
+        """
+        Method to display a won game animation
+
+        Params:
+            color: tuple, optional
+            repeat: int, optional
+        """
+        while repeat > 0:
+            step = 5
+            breath_amps = [ii for ii in range(0, 10000, step)]
+            breath_amps.extend([ii for ii in range(10000, -1, -step)])
+            for ii in breath_amps:
+                for led in self.spheres:
+                    self.__set(led, color)
+                for led in self.paths:
+                    self.__set(led, color)
+                self.__show(ii/25)  # noqa
+            repeat -= 1

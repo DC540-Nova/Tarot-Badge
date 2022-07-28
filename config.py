@@ -30,8 +30,8 @@
 from machine import Pin, SPI
 
 # button config
-BUTTON_LEFT = 21
-BUTTON_RIGHT = 22
+BUTTON_LEFT = 22
+BUTTON_RIGHT = 21
 BUTTON_UP = 19
 BUTTON_DOWN = 18
 BUTTON_SUBMIT = 17
