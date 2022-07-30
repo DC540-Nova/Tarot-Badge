@@ -29,7 +29,7 @@
 
 # pip install mpremote
 # mpremote connect /dev/tty.u* cp main.py :
-# mpremote connect /dev/tty.u* rm ili9341.py
+# mpremote connect /dev/tty.u* rm ids
 # mpremote connect /dev/tty.u* cp main.py :/sd/
 # mpremote connect /dev/tty.u* cp *.* :/sd/
 # mpremote connect /dev/tty.u* ls

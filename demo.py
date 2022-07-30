@@ -30,7 +30,6 @@
 import _thread
 from utime import sleep
 import random
-# import gc
 
 
 class Demo:
@@ -55,22 +54,21 @@ class Demo:
         Private method to handle multi-threadded functionality
         """
         self.thread = True
-        # gc.collect()
-        hex1 = [32, 31, 30, 27, 28, 29, 32]
-        paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
+        outer = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        inner = [23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12]
         while True:
             for _ in range(25):
-                for my_LED in hex1:
-                    self.neo_pixel.on(paths[my_LED - 11], self.neo_pixel.COLORS[random.randint(1, 7)])
+                for my_LED in outer:
+                    self.neo_pixel.on(inner[my_LED - 11], self.neo_pixel.COLORS[random.randint(1, 7)])
                     if not self.thread:
                         _thread.exit()
-            for _ in range (5):
+            for _ in range(5):
                 for _ in paths:
                     self.neo_pixel.flicker()
                     if not self.thread:
                         _thread.exit()
             for _ in range(5):
-                for my_LED in paths:
+                for my_LED in inner:
                     self.neo_pixel.breathing_led_on(my_LED)
                     if not self.thread:
                         _thread.exit()
@@ -79,7 +77,7 @@ class Demo:
         """
         Method to handle demo play
         """
-        _thread.start_new_thread(self.__bg_task, ())  # noqa
+        _thread.start_new_thread(self.__bg_task, ())
         self.display.handle_threading_setup()
         while True:
             touched = self.touch.press(self.touch.button_left)
@@ -93,7 +91,6 @@ class Demo:
                 self.display.text('sd card is damaged')
             self.display.handle_threading_teardown()
             self.display.handle_threading_setup()
-            #_thread.start_new_thread(self.__bg_task, ())  # noqa
             touched = self.touch.press(self.touch.button_left)
             if touched:
                 self.thread = False
@@ -105,7 +102,6 @@ class Demo:
                 self.display.text('sd card is damaged')
             self.display.handle_threading_teardown()
             self.display.handle_threading_setup()
-            #_thread.start_new_thread(self.__bg_task, ())  # noqa
             touched = self.touch.press(self.touch.button_left)
             if touched:
                 self.thread = False
@@ -117,6 +113,3 @@ class Demo:
                 self.display.text('sd card is damaged')
             self.display.handle_threading_teardown()
             self.display.handle_threading_setup()
-            #_thread.start_new_thread(self.__bg_task, ())  # noqa
-
-

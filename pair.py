@@ -62,7 +62,7 @@ class Pair:
         Method to pair badges
         """
         foreign_unique_id = None
-        self.display.text('pairing...')
+        self.display.text('pairing...', timed=False)
         unique_id = self.microcontroller.get_unique_id()
         # try 5 times to ensure the pairing is successful
         for _ in range(3):
@@ -76,7 +76,6 @@ class Pair:
         if foreign_unique_id:
             foreign_unique_id = str(foreign_unique_id)
             if foreign_unique_id[0] == 'e' and len(foreign_unique_id) == 32:
-                print('here i am')
                 ids = self.file_manager.read_ids_file()
                 ids = list(ids.split(' '))
                 ids = ids[0:-1]
@@ -84,36 +83,49 @@ class Pair:
                     for id in ids:  # noqa
                         if id == foreign_unique_id:
                             self.neo_pixel.flicker(color=self.neo_pixel.BLUE)
+                            self.neo_pixel.clear(hard_clear=True)
+                            self.file_manager.update_games_won()
                             break
                         else:
                             self.neo_pixel.flicker(color=self.neo_pixel.GREEN)
+                            self.neo_pixel.clear(hard_clear=True)
                             ids.append(foreign_unique_id)
                             ids = ['{} '.format(element) for element in ids]
                             str_ids = ''
                             for element in ids:
                                 str_ids += element
-                            print(str_ids)
                             self.file_manager.write_ids_file(str_ids)
+                            self.file_manager.write_games_won_file('94 ')
+                            self.file_manager.update_games_won()
                             break
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
                         if foreign_unique_id == id:
                             self.display.text(self.data.boss_names[boss_names_index])
                             self.morse_code.display('SOS')
+                            self.neo_pixel.clear(hard_clear=True)
+                            self.file_manager.write_games_won_file('61 ')
+                            self.file_manager.update_games_won()
                             break
                         boss_names_index += 1
                 else:
                     self.neo_pixel.flicker(color=self.neo_pixel.GREEN)
+                    self.neo_pixel.clear(hard_clear=True)
                     ids.append(foreign_unique_id)
                     ids = ['{} '.format(element) for element in ids]
                     str_ids = ''
                     for element in ids:
                         str_ids += element
                     self.file_manager.write_ids_file(str_ids)
+                    self.file_manager.write_games_won_file('94 ')
+                    self.file_manager.update_games_won()
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
                         if foreign_unique_id == id:
                             self.display.text(self.data.boss_names[boss_names_index])
                             self.morse_code.display('SOS')
+                            self.neo_pixel.clear(hard_clear=True)
+                            self.file_manager.write_games_won_file('61 ')
+                            self.file_manager.update_games_won()
                             break
                         boss_names_index += 1

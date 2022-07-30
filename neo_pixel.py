@@ -68,8 +68,8 @@ class NeoPixel:
         self.num_leds = led_count
         self.sm = sm
         self.ar = ar
-        self.spheres = [31, 27, 25, 20, 18, 15, 7, 9, 4, 0]
-        self.paths = [28, 30, 29, 26, 22, 21, 23, 24, 19, 14, 13, 16, 17, 12, 11, 10, 8, 6, 3, 5, 2, 1]
+        self.outer = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        self.inner = [23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12]
 
     @staticmethod
     @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT, autopull=True, pull_thresh=24)  # noqa

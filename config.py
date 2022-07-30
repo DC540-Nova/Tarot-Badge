@@ -50,7 +50,7 @@ display = Display(display_spi, dc=Pin(15, Pin.OUT), cs=Pin(13, Pin.OUT), rst=Pin
 
 # neo_pixel config
 LED_PIN = 5
-LED_COUNT = 32
+LED_COUNT = 24
 from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin, LED_PIN, LED_COUNT)
 
