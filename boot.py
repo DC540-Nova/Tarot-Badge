@@ -34,7 +34,7 @@ from sd_card import SDCard
 
 # neo_pixel boot config and init LED
 LED_PIN = 5
-LED_COUNT = 32
+LED_COUNT = 24
 from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin, LED_PIN, LED_COUNT)
 neo_pixel.on(0, all_on=True)

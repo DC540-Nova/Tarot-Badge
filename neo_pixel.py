@@ -115,26 +115,26 @@ class NeoPixel:
         self.sm.put(dimmer_ar, 8)  # update the state machine with new colors  # noqa
         sleep_ms(10)
 
-    def clear(self, reverse=False, hard_clear=False, clear_only_spheres=False, clear_only_paths=False):
+    def clear(self, reverse=False, hard_clear=False, clear_only_outer=False, clear_only_inner=False):
         """
         Method to clear pixels
 
         Params:
             reverse: bool, optional
             hard_clear: bool, optional
-            clear_only_spheres: bool, optional
-            clear_only_paths: bool, optional
+            clear_only_outer: bool, optional
+            clear_only_inner: bool, optional
         """
         if hard_clear:
             for led in range(self.num_leds):
                 self.__set(led, self.BLACK)
             self.__show()
-        if clear_only_spheres:
-            for led in self.spheres:
+        if clear_only_outer:
+            for led in self.outer:
                 self.__set(led, self.BLACK)
                 self.__show()
-        if clear_only_paths:
-            for led in self.paths:
+        if clear_only_inner:
+            for led in self.inner:
                 self.__set(led, self.BLACK)
                 self.__show()
         if reverse:
@@ -208,9 +208,9 @@ class NeoPixel:
             breath_amps = [ii for ii in range(0, 1000, step)]
             breath_amps.extend([ii for ii in range(10, -1, -step)])
             for ii in breath_amps:
-                for led in self.spheres:
+                for led in self.outer:
                     self.__set(led, color)
-                for led in self.paths:
+                for led in self.inner:
                     self.__set(led, color)
                 self.__show(ii/25)  # noqa
             repeat -= 1
@@ -228,9 +228,9 @@ class NeoPixel:
             breath_amps = [ii for ii in range(0, 10000, step)]
             breath_amps.extend([ii for ii in range(10000, -1, -step)])
             for ii in breath_amps:
-                for led in self.spheres:
+                for led in self.outer:
                     self.__set(led, color)
-                for led in self.paths:
+                for led in self.inner:
                     self.__set(led, color)
                 self.__show(ii/25)  # noqa
             repeat -= 1
