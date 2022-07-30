@@ -74,8 +74,8 @@ class Pair:
                 self.nrf.send(unique_id)
                 break
         if foreign_unique_id:
-            foreign_unique_id = str(foreign_unique_id)
-            if foreign_unique_id[0] == 'e' and len(foreign_unique_id) == 32:
+            foreign_unique_id = foreign_unique_id[:16]  # trim nrf.recv data from 32-bits to 16-bits
+            if foreign_unique_id[0] == 'e' and len(foreign_unique_id) == 16:
                 ids = self.file_manager.read_ids_file()
                 ids = list(ids.split(' '))
                 ids = ids[0:-1]
@@ -100,11 +100,12 @@ class Pair:
                             break
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
+                        print('here')
                         if foreign_unique_id == id:
-                            self.display.text(self.data.boss_names[boss_names_index])
+                            self.display.text(self.data.boss_names[boss_names_index], timed=False)
                             self.morse_code.display('SOS')
                             self.neo_pixel.clear(hard_clear=True)
-                            self.file_manager.write_games_won_file('61 ')
+                            self.file_manager.write_games_won_file('69 ')
                             self.file_manager.update_games_won()
                             break
                         boss_names_index += 1
@@ -122,10 +123,10 @@ class Pair:
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
                         if foreign_unique_id == id:
-                            self.display.text(self.data.boss_names[boss_names_index])
+                            self.display.text(self.data.boss_names[boss_names_index], timed=False)
                             self.morse_code.display('SOS')
                             self.neo_pixel.clear(hard_clear=True)
-                            self.file_manager.write_games_won_file('61 ')
+                            self.file_manager.write_games_won_file('69 ')
                             self.file_manager.update_games_won()
                             break
                         boss_names_index += 1
