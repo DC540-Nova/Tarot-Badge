@@ -46,7 +46,6 @@ boss_ids.append('e66038b7137a9935')
 boss_ids.append('e66038b7135fa935')
 boss_ids.append('e66038b71316902f')
 boss_ids.append('e66038b71340a735')
-
 boss_names = []  # noqa
 boss_names.append('Baabalicious')
 boss_names.append('Banter')

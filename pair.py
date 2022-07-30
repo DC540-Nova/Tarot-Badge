@@ -30,21 +30,20 @@
 import utime
 import random
 
-import data
-
 
 class Pair:
     """
     Base class to handle badge pairing
     """
 
-    def __init__(self, microcontroller, file_manager, display, neo_pixel, morse_code, nrf, data):
+    def __init__(self, microcontroller, file_manager, display, neo_pixel, game, morse_code, nrf, data):
         """
         Params:
             microcontroller: object
             file_manager: object
             display: object
             neo_pixel: object
+            game: object
             morse_code: object
             nrf: object
             data: dict
@@ -53,6 +52,7 @@ class Pair:
         self.file_manager = file_manager
         self.display = display
         self.neo_pixel = neo_pixel
+        self.game = game
         self.morse_code = morse_code
         self.nrf = nrf
         self.data = data
@@ -95,8 +95,7 @@ class Pair:
                             for element in ids:
                                 str_ids += element
                             self.file_manager.write_ids_file(str_ids)
-                            self.file_manager.write_games_won_file('94 ')
-                            self.file_manager.update_games_won()
+                            self.game.won('94 ')
                             break
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
@@ -105,8 +104,7 @@ class Pair:
                             self.display.text(self.data.boss_names[boss_names_index], timed=False)
                             self.morse_code.display('SOS')
                             self.neo_pixel.clear(hard_clear=True)
-                            self.file_manager.write_games_won_file('69 ')
-                            self.file_manager.update_games_won()
+                            self.game.won('69 ')
                             break
                         boss_names_index += 1
                 else:
@@ -118,15 +116,13 @@ class Pair:
                     for element in ids:
                         str_ids += element
                     self.file_manager.write_ids_file(str_ids)
-                    self.file_manager.write_games_won_file('94 ')
-                    self.file_manager.update_games_won()
+                    self.game.won(won_game)
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
                         if foreign_unique_id == id:
                             self.display.text(self.data.boss_names[boss_names_index], timed=False)
                             self.morse_code.display('SOS')
                             self.neo_pixel.clear(hard_clear=True)
-                            self.file_manager.write_games_won_file('69 ')
-                            self.file_manager.update_games_won()
+                            self.game.won('69 ')
                             break
                         boss_names_index += 1

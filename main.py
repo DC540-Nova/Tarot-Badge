@@ -61,7 +61,7 @@ tarot = Tarot(touch, display, data.cards)
 bad_advice = BadAdvice(touch, display, data.bad_advice)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
 game = Game(file_manager, touch, display, tarot, morse_code, encryption)
-pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, data)
+pair = Pair(microcontroller, file_manager, display, neo_pixel, game, morse_code, nrf, data)
 menu = Menu(file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, data)
 
 if __name__ == '__main__':
