@@ -3,7 +3,7 @@
 from utime import sleep
 from urandom import randrange
 import machine, neopixel
-np = neopixel.NeoPixel(machine.Pin(5), 64)
+np = neopixel.NeoPixel(machine.Pin(5), 24)
 
 #color change interval
 cint=5

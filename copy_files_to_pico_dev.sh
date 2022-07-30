@@ -23,3 +23,8 @@ mpremote connect /dev/tty.u* cp nrf24l01.py :
 mpremote connect /dev/tty.u* cp demo.py :
 mpremote connect /dev/tty.u* cp bad_advice.py :
 mpremote connect /dev/tty.u* cp dc540_logo.raw :
+mpremote connect /dev/tty.u* cp 3Hats.raw :
+echo 'rm :ids'
+echo 'rm :games_won'
+mpremote connect /dev/tty.u* rm ids > /dev/null
+mpremote connect /dev/tty.u* rm games_won  > /dev/null

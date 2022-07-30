@@ -96,10 +96,11 @@ class Pair:
                                 str_ids += element
                             self.file_manager.write_ids_file(str_ids)
                             self.game.won('94 ')
+                            games_won = self.file_manager.read_games_won_file()
+                            print(games_won)
                             break
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
-                        print('here')
                         if foreign_unique_id == id:
                             self.display.text(self.data.boss_names[boss_names_index], timed=False)
                             self.morse_code.display('SOS')
@@ -116,7 +117,9 @@ class Pair:
                     for element in ids:
                         str_ids += element
                     self.file_manager.write_ids_file(str_ids)
-                    self.game.won(won_game)
+                    self.game.won('94 ')
+                    games_won = self.file_manager.read_games_won_file()
+                    print(games_won)
                     boss_names_index = 0
                     for id in self.data.boss_ids:  # noqa
                         if foreign_unique_id == id:
