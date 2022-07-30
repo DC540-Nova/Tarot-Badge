@@ -27,6 +27,11 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import utime
+import random
+
+import data
+
 
 class Pair:
     """
@@ -59,17 +64,19 @@ class Pair:
         foreign_unique_id = None
         self.display.text('pairing...')
         unique_id = self.microcontroller.get_unique_id()
-        # try 3 times to ensure the pairing is successful
+        # try 5 times to ensure the pairing is successful
         for _ in range(3):
-            foreign_unique_id = self.nrf.recv()
             self.nrf.send(unique_id)
+            utime.sleep(random.randint(1, 3))
+            foreign_unique_id = self.nrf.recv()
+            utime.sleep(random.randint(1, 3))
+            if foreign_unique_id:
+                self.nrf.send(unique_id)
+                break
         if foreign_unique_id:
             foreign_unique_id = str(foreign_unique_id)
-            # there is an edge case where some NRF modules are appending the last char of their own
-            # unique_id to the beginning of the foreign_unique_id string
-            if len(foreign_unique_id) == 17:
-                foreign_unique_id = foreign_unique_id[1:]
-            if foreign_unique_id[0] == 'e' and len(foreign_unique_id) == 16:
+            if foreign_unique_id[0] == 'e' and len(foreign_unique_id) == 32:
+                print('here i am')
                 ids = self.file_manager.read_ids_file()
                 ids = list(ids.split(' '))
                 ids = ids[0:-1]
@@ -85,10 +92,11 @@ class Pair:
                             str_ids = ''
                             for element in ids:
                                 str_ids += element
+                            print(str_ids)
                             self.file_manager.write_ids_file(str_ids)
                             break
                     boss_names_index = 0
-                    for id in boss_ids:  # noqa
+                    for id in self.data.boss_ids:  # noqa
                         if foreign_unique_id == id:
                             self.display.text(self.data.boss_names[boss_names_index])
                             self.morse_code.display('SOS')
@@ -103,7 +111,7 @@ class Pair:
                         str_ids += element
                     self.file_manager.write_ids_file(str_ids)
                     boss_names_index = 0
-                    for id in boss_ids:  # noqa
+                    for id in self.data.boss_ids:  # noqa
                         if foreign_unique_id == id:
                             self.display.text(self.data.boss_names[boss_names_index])
                             self.morse_code.display('SOS')

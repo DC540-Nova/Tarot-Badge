@@ -36,24 +36,29 @@ class Menu:
     Base class to handle a menu system
     """
 
-    def __init__(self, touch, display, neo_pixel, game, tarot, bad_advice, data, deck='Rider-Waite'):
+    def __init__(self, file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, data,
+                 deck='Rider-Waite'):
         """
         Params:
+            file_manager: object
             touch: object
             display: object
             neo_pixel: object
             game: object
             tarot: object
             bad_advice: object
+            pair: object
             data: object
             deck: None
         """
+        self.file_manager = file_manager
         self.touch = touch
         self.display = display
         self.neo_pixel = neo_pixel
         self.game = game
         self.tarot = tarot
         self.bad_advice = bad_advice
+        self.pair = pair
         self.data = data
         self.deck = deck
         self.text = None
@@ -456,9 +461,14 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('extras menu', '', '', '', '', '', 'e: main menu')
+                self.__populate('extras menu', 'l: pair badge', '', '', '', '', 'e: main menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
+                self.pair.badge()
+                paired = self.file_manager.read_ids_file()
+                if paired[0] == 'e' and len(paired) == 33:
+                    self.game.won('94')
+                    self.file_manager.update_games_won()
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
                 show_menu = True
@@ -467,6 +477,11 @@ class Menu:
             elif self.touch.press(self.touch.button_down):
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
+                self.__populate('extras menu', '', '', '', '', '', 'e: main menu')
+                # print('trigger')
+                illumaniti_sequence = self.touch.numeric_sequence(show=False)
+                if illumaniti_sequence == '12123434':
+                    self.display.image('3Hats.raw')
                 show_menu = True
             elif self.touch.press(self.touch.button_extra):
                 break

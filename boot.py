@@ -30,12 +30,14 @@
 from machine import Pin, SPI
 import uos
 
-import neopixel
-np=neopixel.NeoPixel(Pin(5), 24)
-np[11]=(0,255,0)
-np.write()
-
 from sd_card import SDCard
+
+# neo_pixel boot config and init LED
+LED_PIN = 5
+LED_COUNT = 32
+from neo_pixel import NeoPixel  # noqa
+neo_pixel = NeoPixel(Pin, LED_PIN, LED_COUNT)
+neo_pixel.on(0, all_on=True)
 
 # sd card config
 sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),

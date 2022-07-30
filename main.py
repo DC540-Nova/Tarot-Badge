@@ -60,11 +60,14 @@ demo = Demo(touch, display, neo_pixel)
 tarot = Tarot(touch, display, data.cards)
 bad_advice = BadAdvice(touch, display, data.bad_advice)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
-game = Game(touch, file_manager, display, tarot, morse_code, encryption)
+game = Game(file_manager, touch, display, tarot, morse_code, encryption)
 pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, data)
-menu = Menu(touch, display, neo_pixel, game, tarot, bad_advice, data)
+menu = Menu(file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, data)
 
 if __name__ == '__main__':
+    neo_pixel.clear(hard_clear=True)
+    file_manager.update_games_won()
+    menu.system()
     # while True:
     #     try:
     #         try:
@@ -75,5 +78,5 @@ if __name__ == '__main__':
     #             pass
     #     except KeyboardInterrupt:
     #         pass
-    pass
+    # pass
 

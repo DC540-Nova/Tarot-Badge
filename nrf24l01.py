@@ -230,11 +230,15 @@ class NRF:
     def recv(self):
         """
         Method to receive a mssage
+
+        Returns:
+            str
         """
         for _ in range(1):
             self.__mode_rx()
             if self.__new_msg() > 0:
-                print("".join([chr(i) for i in self.__read_msg()]))
+                # print("".join([chr(i) for i in self.__read_msg()]))
+                return "".join([chr(i) for i in self.__read_msg()])
             utime.sleep(0.001)
 
     def send(self, msg):

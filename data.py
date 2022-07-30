@@ -920,14 +920,6 @@ flash_cards_game = {
             'D. Knight of Wands',
             2
         ],
-    'Wands02.raw':
-        [
-            'A. Two of Wands',
-            'B. Page of Wands',
-            'C. Ace of Wands',
-            'D. Knight of Wands',
-            0
-        ],
     'Wands03.raw':
         [
             'A. Two of Wands',
@@ -944,14 +936,6 @@ flash_cards_game = {
             'D. Ace of Wands',
             1
         ],
-    'Wands05.raw':
-        [
-            'A. Five of Wands',
-            'B. Page of Wands',
-            'C. Ace of Wands',
-            'D. Knight of Wands',
-            0
-        ],
     'Wands06.raw':
         [
             'A. Six of Wands',
@@ -960,14 +944,6 @@ flash_cards_game = {
             'D. Four of Wands',
             0
         ],
-    'Wands07.raw':
-        [
-            'A. Two of Wands',
-            'B. Page of Wands',
-            'C. Seven of Wands',
-            'D. Knight of Wands',
-            2
-        ],
     'Wands08.raw':
         [
             'A. Ace of Wands',
@@ -975,14 +951,6 @@ flash_cards_game = {
             'C. Seven of Wands',
             'D. Eight of Wands',
             3
-        ],
-    'Wands09.raw':
-        [
-            'A. Queen of Wands',
-            'B. Nine of Wands',
-            'C. Seven of Wands',
-            'D. Knight of Wands',
-            1
         ],
     'Wands10.raw':
         [
@@ -1040,30 +1008,6 @@ flash_cards_game = {
             'D. Ace of Goblets',
             1
         ],
-    'Cups03.raw':
-        [
-            'A. Knight of Goblets',
-            'B. Page of Cups',
-            'C. King of Cups',
-            'D. Three of Goblets',
-            1
-        ],
-    'Cups04.raw':
-        [
-            'A. Five of Cups',
-            'B. Three of Cups',
-            'C. Six of Cups',
-            'D. Four of Cupts',
-            3
-        ],
-    'Cups05.raw':
-        [
-            'A. Ace of Pentacles',
-            'B. Queen of Cups',
-            'C. Five of Cups',
-            'D. Ace of Wands',
-            2
-        ],
     'Cups06.raw':
         [
             'A. Six of Cups',
@@ -1078,14 +1022,6 @@ flash_cards_game = {
             'B. Six of Goblets',
             'C. Six of Cups',
             'D. Seven of Cups',
-            3
-        ],
-    'Cups08.raw':
-        [
-            'A. Eight of Goblets',
-            'B. Six of Goblets',
-            'C. Seven of Cups',
-            'D. Eight of Cups',
             3
         ],
     'Cups09.raw':
@@ -1152,14 +1088,6 @@ flash_cards_game = {
             'D. Two of Towers',
             1
         ],
-    'Pentacles03.raw':
-        [
-            'A. Three of Swords',
-            'B. Three of Stars',
-            'C. Three of Cups',
-            'D. Three of Pentacles',
-            3
-        ],
     'Pentacles04.raw':
         [
             'A. Four of Pentacles',
@@ -1176,14 +1104,6 @@ flash_cards_game = {
             'D. Five of Pentacles',
             3
         ],
-    'Pentacles06.raw':
-        [
-            'A. Six of Pentacles',
-            'B. Six of Goblets',
-            'C. Six of Knights',
-            'D. Six of Swords',
-            0
-        ],
     'Pentacles07.raw':
         [
             'A. Ace of Pentacles',
@@ -1191,22 +1111,6 @@ flash_cards_game = {
             'C. Knight of Pentacles',
             'D. Seven of Pentacles',
             3
-        ],
-    'Pentacles08.raw':
-        [
-            'A. Ace of Pentacles',
-            'B. King of Pentacles',
-            'C. Knight of Pentacles',
-            'D. Eight of Pentacles',
-            3
-        ],
-    'Pentacles09.raw':
-        [
-            'A. Nine of Pentacles',
-            'B. Eight of Pentacles',
-            'C. Knight of Pentacles',
-            'D. Seven of Pentacles',
-            0
         ],
     'Pentacles10.raw':
         [
@@ -1256,14 +1160,6 @@ flash_cards_game = {
             'D. Seven of Swords',
             0
         ],
-    'Swords02.raw':
-        [
-            'A. Ace of Swords',
-            'B. Two of Swords',
-            'C. Knight of Swords',
-            'D. Seven of Swords',
-            1
-        ],
     'Swords03.raw':
         [
             'A. Three of Swords',
@@ -1272,36 +1168,12 @@ flash_cards_game = {
             'D. Eight of Swords',
             0
         ],
-    'Swords04.raw':
-        [
-            'A. Ten of Swords',
-            'B. Three of Swords',
-            'C. Four of Swords',
-            'D. Nine of Swords',
-            2
-        ],
     'Swords05.raw':
         [
             'A. Twelve of Swords',
             'B. Four of Swords',
             'C. Six of Swords',
             'D. Five of Swords',
-            3
-        ],
-    'Swords06.raw':
-        [
-            'A. Six of Swords',
-            'B. Five of Swords',
-            'C. Four of Swords',
-            'D. Seven of Swords',
-            0
-        ],
-    'Swords07.raw':
-        [
-            'A. Eight of Swords',
-            'B. King of Swords',
-            'C. Six of Swords',
-            'D. Seven of Swords',
             3
         ],
     'Swords08.raw':
@@ -1423,7 +1295,7 @@ morse_code_game = {
 }
 
 decryption_game_questions = {
-    'Cipher 1': 'Cipher 1: Hsle td esp yfxmpc ehpyej-escpp',
+    'Cipher 1': 'Cipher 1: Iwt rdchitaapixdc Pcsgdbtsp xh adrpits xc Vgddbqgxsvt ?',
     'Cipher 2': 'Cipher 2: dGhlIGFuc3dlciB0byB saWZlIHRoZSB1bml2ZX JzZSBhbmQgZXZl cnl0aGluZw==',
     'Cipher 3': 'Cipher 3: Mhv bnfbvf rhu rfx eofybgg wck bs kvx ttfabv nlauxr ft mbtrbbnm.',
 }

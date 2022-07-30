@@ -83,11 +83,11 @@ class Touch:
             self.button_total_value += button_value
             self.start_time += 1
         if self.button_total_value == self.sensitivity:
-            print(self.button_total_value)
+            # print(self.button_total_value)
             sleep(self.wait)
             return True
         else:
-            print(self.button_total_value)
+            # print(self.button_total_value)
             sleep(self.wait)
             return False
 
@@ -156,12 +156,13 @@ class Touch:
                 if sentence:
                     return sentence
 
-    def numeric_sequence(self, max_nums=6):
+    def numeric_sequence(self, max_nums=8, show=True):
         """
         Method to handle the construction of four numeric numbers as a result of a series of button presses
 
         Params:
             max_nums: int, optional
+            show: bool, optional
 
         Returns:
             int
@@ -170,16 +171,20 @@ class Touch:
         while True:
             if self.press(self.button_left):
                 numeric_sequence += '1'
-                self.display.text(numeric_sequence, timed=False)
+                if show:
+                    self.display.text(numeric_sequence, timed=False)
             elif self.press(self.button_right):
                 numeric_sequence += '2'
-                self.display.text(numeric_sequence, timed=False)
+                if show:
+                    self.display.text(numeric_sequence, timed=False)
             elif self.press(self.button_up):
                 numeric_sequence += '3'
-                self.display.text(numeric_sequence, timed=False)
+                if show:
+                    self.display.text(numeric_sequence, timed=False)
             elif self.press(self.button_down):
                 numeric_sequence += '4'
-                self.display.text(numeric_sequence, timed=False)
+                if show:
+                    self.display.text(numeric_sequence, timed=False)
             elif self.press(self.button_submit):
                 pass
             elif self.press(self.button_extra):

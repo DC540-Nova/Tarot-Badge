@@ -35,18 +35,18 @@ class Game:
     Base class to handle a game
     """
 
-    def __init__(self, touch, file_manager, display, tarot, morse_code, encryption):
+    def __init__(self, file_manager, touch, display, tarot, morse_code, encryption):
         """
         Params:
-            touch: object
             file_manager: object
+            touch: object
             display: object
             tarot: object
             morse_code: object
             encryption: object
         """
-        self.touch = touch
         self.file_manager = file_manager
+        self.touch = touch
         self.display = display
         self.tarot = tarot
         self.morse_code = morse_code

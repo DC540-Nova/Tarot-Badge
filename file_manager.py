@@ -161,6 +161,8 @@ class FileManager:
                     self.neo_pixel.on(6)
                 if '37' in games_won:
                     self.neo_pixel.on(7)
+                if '94' in games_won:
+                    self.neo_pixel.on(8)
         except OSError:
             with open('games_won', 'w') as f:
                 f.write('')

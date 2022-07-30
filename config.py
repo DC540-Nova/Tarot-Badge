@@ -30,12 +30,18 @@
 from machine import Pin, SPI
 
 # button config
-BUTTON_LEFT = 22
-BUTTON_RIGHT = 21
+BUTTON_LEFT = 21
+BUTTON_RIGHT = 22
 BUTTON_UP = 19
 BUTTON_DOWN = 18
 BUTTON_SUBMIT = 17
 BUTTON_EXTRA = 16
+# BUTTON_LEFT = 22
+# BUTTON_RIGHT = 21
+# BUTTON_UP = 17
+# BUTTON_DOWN = 18
+# BUTTON_SUBMIT = 16
+# BUTTON_EXTRA = 19
 
 # display config
 display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))
