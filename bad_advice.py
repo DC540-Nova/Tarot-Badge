@@ -27,6 +27,7 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import _thread
 import random
 
 
@@ -52,6 +53,8 @@ class BadAdvice:
         """
         card = 'sd/bad_advice/ba1.raw'
         self.display.image(card)
+        color = random.choice(self.neo_pixel.COLORS)
+        self.neo_pixel.on(self, led, color=color, all_on=True)
         while True:
             touched = self.touch.press(self.touch.button_left)
             if touched:
@@ -60,7 +63,8 @@ class BadAdvice:
             try:
                 card = 'sd/bad_advice/ba' + str(card) + '.raw'
                 self.display.image(card)
-                self.neo_pixel.flicker()
+                color = random.choice(self.neo_pixel.COLORS)
+                self.neo_pixel.on(self, led, color=color, all_on=True)
             except OSError:
                 self.display.text('sd card is damaged')
                 break
