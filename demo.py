@@ -169,27 +169,33 @@ class Demo:
         """
         _thread.start_new_thread(self.__neopixel_animation, ())
         self.display.handle_threading_setup()
-        for _ in self.data.cards:
-            touched = self.touch.press(self.touch.button_left)
-            if touched:
-                self.thread = False
-                break
-            card, card_reading = choice(list(self.data.cards.items()))
-            try:
+        running = True
+        while running:
+            for _ in self.data.cards:
                 touched = self.touch.press(self.touch.button_left)
                 if touched:
                     self.thread = False
+                    running = False
                     break
-                card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
-                self.display.image(card)
+                card, card_reading = choice(list(self.data.cards.items()))
+                try:
+                    touched = self.touch.press(self.touch.button_left)
+                    if touched:
+                        self.thread = False
+                        running = False
+                        break
+                    card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
+                    self.display.image(card)
+                    touched = self.touch.press(self.touch.button_left)
+                    if touched:
+                        self.thread = False
+                        running = False
+                        break
+                except OSError:
+                    self.display.text('sd card is damaged')
+                    break
                 touched = self.touch.press(self.touch.button_left)
                 if touched:
                     self.thread = False
+                    running = False
                     break
-            except OSError:
-                self.display.text('sd card is damaged')
-                break
-            touched = self.touch.press(self.touch.button_left)
-            if touched:
-                self.thread = False
-                break
