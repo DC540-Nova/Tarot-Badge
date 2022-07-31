@@ -187,17 +187,16 @@ class NeoPixel:
         """
         step = 5
         breath_amps = [ii for ii in range(0, 200, step)]
-        # breath_amps.extend([ii for ii in range(2000, -1, -step)])
         for ii in breath_amps:
             for led in range(24):
                 self.__set(led, color)
-            self.__show(ii/255)  # noqa
+            self.__show(ii / 255)  # noqa
             sleep(0.02)
         breath_amps = [ii for ii in range(200, 0, -step)]
         for ii in breath_amps:
             for led in range(24):
                 self.__set(led, color)
-            self.__show(ii/255)  # noqa
+            self.__show(ii / 255)  # noqa
             sleep(0.02)
 
     def flicker(self, color=ORANGE, repeat=1):
@@ -211,13 +210,12 @@ class NeoPixel:
         while repeat > 0:
             step = 5
             breath_amps = [ii for ii in range(0, 1000, step)]
-            breath_amps.extend([ii for ii in range(100, -1, -step)])
             for ii in breath_amps:
                 for led in self.outer:
                     self.__set(led, color)
                 for led in self.inner:
                     self.__set(led, color)
-                self.__show(ii/25)  # noqa
+                self.__show(ii / 25)  # noqa
             repeat -= 1
 
     def illuminati(self):
@@ -231,14 +229,14 @@ class NeoPixel:
             for led in range(24):
                 color = random.choice(self.COLORS)
                 self.__set(led, color)
-            self.__show(ii/25)  # noqa
+            self.__show(ii / 25)  # noqa
             sleep(0.02)
         breath_amps = [ii for ii in range(200, 0, -step)]
         for ii in breath_amps:
             for led in range(24):
                 color = random.choice(self.COLORS)
                 self.__set(led, color)
-            self.__show(ii/25)  # noqa
+            self.__show(ii / 25)  # noqa
             sleep(0.02)
 
     def won(self):
@@ -252,12 +250,12 @@ class NeoPixel:
             for led in range(24):
                 color = random.choice(self.COLORS)
                 self.__set(led, color)
-            self.__show(ii/255)  # noqa
+            self.__show(ii / 255)  # noqa
             sleep(0.02)
         breath_amps = [ii for ii in range(2000, 0, -step)]
         for ii in breath_amps:
             for led in range(24):
                 color = random.choice(self.COLORS)
                 self.__set(led, color)
-            self.__show(ii/255)  # noqa
+            self.__show(ii / 255)  # noqa
             sleep(0.02)
