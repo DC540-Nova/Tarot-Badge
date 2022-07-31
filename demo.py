@@ -176,6 +176,10 @@ class Demo:
                 break
             card, card_reading = choice(list(self.data.cards.items()))
             try:
+                touched = self.touch.press(self.touch.button_left)
+                if touched:
+                    self.thread = False
+                    break
                 card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
                 self.display.image(card)
                 touched = self.touch.press(self.touch.button_left)
@@ -189,5 +193,3 @@ class Demo:
             if touched:
                 self.thread = False
                 break
-            self.display.handle_threading_teardown()
-            self.display.handle_threading_setup()

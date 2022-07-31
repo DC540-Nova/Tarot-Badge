@@ -528,14 +528,3 @@ class Display:
         Method to handle threading setup functionality to ensure thread does not crash
         """
         self.clear()
-
-    def handle_threading_teardown(self, sleep_time=1):
-        """
-        Method to handle threading teardown functionality to ensure thread does not crash
-
-        Params:
-            sleep_time: int, optional
-        """
-        self.POWER_DISPLAY.value(1)
-        utime.sleep(sleep_time)
-        self.POWER_DISPLAY.value(0)
