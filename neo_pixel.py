@@ -199,7 +199,7 @@ class NeoPixel:
             self.__show(ii / 255)  # noqa
             sleep(0.02)
 
-    def flicker(self, color=ORANGE, repeat=1):
+    def flicker(self, color=RED, repeat=1):
         """
         Method to display a flicker animation
 
@@ -210,6 +210,7 @@ class NeoPixel:
         while repeat > 0:
             step = 5
             breath_amps = [ii for ii in range(0, 1000, step)]
+            breath_amps.extend([ii for ii in range(10, -1, -step)])
             for ii in breath_amps:
                 for led in self.outer:
                     self.__set(led, color)
