@@ -58,7 +58,7 @@ class BadAdvice:
                 break
             card = random.randint(1, 22)
             try:
-                card = 'sd/bad_advice/ba' + str(card)
+                card = 'sd/bad_advice/ba' + str(card) + '.raw'
                 self.display.image(card)
                 self.neo_pixel.flicker()
             except OSError:
