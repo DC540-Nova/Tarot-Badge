@@ -26,7 +26,7 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-import random
+import urandom
 
 
 class Tarot:
@@ -55,8 +55,8 @@ class Tarot:
         temp_card_bank = self.card_bank
         counter = 1
         for _ in temp_card_bank:
-            card, card_reading = random.choice(list(temp_card_bank.items()))
-            meaning = random.randint(1, 2)  # randomize card up or down position
+            card, card_reading = urandom.choice(list(temp_card_bank.items()))
+            meaning = urandom.randint(1, 2)  # randomize card up or down position
             if counter == 1:
                 self.display.text('Querent')
             elif counter == 2:
@@ -122,13 +122,13 @@ class Tarot:
         Function to handle a tarot scroll
 
         Params:
-            deck: int
+            deck: object
         """
         for _ in self.card_bank:
             touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
-            card, card_reading = random.choice(list(self.card_bank.items()))
+            card, card_reading = urandom.choice(list(self.card_bank.items()))
             try:
                 card = 'sd/' + deck + '/' + card_reading[2]
                 self.display.image(card)

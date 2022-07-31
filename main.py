@@ -56,7 +56,7 @@ microcontroller = Microcontroller()
 encryption = Encryption()
 touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 file_manager = FileManager(touch, display, neo_pixel)
-demo = Demo(touch, display, neo_pixel)
+demo = Demo(touch, display, data)
 tarot = Tarot(touch, display, data.cards)
 bad_advice = BadAdvice(touch, display, data.bad_advice)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
@@ -65,9 +65,10 @@ pair = Pair(microcontroller, file_manager, display, neo_pixel, game, morse_code,
 menu = Menu(file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, data)
 
 if __name__ == '__main__':
-    neo_pixel.clear(hard_clear=True)
-    file_manager.update_games_won()
-    menu.system()
+    demo.play()
+    # neo_pixel.clear(hard_clear=True)
+    # file_manager.update_games_won()
+    # menu.system()
     # while True:
     #     try:
     #         try:

@@ -49,7 +49,7 @@ class Menu:
             bad_advice: object
             pair: object
             data: object
-            deck: None
+            deck: str, optional
         """
         self.file_manager = file_manager
         self.touch = touch
@@ -417,8 +417,6 @@ class Menu:
                     self.display.text('sd card is damaged')
                     show_menu = True
             elif self.touch.press(self.touch.button_right):
-                print(self.deck)
-                print(type(self.deck))
                 self.tarot.reading(self.deck)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
