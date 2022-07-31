@@ -27,7 +27,6 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
-import _thread
 import random
 
 
@@ -51,20 +50,20 @@ class BadAdvice:
         """
         Method to handle bad advice demo play
         """
-        card = 'sd/bad_advice/ba1.raw'
-        self.display.image(card)
         color = random.choice(self.neo_pixel.COLORS)
         self.neo_pixel.on(self, led, color=color, all_on=True)
+        card = 'sd/bad_advice/ba1.raw'
+        self.display.image(card)
         while True:
             touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
             card = random.randint(1, 22)
             try:
-                card = 'sd/bad_advice/ba' + str(card) + '.raw'
-                self.display.image(card)
                 color = random.choice(self.neo_pixel.COLORS)
                 self.neo_pixel.on(self, led, color=color, all_on=True)
+                card = 'sd/bad_advice/ba' + str(card) + '.raw'
+                self.display.image(card)
             except OSError:
                 self.display.text('sd card is damaged')
                 break
