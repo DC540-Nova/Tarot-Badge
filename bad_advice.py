@@ -51,7 +51,7 @@ class BadAdvice:
         Method to handle bad advice demo play
         """
         color = random.choice(self.neo_pixel.COLORS)
-        self.neo_pixel.on(self, led, color=color, all_on=True)
+        self.neo_pixel.on(0, color=color, all_on=True)
         card = 'sd/bad_advice/ba1.raw'
         self.display.image(card)
         while True:
@@ -61,7 +61,7 @@ class BadAdvice:
             card = random.randint(1, 22)
             try:
                 color = random.choice(self.neo_pixel.COLORS)
-                self.neo_pixel.on(self, led, color=color, all_on=True)
+                self.neo_pixel.on(0, color=color, all_on=True)
                 card = 'sd/bad_advice/ba' + str(card) + '.raw'
                 self.display.image(card)
             except OSError:
