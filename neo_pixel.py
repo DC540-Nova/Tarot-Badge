@@ -29,6 +29,8 @@
 # pyright: reportUndefinedVariable=false
 
 import array
+import random
+
 from utime import sleep_ms, sleep
 import rp2
 
@@ -176,7 +178,7 @@ class NeoPixel:
         self.__set(led, color)
         self.__show(int(brightness))
 
-    def breathing_led_on(self, color=RED, repeat=1):
+    def breathing_led_on(self, color=RED):
         """
         Method to handle a breathing led on animation
 
@@ -219,7 +221,7 @@ class NeoPixel:
                 self.__show(ii/25)  # noqa
             repeat -= 1
 
-    def won(self, color=RED, repeat=5):
+    def won(self):
         """
         Method to display a won game animation
 
@@ -227,14 +229,20 @@ class NeoPixel:
             color: tuple, optional
             repeat: int, optional
         """
-        while repeat > 0:
-            step = 5
-            breath_amps = [ii for ii in range(0, 10000, step)]
-            breath_amps.extend([ii for ii in range(10000, -1, -step)])
-            for ii in breath_amps:
-                for led in self.outer:
-                    self.__set(led, color)
-                for led in self.inner:
-                    self.__set(led, color)
-                self.__show(ii/25)  # noqa
-            repeat -= 1
+        step = 5
+        breath_amps = [ii for ii in range(0, 200, step)]
+        # breath_amps.extend([ii for ii in range(2000, -1, -step)])
+        for ii in breath_amps:
+            for led in range(24):
+                color = random.choice(self.COLORS)
+                self.__set(led, color)
+            self.__show(ii/25)  # noqa
+            sleep(0.02)
+        breath_amps = [ii for ii in range(200, 0, -step)]
+        for ii in breath_amps:
+            for led in range(24):
+                color = random.choice(self.COLORS)
+                self.__set(led, color)
+            self.__show(ii/25)  # noqa
+            sleep(0.02)
+

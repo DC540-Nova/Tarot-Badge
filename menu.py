@@ -475,13 +475,13 @@ class Menu:
             elif self.touch.press(self.touch.button_down):
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
-                self.__populate('extras menu', 'l: pair badge', 'e: main menu')
-                # print('trigger')
-                illumaniti_sequence = self.touch.numeric_sequence(show=False)
+                illumaniti_sequence = self.touch.numeric_sequence(show=True)
                 if illumaniti_sequence == '12123434':
                     self.display.image('3Hats.raw',  timed=False)
                     while True:
+                        self.neo_pixel.won()
                         if self.touch.press(self.touch.button_left):
+                            self.file_manager.update_games_won()
                             break
                 show_menu = True
             elif self.touch.press(self.touch.button_extra):
