@@ -66,8 +66,9 @@ menu = Menu(file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pa
 
 if __name__ == '__main__':
     demo.play()
+
     # neo_pixel.clear(hard_clear=True)
-    # file_manager.update_games_won()
+    file_manager.update_games_won()
     # menu.system()
     # while True:
     #     try:

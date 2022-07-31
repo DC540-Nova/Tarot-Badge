@@ -68,6 +68,16 @@ class Demo:
         self.owheel = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
         self.iwheel = [23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12]
 
+    def __reset(self):
+        """
+        Private method to reset original neo_pixel object and clear pixels
+        """
+        LED_PIN = 5
+        LED_COUNT = 24
+        from neo_pixel import NeoPixel  # noqa
+        self.neo_pixel = NeoPixel(machine.Pin, LED_PIN, LED_COUNT)
+        self.neo_pixel.clear(hard_clear=True)
+
     def __new_color(self, my_color):
         """
         Private method to color changes, called for each color
@@ -75,6 +85,9 @@ class Demo:
         Params:
             my_color: int
         """
+        if not self.thread:
+            self.__reset()
+            _thread.exit()
         my_new_color = my_color + randrange(-self.cint, self.cint)
         if my_new_color > self.cmax:
             my_new_color = my_new_color - (self.cmax - self.cmin)
@@ -91,12 +104,14 @@ class Demo:
         self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
         self.neopixel.write()
         if not self.thread:
+            self.__reset()
             _thread.exit()
         while True:
             self.neopixel[self.owheel[self.owheelpos - 1] - 1] = (self.ocr, self.ocg, self.ocb)
             self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
             self.neopixel.write()
             if not self.thread:
+                self.__reset()
                 _thread.exit()
             x = int(randrange(-10, 10))
             y = int(randrange(-10, 10))
@@ -104,6 +119,7 @@ class Demo:
             stime = randrange(5, 6) / 100
             # stime = randrange(5, 6) / 1000
             if not self.thread:
+                self.__reset()
                 _thread.exit()
             for count in range(max(abs(x), abs(y))):
                 if x:
@@ -115,6 +131,7 @@ class Demo:
                 if new_outer < 1:
                     new_outer = self.max_pos
                 if not self.thread:
+                    self.__reset()
                     _thread.exit()
                 if y:
                     y_inc = int(y / abs(y))
@@ -143,6 +160,7 @@ class Demo:
                     self.neopixel[iold] = (0, 0, 0)
                     self.neopixel.write()
                 if not self.thread:
+                    self.__reset()
                     _thread.exit()
 
     def play(self):
@@ -151,19 +169,25 @@ class Demo:
         """
         _thread.start_new_thread(self.__neopixel_animation, ())
         self.display.handle_threading_setup()
-        while True:
-            for _ in self.data.cards:
+        for _ in self.data.cards:
+            touched = self.touch.press(self.touch.button_left)
+            if touched:
+                self.thread = False
+                break
+            card, card_reading = choice(list(self.data.cards.items()))
+            try:
+                card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
+                self.display.image(card)
                 touched = self.touch.press(self.touch.button_left)
                 if touched:
                     self.thread = False
-                    self.neopixel.fill(0, 0, 0)
                     break
-                card, card_reading = choice(list(self.data.cards.items()))
-                try:
-                    card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
-                    self.display.image(card)
-                except OSError:
-                    self.display.text('sd card is damaged')
-                    break
-                self.display.handle_threading_teardown()
-                self.display.handle_threading_setup()
+            except OSError:
+                self.display.text('sd card is damaged')
+                break
+            touched = self.touch.press(self.touch.button_left)
+            if touched:
+                self.thread = False
+                break
+            self.display.handle_threading_teardown()
+            self.display.handle_threading_setup()
