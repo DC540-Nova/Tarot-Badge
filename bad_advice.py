@@ -57,6 +57,7 @@ class BadAdvice:
         while True:
             touched = self.touch.press(self.touch.button_left)
             if touched:
+                self.neo_pixel.clear(hard_clear=True)
                 break
             card = random.randint(1, 22)
             try:
