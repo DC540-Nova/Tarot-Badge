@@ -96,69 +96,76 @@ class Demo:
         """
         Private method to handle the neopixel animation on the second core
         """
-        self.thread = True
-        self.neopixel[self.owheel[self.owheelpos - 1] - 1] = (self.ocr, self.ocg, self.ocb)
-        self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
-        self.neopixel.write()
-        if not self.thread:
-            self.__reset()
-            _thread.exit()
         while True:
-            self.neopixel[self.owheel[self.owheelpos - 1] - 1] = (self.ocr, self.ocg, self.ocb)
-            self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
-            self.neopixel.write()
-            if not self.thread:
-                self.__reset()
-                _thread.exit()
-            x = int(randrange(-10, 10))
-            y = int(randrange(-10, 10))
-            new_outer = 0
-            stime = randrange(5, 6) / 100
-            # stime = randrange(5, 6) / 1000
-            if not self.thread:
-                self.__reset()
-                _thread.exit()
-            for count in range(max(abs(x), abs(y))):
-                if x:
-                    x_inc = int(x / abs(x))
-                    new_outer = self.owheelpos + x_inc
-                    x = x - x_inc
-                if new_outer > self.max_pos:
-                    new_outer = 1
-                if new_outer < 1:
-                    new_outer = self.max_pos
-                if not self.thread:
-                    self.__reset()
-                    _thread.exit()
-                if y:
-                    y_inc = int(y / abs(y))
-                    new_inner = self.iwheelpos + y_inc
-                    y = y - y_inc
-                    if new_inner > self.max_pos:
-                        new_inner = 1
-                    if new_inner < 1:
-                        new_inner = self.max_pos
-                    sleep(stime)
-                    self.ocr = self.__new_color(self.ocr)
-                    self.ocg = self.__new_color(self.ocg)
-                    self.ocb = self.__new_color(self.ocb)
-                    self.icr = self.__new_color(self.ocr)
-                    self.icg = self.__new_color(self.ocg)
-                    self.icb = self.__new_color(self.ocb)
-                    oold = self.owheel[self.owheelpos - 1] - 1
-                    iold = self.iwheel[self.iwheelpos - 1] - 1
-                    self.owheelpos = new_outer
-                    self.iwheelpos = new_inner
-                    onum = self.owheel[self.owheelpos - 1] - 1
-                    inum = self.iwheel[self.iwheelpos - 1] - 1
-                    self.neopixel[onum] = (self.ocr, self.ocg, self.ocg)
-                    self.neopixel[inum] = (self.icr, self.icg, self.icb)
-                    self.neopixel[oold] = (0, 0, 0)
-                    self.neopixel[iold] = (0, 0, 0)
+            try:
+                try:
+                    self.thread = True
+                    self.neopixel[self.owheel[self.owheelpos - 1] - 1] = (self.ocr, self.ocg, self.ocb)
+                    self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
                     self.neopixel.write()
-                if not self.thread:
-                    self.__reset()
-                    _thread.exit()
+                    if not self.thread:
+                        self.__reset()
+                        _thread.exit()
+                    while True:
+                        self.neopixel[self.owheel[self.owheelpos - 1] - 1] = (self.ocr, self.ocg, self.ocb)
+                        self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
+                        self.neopixel.write()
+                        if not self.thread:
+                            self.__reset()
+                            _thread.exit()
+                        x = int(randrange(-10, 10))
+                        y = int(randrange(-10, 10))
+                        new_outer = 0
+                        stime = randrange(5, 6) / 100
+                        # stime = randrange(5, 6) / 1000
+                        if not self.thread:
+                            self.__reset()
+                            _thread.exit()
+                        for count in range(max(abs(x), abs(y))):
+                            if x:
+                                x_inc = int(x / abs(x))
+                                new_outer = self.owheelpos + x_inc
+                                x = x - x_inc
+                            if new_outer > self.max_pos:
+                                new_outer = 1
+                            if new_outer < 1:
+                                new_outer = self.max_pos
+                            if not self.thread:
+                                self.__reset()
+                                _thread.exit()
+                            if y:
+                                y_inc = int(y / abs(y))
+                                new_inner = self.iwheelpos + y_inc
+                                y = y - y_inc
+                                if new_inner > self.max_pos:
+                                    new_inner = 1
+                                if new_inner < 1:
+                                    new_inner = self.max_pos
+                                sleep(stime)
+                                self.ocr = self.__new_color(self.ocr)
+                                self.ocg = self.__new_color(self.ocg)
+                                self.ocb = self.__new_color(self.ocb)
+                                self.icr = self.__new_color(self.ocr)
+                                self.icg = self.__new_color(self.ocg)
+                                self.icb = self.__new_color(self.ocb)
+                                oold = self.owheel[self.owheelpos - 1] - 1
+                                iold = self.iwheel[self.iwheelpos - 1] - 1
+                                self.owheelpos = new_outer
+                                self.iwheelpos = new_inner
+                                onum = self.owheel[self.owheelpos - 1] - 1
+                                inum = self.iwheel[self.iwheelpos - 1] - 1
+                                self.neopixel[onum] = (self.ocr, self.ocg, self.ocg)
+                                self.neopixel[inum] = (self.icr, self.icg, self.icb)
+                                self.neopixel[oold] = (0, 0, 0)
+                                self.neopixel[iold] = (0, 0, 0)
+                                self.neopixel.write()
+                            if not self.thread:
+                                self.__reset()
+                                _thread.exit()
+                except KeyboardInterrupt:
+                    pass
+            except KeyboardInterrupt:
+                pass
 
     def play(self):
         """

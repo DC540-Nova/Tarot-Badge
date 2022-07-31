@@ -143,15 +143,19 @@ class Tarot:
         """
         _thread.start_new_thread(self.__neopixel_animation, ())
         self.display.handle_threading_setup()
-        for _ in self.card_bank:
-            touched = self.touch.press(self.touch.button_left)
-            if touched:
-                self.thread = False
-                break
-            card, card_reading = urandom.choice(list(self.card_bank.items()))
-            try:
-                card = 'sd/' + deck + '/' + card_reading[2]
-                self.display.image(card)
-            except OSError:
-                self.display.text('sd card is damaged')
-                break
+        running = True
+        while running:
+            card_bank = self.card_bank
+            for _ in card_bank:
+                touched = self.touch.press(self.touch.button_left)
+                if touched:
+                    self.thread = False
+                    running = False
+                    break
+                card, card_reading = urandom.choice(list(self.card_bank.items()))
+                try:
+                    card = 'sd/' + deck + '/' + card_reading[2]
+                    self.display.image(card)
+                except OSError:
+                    self.display.text('sd card is damaged')
+                    break

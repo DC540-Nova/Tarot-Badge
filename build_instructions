@@ -18,42 +18,18 @@ STEP 1 - Clone Repo (Rosetta Terminal)
     make -C mpy-cross
 STEP 2 - Update main.c [COMMENT LINES]
     cd ports/rp2
-    vim main.c
-        // Execute user scripts.
-        // int ret = pyexec_file_if_exists("boot.py");
-        // if (ret & PYEXEC_FORCED_EXIT) {
-        //     goto soft_reset_exit;
-        // }
-        // if (pyexec_mode_kind == PYEXEC_MODE_FRIENDLY_REPL) {
-        //     ret = pyexec_file_if_exists("main.py");
-        //     if (ret & PYEXEC_FORCED_EXIT) {
-        //         goto soft_reset_exit;
-        //     }
-        // }
-        // for (;;) {
-        //     if (pyexec_mode_kind == PYEXEC_MODE_RAW_REPL) {
-        //         if (pyexec_raw_repl() != 0) {
-        //             break;
-        //         }
-        //     } else {
-        //         if (pyexec_friendly_repl() != 0) {
-        //             break;
-        //         }
-        //     }
-        // }
-        // soft_reset_exit:
-        //     mp_printf(MP_PYTHON_PRINTER, "MPY: soft reboot\n");
-        //     rp2_pio_deinit();
-        //     machine_pin_deinit();
-        //     #if MICROPY_PY_THREAD
-        //     mp_thread_deinit();
-        //     #endif
-        //     gc_sweep_all();
-        //     mp_deinit();
+    cp main.c
+    cd py
+    cp obj.c
 STEP 3 - Edit main.py [UNCOMMENT LINES]
-    while True:
+        while True:
         try:
-        ...
+            try:
+                demo.play()
+                file_manager.update_games_won()
+                menu.system()
+            except KeyboardInterrupt:
+                pass
         except KeyboardInterrupt:
             pass
 STEP 4 - cd modules [COPY ALL .py FILES INTO THIS DIR]
