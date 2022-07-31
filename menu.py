@@ -479,7 +479,7 @@ class Menu:
                 if illumaniti_sequence == '12123434':
                     self.display.image('3Hats.raw',  timed=False)
                     while True:
-                        self.neo_pixel.won()
+                        self.neo_pixel.illuminati()
                         if self.touch.press(self.touch.button_left):
                             self.neo_pixel.clear(hard_clear=True)
                             self.file_manager.update_games_won()

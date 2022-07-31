@@ -35,14 +35,16 @@ class BadAdvice:
     Base class to handle the bad advice demo
     """
 
-    def __init__(self, touch, display):
+    def __init__(self, touch, display, neo_pixel):
         """
         Params:
             touch: object
             display: object
+            neo_pixel: object
         """
         self.touch = touch
         self.display = display
+        self.neo_pixel = neo_pixel
 
     def scroll(self):
         """
@@ -58,6 +60,7 @@ class BadAdvice:
             try:
                 card = 'sd/bad_adviceba/' + str(card)
                 self.display.image(card)
+                self.neo_pixel.flicker()
             except OSError:
                 self.display.text('sd card is damaged')
                 break

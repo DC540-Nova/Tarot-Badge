@@ -143,28 +143,42 @@ class FileManager:
         """
         try:
             with open('games_won', 'r') as f:
+                won = 0
                 games_won = f.read()
                 games_won = list(games_won.split(' '))
                 if '66' in games_won:
                     self.neo_pixel.on(0)
+                    won += 1
                 if '23' in games_won:
                     self.neo_pixel.on(1)
+                    won += 1
                 if '89' in games_won:
                     self.neo_pixel.on(2)
+                    won += 1
                 if '40' in games_won:
                     self.neo_pixel.on(3)
+                    won += 1
                 if '98' in games_won:
                     self.neo_pixel.on(4)
+                    won += 1
                 if '11' in games_won:
                     self.neo_pixel.on(5)
+                    won += 1
                 if '15' in games_won:
                     self.neo_pixel.on(6)
+                    won += 1
                 if '37' in games_won:
                     self.neo_pixel.on(7)
+                    won += 1
                 if '94' in games_won:
                     self.neo_pixel.on(11)
+                    won += 1
                 if '69' in games_won:
                     self.neo_pixel.on(12)
+                    won += 1
+                if won == 12:
+                    for _ in range(1000):
+                        self.neo_pixel.won()
         except OSError:
             with open('games_won', 'w') as f:
                 f.write('')
