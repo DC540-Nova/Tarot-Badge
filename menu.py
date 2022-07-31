@@ -481,6 +481,7 @@ class Menu:
                     while True:
                         self.neo_pixel.won()
                         if self.touch.press(self.touch.button_left):
+                            self.neo_pixel.clear(hard_clear=True)
                             self.file_manager.update_games_won()
                             break
                 show_menu = True
