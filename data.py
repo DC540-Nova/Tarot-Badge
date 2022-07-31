@@ -1318,22 +1318,3 @@ scavenger_hunt_game = {
 fun_deck_game = {
     'Enter Game 4 Answer': b'\x0b)\xa85\xcb\xf6\x89Wb\x1e2\xfd5.C\xa5',
 }
-
-bad_advice = {
-    'ba1.raw':
-        [
-            'Bad Advice 1',
-        ],
-    'ba2.raw':
-        [
-            'Bad Advice 2',
-        ],
-    'ba3.raw':
-        [
-            'Bad Advice 3',
-        ],
-    'ba4.raw':
-        [
-            'Bad Advice 4',
-        ],
-}

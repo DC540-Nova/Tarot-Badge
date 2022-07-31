@@ -22,16 +22,17 @@ STEP 2 - Update main.c [COMMENT LINES]
     cd py
     cp obj.c
 STEP 3 - Edit main.py [UNCOMMENT LINES]
-        while True:
+    while True:
         try:
             try:
                 demo.play()
                 file_manager.update_games_won()
                 menu.system()
-            except KeyboardInterrupt:
+            except:  # noqa
                 pass
-        except KeyboardInterrupt:
-            pass
+        except:  # noqa
+            while True:
+                pass
 STEP 4 - cd modules [COPY ALL .py FILES INTO THIS DIR]
 STEP 5 - vim _boot.py [ADD LINE TO BOTTOM]
     import main

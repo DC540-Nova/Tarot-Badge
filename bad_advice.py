@@ -35,7 +35,7 @@ class BadAdvice:
     Base class to handle the bad advice demo
     """
 
-    def __init__(self, touch, display, card_bank):
+    def __init__(self, touch, display):
         """
         Params:
             touch: object
@@ -43,7 +43,6 @@ class BadAdvice:
         """
         self.touch = touch
         self.display = display
-        self.card_bank = card_bank
 
     def scroll(self):
         """
@@ -51,17 +50,14 @@ class BadAdvice:
         """
         card = 'sd/bad_advice/ba1.raw'
         self.display.image(card)
-        for _ in self.card_bank:
+        while True:
             touched = self.touch.press(self.touch.button_left)
             if touched:
                 break
-            card, _ = random.choice(list(self.card_bank.items()))
+            card = random.randint(1, 22)
             try:
-                card = 'sd/bad_advice/' + card
+                card = 'sd/bad_adviceba/' + str(card)
                 self.display.image(card)
             except OSError:
                 self.display.text('sd card is damaged')
-                break
-            touched = self.touch.press(self.touch.button_left)
-            if touched:
                 break
