@@ -85,9 +85,6 @@ class Demo:
         Params:
             my_color: int
         """
-        if not self.thread:
-            self.__reset()
-            _thread.exit()
         my_new_color = my_color + randrange(-self.cint, self.cint)
         if my_new_color > self.cmax:
             my_new_color = my_new_color - (self.cmax - self.cmin)
@@ -179,23 +176,8 @@ class Demo:
                     break
                 card, card_reading = choice(list(self.data.cards.items()))
                 try:
-                    touched = self.touch.press(self.touch.button_left)
-                    if touched:
-                        self.thread = False
-                        running = False
-                        break
                     card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
                     self.display.image(card)
-                    touched = self.touch.press(self.touch.button_left)
-                    if touched:
-                        self.thread = False
-                        running = False
-                        break
                 except OSError:
                     self.display.text('sd card is damaged')
-                    break
-                touched = self.touch.press(self.touch.button_left)
-                if touched:
-                    self.thread = False
-                    running = False
                     break

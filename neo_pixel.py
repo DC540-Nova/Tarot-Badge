@@ -176,24 +176,28 @@ class NeoPixel:
         self.__set(led, color)
         self.__show(int(brightness))
 
-    def breathing_led_on(self, led, color=RED, repeat=1):
+    def breathing_led_on(self, color=RED, repeat=1):
         """
         Method to handle a breathing led on animation
 
         Params:
-            led: int
             color: tuple, optional
             repeat: int, optional
         """
-        while repeat > 0:
-            step = 5
-            breath_amps = [ii for ii in range(0, 1000, step)]
-            breath_amps.extend([ii for ii in range(1000, -1, -step)])
-            for ii in breath_amps:
+        step = 5
+        breath_amps = [ii for ii in range(0, 200, step)]
+        # breath_amps.extend([ii for ii in range(2000, -1, -step)])
+        for ii in breath_amps:
+            for led in range(24):
                 self.__set(led, color)
-                self.__show(ii/255)  # noqa
-                sleep(0.02)
-            repeat -= 1
+            self.__show(ii/255)  # noqa
+            sleep(0.02)
+        breath_amps = [ii for ii in range(200, 0, -step)]
+        for ii in breath_amps:
+            for led in range(24):
+                self.__set(led, color)
+            self.__show(ii/255)  # noqa
+            sleep(0.02)
 
     def flicker(self, color=RED, repeat=1):
         """

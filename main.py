@@ -57,7 +57,7 @@ encryption = Encryption()
 touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 file_manager = FileManager(touch, display, neo_pixel)
 demo = Demo(touch, display, data)
-tarot = Tarot(touch, display, data.cards)
+tarot = Tarot(touch, display, neo_pixel, data.cards)
 bad_advice = BadAdvice(touch, display, data.bad_advice)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
 game = Game(file_manager, touch, display, tarot, morse_code, encryption)
@@ -79,4 +79,3 @@ if __name__ == '__main__':
     #     except KeyboardInterrupt:
     #         pass
     # pass
-

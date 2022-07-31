@@ -1,9 +1,6 @@
-# MIT License
-#
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -20,12 +17,15 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# y
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+import _thread
 import urandom
 
 
@@ -34,16 +34,30 @@ class Tarot:
     Base class to handle tarot card reading/s
     """
 
-    def __init__(self, touch, display, card_bank):
+    def __init__(self, touch, display, neo_pixel, card_bank):
         """
         Params:
             touch: object
             display: object
+            neo_pixel: object
             card_bank: dict
         """
         self.touch = touch
         self.display = display
+        self.neo_pixel = neo_pixel
         self.card_bank = card_bank
+        self.thread = False
+
+    def __neopixel_animation(self):
+        """
+        Private method to handle the neopixel animation on the second core
+        """
+        self.thread = True
+        while True:
+            self.neo_pixel.breathing_led_on()
+            if not self.thread:
+                self.neo_pixel.clear(hard_clear=True)
+                _thread.exit()
 
     def reading(self, deck):
         """
@@ -52,6 +66,8 @@ class Tarot:
         Params:
             deck: int
         """
+        _thread.start_new_thread(self.__neopixel_animation, ())
+        self.display.handle_threading_setup()
         temp_card_bank = self.card_bank
         counter = 1
         for _ in temp_card_bank:
@@ -115,6 +131,7 @@ class Tarot:
             if counter > 10:
                 self.display.POWER_DISPLAY.value(0)
                 self.display.clear()
+                self.thread = False
                 break
 
     def scroll(self, deck):
@@ -124,9 +141,12 @@ class Tarot:
         Params:
             deck: object
         """
+        _thread.start_new_thread(self.__neopixel_animation, ())
+        self.display.handle_threading_setup()
         for _ in self.card_bank:
             touched = self.touch.press(self.touch.button_left)
             if touched:
+                self.thread = False
                 break
             card, card_reading = urandom.choice(list(self.card_bank.items()))
             try:
@@ -134,7 +154,4 @@ class Tarot:
                 self.display.image(card)
             except OSError:
                 self.display.text('sd card is damaged')
-                break
-            touched = self.touch.press(self.touch.button_left)
-            if touched:
                 break
