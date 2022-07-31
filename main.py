@@ -62,14 +62,12 @@ bad_advice = BadAdvice(touch, display, data.bad_advice)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
 game = Game(file_manager, touch, display, tarot, morse_code, encryption)
 pair = Pair(microcontroller, file_manager, display, neo_pixel, game, morse_code, nrf, data)
-menu = Menu(file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, data)
+menu = Menu(file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, demo, data)
 
 if __name__ == '__main__':
     demo.play()
-
-    # neo_pixel.clear(hard_clear=True)
     file_manager.update_games_won()
-    # menu.system()
+    menu.system()
     # while True:
     #     try:
     #         try:

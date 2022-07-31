@@ -36,7 +36,7 @@ class Menu:
     Base class to handle a menu system
     """
 
-    def __init__(self, file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, data,
+    def __init__(self, file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, demo, data,
                  deck='Rider-Waite'):
         """
         Params:
@@ -48,6 +48,7 @@ class Menu:
             tarot: object
             bad_advice: object
             pair: object
+            demo: object
             data: object
             deck: str, optional
         """
@@ -59,6 +60,7 @@ class Menu:
         self.tarot = tarot
         self.bad_advice = bad_advice
         self.pair = pair
+        self.demo = demo
         self.data = data
         self.deck = deck
         self.text = None
@@ -459,12 +461,14 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('extras menu', 'l: pair badge', 'e: main menu')
+                self.__populate('extras menu', 'l: pair badge', 'r: demo', 'e: main menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.pair.badge()
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
+                self.demo.play()
+                self.file_manager.update_games_won()
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
                 show_menu = True
