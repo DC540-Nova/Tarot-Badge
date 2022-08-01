@@ -170,11 +170,17 @@ class FileManager:
                 if '37' in games_won:
                     self.neo_pixel.on(7)
                     won += 1
+                if '71' in games_won:
+                    self.neo_pixel.on(8)
+                    won += 1
+                if '53' in games_won:
+                    self.neo_pixel.on(9)
+                    won += 1
                 if '94' in games_won:
-                    self.neo_pixel.on(11)
+                    self.neo_pixel.on(10)
                     won += 1
                 if '69' in games_won:
-                    self.neo_pixel.on(12)
+                    self.neo_pixel.on(11)
                     won += 1
                 if won == 12:
                     for _ in range(1000):

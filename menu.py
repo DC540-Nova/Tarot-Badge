@@ -278,7 +278,8 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption', 'e: main menu')
+                self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption',
+                                'd: malort', 's: nfc', 'e: main menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.__game_menu_fun_deck()
@@ -382,6 +383,60 @@ class Menu:
             elif self.touch.press(self.touch.button_extra):
                 break
 
+    def __game_menu_malort(self):
+        """
+        Private method to handle the malort game
+        """
+        show_menu = True
+        while True:
+            if show_menu:
+                self.__populate('malort menu', 'l: instructions', 'r: play', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
+                self.display.text(self.data.malort_game_instructions)
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.sequence(self.data.malort_game, '71', 1, 1)
+                if won_game:
+                    self.game.won(won_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                self.game.multiple_choice_practice(self.data.fun_deck_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
+
+    def __game_menu_nfc(self):
+        """
+        Private method to handle the nfc game
+        """
+        show_menu = True
+        while True:
+            if show_menu:
+                self.__populate('nfc menu', 'l: instructions', 'r: play', 'e: prior menu')
+                show_menu = False
+            if self.touch.press(self.touch.button_left):
+                self.display.text(self.data.nfc_game_instructions)
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
+                won_game = self.game.sequence(self.data.malort_game, '53', 1, 1)
+                if won_game:
+                    self.game.won(won_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                self.game.multiple_choice_practice(self.data.fun_deck_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
+                show_menu = True
+            elif self.touch.press(self.touch.button_submit):
+                show_menu = True
+            elif self.touch.press(self.touch.button_extra):
+                break
+
     def __tarot_reading_menu(self):
         """
         Private method to handle the tarot reading menu
@@ -461,14 +516,14 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('extras menu', 'l: pair badge', 'r: demo', 'e: main menu')
+                self.__populate('extras menu', 'l: demo', 'e: main menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
-                self.pair.badge()
-                show_menu = True
-            elif self.touch.press(self.touch.button_right):
+                # self.pair.badge()
                 self.demo.play()
                 self.file_manager.update_games_won()
+                show_menu = True
+            elif self.touch.press(self.touch.button_right):
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
                 show_menu = True

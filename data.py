@@ -39,13 +39,16 @@ fun_deck_game_instructions = 'We at DC540 created our own terrible Tarot deck. C
 morse_code_game_instructions = 'complete all three morse code challenges to pass this game'
 decryption_game_instructions = 'decode these three encryptions and add them together for the answer'
 help_someone_game_instructions = 'find another player wearing this badge and offer to help them'
-boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge'
+malort_game_instructions = 'Create your own drink recipe using Malort. Post on the DC540 Tarot Badge Channel.'
+nfc_game_instructions = 'follow the clues and look for the nfc stickers we havve posted around Defcon.'
+tarot_pairing_game_instructions = 'Find another player wearing the DC540 Tarot badge, pair, and pass this challenge.'
+boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge.'
 
 boss_ids = []  # noqa
 boss_ids.append('e66038b7137a9935')
 boss_ids.append('e66038b7135fa935')
-boss_ids.append('e66038b71316902f')
 boss_ids.append('e66038b71340a735')
+boss_ids.append('e66038b7dfsfdfdf')
 boss_names = []  # noqa
 boss_names.append('Baabalicious')
 boss_names.append('Banter')
@@ -1300,7 +1303,7 @@ decryption_game_questions = {
 }
 
 decryption_game = {
-    'Enter Game 9 Answer': b'\xc3\xc4\x1a\xa4\xb8`\x8bp\xa6[\xd2\x1bu\xcd\xf9\x17',
+    'Enter Game 8 Answer': b'\xc3\xc4\x1a\xa4\xb8`\x8bp\xa6[\xd2\x1bu\xcd\xf9\x17',
 }
 
 stego_game = {
@@ -1317,4 +1320,12 @@ scavenger_hunt_game = {
 
 fun_deck_game = {
     'Enter Game 4 Answer': b'\x0b)\xa85\xcb\xf6\x89Wb\x1e2\xfd5.C\xa5',
+}
+
+malort_game = {
+    'Enter Game 9 Answer': b'6:\x08 \xe5\xd4\xaa\xa6z\x07\x85*\xaf\xfb\xab6',
+}
+
+nfc_game = {
+    'Enter Game 10 Answer': b'X\x05f\xd1\xd42\xae\r\xcbe\xec\x11\x87)\x03\x0b',
 }
