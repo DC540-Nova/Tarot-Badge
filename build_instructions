@@ -44,3 +44,25 @@ STEP 9 - make
         line 324
             # -Werror
 STEP 10 - cp build-PICO/firmware.uf2 /Volumes/RPI-RP2/
+
+Supplemental Instructions: Mass Convert PNG Images to 240x320
+-------------------------------------------------------------
+https://redketchup.io/bulk-image-resizer
+
+Supplemental Instructions: Convert To .raw & Copy Files To SD Card (EXPERIMENTAL DEV MODE ONLY)
+-----------------------------------------------------------------------------------------------
+# cd to Tarot-Badge directory
+# copy Tarot Card Images into the deck directory (KEEP A BACKUP OF ORIGINALS!)
+# NOTE: PLEASE NAME FILES EXACTLY AS THEY ARE IN deck FOLDER FOR NEW DECKS
+# NOTE: this will convert the files to 240x320 raw
+./convert_to_raw.sh decks/Shitty-Deck/
+# NOTE: this will convert all the files in deck and create a dir called deck-raw and copy the .raw files into it
+# copy all the files in deck-raw to sd drive
+./copy_files_to_sd_card.sh decks/Shitty-Deck/ Shitty-Deck
+# NOTE: this will copy files directly to the sd card without having to remove the card it and place in a sd reader
+
+Supplemental Instructions: Convert Single Image File To .raw
+------------------------------------------------------------
+# manually convert a single image (.png, jpg, etc.) to 240x320 .raw
+./convert_single_image_to_raw.sh
+# NOTE: this will create a single 240x320 .raw file

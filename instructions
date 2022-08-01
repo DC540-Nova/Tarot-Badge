@@ -1,27 +1,27 @@
-Instructions: Mass Convert Images 240x320 REQUIRED
-https://redketchup.io/bulk-image-resizer
+Prod Instructions
+-----------------
+STEP 1: ./setup.sh
+STEP 2: burn firmware.uf2 to a Pico
+STEP 3: ./copy_files_to_pico_prod.sh
+STEP 4: burn tb_rcX.uf2 to a Pico
+STEP 5: ./convert_to_raw.sh bad_advice/
+STEP 6: copy bad_advice folder to SD card
+STEP 7: ./convert_to_raw.sh decks/Marseilles-Pitisci/
+STEP 8: copy Marseilles-Pitisci folder to SD card
+STEP 9: ./convert_to_raw.sh decks/Rider-Waite/
+STEP 10: copy Rider-Waite folder to SD card
+STEP 11: ./convert_to_raw.sh decks/Shitty-Deck/
+STEP 12: copy Shitty-Deck folder to SD card
 
-Instructions: Set Up Automation ONE-TIME OPERATION
-# cd to Tarot-Badge Directory
-./setup.sh
-
-Instructions: Copy Files To Pico
-# cd to Tarot-Badge directory
-# plug Pico into USB
-./copy_files_to_pico.sh
-
-Instructions: Convert To .raw & Copy Files To SD Card
-# cd to Tarot-Badge directory
-# copy Tarot Card Images into the deck directory (KEEP A BACKUP OF ORIGINALS!)
-# NOTE: PLEASE NAME FILES EXACTLY AS THEY ARE IN deck FOLDER FOR NEW DECKS
-# NOTE: this will convert the files to 240x320 and overwrite the originals in the deck directory
-./convert_to_raw.sh decks/Shitty-Deck/
-# NOTE: this will convert all the files in deck and create a dir called deck-raw and copy the .raw files into it
-# copy all the files in deck-raw to sd drive
-./copy_files_to_sd_card.sh decks/Shitty-Deck/ Shitty-Deck
-# NOTE: this will copy files directly to the sd card without having to remove the card it and place in a sd reader
-
-Instructions: Convert Single Image File To .raw
-# manually convert a single image (.png, jpg, etc.) to 240x320 .raw
-./convert_single_image_to_raw.sh
-# NOTE: this will create a single 240x320 .raw file
+Dev Instructions
+----------------
+STEP 1: ./setup.sh
+STEP 2: ./copy_files_to_pico_dev.sh
+STEP 3: ./convert_to_raw.sh bad_advice/
+STEP 4: copy bad_advice folder to SD card
+STEP 5: ./convert_to_raw.sh decks/Marseilles-Pitisci/
+STEP 6: copy Marseilles-Pitisci folder to SD card
+STEP 7: ./convert_to_raw.sh decks/Rider-Waite/
+STEP 8: copy Rider-Waite folder to SD card
+STEP 9: ./convert_to_raw.sh decks/Shitty-Deck/
+STEP 10: copy Shitty-Deck folder to SD card
