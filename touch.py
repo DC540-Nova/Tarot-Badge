@@ -37,7 +37,7 @@ class Touch:
     """
 
     def __init__(self, button_up, button_down, button_left, button_right, button_submit, button_extra, display,
-                 wait=0.05, sensitivity=3):
+                 wait=0.05, sensitivity=5):
         """
         Params:
             button_up: int
