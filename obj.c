@@ -151,7 +151,7 @@ void mp_obj_print_exception(const mp_print_t *print, mp_obj_t exc) {
     //                 mp_printf(print, ", in %q\n", block);
     //             }
     //         }
-      //   }
+    //   }
     // }
     // mp_obj_print_helper(print, exc, PRINT_EXC);
     // mp_print_str(print, "\n");
