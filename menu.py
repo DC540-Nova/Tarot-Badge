@@ -442,16 +442,15 @@ class Menu:
         Private method to handle the tarot reading menu
         """
         show_menu = True
-        deck_selected = False
         while True:
             if show_menu:
                 self.__populate('tarot reading menu', 'l: choose deck', 'r: tarot reading', 'u: tarot scroll',
                                 'e: main menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
+                deck_selected = False
                 try:
-                    uos.chdir('sd')
-                    folders = uos.listdir()
+                    folders = uos.listdir('sd')
                     for folder in folders:
                         if folder == 'System Volume Information' or folder == '.fseventsd' or \
                                 folder == '.Spotlight-V100' or folder == '.Trashes' or folder == 'bad_advice':
@@ -461,7 +460,6 @@ class Menu:
                             while True:
                                 if self.touch.press(self.touch.button_left):
                                     self.deck = folder
-                                    uos.chdir('/')
                                     self.display.text('DECK CHANGED')
                                     deck_selected = True
                                     break
