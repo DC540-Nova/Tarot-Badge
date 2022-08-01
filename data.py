@@ -29,7 +29,7 @@
 
 badge_instructions_1 = 'There are more details can be found on the webpage dc540.org. Some games require you to submit to the DC540 discord channel.'  # noqa
 badge_instructions_2 = 'For those you will be sent a code to input. Other games are automatic.'  # noqa
-badge_instructions_3 = 'Stuff' # noqa
+badge_instructions_3 = 'SHIT SHIZ' # noqa
 tarot_trivia_game_instructions = 'Answer 15 of the 20 trivia questions correctly to pass this game.'
 stego_game_instructions = 'Go to the DC540 website and find the game labeled stego.'
 reenactment_game_instructions = 'Re-enact a Tarot Card picture using yourself. Take a picture and submit on the DC540 Tartot badge channel'  # noqa

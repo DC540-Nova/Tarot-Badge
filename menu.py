@@ -516,18 +516,21 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('extras menu', 'l: demo', 'e: main menu')
+                self.__populate('extras menu', 'l: demo', 'r: tarot pair instr', 'u: boss pair instr', 'd: pair',
+                                'e: main menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
-                # self.pair.badge()
                 self.demo.play()
                 self.file_manager.update_games_won()
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
+                self.display.text(self.data.tarot_pairing_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
+                self.display.text(self.data.boss_pairing_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
+                self.pair.badge()
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
                 illumaniti_sequence = self.touch.numeric_sequence(show=True)
