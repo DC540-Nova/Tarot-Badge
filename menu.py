@@ -146,18 +146,18 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('tarot trivia menu', 'l: instructions', 'r: play', 'u: practice', 'e: prior menu')
+                self.__populate('tarot trivia menu', 'l: instructions', 'r: practice', 'u: play', 'e: prior menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.tarot_trivia_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 1, 1)
-                if won_game:
-                    self.game.won(won_game)
+                self.game.multiple_choice_practice(self.data.tarot_trivia_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                self.game.multiple_choice_practice(self.data.tarot_trivia_game)
+                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 20, 15)
+                if won_game:
+                    self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
                 show_menu = True
@@ -251,18 +251,18 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('flash cards menu', 'l: instructions', 'r: play', 'u: practice', 'e: prior menu')
+                self.__populate('flash cards menu', 'l: instructions', 'r: practice', 'u: play', 'e: prior menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.flash_cards_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
+                self.game.multiple_choice_practice(self.data.flash_cards_game)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
                 won_game = self.game.multiple_choice(self.data.flash_cards_game, '98', '1', 1, False)
                 if won_game:
                     self.game.won(won_game)
-                show_menu = True
-            elif self.touch.press(self.touch.button_up):
-                self.game.multiple_choice_practice(self.data.flash_cards_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
                 show_menu = True
@@ -331,22 +331,22 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('morse code menu', 'l: instructions', 'r: play', 'u: practice-easy',
-                                'd: practice-medium', 'e: prior menu')
+                self.__populate('morse code menu', 'l: instructions', 'r: practice-easy',
+                                'u: practice-medium', 'd: play', 'e: prior menu')
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.morse_code_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
+                self.game.morse_code_practice(self.data.morse_code_game_practice_easy)
+                show_menu = True
+            elif self.touch.press(self.touch.button_up):
+                self.game.morse_code_practice(self.data.morse_code_game_practice_medium)
+                show_menu = True
+            elif self.touch.press(self.touch.button_down):
                 won_game = self.game.morse_code_sequence(self.data.morse_code_game, '15', 3, 3)
                 if won_game:
                     self.game.won(won_game)
-                show_menu = True
-            elif self.touch.press(self.touch.button_up):
-                self.game.morse_code_practice(self.data.morse_code_game_practice_easy)
-                show_menu = True
-            elif self.touch.press(self.touch.button_down):
-                self.game.morse_code_practice(self.data.morse_code_game_practice_medium)
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
                 show_menu = True

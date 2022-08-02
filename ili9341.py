@@ -436,7 +436,7 @@ class Display:
         for y in range(0, height, 8):
             self.__block(0, y, width - 1, y + 7, line)
 
-    def text(self, text, x=8, y=0, color=0b1111111111100000, font=UNISPACE_FONT, wrap=True, clear=True, sleep_time=3,
+    def text(self, text, x=8, y=0, color=0b1111111111100000, font=UNISPACE_FONT, wrap=True, clear=True, sleep_time=6,
              timed=True, off=False):
         """
         Method to draw text

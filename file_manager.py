@@ -185,6 +185,12 @@ class FileManager:
                 if won == 12:
                     for _ in range(1000):
                         self.neo_pixel.won()
+                games_won = [1, 2, 3, 4]
+                games_won_str = ''
+                for item in games_won:
+                    games_won_str += str(item) + ' '
+                with open('games_won', 'w') as f:
+                    f.write(games_won_str)
         except OSError:
             with open('games_won', 'w') as f:
                 f.write('')

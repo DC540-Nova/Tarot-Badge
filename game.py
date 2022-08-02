@@ -100,8 +100,9 @@ class Game:
             self.text = answers[2]
             self.display.text(self.text, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[3]
-            self.display.text(self.text, y=self.line_6, wrap=False, clear=False, off=False)
+            self.display.text(self.text, y=self.line_6, wrap=False, clear=False, timed=False, off=False)
             answer = self.touch.multiple_choice()
+            self.display.clear()
             counter += 1
             if answer == correct_answer_index:
                 self.display.text('ANSWER SUBMITTED')
@@ -154,15 +155,16 @@ class Game:
             self.text = answers[2]
             self.display.text(self.text, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[3]
-            self.display.text(self.text, y=self.line_6, wrap=False, clear=False, off=False)
+            self.display.text(self.text, y=self.line_6, wrap=False, clear=False, timed=False, off=False)
             answer = self.touch.multiple_choice()
+            self.display.clear()
             if answer == correct_answer_index:
                 self.display.text('CORRECT')
             else:
                 self.display.text('INCORRECT')
-            self.display.text('Would you like to practice with another question? ')
-            self.display.text('CHOOSE...')
+            self.display.text('Would you like to practice with another question? [A: Yes & B: No]', clear=False)
             response = self.touch.yes_no()
+            self.display.clear()
             if response == 'yes':
                 pass
             else:
