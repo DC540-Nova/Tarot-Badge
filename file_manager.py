@@ -48,6 +48,7 @@ class FileManager:
         self.touch = touch
         self.display = display
         self.neo_pixel = neo_pixel
+        self.games_won = None
 
     @staticmethod
     def write_ids_file(ids):
@@ -88,7 +89,7 @@ class FileManager:
         Function to write to the games_won file
 
         Params:
-            str_status: str
+            games_won: str
         """
         try:
             with open('games_won', 'w') as f:
@@ -146,55 +147,49 @@ class FileManager:
         try:
             with open('games_won', 'r') as f:
                 won = 0
-                games_won = f.read()
-                games_won = list(games_won.split(' '))
-                print(games_won)
-                if '66' in games_won:
+                self.games_won = f.read()
+                self.games_won = list(self.games_won.split(' '))
+                print(self.games_won)
+                if '66' in self.games_won:
                     self.neo_pixel.on(0)
                     won += 1
-                if '23' in games_won:
+                if '23' in self.games_won:
                     print('here')
                     self.neo_pixel.on(1)
                     won += 1
-                if '89' in games_won:
+                if '89' in self.games_won:
                     self.neo_pixel.on(2)
                     won += 1
-                if '40' in games_won:
+                if '40' in self.games_won:
                     self.neo_pixel.on(3)
                     won += 1
-                if '98' in games_won:
+                if '98' in self.games_won:
                     self.neo_pixel.on(4)
                     won += 1
-                if '11' in games_won:
+                if '11' in self.games_won:
                     self.neo_pixel.on(5)
                     won += 1
-                if '15' in games_won:
+                if '15' in self.games_won:
                     self.neo_pixel.on(6)
                     won += 1
-                if '37' in games_won:
+                if '37' in self.games_won:
                     self.neo_pixel.on(7)
                     won += 1
-                if '71' in games_won:
+                if '71' in self.games_won:
                     self.neo_pixel.on(8)
                     won += 1
-                if '53' in games_won:
+                if '53' in self.games_won:
                     self.neo_pixel.on(9)
                     won += 1
-                if '94' in games_won:
+                if '94' in self.games_won:
                     self.neo_pixel.on(10)
                     won += 1
-                if '69' in games_won:
+                if '69' in self.games_won:
                     self.neo_pixel.on(11)
                     won += 1
                 if won == 12:
                     for _ in range(1000):
                         self.neo_pixel.won()
-                        self.neo_pixel.won()
-                games_won_str = ''
-                for item in games_won:
-                    games_won_str += str(item) + ' '
-                with open('games_won', 'w') as f:
-                    f.write(games_won_str)
         except OSError:
             with open('games_won', 'w') as f:
                 f.write('')

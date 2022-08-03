@@ -278,7 +278,7 @@ class Game:
                 else:
                     return False
 
-    def won(self, game_won=0):
+    def won(self, game_won):
         """
         Method to handle a single game win
 
@@ -286,7 +286,6 @@ class Game:
             game_won: str
         """
         games_won = self.file_manager.read_games_won_file()
-        if not game_won == 0:
-            games_won += game_won
+        games_won += game_won + ' '
         self.file_manager.write_games_won_file(games_won)
         self.file_manager.update_games_won()

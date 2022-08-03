@@ -205,7 +205,7 @@ class Menu:
                 self.display.text(self.data.reenactment_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.sequence(self.data.reeanactment, '89', 1, 1)
+                won_game = self.game.sequence(self.data.reenactment_game, '89', 1, 1)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
