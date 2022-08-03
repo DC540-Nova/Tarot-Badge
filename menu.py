@@ -577,5 +577,6 @@ class Menu:
         Method to handle the menu system
         """
         self.display.image('dc540_logo.raw')
+        self.file_manager.update_games_won()
         while True:
             self.__main_menu()

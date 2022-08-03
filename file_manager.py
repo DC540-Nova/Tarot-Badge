@@ -30,6 +30,8 @@
 import uos
 from utime import sleep
 
+from neopixel import NeoPixel
+
 
 class FileManager:
     """
@@ -146,10 +148,12 @@ class FileManager:
                 won = 0
                 games_won = f.read()
                 games_won = list(games_won.split(' '))
+                print(games_won)
                 if '66' in games_won:
                     self.neo_pixel.on(0)
                     won += 1
                 if '23' in games_won:
+                    print('here')
                     self.neo_pixel.on(1)
                     won += 1
                 if '89' in games_won:
@@ -185,7 +189,7 @@ class FileManager:
                 if won == 12:
                     for _ in range(1000):
                         self.neo_pixel.won()
-                games_won = [1, 2, 3, 4]
+                        self.neo_pixel.won()
                 games_won_str = ''
                 for item in games_won:
                     games_won_str += str(item) + ' '

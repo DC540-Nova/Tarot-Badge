@@ -36,16 +36,18 @@ class Demo:
     Base class to handle the demo
     """
 
-    def __init__(self, touch, display, data):
+    def __init__(self, touch, display, neo_pixel, data):
         """
         Params:
             touch: object
             display: object
+            neo_pixel: object
             data: object
         """
         self.neopixel = NeoPixel(machine.Pin(5), 24)
         self.touch = touch
         self.display = display
+        self.neo_pixel = neo_pixel
         self.data = data
         self.thread = False
         # color change interval

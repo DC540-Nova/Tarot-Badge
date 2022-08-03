@@ -56,7 +56,7 @@ microcontroller = Microcontroller()
 encryption = Encryption()
 touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 file_manager = FileManager(touch, display, neo_pixel)
-demo = Demo(touch, display, data)
+demo = Demo(touch, display, neo_pixel, data)
 tarot = Tarot(touch, display, neo_pixel, data.cards)
 bad_advice = BadAdvice(touch, display, neo_pixel)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
@@ -69,7 +69,6 @@ if __name__ == '__main__':
         try:
             try:
                 demo.play()
-                file_manager.update_games_won()
                 menu.system()
             except:  # noqa
                 pass

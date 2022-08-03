@@ -252,6 +252,7 @@ class Game:
         for _ in questions:
             question, answer = random.choice(list(self.question_bank.items()))
             answer = self.encryption.decode(answer)
+            print(answer)
             correct_answer_index = answer
             self.display.text(question)
             self.display.text('CHOOSE...')
@@ -277,7 +278,7 @@ class Game:
                 else:
                     return False
 
-    def won(self, game_won):
+    def won(self, game_won=0):
         """
         Method to handle a single game win
 
@@ -285,6 +286,7 @@ class Game:
             game_won: str
         """
         games_won = self.file_manager.read_games_won_file()
-        games_won += game_won
+        if not game_won == 0:
+            games_won += game_won
         self.file_manager.write_games_won_file(games_won)
         self.file_manager.update_games_won()
