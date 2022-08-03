@@ -252,7 +252,6 @@ class Game:
         for _ in questions:
             question, answer = random.choice(list(self.question_bank.items()))
             answer = self.encryption.decode(answer)
-            print(answer)
             correct_answer_index = answer
             self.display.text(question)
             self.display.text('CHOOSE...')

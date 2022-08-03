@@ -914,14 +914,6 @@ flash_cards_game = {
             'D. The Sun',
             0
         ],
-    'Wands01.raw':
-        [
-            'A. Two of Wands',
-            'B. Page of Wands',
-            'C. Ace of Wands',
-            'D. Knight of Wands',
-            2
-        ],
     'Wands03.raw':
         [
             'A. Two of Wands',
@@ -962,22 +954,6 @@ flash_cards_game = {
             'D. Knight of Wands',
             2
         ],
-    'Wands11.raw':
-        [
-            'A. King of Wands',
-            'B. Page of Wands',
-            'C. Queen of Wands',
-            'D. Knight of Wands',
-            1
-        ],
-    'Wands12.raw':
-        [
-            'A. Knight of Wands',
-            'B. Page of Wands',
-            'C. King of Wands',
-            'D. Queen of Wands',
-            0
-        ],
     'Wands13.raw':
         [
             'A. Queen of Wands',
@@ -993,14 +969,6 @@ flash_cards_game = {
             'C. Page of Wands',
             'D. Knight of Wands',
             1
-        ],
-    'Cups01.raw':
-        [
-            'A. Ace of Cups',
-            'B. Page of Cups',
-            'C. Queen of Goblets',
-            'D. Ace of Goblets',
-            0
         ],
     'Cups02.raw':
         [
@@ -1042,22 +1010,6 @@ flash_cards_game = {
             'D. Ten of Cups',
             3
         ],
-    'Cups11.raw':
-        [
-            'A. Seven of Pages',
-            'B. Seven of Goblets',
-            'C. Page of Cups',
-            'D. Queen of Cups',
-            2
-        ],
-    'Cups12.raw':
-        [
-            'A. Knight of Cups',
-            'B. Night of Goblets',
-            'C. Night of Cups',
-            'D. Knight of Goblets',
-            0
-        ],
     'Cups13.raw':
         [
             'A. Knight of Chalices',
@@ -1073,14 +1025,6 @@ flash_cards_game = {
             'C. Jack of Goblets',
             'D. Page of Cups',
             0
-        ],
-    'Pentacles01.raw':
-        [
-            'A. Ace of Cups',
-            'B. Ace of Goblets',
-            'C. Ace of Pentacles',
-            'D. Ace of Swords',
-            2
         ],
     'Pentacles02.raw':
         [
@@ -1122,22 +1066,6 @@ flash_cards_game = {
             'D. Page of Pentacles',
             3
         ],
-    'Pentacles11.raw':
-        [
-            'A. Queen of Pentacles',
-            'B. Page of Pentacles',
-            'C. Knight of Pentacles',
-            'D. Ace of Pentacles',
-            1
-        ],
-    'Pentacles12.raw':
-        [
-            'A. Ace of Pentacles',
-            'B. King of Pentacles',
-            'C. Knight of Pentacles',
-            'D. Seven of Pentacles',
-            2
-        ],
     'Pentacles13.raw':
         [
             'A. Queen of Pentacles',
@@ -1153,14 +1081,6 @@ flash_cards_game = {
             'C. Knight of Pentacles',
             'D. Queen of Pentacles',
             1
-        ],
-    'Swords01.raw':
-        [
-            'A. Ace of Swords',
-            'B. King of Swords',
-            'C. Knight of Swords',
-            'D. Seven of Swords',
-            0
         ],
     'Swords03.raw':
         [
@@ -1199,22 +1119,6 @@ flash_cards_game = {
             'A. King of Swords',
             'B. Queen of Swords',
             'C. Ten of Swords',
-            'D. Page of Swords',
-            2
-        ],
-    'Swords11.raw':
-        [
-            'A. Paige of Swords',
-            'B. Queen of Swords',
-            'C. Night of Swords',
-            'D. Page of Swords',
-            3
-        ],
-    'Swords12.raw':
-        [
-            'A. Queen of Swords',
-            'B. Night of Swords',
-            'C. Knight of Swords',
             'D. Page of Swords',
             2
         ],

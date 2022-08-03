@@ -120,6 +120,7 @@ class Menu:
             if show_menu:
                 self.__populate('game menu 1', 'l: tarot trivia', 'r: stego', 'u: re-enactment',
                                 'd: scavenger hunt', 's: flash cards', 'e: main menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.__game_menu_tarot_trivia()
@@ -147,6 +148,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('tarot trivia menu', 'l: instructions', 'r: practice', 'u: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.tarot_trivia_game_instructions)
@@ -174,6 +176,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('stego menu', 'l: instructions', 'r: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.stego_game_instructions)
@@ -200,6 +203,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('reenactment menu', 'l: instructions', 'r: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.reenactment_game_instructions)
@@ -226,6 +230,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('scavenger hunt menu', 'l: instructions', 'r: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.scavenger_hunt_game_instructions)
@@ -252,6 +257,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('flash cards menu', 'l: instructions', 'r: practice', 'u: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.flash_cards_game_instructions)
@@ -280,6 +286,7 @@ class Menu:
             if show_menu:
                 self.__populate('game menu 2', 'l: fun deck', 'r: morse code', 'u: decryption',
                                 'd: malort', 's: nfc', 'e: main menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.__game_menu_fun_deck()
@@ -305,6 +312,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('fun deck menu', 'l: instructions', 'r: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.fun_deck_game_instructions)
@@ -333,6 +341,7 @@ class Menu:
             if show_menu:
                 self.__populate('morse code menu', 'l: instructions', 'r: practice-easy',
                                 'u: practice-medium', 'd: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.morse_code_game_instructions)
@@ -361,6 +370,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('decryption menu', 'l: instructions', 'r: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.decryption_game_instructions)
@@ -391,6 +401,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('malort menu', 'l: instructions', 'r: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.malort_game_instructions)
@@ -418,6 +429,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('nfc menu', 'l: instructions', 'r: play', 'e: prior menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.nfc_game_instructions)
@@ -446,6 +458,7 @@ class Menu:
             if show_menu:
                 self.__populate('tarot reading menu', 'l: choose deck', 'r: tarot reading', 'u: tarot scroll',
                                 'e: main menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 deck_selected = False
@@ -492,6 +505,7 @@ class Menu:
         while True:
             if show_menu:
                 self.__populate('bad advice menu', 'l: bad advice scroll', 'e: main menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.bad_advice.scroll()
@@ -516,6 +530,7 @@ class Menu:
             if show_menu:
                 self.__populate('extras menu', 'l: demo', 'r: tarot pair instr', 'u: boss pair instr', 'd: pair',
                                 'e: main menu')
+                self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
                 self.demo.play()
@@ -550,6 +565,7 @@ class Menu:
         """
         self.__populate('main menu', 'l: instructions', 'r: games 1 menu', 'u: games 2 menu', 'd: tarot menu',
                         's: bad advice menu', 'e: extras menu')
+        self.file_manager.update_games_won()
         while True:
             if self.touch.press(self.touch.button_left):
                 self.display.text(self.data.badge_instructions_1)
@@ -576,7 +592,6 @@ class Menu:
         """
         Method to handle the menu system
         """
-        self.display.image('dc540_logo.raw')
         self.file_manager.update_games_won()
         while True:
             self.__main_menu()

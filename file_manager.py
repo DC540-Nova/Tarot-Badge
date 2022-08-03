@@ -149,7 +149,6 @@ class FileManager:
                 won = 0
                 self.games_won = f.read()
                 self.games_won = list(self.games_won.split(' '))
-                print(self.games_won)
                 if '66' in self.games_won:
                     self.neo_pixel.on(0)
                     won += 1

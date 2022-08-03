@@ -178,15 +178,15 @@ class Demo:
         running = True
         while running:
             for _ in self.data.cards:
-                touched = self.touch.press(self.touch.button_left)
-                if touched:
-                    self.thread = False
-                    running = False
-                    break
                 card, card_reading = choice(list(self.data.cards.items()))
                 try:
                     card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
                     self.display.image(card)
+                    touched = self.touch.press(self.touch.button_left)
+                    if touched:
+                        self.thread = False
+                        running = False
+                        break
                 except OSError:
                     self.display.text('sd card is damaged')
                     break

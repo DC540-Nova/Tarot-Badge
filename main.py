@@ -68,10 +68,11 @@ if __name__ == '__main__':
     while True:
         try:
             try:
+                display.image('dc540_logo.raw')
                 demo.play()
                 menu.system()
-            except:  # noqa
-                pass
+            except Exception as e:  # noqa
+                print(e)
         except:  # noqa
             while True:
                 pass
