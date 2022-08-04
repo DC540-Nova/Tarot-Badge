@@ -245,6 +245,7 @@ class FileManager:
         reset = self.touch.yes_no()
         if reset == 'yes':
             if file == 'games_won':
+                self.neo_pixel.clear(hard_clear=True)
                 message = 'RESETTING GAME!'
             elif file == 'ids':
                 message = 'RESETTING STATUS!'
