@@ -41,8 +41,8 @@ decryption_game_instructions = 'decode these three encryptions and add them toge
 help_someone_game_instructions = 'find another player wearing this badge and offer to help them'
 malort_game_instructions = 'Create your own drink recipe using Malort. Post on the DC540 Tarot Badge Channel.'
 nfc_game_instructions = 'follow the clues and look for the nfc stickers we havve posted around Defcon.'
-tarot_pairing_game_instructions = 'Find another player wearing the DC540 Tarot badge, pair, and pass this challenge.'
-boss_pairing_instructions = 'Find a DC540 Boss badge and we will give you the code you need to pass this challenge.'
+pairing_games_instructions_1 = 'Tarot Pairing Game: Find another player wearing the DC540 Tarot badge, pair, and pass this challenge.'  # noqa
+pairing_games_instructions_2 = 'Boss Pairing Game: Find a DC540 Boss badge and we will give you the code you need to pass this challenge.'  # noqa
 
 boss_ids = []  # noqa
 boss_ids.append('e66038b7137a9935')
@@ -1211,19 +1211,19 @@ decryption_game = {
 }
 
 stego_game = {
-    'Enter Game 1 Answer': b'\x9ax\xde\x90\xb3\xaa?\xe2\x81u1=\r\xa6xd',
+    'Enter Game 2 Answer': b'\x9ax\xde\x90\xb3\xaa?\xe2\x81u1=\r\xa6xd',
 }
 
 reenactment_game = {
-    'Enter Game 2 Answer': b'\x8fl\x07\xe1\xa5;=\xb9\'7\xabG\x86"b\xa4',
+    'Enter Game 3 Answer': b'\x8fl\x07\xe1\xa5;=\xb9\'7\xabG\x86"b\xa4',
 }
 
 scavenger_hunt_game = {
-    'Enter Game 3 Answer': b'\x0b\xf2\xc5\xec\x96s\xad\xa0\x8c%\xb0\xdc\xdf\xddS\xc7',
+    'Enter Game 4 Answer': b'\x0b\xf2\xc5\xec\x96s\xad\xa0\x8c%\xb0\xdc\xdf\xddS\xc7',
 }
 
 fun_deck_game = {
-    'Enter Game 4 Answer': b'\x0b)\xa85\xcb\xf6\x89Wb\x1e2\xfd5.C\xa5',
+    'Enter Game 6 Answer': b'\x0b)\xa85\xcb\xf6\x89Wb\x1e2\xfd5.C\xa5',
 }
 
 malort_game = {

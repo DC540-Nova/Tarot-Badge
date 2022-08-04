@@ -185,7 +185,8 @@ class Touch:
                 if show:
                     self.display.text(numeric_sequence, timed=False)
             elif self.press(self.button_submit):
-                pass
+                numeric_sequence = numeric_sequence[:-1]
+                self.display.text(numeric_sequence, timed=False)
             elif self.press(self.button_extra):
                 if numeric_sequence:
                     return numeric_sequence

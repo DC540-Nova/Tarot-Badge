@@ -91,7 +91,6 @@ class Game:
                     break
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
-            self.text = 'CHOOSE...'
             self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
             self.text = answers[0]
             self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
@@ -104,12 +103,20 @@ class Game:
             answer = self.touch.multiple_choice()
             self.display.clear()
             counter += 1
+            print('counter: ' + str(counter))
             if answer == correct_answer_index:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(1)
             else:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
+            self.display.text('Would you like to keep playing? [A: Yes & B: No]', clear=False)
+            response = self.touch.yes_no()
+            self.display.clear()
+            if response == 'yes':
+                pass
+            else:
+                return
             question_number += 1
             del self.question_bank[question]
             answer_total = 0
@@ -118,6 +125,7 @@ class Game:
                     answer_total += 1
                 else:
                     pass
+            print('num_questions: ' + num_questions)
             if counter == num_questions:
                 import data
                 if answer_total >= num_questions_to_win:
@@ -145,8 +153,9 @@ class Game:
                     # self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
+            # TODO: hide prints!
+            print('answer: ' + correct_answer_index)
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
-            self.text = 'CHOOSE...'
             self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
             self.text = answers[0]
             self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
@@ -182,6 +191,7 @@ class Game:
         for _ in questions:
             question, answer = random.choice(list(self.question_bank.items()))
             answer = self.encryption.decode(answer)
+            print('answer: ' + answer)
             self.display.text(question)
             self.display.text('ENTER MORSE CODE..')
             correct_answer_index = answer
@@ -252,9 +262,9 @@ class Game:
         for _ in questions:
             question, answer = random.choice(list(self.question_bank.items()))
             answer = self.encryption.decode(answer)
+            print('answer: ' + answer)
             correct_answer_index = answer
             self.display.text(question)
-            self.display.text('CHOOSE...')
             answer = self.touch.numeric_sequence()
             counter += 1
             if answer == correct_answer_index:

@@ -117,6 +117,40 @@ class FileManager:
                 return games_won
 
     @staticmethod
+    def write_tarot_deck_folder(tarot_deck_folder):
+        """
+        Function to write to the tarot deck folder file
+
+        Params:
+            tarot_deck_folder: str
+        """
+        try:
+            with open('tarot_deck_folder', 'w') as f:
+                f.write(tarot_deck_folder)
+        except OSError:
+            with open('tarot_deck_folder', 'w') as f:
+                f.write('Rider-Waite')
+
+    @staticmethod
+    def read_tarot_deck_folder():
+        """
+        Function to read to the tarot deck folder file
+
+        Returns:
+            str
+        """
+        try:
+            with open('tarot_deck_folder', 'r') as f:
+                tarot_deck_folder = f.read()
+                return tarot_deck_folder
+        except OSError:
+            with open('tarot_deck_folder', 'w') as f:
+                f.write('Rider-Waite')
+            with open('tarot_deck_folder', 'r') as f:
+                tarot_deck_folder = f.read()
+                return tarot_deck_folder
+
+    @staticmethod
     def clear_ids_file():
         """
         Static method to clear the ids file by resetting it

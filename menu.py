@@ -154,10 +154,10 @@ class Menu:
                 self.display.text(self.data.tarot_trivia_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                self.game.multiple_choice_practice(self.data.tarot_trivia_game)
+                self.game.multiple_choice_practice(self.data.tarot_trivia_game, text=False)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 20, 15)
+                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 3, 2, text=False)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -266,7 +266,7 @@ class Menu:
                 self.game.multiple_choice_practice(self.data.flash_cards_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                won_game = self.game.multiple_choice(self.data.flash_cards_game, '98', '1', 1, False)
+                won_game = self.game.multiple_choice(self.data.flash_cards_game, '98', 1, 1, False)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True
@@ -473,6 +473,7 @@ class Menu:
                             while True:
                                 if self.touch.press(self.touch.button_left):
                                     self.deck = folder
+                                    self.file_manager.write_tarot_deck_folder(folder)
                                     self.display.text('DECK CHANGED')
                                     deck_selected = True
                                     break
@@ -528,7 +529,7 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('extras menu', 'l: demo', 'r: tarot pair instr', 'u: boss pair instr', 'd: pair',
+                self.__populate('extras menu', 'l: demo', 'r: badge reset', 'u: instructions', 'd: pair',
                                 'e: main menu')
                 self.file_manager.update_games_won()
                 show_menu = False
@@ -537,10 +538,11 @@ class Menu:
                 self.file_manager.update_games_won()
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                self.display.text(self.data.tarot_pairing_game_instructions)
+                self.file_manager.reset('games_won')
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                self.display.text(self.data.boss_pairing_instructions)
+                self.display.text(self.data.pairing_games_instructions_1)
+                self.display.text(self.data.pairing_games_instructions_2)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
                 self.pair.badge()

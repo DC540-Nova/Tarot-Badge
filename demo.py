@@ -36,15 +36,17 @@ class Demo:
     Base class to handle the demo
     """
 
-    def __init__(self, touch, display, neo_pixel, data):
+    def __init__(self, file_manager, touch, display, neo_pixel, data):
         """
         Params:
+            file_manager: object
             touch: object
             display: object
             neo_pixel: object
             data: object
         """
         self.neopixel = NeoPixel(machine.Pin(5), 24)
+        self.file_manager = file_manager
         self.touch = touch
         self.display = display
         self.neo_pixel = neo_pixel
@@ -177,13 +179,19 @@ class Demo:
         self.display.handle_threading_setup()
         running = True
         while running:
+            tarot_deck_folder = self.file_manager.read_tarot_deck_folder()
             for _ in self.data.cards:
                 card, card_reading = choice(list(self.data.cards.items()))
                 try:
-                    card = 'sd/' + 'Rider-Waite' + '/' + card_reading[2]
+                    card = 'sd/' + tarot_deck_folder + '/' + card_reading[2]
                     self.display.image(card)
-                    touched = self.touch.press(self.touch.button_left)
-                    if touched:
+                    touched_left = self.touch.press(self.touch.button_left)
+                    touched_right = self.touch.press(self.touch.button_right)
+                    touched_up = self.touch.press(self.touch.button_up)
+                    touched_down = self.touch.press(self.touch.button_down)
+                    touched_submit = self.touch.press(self.touch.button_submit)
+                    touched_extra = self.touch.press(self.touch.button_extra)
+                    if touched_left or touched_right or touched_up or touched_down or touched_submit or touched_extra:
                         self.thread = False
                         running = False
                         break
