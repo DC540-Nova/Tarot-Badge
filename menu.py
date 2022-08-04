@@ -482,7 +482,7 @@ class Menu:
                             break
                         show_menu = True
                 except OSError:
-                    self.display.text('sd card is damaged')
+                    # self.display.text('sd card is damaged')
                     show_menu = True
             elif self.touch.press(self.touch.button_right):
                 self.tarot.reading(self.deck)

@@ -87,7 +87,7 @@ class Game:
                 try:
                     self.display.image('sd/Rider-Waite/' + question)
                 except OSError:
-                    self.display.text('sd card is damaged')
+                    # self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
@@ -142,7 +142,7 @@ class Game:
                 try:
                     self.display.image('sd/Rider-Waite/' + question)
                 except OSError:
-                    self.display.text('sd card is damaged')
+                    # self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed

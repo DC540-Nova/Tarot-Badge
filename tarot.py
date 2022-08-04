@@ -101,7 +101,7 @@ class Tarot:
                         if self.touch.press(self.touch.button_left):
                             break
                 except OSError:
-                    self.display.text('sd card is damaged')
+                    # self.display.text('sd card is damaged')
                     break
             if meaning == 2:
                 try:
@@ -111,7 +111,7 @@ class Tarot:
                         if self.touch.press(self.touch.button_left):
                             break
                 except OSError:
-                    self.display.text('sd card is damaged')
+                    # self.display.text('sd card is damaged')
                     break
             if meaning == 1:
                 self.display.text(card_reading[0], timed=False)
@@ -157,5 +157,5 @@ class Tarot:
                     card = 'sd/' + deck + '/' + card_reading[2]
                     self.display.image(card)
                 except OSError:
-                    self.display.text('sd card is damaged')
+                    # self.display.text('sd card is damaged')
                     break

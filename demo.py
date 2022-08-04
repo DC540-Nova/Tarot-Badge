@@ -188,5 +188,5 @@ class Demo:
                         running = False
                         break
                 except OSError:
-                    self.display.text('sd card is damaged')
+                    # self.display.text('sd card is damaged')
                     break

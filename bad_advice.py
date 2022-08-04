@@ -66,5 +66,5 @@ class BadAdvice:
                 card = 'sd/bad_advice/ba' + str(card) + '.raw'
                 self.display.image(card)
             except OSError:
-                self.display.text('sd card is damaged')
+                # self.display.text('sd card is damaged')
                 break

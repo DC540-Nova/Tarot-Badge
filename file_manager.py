@@ -153,7 +153,6 @@ class FileManager:
                     self.neo_pixel.on(0)
                     won += 1
                 if '23' in self.games_won:
-                    print('here')
                     self.neo_pixel.on(1)
                     won += 1
                 if '89' in self.games_won:
