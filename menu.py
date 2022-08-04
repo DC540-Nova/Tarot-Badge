@@ -151,15 +151,12 @@ class Menu:
                 self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
-                print('b')
                 self.display.text(self.data.tarot_trivia_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                print('c')
                 self.game.multiple_choice_practice(self.data.tarot_trivia_game, text=False)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                print('d')
                 won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 3, 2, text=False)
                 if won_game:
                     self.game.won(won_game)
@@ -266,11 +263,9 @@ class Menu:
                 self.display.text(self.data.flash_cards_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                print('right')
                 self.game.multiple_choice_practice(self.data.flash_cards_game, text=False)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                print('up')
                 won_game = self.game.multiple_choice(self.data.flash_cards_game, '98', 1, 1, text=False)
                 if won_game:
                     self.game.won(won_game)

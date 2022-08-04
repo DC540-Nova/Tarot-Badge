@@ -74,16 +74,15 @@ class Game:
         Returns:
             str or bool
         """
-        print('mc')
         self.question_bank = question_bank.copy()
         questions = list(self.question_bank)
-        print('text: ' + str(text))
-        print('questions: ' + str(questions))
         question_number = 0
         counter = 0
         answer_list = []
         for _ in questions:
+            print('mc baby')
             question, answers = random.choice(list(self.question_bank.items()))
+            print('mc baby baby')
             if text:
                 self.display.text(question)
             else:
@@ -93,16 +92,16 @@ class Game:
                     # self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
+            print('answer: ' + str(correct_answer_index))
             answers = answers[0:-1]   # strip off correct_answer_index from being displaye
-            self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
             self.text = answers[0]
-            self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
+            self.display.text(self.text, y=self.title, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[1]
-            self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
+            self.display.text(self.text, y=self.line_2, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[2]
-            self.display.text(self.text, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
+            self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[3]
-            self.display.text(self.text, y=self.line_6, wrap=False, clear=False, timed=False, off=False)
+            self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=False)
             answer = self.touch.multiple_choice()
             self.display.clear()
             counter += 1
@@ -113,13 +112,14 @@ class Game:
             else:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
-            self.display.text('Would you like to keep playing? [A: Yes & B: No]', clear=False)
-            response = self.touch.yes_no()
-            self.display.clear()
-            if response == 'yes':
-                pass
-            else:
-                return
+            if counter != num_questions:
+                self.display.text('Would you like to keep playing? [A: Yes & B: No]', clear=False)
+                response = self.touch.yes_no()
+                self.display.clear()
+                if response == 'yes':
+                    pass
+                else:
+                    return
             question_number += 1
             del self.question_bank[question]
             answer_total = 0
@@ -147,8 +147,6 @@ class Game:
         questions = list(question_bank)
         for _ in questions:
             question, answers = random.choice(list(question_bank.items()))
-            print('question: ' + question)
-            print('answers: ' + answers)
             if text:
                 self.display.text(question)
             else:
@@ -161,15 +159,14 @@ class Game:
             # TODO: hide prints!
             print('answer: ' + str(correct_answer_index))
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
-            self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
             self.text = answers[0]
-            self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
+            self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
             self.text = answers[1]
-            self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
+            self.display.text(self.text, y=self.line_2, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[2]
-            self.display.text(self.text, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
+            self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[3]
-            self.display.text(self.text, y=self.line_6, wrap=False, clear=False, timed=False, off=False)
+            self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
             answer = self.touch.multiple_choice()
             self.display.clear()
             if answer == correct_answer_index:
