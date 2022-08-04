@@ -266,9 +266,11 @@ class Menu:
                 self.display.text(self.data.flash_cards_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                self.game.multiple_choice_practice(self.data.flash_cards_game)
+                print('right')
+                self.game.multiple_choice_practice(self.data.flash_cards_game, text=False)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
+                print('up')
                 won_game = self.game.multiple_choice(self.data.flash_cards_game, '98', 1, 1, text=False)
                 if won_game:
                     self.game.won(won_game)

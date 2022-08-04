@@ -74,8 +74,11 @@ class Game:
         Returns:
             str or bool
         """
+        print('mc')
         self.question_bank = question_bank.copy()
         questions = list(self.question_bank)
+        print('text: ' + str(text))
+        print('questions: ' + str(questions))
         question_number = 0
         counter = 0
         answer_list = []
@@ -144,6 +147,8 @@ class Game:
         questions = list(question_bank)
         for _ in questions:
             question, answers = random.choice(list(question_bank.items()))
+            print('question: ' + question)
+            print('answers: ' + answers)
             if text:
                 self.display.text(question)
             else:
@@ -154,7 +159,7 @@ class Game:
                     break
             correct_answer_index = answers[4]
             # TODO: hide prints!
-            print('answer: ' + correct_answer_index)
+            print('answer: ' + str(correct_answer_index))
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
             self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
             self.text = answers[0]
