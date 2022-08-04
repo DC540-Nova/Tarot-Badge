@@ -82,7 +82,7 @@ class Game:
         for _ in questions:
             question, answers = random.choice(list(self.question_bank.items()))
             if text:
-                self.display.text(question, )
+                self.display.text(question)
             else:
                 try:
                     self.display.image('sd/Rider-Waite/' + question)
@@ -91,7 +91,8 @@ class Game:
                     break
             correct_answer_index = answers[4]
             print('answer: ' + str(correct_answer_index))
-            answers = answers[0:-1]   # strip off correct_answer_index from being displaye
+            answers = answers[0:-1]   # strip off correct_answer_index from being displayed
+            self.display.clear()
             self.text = answers[0]
             self.display.text(self.text, y=self.title, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[1]
@@ -110,8 +111,8 @@ class Game:
             else:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
-            if counter != num_questions:
-                self.display.text('Would you like to keep playing? [A: Yes & B: No]', clear=False)
+            if counter < num_questions:
+                self.display.text('Would you like to keep playing? [A: Yes & B: No]')
                 response = self.touch.yes_no()
                 self.display.clear()
                 if response == 'yes':
@@ -126,7 +127,7 @@ class Game:
                     answer_total += 1
                 else:
                     pass
-            print('num_questions: ' + num_questions)
+            print('num_questions: ' + str(num_questions))
             if counter == num_questions:
                 import data
                 if answer_total >= num_questions_to_win:
@@ -157,6 +158,7 @@ class Game:
             # TODO: hide prints!
             print('answer: ' + str(correct_answer_index))
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
+            self.display.clear()
             self.text = answers[0]
             self.display.text(self.text, y=self.title, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[1]
@@ -164,14 +166,14 @@ class Game:
             self.text = answers[2]
             self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[3]
-            self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
+            self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=False)
             answer = self.touch.multiple_choice()
             self.display.clear()
             if answer == correct_answer_index:
                 self.display.text('CORRECT')
             else:
                 self.display.text('INCORRECT')
-            self.display.text('Would you like to practice with another question? [A: Yes & B: No]', clear=False)
+            self.display.text('Would you like to practice with another question? [A: Yes & B: No]')
             response = self.touch.yes_no()
             self.display.clear()
             if response == 'yes':
