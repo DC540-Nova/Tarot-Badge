@@ -154,10 +154,10 @@ class Menu:
                 self.display.text(self.data.tarot_trivia_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                self.game.multiple_choice_practice(self.data.tarot_trivia_game, text=False)
+                self.game.multiple_choice_practice(self.data.tarot_trivia_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 3, 2, text=False)
+                won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 3, 2)
                 if won_game:
                     self.game.won(won_game)
                 show_menu = True

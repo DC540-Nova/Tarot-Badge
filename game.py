@@ -80,11 +80,9 @@ class Game:
         counter = 0
         answer_list = []
         for _ in questions:
-            print('mc baby')
             question, answers = random.choice(list(self.question_bank.items()))
-            print('mc baby baby')
             if text:
-                self.display.text(question)
+                self.display.text(question, )
             else:
                 try:
                     self.display.image('sd/Rider-Waite/' + question)
@@ -160,7 +158,7 @@ class Game:
             print('answer: ' + str(correct_answer_index))
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
             self.text = answers[0]
-            self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
+            self.display.text(self.text, y=self.title, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[1]
             self.display.text(self.text, y=self.line_2, wrap=False, clear=False, timed=False, off=True)
             self.text = answers[2]
