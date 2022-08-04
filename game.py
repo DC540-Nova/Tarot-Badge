@@ -90,7 +90,7 @@ class Game:
                     # self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
-            answers = answers[0:-1]   # strip off correct_answer_index from being displayed
+            answers = answers[0:-1]   # strip off correct_answer_index from being displaye
             self.display.text(self.text, y=self.title, wrap=False, clear=True, timed=False, off=True)
             self.text = answers[0]
             self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
