@@ -112,7 +112,7 @@ class Game:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
             if counter < num_questions:
-                self.display.text('Would you like to keep playing? [A: Yes & B: No]', clear=False, timed=False, off=False)  # noqa
+                self.display.text('Would you like to keep playing? [A: Yes & B: No]', timed=False, off=False)  # noqa
                 response = self.touch.yes_no()
                 self.display.clear()
                 if response == 'yes':
@@ -173,7 +173,7 @@ class Game:
                 self.display.text('CORRECT')
             else:
                 self.display.text('INCORRECT')
-            self.display.text('Would you like to practice with another question? [A: Yes & B: No]', clear=False, timed=False, off=False)  # noqa
+            self.display.text('Would you like to practice with another question? [A: Yes & B: No]', timed=False, off=False)  # noqa
             response = self.touch.yes_no()
             self.display.clear()
             if response == 'yes':
@@ -208,7 +208,7 @@ class Game:
                 answer_list.append(1)
             else:
                 answer_list.append(0)
-            self.display.text('Would you like to keep playing? [A: Yes & B: No]', clear=False, timed=False, off=False)
+            self.display.text('Would you like to keep playing? [A: Yes & B: No]', timed=False, off=False)
             response = self.touch.yes_no()
             self.display.clear()
             if response == 'yes':
@@ -250,7 +250,7 @@ class Game:
                 self.display.text('CORRECT')
             else:
                 self.display.text('INCORRECT')
-            self.display.text('Would you like to practice with another morse code? [A: Yes & B: No]', clear=False, timed=False, off=False)  # noqa
+            self.display.text('Would you like to practice with another morse code? [A: Yes & B: No]',  timed=False, off=False)  # noqa
             response = self.touch.yes_no()
             self.display.clear()
             if response == 'yes':
