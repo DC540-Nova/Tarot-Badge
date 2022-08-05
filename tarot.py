@@ -120,6 +120,7 @@ class Tarot:
                             break
                 except OSError:
                     # self.display.text('sd card is damaged')
+                    self.thread = False
                     break
             if meaning == 1:
                 self.display.text(card_reading[0], timed=False)
@@ -169,4 +170,6 @@ class Tarot:
                         break
                 except OSError:
                     # self.display.text('sd card is damaged')
+                    self.thread = False
+                    running = False
                     break
