@@ -10,7 +10,6 @@ DC540 Defcon Group Tarot Badge code repo.
 ### Designer: Bob German
 ### Designer: Betsy Lawrie
 ### Developer: Kevin Thomas
-### Developer: Corinne "Rinn" Neidig
 
 <br>
 
