@@ -69,12 +69,9 @@ class Tarot:
                 self.neo_pixel.clear(hard_clear=True)
                 _thread.exit()
 
-    def reading(self, deck):
+    def reading(self):
         """
         Function to handle a tarot reading
-
-        Params:
-            deck: int
         """
         self.__load_tarot_deck()
         _thread.start_new_thread(self.__neopixel_animation, ())
