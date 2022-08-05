@@ -3,7 +3,6 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -179,17 +178,6 @@ class TestDisplay(unittest.TestCase):
         return_1 = None
         # Calls
         none_1 = self.display.handle_threading_setup()
-        # Asserts
-        self.assertEqual(none_1, return_1)
-
-    def test_handle_threading_teardown(self):
-        """
-        test handle_threading_teardown functionality
-        """
-        # Returns
-        return_1 = None
-        # Calls
-        none_1 = self.display.handle_threading_teardown()
         # Asserts
         self.assertEqual(none_1, return_1)
 

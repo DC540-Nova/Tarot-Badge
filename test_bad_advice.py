@@ -3,7 +3,6 @@
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
-# Developer: Corinne "Rinn" Neidig
 #
 # Copyright (c) 2022 DC540 Defcon Group
 #
@@ -35,7 +34,7 @@
 
 import unittest
 
-from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display
+from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel
 from touch import Touch
 from bad_advice import BadAdvice
 import data
@@ -52,13 +51,15 @@ class TestBadAdvice(unittest.TestCase):
         setUp class
         """
         # Instantiate
-        self.bad_advice = BadAdvice(touch, display, data.bad_advice)
+        self.bad_advice = BadAdvice(touch, display, neo_pixel)
 
-    def tearDown(self):
+    @staticmethod
+    def tearDown():
         """
         tearDown class
         """
-        pass
+        # Clear LED's
+        neo_pixel.clear(hard_clear=True)
 
     def test_bad_advice_scroll(self):
         """

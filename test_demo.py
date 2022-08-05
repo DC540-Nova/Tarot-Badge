@@ -35,11 +35,13 @@
 import unittest
 
 from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel
+from file_manager import FileManager
 from touch import Touch
 from demo import Demo
 import data
 
 touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+file_manager = FileManager(touch, display, neo_pixel)
 
 
 class TestDemo(unittest.TestCase):
@@ -51,7 +53,7 @@ class TestDemo(unittest.TestCase):
         setUp class
         """
         # Instantiate
-        self.demo = Demo(touch, display, neo_pixel)
+        self.demo = Demo(file_manager, touch, display, neo_pixel, data)
 
     def tearDown(self):
         """

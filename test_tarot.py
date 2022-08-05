@@ -34,12 +34,14 @@
 
 import unittest
 
-from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display
+from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel
+from file_manager import FileManager
 from touch import Touch
 from tarot import Tarot
 import data
 
 touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+file_manager = FileManager(touch, display, neo_pixel)
 
 
 class TestTarot(unittest.TestCase):
@@ -51,7 +53,7 @@ class TestTarot(unittest.TestCase):
         setUp class
         """
         # Instantiate
-        self.tarot = Tarot(touch, display, data.cards)
+        self.tarot = Tarot(file_manager, touch, display, neo_pixel, data.cards)
 
     def tearDown(self):
         """
@@ -80,11 +82,9 @@ class TestTarot(unittest.TestCase):
 
         Interactive Response:  [RANDOM MANUAL VALIDATION]
         """
-        # Params
-        deck = 'Rider-Waite'
         # Returns
         return_1 = None
         # Calls
-        none_1 = self.tarot.scroll(deck)
+        none_1 = self.tarot.scroll()
         # Asserts
         self.assertEqual(none_1, return_1)

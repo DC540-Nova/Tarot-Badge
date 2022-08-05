@@ -1,3 +1,5 @@
+# MIT License
+#
 # Designer: Bob German
 # Designer: Betsy Lawrie
 # Developer: Kevin Thomas
@@ -34,19 +36,27 @@ class Tarot:
     Base class to handle tarot card reading/s
     """
 
-    def __init__(self, touch, display, neo_pixel, card_bank):
+    def __init__(self, file_manager, touch, display, neo_pixel, card_bank):
         """
         Params:
+            file_manager: object
             touch: object
             display: object
             neo_pixel: object
-            card_bank: dict
         """
+        self.file_manager = file_manager
         self.touch = touch
         self.display = display
         self.neo_pixel = neo_pixel
         self.card_bank = card_bank
+        self.deck = None
         self.thread = False
+
+    def __load_tarot_deck(self):
+        """
+        Private method to load the tarot deck from a file
+        """
+        self.deck = self.file_manager.read_tarot_deck_folder()
 
     def __neopixel_animation(self):
         """
@@ -66,6 +76,7 @@ class Tarot:
         Params:
             deck: int
         """
+        self.__load_tarot_deck()
         _thread.start_new_thread(self.__neopixel_animation, ())
         self.display.handle_threading_setup()
         temp_card_bank = self.card_bank
@@ -95,7 +106,7 @@ class Tarot:
                 self.display.text('Outcome')
             if meaning == 1:
                 try:
-                    card = 'sd/' + deck + '/' + card_reading[2]
+                    card = 'sd/' + self.deck + '/' + card_reading[2]
                     self.display.image(card, timed=False)
                     while True:
                         if self.touch.press(self.touch.button_left):
@@ -105,7 +116,7 @@ class Tarot:
                     break
             if meaning == 2:
                 try:
-                    card = 'sd/' + deck + '/' + card_reading[2]
+                    card = 'sd/' + self.deck + '/' + card_reading[2]
                     self.display.image(card, up=False, timed=False)
                     while True:
                         if self.touch.press(self.touch.button_left):
@@ -134,28 +145,31 @@ class Tarot:
                 self.thread = False
                 break
 
-    def scroll(self, deck):
+    def scroll(self):
         """
         Function to handle a tarot scroll
-
-        Params:
-            deck: object
         """
+        self.__load_tarot_deck()
         _thread.start_new_thread(self.__neopixel_animation, ())
         self.display.handle_threading_setup()
         running = True
         while running:
             card_bank = self.card_bank
             for _ in card_bank:
-                touched = self.touch.press(self.touch.button_left)
-                if touched:
-                    self.thread = False
-                    running = False
-                    break
                 card, card_reading = urandom.choice(list(self.card_bank.items()))
                 try:
-                    card = 'sd/' + deck + '/' + card_reading[2]
+                    card = 'sd/' + self.deck + '/' + card_reading[2]
                     self.display.image(card)
+                    touched_left = self.touch.press(self.touch.button_left)
+                    touched_right = self.touch.press(self.touch.button_right)
+                    touched_up = self.touch.press(self.touch.button_up)
+                    touched_down = self.touch.press(self.touch.button_down)
+                    touched_submit = self.touch.press(self.touch.button_submit)
+                    touched_extra = self.touch.press(self.touch.button_extra)
+                    if touched_left or touched_right or touched_up or touched_down or touched_submit or touched_extra:
+                        self.thread = False
+                        running = False
+                        break
                 except OSError:
                     # self.display.text('sd card is damaged')
                     break

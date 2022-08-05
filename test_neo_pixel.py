@@ -56,7 +56,7 @@ class TestMicrocontroller(unittest.TestCase):
         """
         tearDown class
         """
-        # Clear leds
+        # Clear LEDs
         self.neo_pixel.clear(hard_clear=True)
 
     def test___set(self):

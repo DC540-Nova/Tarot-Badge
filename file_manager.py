@@ -220,8 +220,7 @@ class FileManager:
                     self.neo_pixel.on(11)
                     won += 1
                 if won == 12:
-                    for _ in range(1000):
-                        self.neo_pixel.won()
+                    self.neo_pixel.won()
         except OSError:
             with open('games_won', 'w') as f:
                 f.write('')

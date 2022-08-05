@@ -55,16 +55,20 @@ class BadAdvice:
         card = 'sd/bad_advice/ba1.raw'
         self.display.image(card)
         while True:
-            touched = self.touch.press(self.touch.button_left)
-            if touched:
-                self.neo_pixel.clear(hard_clear=True)
-                break
             card = random.randint(1, 22)
             try:
                 color = random.choice(self.neo_pixel.COLORS)
                 self.neo_pixel.on(0, color=color, all_on=True)
                 card = 'sd/bad_advice/ba' + str(card) + '.raw'
                 self.display.image(card)
+                touched_left = self.touch.press(self.touch.button_left)
+                touched_right = self.touch.press(self.touch.button_right)
+                touched_up = self.touch.press(self.touch.button_up)
+                touched_down = self.touch.press(self.touch.button_down)
+                touched_submit = self.touch.press(self.touch.button_submit)
+                touched_extra = self.touch.press(self.touch.button_extra)
+                if touched_left or touched_right or touched_up or touched_down or touched_submit or touched_extra:
+                    break
             except OSError:
                 # self.display.text('sd card is damaged')
                 break

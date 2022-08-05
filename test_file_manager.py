@@ -61,7 +61,7 @@ class TestFileManager(unittest.TestCase):
         """
         tearDown class
         """
-        # Clear leds
+        # Clear LEDs
         neo_pixel.clear(hard_clear=True)
 
     def test_write_ids_file(self):
@@ -69,7 +69,7 @@ class TestFileManager(unittest.TestCase):
         test write_ids_file functionality
         """
         # Params
-        ids = 'e66038b7137a9935'
+        ids = 'e66038b713902e33'
         # Returns
         return_1 = None
         # Calls
@@ -82,9 +82,9 @@ class TestFileManager(unittest.TestCase):
         test read_ids_file functionality
         """
         # Params
-        ids = 'e66038b7137a9935'
+        ids = 'e66038b713902e33'
         # Returns
-        return_1 = 'e66038b7137a9935'
+        return_1 = 'e66038b713902e33'
         # Calls
         self.file_manager.write_ids_file(ids)
         ids = self.file_manager.read_ids_file()
@@ -96,7 +96,7 @@ class TestFileManager(unittest.TestCase):
         test write_games_won functionality
         """
         # Params
-        games_won = '66 23 89 40 98 11 15 37 '
+        games_won = '66 23 89 40 98 11 15 37 71 53 94 69'
         # Returns
         return_1 = None
         # Calls
@@ -109,14 +109,38 @@ class TestFileManager(unittest.TestCase):
         test read_games_won_file functionality
         """
         # Params
-        games_won = '66 23 89 40 98 11 15 37 '
+        games_won = '66 23 89 40 98 11 15 37 71 53 94 69'
         # Returns
-        return_1 = '66 23 89 40 98 11 15 37 '
+        return_1 = '66 23 89 40 98 11 15 37 71 53 94 69'
         # Calls
         self.file_manager.write_games_won_file(games_won)
         games_won = self.file_manager.read_games_won_file()
         # Asserts
         self.assertEqual(games_won, return_1)
+
+    def test_write_tarot_deck_folder(self):
+        """
+        test write_tarot_deck_folder functionality
+        """
+        # Params
+        tarot_deck_folder = 'Rider-Waite'
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.file_manager.write_tarot_deck_folder(tarot_deck_folder)
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test_read_tarot_deck_folder(self):
+        """
+        test read_tarot_deck_folder functionality
+        """
+        # Returns
+        return_1 = 'Rider-Waite'
+        # Calls
+        none_1 = self.file_manager.read_tarot_deck_folder()
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_clear_ids_file(self):
         """
@@ -145,7 +169,7 @@ class TestFileManager(unittest.TestCase):
         test update_games_won functionality
         """
         # Params
-        games_won = '66 23 89 40 98 11 15 37 '
+        games_won = '66 23 89 40 98 11 15 37 71 53 94 69'
         # Returns
         return_1 = None
         # Calls
@@ -154,24 +178,35 @@ class TestFileManager(unittest.TestCase):
         # Asserts
         self.assertEqual(none_1, return_1)
 
-    def test_reset_ids(self):
+    def test_clear_ids(self):
         """
-        test reset ids file functionality
+        test clear ids file functionality
 
         Interactive Response:  [RANDOM MANUAL VALIDATION]
         """
-        # Params
-        file = 'ids'
         # Returns
         return_1 = None
         # Calls
-        none_1 = self.file_manager.reset(file)
+        none_1 = self.file_manager.clear_ids_file()
         # Asserts
         self.assertEqual(none_1, return_1)
 
-    def test_reset_games_won(self):
+    def test_clear_games_won(self):
         """
-        test reset games_won file functionality
+        test clear games_won file functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Returns
+        return_1 = None
+        # Calls
+        none_1 = self.file_manager.clear_games_won_file()
+        # Asserts
+        self.assertEqual(none_1, return_1)
+
+    def test_reset(self):
+        """
+        test reset badge functionality
 
         Interactive Response:  [RANDOM MANUAL VALIDATION]
         """

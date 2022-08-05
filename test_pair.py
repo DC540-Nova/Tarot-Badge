@@ -40,6 +40,8 @@ from microcontroller import Microcontroller
 from encryption import Encryption
 from touch import Touch
 from file_manager import FileManager
+from tarot import Tarot
+from game import Game
 from morse_code import MorseCode
 from pair import Pair
 import data
@@ -48,7 +50,9 @@ microcontroller = Microcontroller()
 encryption = Encryption()
 touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 file_manager = FileManager(touch, display, neo_pixel)
+tarot = Tarot(file_manager, touch, display, neo_pixel, data.cards)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
+game = Game(file_manager, touch, display, tarot, morse_code, encryption)
 
 
 class TestPair(unittest.TestCase):
@@ -60,13 +64,15 @@ class TestPair(unittest.TestCase):
         setUp class
         """
         # Instantiate
-        self.pair = Pair(microcontroller, file_manager, display, neo_pixel, morse_code, nrf, data)
+        self.pair = Pair(microcontroller, file_manager, display, neo_pixel, game, morse_code, nrf, data)
 
-    def tearDown(self):
+    @staticmethod
+    def tearDown():
         """
         tearDown class
         """
-        pass
+        # Clear display
+        display.text('')
 
     def test_badge(self):
         """
