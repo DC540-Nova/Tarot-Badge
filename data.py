@@ -28,8 +28,11 @@
 # pyright: reportUndefinedVariable=false
 
 badge_instructions_1 = 'There are more details can be found on the webpage dc540.org. Some games require you to submit to the DC540 discord channel.'  # noqa
-badge_instructions_2 = 'For those you will be sent a code to input. Other games are automatic.'  # noqa
-badge_instructions_3 = 'SHIT SHIZ' # noqa
+badge_instructions_2 = 'For those you will be sent a code to input. Other games are automatic.'
+badge_instructions_3 = 'There are six buttons for the games, Left = A, Right = B, Up = C, Down = D, S = Submit, E = Enter'  # noqa
+tarot_instructions_1 = 'Tarot Deck: Use the right button to scroll through our 3 decks & select to change the start-up demo.'  # noqa
+tarot_instructions_2 = 'Tarot Reading: Get your daily card reading here!'
+tarot_instructions_3 = 'The Tarot Scroll will display cards from the selected deck.'
 tarot_trivia_game_instructions = 'Answer 15 of the 20 trivia questions correctly to pass this game.'
 stego_game_instructions = 'Go to the DC540 website and find the game labeled stego.'
 reenactment_game_instructions = 'Re-enact a Tarot Card picture using yourself. Take a picture and submit on the DC540 Tartot badge channel'  # noqa
@@ -1128,10 +1131,12 @@ morse_code_game = {
     'THE HANGED MAN': 'THE HANGED MAN',
 }
 
-decryption_game_questions = {
-    'Cipher 1': 'Cipher 1: Iwt rdchitaapixdc Pcsgdbtsp xh adrpits xc Vgddbqgxsvt ?',
+decryption_game_setup = {
+    'Instructions': 'Use the right button to scroll through these three encryptions and add them together for the answer.',  # noqa
+    'Cipher 1': 'Cipher 1: Iwt rdchitaapixdc Pcsgdbtsp xh adrpits xc Vgddbqgxsvt',
     'Cipher 2': 'Cipher 2: dGhlIGFuc3dlciB0byB saWZlIHRoZSB1bml2ZX JzZSBhbmQgZXZl cnl0aGluZw==',
     'Cipher 3': 'Cipher 3: Mhv bnfbvf rhu rfx eofybgg wck bs kvx ttfabv nlauxr ft mbtrbbnm.',
+    'Submit': 'Use the submit button to backspace if you make a mistake and then select enter.'
 }
 
 decryption_game = {

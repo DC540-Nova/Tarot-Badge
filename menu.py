@@ -159,6 +159,7 @@ class Menu:
             elif self.touch.press(self.touch.button_up):
                 won_game = self.game.multiple_choice(self.data.tarot_trivia_game, '66', 3, 2)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
@@ -184,6 +185,7 @@ class Menu:
             elif self.touch.press(self.touch.button_right):
                 won_game = self.game.sequence(self.data.stego_game, '23', 1, 1)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
@@ -211,6 +213,7 @@ class Menu:
             elif self.touch.press(self.touch.button_right):
                 won_game = self.game.sequence(self.data.reenactment_game, '89', 1, 1)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
@@ -238,6 +241,7 @@ class Menu:
             elif self.touch.press(self.touch.button_right):
                 won_game = self.game.sequence(self.data.scavenger_hunt_game, '40', 1, 1)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
@@ -268,6 +272,7 @@ class Menu:
             elif self.touch.press(self.touch.button_up):
                 won_game = self.game.multiple_choice(self.data.flash_cards_game, '98', 2, 1, text=False)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
@@ -320,6 +325,7 @@ class Menu:
             elif self.touch.press(self.touch.button_right):
                 won_game = self.game.sequence(self.data.fun_deck_game, '11', 1, 1)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
@@ -355,6 +361,7 @@ class Menu:
             elif self.touch.press(self.touch.button_down):
                 won_game = self.game.morse_code_sequence(self.data.morse_code_game, '15', 3, 3)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
@@ -376,15 +383,17 @@ class Menu:
                 self.display.text(self.data.decryption_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
+                self.display.text(self.data.decryption_game_questions['Instructions'])
                 self.display.text(self.data.decryption_game_questions['Cipher 1'])
                 self.display.text(self.data.decryption_game_questions['Cipher 2'])
                 self.display.text(self.data.decryption_game_questions['Cipher 3'])
+                self.display.text(self.data.decryption_game_questions['Submit'])
                 won_game = self.game.sequence(self.data.decryption_game, '37', 1, 1)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                self.game.multiple_choice_practice(self.data.fun_deck_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
                 show_menu = True
@@ -409,10 +418,10 @@ class Menu:
             elif self.touch.press(self.touch.button_right):
                 won_game = self.game.sequence(self.data.malort_game, '71', 1, 1)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                self.game.multiple_choice_practice(self.data.fun_deck_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
                 show_menu = True
@@ -435,12 +444,12 @@ class Menu:
                 self.display.text(self.data.nfc_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                won_game = self.game.sequence(self.data.malort_game, '53', 1, 1)
+                won_game = self.game.sequence(self.data.nfc_game, '53', 1, 1)
                 if won_game:
+                    self.display.text('YOU WON!')
                     self.game.won(won_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_up):
-                self.game.multiple_choice_practice(self.data.fun_deck_game)
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
                 show_menu = True
@@ -456,11 +465,15 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('tarot reading menu', 'l: choose deck', 'r: tarot reading', 'u: tarot scroll',
-                                'e: main menu')
+                self.__populate('tarot reading menu', 'l: instructions', 'r: choose deck', 'u: tarot reading',
+                                'd: tarot scroll', 'e: main menu')
                 self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
+                self.display.text(self.data.tarot_instructions_1)
+                self.display.text(self.data.tarot_instructions_2)
+                self.display.text(self.data.tarot_instructions_3)
+            if self.touch.press(self.touch.button_right):
                 deck_selected = False
                 try:
                     folders = uos.listdir('sd')
@@ -485,13 +498,11 @@ class Menu:
                 except OSError:
                     # self.display.text('sd card is damaged')
                     show_menu = True
-            elif self.touch.press(self.touch.button_right):
+            elif self.touch.press(self.touch.button_up):
                 self.tarot.reading()
                 show_menu = True
-            elif self.touch.press(self.touch.button_up):
-                self.tarot.scroll()
-                show_menu = True
             elif self.touch.press(self.touch.button_down):
+                self.tarot.scroll()
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
                 show_menu = True
