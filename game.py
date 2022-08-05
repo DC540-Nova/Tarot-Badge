@@ -111,14 +111,8 @@ class Game:
             else:
                 self.display.text('ANSWER SUBMITTED')
                 answer_list.append(0)
-            if counter < num_questions:
-                self.display.text('Would you like to keep playing? [A: Yes & B: No]', timed=False, off=False)  # noqa
-                response = self.touch.yes_no()
-                self.display.clear()
-                if response == 'yes':
-                    pass
-                else:
-                    return
+            if self.touch.press(self.touch.button_extra):
+                break
             question_number += 1
             del self.question_bank[question]
             answer_total = 0
@@ -208,13 +202,8 @@ class Game:
                 answer_list.append(1)
             else:
                 answer_list.append(0)
-            self.display.text('Would you like to keep playing? [A: Yes & B: No]', timed=False, off=False)
-            response = self.touch.yes_no()
-            self.display.clear()
-            if response == 'yes':
-                pass
-            else:
-                return
+            if self.touch.press(self.touch.button_extra):
+                break
             question_number += 1
             del self.question_bank[question]
             answer_total = 0
