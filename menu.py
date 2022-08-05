@@ -303,8 +303,10 @@ class Menu:
                 self.__game_menu_decryption()
                 show_menu = True
             elif self.touch.press(self.touch.button_down):
+                self.__game_menu_malort()
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
+                self.__game_menu_nfc()
                 show_menu = True
             elif self.touch.press(self.touch.button_extra):
                 break
@@ -350,7 +352,11 @@ class Menu:
                 self.file_manager.update_games_won()
                 show_menu = False
             if self.touch.press(self.touch.button_left):
-                self.display.text(self.data.morse_code_game_instructions)
+                self.display.text(self.data.morse_code_game_instructions_1)
+                self.display.text(self.data.morse_code_game_instructions_2)
+                self.display.text(self.data.morse_code_game_instructions_3)
+                self.display.text(self.data.morse_code_game_instructions_4)
+                self.display.text(self.data.morse_code_game_instructions_5)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
                 self.game.morse_code_practice(self.data.morse_code_game_practice_easy)
@@ -383,11 +389,11 @@ class Menu:
                 self.display.text(self.data.decryption_game_instructions)
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
-                self.display.text(self.data.decryption_game_questions['Instructions'])
-                self.display.text(self.data.decryption_game_questions['Cipher 1'])
-                self.display.text(self.data.decryption_game_questions['Cipher 2'])
-                self.display.text(self.data.decryption_game_questions['Cipher 3'])
-                self.display.text(self.data.decryption_game_questions['Submit'])
+                self.display.text(self.data.decryption_game_setup['Instructions'])
+                self.display.text(self.data.decryption_game_setup['Cipher 1'])
+                self.display.text(self.data.decryption_game_setup['Cipher 2'])
+                self.display.text(self.data.decryption_game_setup['Cipher 3'])
+                self.display.text(self.data.decryption_game_setup['Submit'])
                 won_game = self.game.sequence(self.data.decryption_game, '37', 1, 1)
                 if won_game:
                     self.display.text('YOU WON!')
@@ -473,6 +479,7 @@ class Menu:
                 self.display.text(self.data.tarot_instructions_1)
                 self.display.text(self.data.tarot_instructions_2)
                 self.display.text(self.data.tarot_instructions_3)
+                show_menu = True
             if self.touch.press(self.touch.button_right):
                 deck_selected = False
                 try:
@@ -540,7 +547,7 @@ class Menu:
         show_menu = True
         while True:
             if show_menu:
-                self.__populate('extras menu', 'l: demo', 'r: badge reset', 'u: instructions', 'd: pair',
+                self.__populate('extras menu', 'l: demo', 'r: badge reset', 'u: game 11/12 pair', 'd: pair',
                                 'e: main menu')
                 self.file_manager.update_games_won()
                 show_menu = False

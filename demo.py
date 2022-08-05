@@ -190,6 +190,4 @@ class Demo:
                         break
                 except OSError:
                     # self.display.text('sd card is damaged')
-                    self.thread = False
-                    running = False
-                    break
+                    pass

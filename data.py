@@ -29,23 +29,27 @@
 
 badge_instructions_1 = 'There are more details can be found on the webpage dc540.org. Some games require you to submit to the DC540 discord channel.'  # noqa
 badge_instructions_2 = 'For those you will be sent a code to input. Other games are automatic.'
-badge_instructions_3 = 'There are six buttons for the games, Left = A, Right = B, Up = C, Down = D, S = Submit, E = Enter'  # noqa
-tarot_instructions_1 = 'Tarot Deck: Use the right button to scroll through our 3 decks & select to change the start-up demo.'  # noqa
-tarot_instructions_2 = 'Tarot Reading: Get your daily card reading here!'
+badge_instructions_3 = 'There are six buttons for the games. Left = A  Right = B Up = C     Down = D  S = Submit E = Enter'  # noqa
+tarot_instructions_1 = 'For the Tarot Deck, use the right button to scroll through our 3 decks & select to change the start-up demo.'  # noqa
+tarot_instructions_2 = 'We offer Tarot Reading where you can get your daily card reading here!'
 tarot_instructions_3 = 'The Tarot Scroll will display cards from the selected deck.'
 tarot_trivia_game_instructions = 'Answer 15 of the 20 trivia questions correctly to pass this game.'
 stego_game_instructions = 'Go to the DC540 website and find the game labeled stego.'
 reenactment_game_instructions = 'Re-enact a Tarot Card picture using yourself. Take a picture and submit on the DC540 Tartot badge channel'  # noqa
-scavenger_hunt_game_instructions = 'Find ten items that can be found on the tarot deck. Submit a picture of all ten items to the DC540 Tarot badge channel'  # noqa
+scavenger_hunt_game_instructions = 'Use the list of items on the DC540.org game instructions page.  Follow instructions to get the answer code.'  # noqa
 flash_cards_game_instructions = 'Answer 15 of the 20 flashcards correctly to pass this game.'
 fun_deck_game_instructions = 'We at DC540 created our own terrible Tarot deck. Create your own original deck and post to our DC540 discord #Tarot channel.'  # noqa
-morse_code_game_instructions = 'complete all three morse code challenges to pass this game'
+morse_code_game_instructions_1 = 'For the game, get all three correct to pass.'
+morse_code_game_instructions_2 = 'For the practice, the word will appear, the badge will flash in morse code.'
+morse_code_game_instructions_3 = 'The player enters either the left button for the dash (-) or right button for the dot (.) to progress.'  # noqa
+morse_code_game_instructions_4 = 'For a space, choose the up button and to backspace choose the submit button.'
+morse_code_game_instructions_5 = 'When ready, select enter to submit the answer and to quit the practice press E.'
 decryption_game_instructions = 'decode these three encryptions and add them together for the answer'
 help_someone_game_instructions = 'find another player wearing this badge and offer to help them'
 malort_game_instructions = 'Create your own drink recipe using Malort. Post on the DC540 Tarot Badge Channel.'
 nfc_game_instructions = 'follow the clues and look for the nfc stickers we havve posted around Defcon.'
-pairing_games_instructions_1 = 'Tarot Pairing Game: Find another player wearing the DC540 Tarot badge, pair, and pass this challenge.'  # noqa
-pairing_games_instructions_2 = 'Boss Pairing Game: Find a DC540 Boss badge and we will give you the code you need to pass this challenge.'  # noqa
+pairing_games_instructions_1 = 'For the Tarot Pairing Game, find another player wearing the DC540 Tarot badge, pair, and pass this challenge.'  # noqa
+pairing_games_instructions_2 = 'For the Boss Pairing Game, find a DC540 Boss badge and pair to pass this challenge.'  # noqa
 
 boss_ids = []  # noqa
 boss_ids.append('e66038b7137a9935')

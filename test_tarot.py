@@ -53,7 +53,7 @@ class TestTarot(unittest.TestCase):
         setUp class
         """
         # Instantiate
-        self.tarot = Tarot(file_manager, touch, display, neo_pixel, data.cards)
+        self.tarot = Tarot(file_manager, touch, display, nrf, neo_pixel, data.cards)
 
     def tearDown(self):
         """

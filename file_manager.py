@@ -237,9 +237,8 @@ class FileManager:
         if file == 'ids':
             message = 'ARE YOU SURE YOU WANT TO RESET PAIRS?'
         elif file == 'games_won':
-            message = 'ARE YOU SURE YOU WANT TO RESET GAME?'
+            message = 'ARE YOU SURE YOU WANT TO RESET GAME? [A: Yes & B: No]'
         self.display.text(message)
-        self.display.text('CHOOSE...')
         sleep(sleep_time)
         reset = self.touch.yes_no()
         if reset == 'yes':

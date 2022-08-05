@@ -192,13 +192,13 @@ class Game:
             self.display.text(question)
             self.display.text('ENTER MORSE CODE..')
             answer = self.touch.morse_code()
-            if answer == correct_answer_index:
+            if answer == correct_answer_index[:-1]:  # adds extra char in data so must remove
                 self.display.text('CORRECT')
                 self.morse_code.display(question)
             else:
                 self.display.text('INCORRECT')
             counter += 1
-            if answer == correct_answer_index:
+            if answer == correct_answer_index[:-1]:  # adds extra char in data so must remove
                 answer_list.append(1)
             else:
                 answer_list.append(0)
@@ -235,7 +235,7 @@ class Game:
             encrypted_sentence = self.morse_code.encrypt(answer)
             print('answer: ' + encrypted_sentence)
             answer = self.touch.morse_code()
-            if answer == encrypted_sentence:
+            if answer == encrypted_sentence[:-1]:  # adds extra char in data so must remove
                 self.display.text('CORRECT')
             else:
                 self.display.text('INCORRECT')

@@ -36,17 +36,19 @@ class Tarot:
     Base class to handle tarot card reading/s
     """
 
-    def __init__(self, file_manager, touch, display, neo_pixel, card_bank):
+    def __init__(self, file_manager, touch, display, nrf, neo_pixel, card_bank):
         """
         Params:
             file_manager: object
             touch: object
             display: object
+            nrf: object
             neo_pixel: object
         """
         self.file_manager = file_manager
         self.touch = touch
         self.display = display
+        self.nrf = nrf
         self.neo_pixel = neo_pixel
         self.card_bank = card_bank
         self.deck = None
@@ -71,7 +73,7 @@ class Tarot:
 
     def reading(self):
         """
-        Function to handle a tarot reading
+        Method to handle a tarot reading
         """
         self.__load_tarot_deck()
         _thread.start_new_thread(self.__neopixel_animation, ())
@@ -80,7 +82,14 @@ class Tarot:
         counter = 1
         for _ in temp_card_bank:
             card, card_reading = urandom.choice(list(temp_card_bank.items()))
-            meaning = urandom.randint(1, 2)  # randomize card up or down position
+            seed = self.nrf.__read_msg()
+            seed_1 = 1
+            seed_2 = 2
+            if seed[0] >= 0:
+                seed_1 = urandom.randint(1, 2)
+            else:
+                seed_2 = urandom.randint(1, 2)
+            meaning = urandom.randint(seed_1, seed_2)  # randomize card up or down position
             if counter == 1:
                 self.display.text('Querent')
             elif counter == 2:
@@ -101,6 +110,14 @@ class Tarot:
                 self.display.text('Hopes & Fears')
             elif counter == 10:
                 self.display.text('Outcome')
+            touched_right = self.touch.press(self.touch.button_right)
+            touched_up = self.touch.press(self.touch.button_up)
+            touched_down = self.touch.press(self.touch.button_down)
+            touched_submit = self.touch.press(self.touch.button_submit)
+            touched_extra = self.touch.press(self.touch.button_extra)
+            if touched_right or touched_up or touched_down or touched_submit or touched_extra:
+                self.thread = False
+                break
             if meaning == 1:
                 try:
                     card = 'sd/' + self.deck + '/' + card_reading[2]
@@ -120,8 +137,7 @@ class Tarot:
                             break
                 except OSError:
                     # self.display.text('sd card is damaged')
-                    self.thread = False
-                    break
+                    pass
             if meaning == 1:
                 self.display.text(card_reading[0], timed=False)
                 while True:
@@ -170,6 +186,4 @@ class Tarot:
                         break
                 except OSError:
                     # self.display.text('sd card is damaged')
-                    self.thread = False
-                    running = False
-                    break
+                    pass

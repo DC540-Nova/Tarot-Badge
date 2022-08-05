@@ -50,7 +50,7 @@ microcontroller = Microcontroller()
 encryption = Encryption()
 touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
 file_manager = FileManager(touch, display, neo_pixel)
-tarot = Tarot(file_manager, touch, display, neo_pixel, data.cards)
+tarot = Tarot(file_manager, touch, display, nrf, neo_pixel, data.cards)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)
 game = Game(file_manager, touch, display, tarot, morse_code, encryption)
 

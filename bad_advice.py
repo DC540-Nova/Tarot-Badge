@@ -71,4 +71,4 @@ class BadAdvice:
                     break
             except OSError:
                 # self.display.text('sd card is damaged')
-                break
+                pass
