@@ -119,31 +119,31 @@ class TestGame(unittest.TestCase):
         # Params
         question_bank = data.tarot_trivia_game
         # Returns
-        return_1 = False
+        return_1 = None
         # Calls
         none_1 = self.game.multiple_choice_practice(question_bank)
         # Asserts
         self.assertEqual(none_1, return_1)
 
-    def test_morse_code_won(self):
-        """
-        test morse_code won functionality
-
-        Interactive Response:  [RANDOM MANUAL VALIDATION]
-        """
-        # Params
-        question_bank = data.morse_code_game
-        game_number = '7'
-        num_questions = 1
-        num_questions_to_win = 1
-        # Returns
-        return_1 = '7 '
-        # Calls
-        won_game = self.game.morse_code_sequence(question_bank, game_number, num_questions, num_questions_to_win)
-        if won_game:
-            self.game.won(won_game)
-        # Asserts
-        self.assertEqual(won_game, return_1)
+    # def test_morse_code_won(self):
+    #     """
+    #     test morse_code won functionality
+    #
+    #     Interactive Response:  [RANDOM MANUAL VALIDATION]
+    #     """
+    #     # Params
+    #     question_bank = data.morse_code_game
+    #     game_number = '7'
+    #     num_questions = 1
+    #     num_questions_to_win = 1
+    #     # Returns
+    #     return_1 = '7 '
+    #     # Calls
+    #     won_game = self.game.morse_code_sequence(question_bank, game_number, num_questions, num_questions_to_win)
+    #     if won_game:
+    #         self.game.won(won_game)
+    #     # Asserts
+    #     self.assertEqual(won_game, return_1)
 
     def test_morse_code_lose(self):
         """

@@ -244,6 +244,7 @@ class Game:
             self.morse_code.display(answer)
             self.display.text('ENTER MORSE CODE...')
             encrypted_sentence = self.morse_code.encrypt(answer)
+            print('answer: ' + encrypted_sentence)
             answer = self.touch.morse_code()
             if answer == encrypted_sentence:
                 self.display.text('CORRECT')
