@@ -567,7 +567,7 @@ class Menu:
                 show_menu = True
             elif self.touch.press(self.touch.button_submit):
                 illumaniti_sequence = self.touch.numeric_sequence(show=True)
-                if illumaniti_sequence == '12123344':
+                if illumaniti_sequence == '33441212':
                     self.display.image('3Hats.raw',  timed=False)
                     while True:
                         self.neo_pixel.illuminati()
