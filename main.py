@@ -65,15 +65,15 @@ pair = Pair(microcontroller, file_manager, display, neo_pixel, game, morse_code,
 menu = Menu(file_manager, touch, display, neo_pixel, game, tarot, bad_advice, pair, demo, data)
 
 if __name__ == '__main__':
-    while True:
-        try:
-            try:
-                display.image('dc540_logo.raw')
-                demo.play()
-                menu.system()
-            except Exception as e:  # noqa
-                print(e)
-        except:  # noqa
-            while True:
-                pass
-    # pass
+    # while True:
+    #     try:
+    #         try:
+    #             display.image('dc540_logo.raw')
+    #             demo.play()
+    #             menu.system()
+    #         except Exception as e:  # noqa
+    #             print(e)
+    #     except:  # noqa
+    #         while True:
+    #             pass
+    pass

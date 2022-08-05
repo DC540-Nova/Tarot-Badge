@@ -62,7 +62,7 @@ class TestGame(unittest.TestCase):
         setUp class
         """
         # Instantiate
-        self.game = Game(touch, file_manager, display, tarot, morse_code, encryption)
+        self.game = Game(file_manager, touch, display, tarot, morse_code, encryption)
 
     def tearDown(self):
         """
@@ -70,47 +70,60 @@ class TestGame(unittest.TestCase):
         """
         pass
 
-    # def test_multiple_choice_won(self):
-    #     """
-    #     test multiple_choice won functionality
-    #
-    #     Interactive Response:  [RANDOM MANUAL VALIDATION]
-    #     """
-    #     # Params
-    #     question_bank = data.tarot_trivia_game
-    #     game_number = '1'
-    #     num_questions = 3
-    #     num_questions_to_win = 2
-    #     # Returns
-    #     return_1 = '1 '
-    #     # Calls
-    #     won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
-    #     if won_game:
-    #         self.game.won(won_game)
-    #     # Asserts
-    #     self.assertEqual(won_game, return_1)
-    #
-    # def test_multiple_choice_lose(self):
-    #     """
-    #     test multiple_choice lose functionality
-    #
-    #     Interactive Response:  [RANDOM MANUAL VALIDATION]
-    #     """
-    #     # Params
-    #     question_bank = data.tarot_trivia_game
-    #     game_number = '1'
-    #     num_questions = 3
-    #     num_questions_to_win = 2
-    #     # Returns
-    #     return_1 = False
-    #     # Calls
-    #     won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
-    #     if won_game:
-    #         self.game.won(won_game)
-    #     # Asserts
-    #     self.assertEqual(won_game, return_1)
+    def test_multiple_choice_won(self):
+        """
+        test multiple_choice won functionality
 
-# TODO: practice unit test
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.tarot_trivia_game
+        game_number = '1'
+        num_questions = 1
+        num_questions_to_win = 1
+        # Returns
+        return_1 = '1 '
+        # Calls
+        won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
+        if won_game:
+            self.game.won(won_game)
+        # Asserts
+        self.assertEqual(won_game, return_1)
+
+    def test_multiple_choice_lose(self):
+        """
+        test multiple_choice lose functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.tarot_trivia_game
+        game_number = '1'
+        num_questions = 1
+        num_questions_to_win = 1
+        # Returns
+        return_1 = False
+        # Calls
+        won_game = self.game.multiple_choice(question_bank, game_number, num_questions, num_questions_to_win)
+        if won_game:
+            self.game.won(won_game)
+        # Asserts
+        self.assertEqual(won_game, return_1)
+
+    def test_multiple_practice(self):
+        """
+        test multiple_choice practice functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.tarot_trivia_game
+        # Returns
+        return_1 = False
+        # Calls
+        none_1 = self.game.multiple_choice_practice(question_bank)
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
     def test_morse_code_won(self):
         """
@@ -121,8 +134,8 @@ class TestGame(unittest.TestCase):
         # Params
         question_bank = data.morse_code_game
         game_number = '7'
-        num_questions = 3
-        num_questions_to_win = 3
+        num_questions = 1
+        num_questions_to_win = 1
         # Returns
         return_1 = '7 '
         # Calls
@@ -132,24 +145,62 @@ class TestGame(unittest.TestCase):
         # Asserts
         self.assertEqual(won_game, return_1)
 
-    # def test_question_loop_win_interactive(self):
-    #     """
-    #     test question_loop win functionality
-    #
-    #     Interactive Response:  60144559
-    #     """
-    #     # Setup
-    #     str_status = '7 10 4 6 9 3 2 8 5 '
-    #     file_manager.write_status_file(str_status)
-    #     # Params
-    #     question_number = '1'
-    #     # Returns
-    #     return_1 = None
-    #     # Calls
-    #     question = game.question_loop(question_number)
-    #     # Asserts
-    #     self.assertEqual(question, return_1)
-    #
+    def test_morse_code_lose(self):
+        """
+        test morse_code lose functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.morse_code_game
+        game_number = '7'
+        num_questions = 1
+        num_questions_to_win = 1
+        # Returns
+        return_1 = False
+        # Calls
+        won_game = self.game.morse_code_sequence(question_bank, game_number, num_questions, num_questions_to_win)
+        # Asserts
+        self.assertEqual(won_game, return_1)
+
+    def test_sequence_won(self):
+        """
+        test seqience won functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.stego_game
+        game_number = '7'
+        num_questions = 1
+        num_questions_to_win = 1
+        # Returns
+        return_1 = '7 '
+        # Calls
+        won_game = self.game.sequence(question_bank, game_number, num_questions, num_questions_to_win)
+        if won_game:
+            self.game.won(won_game)
+        # Asserts
+        self.assertEqual(won_game, return_1)
+
+    def test_sequence_lose(self):
+        """
+        test sequence lose functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.stego_game
+        game_number = '7'
+        num_questions = 1
+        num_questions_to_win = 1
+        # Returns
+        return_1 = False
+        # Calls
+        won_game = self.game.sequence(question_bank, game_number, num_questions, num_questions_to_win)
+        # Asserts
+        self.assertEqual(won_game, return_1)
+
 
 if __name__ == '__main__':
     unittest.main()

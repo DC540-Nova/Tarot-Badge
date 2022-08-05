@@ -150,7 +150,8 @@ class Touch:
             elif self.press(self.button_down):
                 pass
             elif self.press(self.button_submit):
-                pass
+                sentence = sentence[:-1]
+                self.display.text(sentence, timed=False)
             elif self.press(self.button_extra):
                 if sentence:
                     return sentence

@@ -192,11 +192,11 @@ class Game:
         answer_list = []
         for _ in questions:
             question, answer = random.choice(list(self.question_bank.items()))
-            answer = self.encryption.decode(answer)
-            print('answer: ' + answer)
+            answer = self.morse_code.encrypt(answer)
+            correct_answer_index = answer
+            print('answer: ', correct_answer_index)
             self.display.text(question)
             self.display.text('ENTER MORSE CODE..')
-            correct_answer_index = answer
             answer = self.touch.morse_code()
             if answer == correct_answer_index:
                 self.display.text('CORRECT')
@@ -208,6 +208,13 @@ class Game:
                 answer_list.append(1)
             else:
                 answer_list.append(0)
+            self.display.text('Would you like to keep playing? [A: Yes & B: No]')
+            response = self.touch.yes_no()
+            self.display.clear()
+            if response == 'yes':
+                pass
+            else:
+                return
             question_number += 1
             del self.question_bank[question]
             answer_total = 0
@@ -242,6 +249,13 @@ class Game:
                 self.display.text('CORRECT')
             else:
                 self.display.text('INCORRECT')
+            self.display.text('Would you like to practice with another morse code? [A: Yes & B: No]')
+            response = self.touch.yes_no()
+            self.display.clear()
+            if response == 'yes':
+                pass
+            else:
+                return
 
     def sequence(self, question_bank, game_number, num_questions, num_questions_to_win):
         """
