@@ -136,7 +136,7 @@ class Tarot:
                 del temp_card_bank[card]
             except KeyError:
                 pass
-            if counter > 1:
+            if counter > 10:
                 self.display.POWER_DISPLAY.value(0)
                 self.display.clear()
                 self.thread = False
