@@ -95,7 +95,7 @@ cards = {
     '6 The Lovers':
         [
             'Life-changing choice, turning point. Union with another, two as one.',
-            'Inappropriate relationship. Immaturity, lack of love, possessiveness, lust rather than love. Bad choice, indecision, temptation, weakness, lack of trust.',   # noqa
+            'Inappropriate relationship. Immaturity, lack of love, possessiveness, lust rather than love. Bad choice.',   # noqa
             '06-TheLovers.raw'
         ],
     '7 The Chariot':
@@ -107,13 +107,13 @@ cards = {
     '8 Strength':
         [
             'Persuasion, gentle strength. Patience, control, compassion.',
-            'Mental problems. Too overbearing or too weak. Not knowing when to stop. Government vs citizens. Cruelty. Disregarding the well-being of others.',  # noqa
+            'Mental problems. Too overbearing or too weak. Not knowing when to stop. Government vs citizens. Cruelty.',  # noqa
             '08-Strength.raw'
         ],
     '9 The Hermit':
         [
             'Knowing oneself, solitude. Understanding humanity, wisdom.',
-            'Fear of being alone. Social withdrawal, paranoia, identity crisis, embittered. Worry about aging. Fear of having to depend on others.',  # noqa
+            'Fear of being alone. Social withdrawal, paranoia, identity crisis, embittered. Worry about aging.',  # noqa
             '09-TheHermit.raw'
         ],
     '10 Wheel Of Fortune':
@@ -137,7 +137,7 @@ cards = {
     '13 Death':
         [
             'Endings and new beginnings, transformation, transition. Death.',
-            'Attempting to avoid an inevitable end. Chronic illness. Extreme depression or pessimism. Obsession with death. Accident (narrowly escaping death).',  # noqa
+            'Attempting to avoid an inevitable end. Chronic illness. Extreme depression or pessimism. Obsession with death.',  # noqa
             '13-Death.raw'
         ],
     '14 Temperance':
@@ -149,13 +149,13 @@ cards = {
     '15 The Devil':
         [
             'Addiction, bad habits, co-dependency, materialism.',
-            'Extremes, life threatening addiction, psychopathic personality disorder. Abuse. Escape, release, moving forward, taking control of your problems and your life.',  # noqa
+            'Extremes, life threatening addiction, psychopathic personality disorder. Abuse. Escape, release, moving forward.',  # noqa
             '15-TheDevil.raw'
         ],
     '16 The Tower':
         [
             'Chaos, destruction, upheaval. Unexpected and possibly unwanted change.',
-            'Weakened energy of upright card. Irritations, things going wrong, setbacks, pressure, stress. Accidents, cuts, burns, surgery. Need to visit the doctor.',  # noqa
+            'Weakened energy of upright card. Irritations, things going wrong, setbacks, pressure, stress. Accidents, cuts, burns, surgery.',  # noqa
             '16-TheTower.raw'
         ],
     '17 The Star':
@@ -185,7 +185,7 @@ cards = {
     '21 The World':
         [
             'In the right place. Accomplishment, completion. Pause before the next stage.',
-            'Slightly weakened energy of upright card so generally positive. Wanting to move forward but held back. Overdue birth. Issues with weight loss.',  # noqa
+            'Slightly weakened energy of upright card so generally positive. Wanting to move forward but held back. Overdue birth.',  # noqa
             '21-TheWorld.raw'
         ],
     '22 Ace Of Wands':
@@ -209,7 +209,7 @@ cards = {
     '25 Four Of Wands':
         [
             'Community, celebration, domestic comfort, engagement, wedding, housewarming. A job well done.',
-            'Not much different from upright. Celebration, reunions, break from hard work. Building of foundations, cementing of relationships. Sale of property.',  # noqa
+            'Not much different from upright. Celebration, reunions, break from hard work. Building of foundations, cementing of relationships.',  # noqa
             'Wands04.raw'
         ],
     '26 Five Of Wands':
@@ -275,7 +275,7 @@ cards = {
     '36 Ace Of Cups':
         [
             'Overwhelming romantic and spiritual love. New relationship, friendship. Compassion.',
-            'Love seeping away. Setting emotional boundaries. Lost or unrequited love. Change in a relationship from romantic to routine. Possible drinking problem.',  # noqa
+            'Love seeping away. Setting emotional boundaries. Lost or unrequited love. Change in a relationship from romantic to routine.',  # noqa
             'Cups01.raw'
         ],
     '37 Two Of Cups':
@@ -293,7 +293,7 @@ cards = {
     '39 Four Of Cups':
         [
             'Emotional stability, contemplation, meditation, inward focus.',
-            'Ready to overcome depression. Looking for solutions. Preparing for a change. Restlessness. Mild insomnia. Tiredness, apathy. Psychic experiences.',  # noqa
+            'Ready to overcome depression. Looking for solutions. Preparing for a change. Restlessness. Mild insomnia. Tiredness, apathy.',  # noqa
             'Cups04.raw'
         ],
     '40 Five Of Cups':
@@ -347,25 +347,25 @@ cards = {
     '48 Queen Of Cups':
         [
             'Intuitive, compassionate woman. Good friend.',
-            'A delicate woman. Perhaps with health issues or emotional problems. Someone who needs physical and emotional support. Withdrawal of love from a partner.',  # noqa
+            'A delicate woman. Perhaps with health issues or emotional problems. Someone who needs physical and emotional support.',  # noqa
             'Cups13.raw'
         ],
     '49 King Of Cups':
         [
             'Friendly, gentle man. Emotionally supportive.',
-            'A man isolated emotionally. Possible alcoholic or drug addict. Depression and self pity causes relationship difficulties. Unable to express personal feelings.',  # noqa
+            'A man isolated emotionally. Possible alcoholic or drug addict. Depression and self pity causes relationship difficulties.',  # noqa
             'Cups14.raw'
         ],
     '50 Ace Of Pentacles':
         [
             'Gift, manifestation, new house or project. Prosperity.',
-            'Exaggerated energy of upright card. Treasure, wealth, fortune. Prosperity without happiness. Obsessed with making money. Corruption. Easy come, easy go.',  # noqa
+            'Exaggerated energy of upright card. Treasure, wealth, fortune. Prosperity without happiness. Obsessed with making money.',  # noqa
             'Pentacles01.raw'
         ],
     '51 Two Of Pentacles':
         [
             'Making ends meet. Balancing time and resources.',
-            'Paperwork. Too much to deal with. Data crashes. Learning difficulties. Student struggles with making ends meet, meeting deadlines, understanding the work.',  # noqa
+            'Paperwork. Too much to deal with. Data crashes. Learning difficulties. Student struggles with making ends meet.',  # noqa
             'Pentacles02.raw'
         ],
     '52 Three Of Pentacles':
@@ -377,19 +377,19 @@ cards = {
     '53 Four Of Pentacles':
         [
             'Stability, security, isolation, holding on to resources.',
-            'Resisting letting go of resources. Uneasiness outside of comfort zone. Blockages both mental and actual. Writers block. Hindrances and delays. Late payment.',  # noqa
+            'Resisting letting go of resources. Uneasiness outside of comfort zone. Blockages both mental and actual.',  # noqa
             'Pentacles04.raw'
         ],
     '54 Five Of Pentacles':
         [
             'Material loss, destitution, poverty, financial or material challenge.',
-            'A turning point. Slight improvement in situation. Access to help and support. Or things go from bad to worse. The unthinkable happens. Loss of everything.',  # noqa
+            'A turning point. Slight improvement in situation. Access to help and support. Or things go from bad to worse.',  # noqa
             'Pentacles05.raw'
         ],
     '55 Six Of Pentacles':
         [
             'Generosity, giving and receiving support, charity, donation of resources.',
-            'Taking advantage. Claiming under false pretenses. Greed, jealousy, disputes over money. Insurance refusing to pay. Lack of insurance. Unpaid debts or paying off a debt.',  # noqa
+            'Taking advantage. Claiming under false pretenses. Greed, jealousy, disputes over money. Insurance refusing to pay.',  # noqa
             'Pentacles06.raw'
         ],
     '56 Seven Of Pentacles':
@@ -401,43 +401,43 @@ cards = {
     '57 Eight Of Pentacles':
         [
             'Education, training/retraining, change of career, focus on the job in hand.',
-            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Overqualified for the job. Boredom and tedium at work and life in general.',  # noqa
+            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Overqualified for the job.',  # noqa
             'Pentacles08.raw'
         ],
     '58 Nine Of Pentacles':
         [
             'Independence, happy with own company. Self-sufficiency, appreciation.',
-            'Goals attained but not as satisfying as expected. Trapped in a gilded cage. Looking for a way out. Needing a challenge. Lack of exercise. Lack of company.',  # noqa
+            'Goals attained but not as satisfying as expected. Trapped in a gilded cage. Looking for a way out. Needing a challenge.',  # noqa
             'Pentacles09.raw'
         ],
     '59 Ten Of Pentacles':
         [
             'Family structure, wealth, business, planning, inter-generational co-operation.',
-            'Rejecting family. Disputes over inheritance or property. Family quarrels. Feeling like an outsider. Elderly relative needing care. Gambling losses. Material insecurity.',  # noqa
+            'Rejecting family. Disputes over inheritance or property. Family quarrels. Feeling like an outsider.',  # noqa
             'Pentacles10.raw'
         ],
     '60 Page Of Pentacles':
         [
             'Student, curiosity, focus. Messenger, or message arriving by post.',
-            'Lost interest in school or college. Underlying and hidden issues. Preoccupied with material possessions and appearance. Stress and exhaustion caused by overwork.',  # noqa
+            'Lost interest in school or college. Underlying and hidden issues. Preoccupied with material possessions and appearance.',  # noqa
             'Pentacles11.raw'
         ],
     '61 Knight Of Pentacles':
         [
             'Hard worker, loyal, reliable, quiet man with hidden depths.',
-            'Workaholic or its opposite; work-shy and lazy. Obsession with one person or topic. Weight issues, lack of exercise, chronic fatigue. Bore. Socially inept.',  # noqa
+            'Workaholic or its opposite; work-shy and lazy. Obsession with one person or topic. Weight issues, lack of exercise.',  # noqa
             'Pentacles12.raw'
         ],
     '62 Queen Of Pentacles':
         [
             'Comforting, practical, efficient woman. Motherhood, career woman.',
-            'Extremely house proud, or extremely slovenly. Possessions mean more than people. Hoarder, or fixated on designer goods. Helicopter parenting. Doubt, mistrust.',  # noqa
+            'Extremely house proud, or extremely slovenly. Possessions mean more than people. Hoarder, or fixated on designer goods.',  # noqa
             'Pentacles13.raw'
         ],
     '63 King Of Pentacles':
         [
             'Businessman, magnanimous, proud, self-educated, self-made.',
-            'Misuse of power and money. Abuse of people for gain or personal gratification. Corruption. Overeating, indigestion. Careless of the wellbeing of others. Unloved by family.',  # noqa
+            'Misuse of power and money. Abuse of people for gain or personal gratification. Corruption. Overeating, indigestion.',  # noqa
             'Pentacles14.raw'
         ],
     '64 Ace Of Swords':
@@ -479,7 +479,7 @@ cards = {
     '70 Seven Of Swords':
         [
             'Stealth, reclaiming something lost, mental trickery, betrayal, theft.',
-            'Shame after trying to steal or deceive. Returning that which does not belong to you. Community service. Giving back or paying forward.',  # noqa
+            'Shame after trying to steal or deceive. Returning that which does not belong to you. Community service.',  # noqa
             'Swords07.raw'
         ],
     '71 Eight Of Swords':

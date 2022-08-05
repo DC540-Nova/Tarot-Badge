@@ -67,12 +67,10 @@ class TestTarot(unittest.TestCase):
 
         Interactive Response:  [RANDOM MANUAL VALIDATION]
         """
-        # Params
-        deck = 'Rider-Waite'
         # Returns
         return_1 = None
         # Calls
-        none_1 = self.tarot.reading(deck)
+        none_1 = self.tarot.reading()
         # Asserts
         self.assertEqual(none_1, return_1)
 
