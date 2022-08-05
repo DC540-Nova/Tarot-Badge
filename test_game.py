@@ -79,7 +79,7 @@ class TestGame(unittest.TestCase):
         # Params
         question_bank = data.tarot_trivia_game
         game_number = '1'
-        num_questions = 1
+        num_questions = 2
         num_questions_to_win = 1
         # Returns
         return_1 = '1 '
@@ -99,7 +99,7 @@ class TestGame(unittest.TestCase):
         # Params
         question_bank = data.tarot_trivia_game
         game_number = '1'
-        num_questions = 1
+        num_questions = 2
         num_questions_to_win = 1
         # Returns
         return_1 = False
@@ -110,7 +110,7 @@ class TestGame(unittest.TestCase):
         # Asserts
         self.assertEqual(won_game, return_1)
 
-    def test_multiple_practice(self):
+    def test_multiple_choice_practice(self):
         """
         test multiple_choice practice functionality
 
@@ -125,25 +125,25 @@ class TestGame(unittest.TestCase):
         # Asserts
         self.assertEqual(none_1, return_1)
 
-    # def test_morse_code_won(self):
-    #     """
-    #     test morse_code won functionality
-    #
-    #     Interactive Response:  [RANDOM MANUAL VALIDATION]
-    #     """
-    #     # Params
-    #     question_bank = data.morse_code_game
-    #     game_number = '7'
-    #     num_questions = 1
-    #     num_questions_to_win = 1
-    #     # Returns
-    #     return_1 = '7 '
-    #     # Calls
-    #     won_game = self.game.morse_code_sequence(question_bank, game_number, num_questions, num_questions_to_win)
-    #     if won_game:
-    #         self.game.won(won_game)
-    #     # Asserts
-    #     self.assertEqual(won_game, return_1)
+    def test_morse_code_won(self):
+        """
+        test morse_code won functionality
+
+        Interactive Response:  [RANDOM MANUAL VALIDATION]
+        """
+        # Params
+        question_bank = data.morse_code_game
+        game_number = '7'
+        num_questions = 2
+        num_questions_to_win = 1
+        # Returns
+        return_1 = '7 '
+        # Calls
+        won_game = self.game.morse_code_sequence(question_bank, game_number, num_questions, num_questions_to_win)
+        if won_game:
+            self.game.won(won_game)
+        # Asserts
+        self.assertEqual(won_game, return_1)
 
     def test_morse_code_lose(self):
         """
@@ -154,7 +154,7 @@ class TestGame(unittest.TestCase):
         # Params
         question_bank = data.morse_code_game
         game_number = '7'
-        num_questions = 1
+        num_questions = 2
         num_questions_to_win = 1
         # Returns
         return_1 = False
@@ -200,6 +200,19 @@ class TestGame(unittest.TestCase):
         won_game = self.game.sequence(question_bank, game_number, num_questions, num_questions_to_win)
         # Asserts
         self.assertEqual(won_game, return_1)
+
+    def test_won(self):
+        """
+        test won functionality
+        """
+        # Params
+        game_won = '1'
+        # Returns
+        return_1 = False
+        # Calls
+        none_1 = self.game.won(game_won)
+        # Asserts
+        self.assertEqual(none_1, return_1)
 
 
 if __name__ == '__main__':
