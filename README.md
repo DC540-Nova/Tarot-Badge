@@ -20,4 +20,4 @@ unittest.main('test_display')
 ```
 
 ## License
-[MIT License](https://raw.githubusercontent.com/DC540-Nova/Tarot-Badge/main/LICENSE?token=GHSAT0AAAAAABTGUGNKZPESZQJJLOJLPQRWYSS4ZQQ)
+[MIT License](https://raw.githubusercontent.com/DC540-Nova/Tarot-Badge/main/LICENSE?token=GHSAT0AAAAAABXL4O6QYCDD22UFRDF4XLXMYXOK47A)
