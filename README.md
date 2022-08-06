@@ -5,7 +5,7 @@ DC540 Defcon Group Tarot Badge code repo.
 
 ## PROMOTIONAL VIDEO
 ### WATCH NOW [HERE](https://youtu.be/l6vM9SNLcsQ) ON YOUTUBE
-![image](https://github.com/DC540-Nova/DC30-Tarot-Badge/blob/main/Tarot%20Badge.jpg?raw=true)
+![image](https://github.com/DC540-Nova/Tarot-Badge/blob/main/Tarot%20Badge.jpg?raw=true)
 
 <br>
 
