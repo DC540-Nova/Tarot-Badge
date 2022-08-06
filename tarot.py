@@ -28,6 +28,8 @@
 # pyright: reportUndefinedVariable=false
 
 import _thread
+
+import gc
 import urandom
 
 
@@ -169,6 +171,7 @@ class Tarot:
         running = True
         while running:
             for _ in self.card_bank:
+                print(gc.mem_free())
                 card, card_reading = urandom.choice(list(self.card_bank.items()))
                 try:
                     card = 'sd/' + self.deck + '/' + card_reading[2]
