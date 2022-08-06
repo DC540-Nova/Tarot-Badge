@@ -29,9 +29,9 @@
 
 import array
 import random
-
 from utime import sleep_ms, sleep
 import rp2
+import gc
 
 
 class NeoPixel:
@@ -185,6 +185,7 @@ class NeoPixel:
             color: tuple, optional
             repeat: int, optional
         """
+        gc.collect()
         step = 5
         breath_amps = [ii for ii in range(0, 200, step)]
         for ii in breath_amps:
