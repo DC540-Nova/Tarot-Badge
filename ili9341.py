@@ -491,7 +491,7 @@ class Display:
         y = 0
         width = 240
         height = 320
-        draw_speed = 1024
+        draw_speed = 768
         if up:
             self.rotation = self.ROTATE[0]
             self.__config()
@@ -502,6 +502,7 @@ class Display:
             self.clear()
         x2 = x + width - 1
         with open(path, 'rb') as f:
+            gc.collect()
             chunk_height = draw_speed // width  # 153600 total bytes of an image
             chunk_count, remainder = divmod(height, chunk_height)
             chunk_size = chunk_height * width * 2

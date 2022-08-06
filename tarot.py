@@ -168,8 +168,7 @@ class Tarot:
         self.display.handle_threading_setup()
         running = True
         while running:
-            card_bank = self.card_bank
-            for _ in card_bank:
+            for _ in self.card_bank:
                 card, card_reading = urandom.choice(list(self.card_bank.items()))
                 try:
                     card = 'sd/' + self.deck + '/' + card_reading[2]
