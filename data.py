@@ -921,6 +921,14 @@ flash_cards_game = {
             'D. The Sun',
             0
         ],
+    'Wands03.raw':
+        [
+            'A. Two of Wands',
+            'B. Page of Wands',
+            'C. Queen of Wands',
+            'D. Three of Wands',
+            3
+        ],
     'Wands04.raw':
         [
             'A. Two of Wands',
@@ -928,6 +936,54 @@ flash_cards_game = {
             'C. Three of Wands',
             'D. Ace of Wands',
             1
+        ],
+    'Wands06.raw':
+        [
+            'A. Six of Wands',
+            'B. Five of Wands',
+            'C. Seven of Wands',
+            'D. Four of Wands',
+            0
+        ],
+    'Wands08.raw':
+        [
+            'A. Ace of Wands',
+            'B. Page of Wands',
+            'C. Seven of Wands',
+            'D. Eight of Wands',
+            3
+        ],
+    'Wands10.raw':
+        [
+            'A. Jack of Wands',
+            'B. Page of Wands',
+            'C. Ten of Wands',
+            'D. Knight of Wands',
+            2
+        ],
+    'Wands13.raw':
+        [
+            'A. Queen of Wands',
+            'B. Page of Wands',
+            'C. King of Wands',
+            'D. Ace of Wands',
+            0
+        ],
+    'Wands14.raw':
+        [
+            'A. Ace of Wands',
+            'B. King of Wands',
+            'C. Page of Wands',
+            'D. Knight of Wands',
+            1
+        ],
+    'Cups01.raw':
+        [
+            'A. Ace of Cups',
+            'B. Page of Cups',
+            'C. Queen of Goblets',
+            'D. Ace of Goblets',
+            0
         ],
     'Cups02.raw':
         [
@@ -945,12 +1001,92 @@ flash_cards_game = {
             'D. Ace of Cups',
             0
         ],
+    'Cups07.raw':
+        [
+            'A. Seven of Goblets',
+            'B. Six of Goblets',
+            'C. Six of Cups',
+            'D. Seven of Cups',
+            3
+        ],
+    'Cups09.raw':
+        [
+            'A. Nine of Goblets',
+            'B. Nine of Chalices',
+            'C. Nine of Cups',
+            'D. Nine of Mugs',
+            2
+        ],
+    'Cups12.raw':
+        [
+            'A. Knight of Cups',
+            'B. Night of Goblets',
+            'C. Night of Cups',
+            'D. Knight of Goblets',
+            0
+        ],
+    'Pentacles02.raw':
+        [
+            'A. Two of Cups',
+            'B. Two of Pentacles',
+            'C. Two of Wands',
+            'D. Two of Towers',
+            1
+        ],
     'Pentacles04.raw':
         [
             'A. Four of Pentacles',
             'B. Four of Stars',
             'C. Four of Temperance',
             'D. Four of Kings',
+            0
+        ],
+    'Pentacles05.raw':
+        [
+            'A. Ace of Cups',
+            'B. Five of Swords',
+            'C. Ace of Pentacles',
+            'D. Five of Pentacles',
+            3
+        ],
+    'Pentacles07.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Seven of Pentacles',
+            3
+        ],
+    'Pentacles11.raw':
+        [
+            'A. Queen of Pentacles',
+            'B. Page of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Ace of Pentacles',
+            1
+        ],
+    'Pentacles12.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Seven of Pentacles',
+            2
+        ],
+    'Pentacles14.raw':
+        [
+            'A. Ace of Pentacles',
+            'B. King of Pentacles',
+            'C. Knight of Pentacles',
+            'D. Queen of Pentacles',
+            1
+        ],
+    'Swords01.raw':
+        [
+            'A. Ace of Swords',
+            'B. King of Swords',
+            'C. Knight of Swords',
+            'D. Seven of Swords',
             0
         ],
     'Swords03.raw':
@@ -967,6 +1103,38 @@ flash_cards_game = {
             'B. Four of Swords',
             'C. Six of Swords',
             'D. Five of Swords',
+            3
+        ],
+    'Swords08.raw':
+        [
+            'A. Three of Swords',
+            'B. Eight of Swords',
+            'C. Ace of Swords',
+            'D. Two of Swords',
+            1
+        ],
+    'Swords09.raw':
+        [
+            'A. Nine of Swords',
+            'B. Eight of Swords',
+            'C. Page of Swords',
+            'D. Two of Swords',
+            0
+        ],
+    'Swords10.raw':
+        [
+            'A. King of Swords',
+            'B. Queen of Swords',
+            'C. Ten of Swords',
+            'D. Page of Swords',
+            2
+        ],
+    'Swords11.raw':
+        [
+            'A. Paige of Swords',
+            'B. Queen of Swords',
+            'C. Night of Swords',
+            'D. Page of Swords',
             3
         ],
     'Swords13.raw':
