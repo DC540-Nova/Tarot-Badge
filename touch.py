@@ -124,7 +124,7 @@ class Touch:
             elif self.press(self.button_extra):
                 return 5
 
-    def morse_code(self, max_chars=20):
+    def morse_code(self, max_chars=100):
         """
         Method to handle morse code touch button presses
 

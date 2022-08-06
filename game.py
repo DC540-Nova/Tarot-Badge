@@ -106,10 +106,10 @@ class Game:
             counter += 1
             print('counter: ' + str(counter))
             if answer == correct_answer_index:
-                self.display.text('ANSWER SUBMITTED')
+                self.display.text('ANSWER SUBMITTED', sleep_time=3)
                 answer_list.append(1)
             else:
-                self.display.text('ANSWER SUBMITTED')
+                self.display.text('ANSWER SUBMITTED', sleep_time=3)
                 answer_list.append(0)
             if self.touch.press(self.touch.button_extra):
                 break
@@ -164,9 +164,9 @@ class Game:
             answer = self.touch.multiple_choice()
             self.display.clear()
             if answer == correct_answer_index:
-                self.display.text('CORRECT')
+                self.display.text('CORRECT', sleep_time=3)
             else:
-                self.display.text('INCORRECT')
+                self.display.text('INCORRECT', sleep_time=3)
             self.display.text('Would you like to practice with another question? [A: Yes & B: No]', timed=False, off=False)  # noqa
             response = self.touch.yes_no()
             self.display.clear()
@@ -190,13 +190,13 @@ class Game:
             correct_answer_index = answer
             print('answer: ', correct_answer_index)
             self.display.text(question)
-            self.display.text('ENTER MORSE CODE..')
+            self.display.text('ENTER MORSE CODE..', sleep_time=3)
             answer = self.touch.morse_code()
             if answer == correct_answer_index[:-1]:  # adds extra char in data so must remove
-                self.display.text('CORRECT')
+                self.display.text('CORRECT', sleep_time=3)
                 self.morse_code.display(question)
             else:
-                self.display.text('INCORRECT')
+                self.display.text('INCORRECT', sleep_time=3)
             counter += 1
             if answer == correct_answer_index[:-1]:  # adds extra char in data so must remove
                 answer_list.append(1)
@@ -231,14 +231,14 @@ class Game:
             question, answer = random.choice(list(question_bank.items()))
             self.display.text(question)
             self.morse_code.display(answer)
-            self.display.text('ENTER MORSE CODE...')
+            self.display.text('ENTER MORSE CODE...', sleep_time=3)
             encrypted_sentence = self.morse_code.encrypt(answer)
             print('answer: ' + encrypted_sentence)
             answer = self.touch.morse_code()
             if answer == encrypted_sentence[:-1]:  # adds extra char in data so must remove
-                self.display.text('CORRECT')
+                self.display.text('CORRECT', sleep_time=3)
             else:
-                self.display.text('INCORRECT')
+                self.display.text('INCORRECT', sleep_time=3)
             self.display.text('Would you like to practice with another morse code? [A: Yes & B: No]',  timed=False, off=False)  # noqa
             response = self.touch.yes_no()
             self.display.clear()
@@ -274,10 +274,10 @@ class Game:
             answer = self.touch.numeric_sequence()
             counter += 1
             if answer == correct_answer_index:
-                self.display.text('CORRECT')
+                self.display.text('CORRECT', sleep_time=3)
                 answer_list.append(1)
             else:
-                self.display.text('INCORRECT')
+                self.display.text('INCORRECT', sleep_time=3)
                 answer_list.append(0)
             question_number += 1
             del self.question_bank[question]
