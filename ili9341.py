@@ -119,7 +119,7 @@ class XglcdFont:
         letter_ord = ord(letter) - self.start_letter
         # confirm font contains letter
         if letter_ord >= self.letter_count:
-            print('font does not contain character: ' + letter)
+            # print('font does not contain character: ' + letter)
             return b'', 0, 0
         bytes_per_letter = self.bytes_per_letter
         offset = letter_ord * bytes_per_letter

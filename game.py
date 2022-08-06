@@ -90,7 +90,7 @@ class Game:
                     # self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
-            print('answer: ' + str(correct_answer_index))
+            # print('answer: ' + str(correct_answer_index))
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
             self.display.clear()
             self.text = answers[0]
@@ -104,7 +104,7 @@ class Game:
             answer = self.touch.multiple_choice()
             self.display.clear()
             counter += 1
-            print('counter: ' + str(counter))
+            # print('counter: ' + str(counter))
             if answer == correct_answer_index:
                 self.display.text('ANSWER SUBMITTED', sleep_time=3)
                 answer_list.append(1)
@@ -121,7 +121,7 @@ class Game:
                     answer_total += 1
                 else:
                     pass
-            print('num_questions: ' + str(num_questions))
+            # print('num_questions: ' + str(num_questions))
             if counter == num_questions:
                 import data
                 if answer_total >= num_questions_to_win:
@@ -149,8 +149,7 @@ class Game:
                     # self.display.text('sd card is damaged')
                     break
             correct_answer_index = answers[4]
-            # TODO: hide prints!
-            print('answer: ' + str(correct_answer_index))
+            # print('answer: ' + str(correct_answer_index))
             answers = answers[0:-1]   # strip off correct_answer_index from being displayed
             self.display.clear()
             self.text = answers[0]
@@ -188,7 +187,7 @@ class Game:
             question, answer = random.choice(list(self.question_bank.items()))
             answer = self.morse_code.encrypt(answer)
             correct_answer_index = answer
-            print('answer: ', correct_answer_index)
+            # print('answer: ', correct_answer_index)
             self.display.text(question)
             self.display.text('ENTER MORSE CODE..', sleep_time=3)
             answer = self.touch.morse_code()
@@ -233,7 +232,7 @@ class Game:
             self.morse_code.display(answer)
             self.display.text('ENTER MORSE CODE...', sleep_time=3)
             encrypted_sentence = self.morse_code.encrypt(answer)
-            print('answer: ' + encrypted_sentence)
+            # print('answer: ' + encrypted_sentence)
             answer = self.touch.morse_code()
             if answer == encrypted_sentence[:-1]:  # adds extra char in data so must remove
                 self.display.text('CORRECT', sleep_time=3)
@@ -268,7 +267,7 @@ class Game:
         for _ in questions:
             question, answer = random.choice(list(self.question_bank.items()))
             answer = self.encryption.decode(answer)
-            print('answer: ' + answer)
+            # print('answer: ' + answer)
             correct_answer_index = answer
             self.display.text(question)
             answer = self.touch.numeric_sequence()
