@@ -937,14 +937,6 @@ flash_cards_game = {
             'D. Ace of Wands',
             1
         ],
-    'Wands06.raw':
-        [
-            'A. Six of Wands',
-            'B. Five of Wands',
-            'C. Seven of Wands',
-            'D. Four of Wands',
-            0
-        ],
     'Wands08.raw':
         [
             'A. Ace of Wands',
@@ -952,14 +944,6 @@ flash_cards_game = {
             'C. Seven of Wands',
             'D. Eight of Wands',
             3
-        ],
-    'Wands10.raw':
-        [
-            'A. Jack of Wands',
-            'B. Page of Wands',
-            'C. Ten of Wands',
-            'D. Knight of Wands',
-            2
         ],
     'Wands14.raw':
         [
@@ -1024,46 +1008,6 @@ flash_cards_game = {
             'C. Knight of Pentacles',
             'D. Seven of Pentacles',
             3
-        ],
-    'Pentacles11.raw':
-        [
-            'A. Queen of Pentacles',
-            'B. Page of Pentacles',
-            'C. Knight of Pentacles',
-            'D. Ace of Pentacles',
-            1
-        ],
-    'Pentacles12.raw':
-        [
-            'A. Ace of Pentacles',
-            'B. King of Pentacles',
-            'C. Knight of Pentacles',
-            'D. Seven of Pentacles',
-            2
-        ],
-    'Swords01.raw':
-        [
-            'A. Ace of Swords',
-            'B. King of Swords',
-            'C. Knight of Swords',
-            'D. Seven of Swords',
-            0
-        ],
-    'Swords05.raw':
-        [
-            'A. Twelve of Swords',
-            'B. Four of Swords',
-            'C. Six of Swords',
-            'D. Five of Swords',
-            3
-        ],
-    'Swords09.raw':
-        [
-            'A. Nine of Swords',
-            'B. Eight of Swords',
-            'C. Page of Swords',
-            'D. Two of Swords',
-            0
         ],
     'Swords10.raw':
         [
