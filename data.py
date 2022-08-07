@@ -30,7 +30,7 @@
 badge_instructions_1 = 'More details can be found at dc540.org. There are 12 games. Some games require you to submit to the DC540 Tarot-Badge discord channel.'  # noqa
 badge_instructions_2 = 'For answers submitted to the Disord Channel, you will be sent a code to input on the badge. Other games do not need to be entered manually.'  # noqa
 badge_instructions_3 = 'There are six buttons for the games. Left = A  Right = B Up = C     Down = D  S = Submit E = Enter'  # noqa
-tarot_instructions_1 = 'For the Tarot Deck, use the right button to scroll through our 3 decks & select to change the start-up demo.'  # noqa
+tarot_instructions_1 = 'For the Tarot Deck, have up to 6 decks for the demo. We have provided 3 decks and you can add in 3 more.'  # noqa
 tarot_instructions_2 = 'We offer Tarot Reading. You you can get your daily card reading here with a little extra!'
 tarot_instructions_3 = 'The Tarot Scroll will display cards from the selected deck.'
 tarot_trivia_game_instructions = 'Answer 15 of the 20 trivia questions correctly to pass this game.'
@@ -1104,7 +1104,7 @@ morse_code_game = {
 }
 
 decryption_game_setup = {
-    'Instructions': 'Use the right button to scroll through these three encryptions and add them together for the answer.',  # noqa
+    'Instructions': 'Here are the three encryptions and add them together for the answer.',  # noqa
     'Cipher 1': 'Cipher 1: Iwt rdchitaapixdc Pcsgdbtsp xh adrpits xc Vgddbqgxsvt',
     'Cipher 2': 'Cipher 2: dGhlIGFuc3dlciB0byB saWZlIHRoZSB1bml2ZX JzZSBhbmQgZXZl cnl0aGluZw==',
     'Cipher 3': 'Cipher 3: Mhv bnfbvf rhu rfx eofybgg wck bs kvx ttfabv nlauxr ft mbtrbbnm.',

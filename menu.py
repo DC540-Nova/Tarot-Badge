@@ -390,9 +390,9 @@ class Menu:
                 show_menu = True
             elif self.touch.press(self.touch.button_right):
                 self.display.text(self.data.decryption_game_setup['Instructions'])
-                self.display.text(self.data.decryption_game_setup['Cipher 1'])
-                self.display.text(self.data.decryption_game_setup['Cipher 2'])
-                self.display.text(self.data.decryption_game_setup['Cipher 3'])
+                self.display.text(self.data.decryption_game_setup['Cipher 1'], sleep_time=12)
+                self.display.text(self.data.decryption_game_setup['Cipher 2'], sleep_time=12)
+                self.display.text(self.data.decryption_game_setup['Cipher 3'], sleep_time=12)
                 self.display.text(self.data.decryption_game_setup['Submit'])
                 won_game = self.game.sequence(self.data.decryption_game, '37', 1, 1)
                 if won_game:
