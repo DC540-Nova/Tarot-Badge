@@ -590,7 +590,7 @@ tarot_trivia_game = {
             'D. ANK',
             0
         ],
-    'Which tarot suit of the Tarot Marselle does not typically number they cards?':
+    'Which tarot suit of the Tarot dMarselle does not typically number their cards?':
         [
             'A. Swords',
             'B. Coins',
@@ -1104,7 +1104,7 @@ morse_code_game = {
 }
 
 decryption_game_setup = {
-    'Instructions': 'Here are the three encryptions and add them together for the answer.',  # noqa
+    'Instructions': 'Here are the three encryptions. Use them to get the six digit answer.',
     'Cipher 1': 'Cipher 1: Iwt rdchitaapixdc Pcsgdbtsp xh adrpits xc Vgddbqgxsvt',
     'Cipher 2': 'Cipher 2: dGhlIGFuc3dlciB0byB saWZlIHRoZSB1bml2ZX JzZSBhbmQgZXZl cnl0aGluZw==',
     'Cipher 3': 'Cipher 3: Mhv bnfbvf rhu rfx eofybgg wck bs kvx ttfabv nlauxr ft mbtrbbnm.',
