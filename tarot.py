@@ -175,7 +175,7 @@ class Tarot:
                 card, card_reading = urandom.choice(list(self.card_bank.items()))
                 try:
                     card = 'sd/' + self.deck + '/' + card_reading[2]
-                    self.display.image(card)
+                    self.display.image(card, sleep_time=10)
                     touched_left = self.touch.press(self.touch.button_left)
                     touched_right = self.touch.press(self.touch.button_right)
                     touched_up = self.touch.press(self.touch.button_up)

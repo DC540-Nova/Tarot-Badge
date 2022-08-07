@@ -127,6 +127,7 @@ class Game:
                 if answer_total >= num_questions_to_win:
                     return game_number + ' '
                 else:
+                    self.display('Sorry, you did not pass. Try again.')
                     return False
 
     def multiple_choice_practice(self, question_bank, text=True):
@@ -216,6 +217,7 @@ class Game:
                 if answer_total >= num_questions_to_win:
                     return game_number + ' '
                 else:
+                    self.display('Sorry, you did not pass. Try again.')
                     return False
 
     def morse_code_practice(self, question_bank):
@@ -290,6 +292,7 @@ class Game:
                 if answer_total >= num_questions_to_win:
                     return game_number + ' '
                 else:
+                    self.display('Sorry, you did not pass. Try again.')
                     return False
 
     def won(self, game_won):

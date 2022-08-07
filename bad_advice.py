@@ -53,7 +53,7 @@ class BadAdvice:
         color = random.choice(self.neo_pixel.COLORS)
         self.neo_pixel.on(0, color=color, all_on=True)
         card = 'sd/bad_advice/ba1.raw'
-        self.display.image(card, sleep_time=5)
+        self.display.image(card, sleep_time=10)
         while True:
             card = random.randint(1, 22)
             try:
