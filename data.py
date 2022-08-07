@@ -875,35 +875,35 @@ flash_cards_game = {
         ],
     '16-TheTower.raw':
         [
-            'A. The Hanged Man',
-            'B. Death',
-            'C. The Devil',
+            'A. The Castle',
+            'B. The Night',
+            'C. The Tower',
             'D. Strength',
             2
         ],
     '17-TheStar.raw':
         [
-            'A. The Hanged Man',
-            'B. Death',
-            'C. The Devil',
+            'A. The Star',
+            'B. Nighttime',
+            'C. Life',
             'D. Strength',
-            2
+            0
         ],
     '18-TheMoon.raw':
         [
-            'A. The Hanged Man',
-            'B. Death',
-            'C. The Devil',
+            'A. Bravery',
+            'B. The Star',
+            'C. The Moon',
             'D. Strength',
             2
         ],
     '19-TheSun.raw':
         [
-            'A. The Hanged Man',
-            'B. Death',
-            'C. The Devil',
-            'D. Strength',
-            2
+            'A. The Moon',
+            'B. the Sun',
+            'C. Bravery',
+            'D. Life',
+            1
         ],
     '20-Judgement.raw':
         [
