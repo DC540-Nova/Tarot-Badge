@@ -52,10 +52,10 @@ pairing_games_instructions_1 = 'For the Tarot Pairing Game, find another player 
 pairing_games_instructions_2 = 'For the Boss Pairing Game, find a DC540 Boss badge and pair to pass this challenge.'  # noqa
 
 boss_ids = []  # noqa
-boss_ids.append('e66038b7137a9935')
-boss_ids.append('e66038b7135fa935')
-boss_ids.append('e66038b71340a735')
-boss_ids.append('e66038b7dfsfdfdf')
+boss_ids.append('e66038b7136f7030')
+boss_ids.append('e66038b7131c6335')
+boss_ids.append('e66038b7130e6335')
+boss_ids.append('e66038b71338842f')
 boss_names = []  # noqa
 boss_names.append('Baabalicious')
 boss_names.append('Banter')

@@ -28,7 +28,7 @@
 # pyright: reportUndefinedVariable=false
 
 import _thread
-
+import utime
 import gc
 import urandom
 
@@ -55,6 +55,7 @@ class Tarot:
         self.card_bank = card_bank
         self.deck = None
         self.thread = False
+        self.sleep_time = 5
 
     def __load_tarot_deck(self):
         """
@@ -83,7 +84,16 @@ class Tarot:
         temp_card_bank = self.card_bank
         counter = 1
         for _ in temp_card_bank:
-            card, card_reading = urandom.choice(list(temp_card_bank.items()))
+            utime.sleep(.5)
+            touched_right = self.touch.press(self.touch.button_right)
+            touched_up = self.touch.press(self.touch.button_up)
+            touched_down = self.touch.press(self.touch.button_down)
+            touched_submit = self.touch.press(self.touch.button_submit)
+            touched_extra = self.touch.press(self.touch.button_extra)
+            if touched_right or touched_up or touched_down or touched_submit or touched_extra:
+                self.__reset()
+                _thread.exit()
+            card, card_reading = urandom.choice(list(self.card_bank.items()))
             seed = self.nrf.__read_msg()
             seed_1 = 1
             seed_2 = 2
@@ -112,18 +122,16 @@ class Tarot:
                 self.display.text('Hopes & Fears')
             elif counter == 10:
                 self.display.text('Outcome')
-            touched_right = self.touch.press(self.touch.button_right)
-            touched_up = self.touch.press(self.touch.button_up)
-            touched_down = self.touch.press(self.touch.button_down)
-            touched_submit = self.touch.press(self.touch.button_submit)
-            touched_extra = self.touch.press(self.touch.button_extra)
-            if touched_right or touched_up or touched_down or touched_submit or touched_extra:
-                self.thread = False
-                break
             if meaning == 1:
                 try:
+                    utime.sleep(.25)
                     card = 'sd/' + self.deck + '/' + card_reading[2]
-                    self.display.image(card, timed=False)
+                    try:
+                        gc.collect()
+                        self.display.image(card, timed=False)
+                    except:  # noqa
+                        gc.collect()
+                        self.display.image(card, timed=False)
                     while True:
                         if self.touch.press(self.touch.button_left):
                             break
@@ -132,8 +140,14 @@ class Tarot:
                     break
             if meaning == 2:
                 try:
+                    utime.sleep(.25)
                     card = 'sd/' + self.deck + '/' + card_reading[2]
-                    self.display.image(card, up=False, timed=False)
+                    try:
+                        gc.collect()
+                        self.display.image(card, up=False, timed=False)
+                    except:  # noqa
+                        gc.collect()
+                        self.display.image(card, timed=False)
                     while True:
                         if self.touch.press(self.touch.button_left):
                             break
@@ -171,11 +185,11 @@ class Tarot:
         running = True
         while running:
             for _ in self.card_bank:
-                print(gc.mem_free())
+                gc.collect()
                 card, card_reading = urandom.choice(list(self.card_bank.items()))
                 try:
                     card = 'sd/' + self.deck + '/' + card_reading[2]
-                    self.display.image(card, sleep_time=10)
+                    self.display.image(card, sleep_time=self.sleep_time)
                     touched_left = self.touch.press(self.touch.button_left)
                     touched_right = self.touch.press(self.touch.button_right)
                     touched_up = self.touch.press(self.touch.button_up)
