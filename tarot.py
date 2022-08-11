@@ -85,14 +85,6 @@ class Tarot:
         counter = 1
         for _ in temp_card_bank:
             utime.sleep(.5)
-            touched_right = self.touch.press(self.touch.button_right)
-            touched_up = self.touch.press(self.touch.button_up)
-            touched_down = self.touch.press(self.touch.button_down)
-            touched_submit = self.touch.press(self.touch.button_submit)
-            touched_extra = self.touch.press(self.touch.button_extra)
-            if touched_right or touched_up or touched_down or touched_submit or touched_extra:
-                self.__reset()
-                _thread.exit()
             card, card_reading = urandom.choice(list(self.card_bank.items()))
             seed = self.nrf.__read_msg()
             seed_1 = 1
@@ -133,7 +125,9 @@ class Tarot:
                         gc.collect()
                         self.display.image(card, timed=False)
                     while True:
-                        if self.touch.press(self.touch.button_left):
+                        if self.touch.press(self.touch.button_left) or self.touch.press(self.touch.button_right) or \
+                                self.touch.press(self.touch.button_up) or self.touch.press(self.touch.button_down) or \
+                                self.touch.press(self.touch.button_submit) or self.touch.press(self.touch.button_extra):
                             break
                 except OSError:
                     # self.display.text('sd card is damaged')
@@ -149,7 +143,9 @@ class Tarot:
                         gc.collect()
                         self.display.image(card, timed=False)
                     while True:
-                        if self.touch.press(self.touch.button_left):
+                        if self.touch.press(self.touch.button_left) or self.touch.press(self.touch.button_right) or \
+                                self.touch.press(self.touch.button_up) or self.touch.press(self.touch.button_down) or \
+                                self.touch.press(self.touch.button_submit) or self.touch.press(self.touch.button_extra):
                             break
                 except OSError:
                     # self.display.text('sd card is damaged')

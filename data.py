@@ -408,13 +408,13 @@ cards = {
     '57 Eight Of Pentacles':
         [
             'Education, training/retraining, change of career, focus on the job in hand.',
-            'Stuck in a dead-end job. Working on a factory line. Undervalued skills. Overqualified for the job.',  # noqa
+            'Stuck in a dead-end job. Working on a factory line. Undervalued skills.',  # noqa
             'Pentacles08.raw'
         ],
     '58 Nine Of Pentacles':
         [
             'Independence, happy with own company. Self-sufficiency, appreciation.',
-            'Goals attained but not as satisfying as expected. Trapped in a gilded cage. Looking for a way out. Needing a challenge.',  # noqa
+            'Goals attained but not as satisfying as expected. Looking for a way out. Needing a challenge.',
             'Pentacles09.raw'
         ],
     '59 Ten Of Pentacles':
