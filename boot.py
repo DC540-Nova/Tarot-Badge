@@ -29,8 +29,17 @@
 
 from machine import Pin, SPI
 import uos
+import neopixel
 
 from sd_card import SDCard
+
+# init neo_pixel to ensure badge is running
+np = neopixel.NeoPixel(Pin(5), 24)
+np[11] = (0, 255, 0)
+np[2] = (0, 255, 0)
+np[5] = (0, 255, 0)
+np[8] = (0, 255, 0)
+np.write()
 
 # sd card config
 sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
