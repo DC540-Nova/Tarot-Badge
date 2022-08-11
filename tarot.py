@@ -153,12 +153,16 @@ class Tarot:
             if meaning == 1:
                 self.display.text(card_reading[0], timed=False)
                 while True:
-                    if self.touch.press(self.touch.button_left):
+                    if self.touch.press(self.touch.button_left) or self.touch.press(self.touch.button_right) or \
+                            self.touch.press(self.touch.button_up) or self.touch.press(self.touch.button_down) or \
+                            self.touch.press(self.touch.button_submit) or self.touch.press(self.touch.button_extra):
                         break
             if meaning == 2:
                 self.display.text(card_reading[1], timed=False)
                 while True:
-                    if self.touch.press(self.touch.button_left):
+                    if self.touch.press(self.touch.button_left) or self.touch.press(self.touch.button_right) or \
+                            self.touch.press(self.touch.button_up) or self.touch.press(self.touch.button_down) or \
+                            self.touch.press(self.touch.button_submit) or self.touch.press(self.touch.button_extra):
                         break
             counter += 1
             try:
