@@ -56,7 +56,7 @@ class Demo:
         # color change interval
         self.cint = 10
         self.cmin = 0
-        self.cmax = 128
+        self.cmax = 255
         self.max_pos = 12
         self.stime = 0.05
         self.owheelpos = 1
@@ -177,16 +177,6 @@ class Demo:
             for _ in self.data.cards:
                 card, card_reading = choice(list(self.data.cards.items()))
                 try:
-                    touched_left = self.touch.press(self.touch.button_left)
-                    touched_right = self.touch.press(self.touch.button_right)
-                    touched_up = self.touch.press(self.touch.button_up)
-                    touched_down = self.touch.press(self.touch.button_down)
-                    touched_submit = self.touch.press(self.touch.button_submit)
-                    touched_extra = self.touch.press(self.touch.button_extra)
-                    if touched_left or touched_right or touched_up or touched_down or touched_submit or touched_extra:
-                        self.thread = False
-                        running = False
-                        break
                     card = 'sd/' + tarot_deck_folder + '/' + card_reading[2]
                     self.display.image(card, self.sleep_time)
                     touched_left = self.touch.press(self.touch.button_left)
