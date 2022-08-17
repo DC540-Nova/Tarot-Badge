@@ -27,7 +27,7 @@
 import _thread
 from utime import sleep
 from urandom import randrange, choice
-import machine
+from machine import Pin
 from neopixel import NeoPixel
 
 
@@ -45,7 +45,7 @@ class Demo:
             neo_pixel: object
             data: object
         """
-        self.neopixel = NeoPixel(machine.Pin(5), 24)
+        self.neopixel = NeoPixel(Pin(5), 24)
         self.file_manager = file_manager
         self.touch = touch
         self.display = display
@@ -80,7 +80,7 @@ class Demo:
         LED_PIN = 5
         LED_COUNT = 24
         from neo_pixel import NeoPixel  # noqa
-        self.neo_pixel = NeoPixel(machine.Pin, LED_PIN, LED_COUNT)
+        self.neo_pixel = NeoPixel(Pin, LED_PIN, LED_COUNT)
         self.neo_pixel.clear(hard_clear=True)
 
     def __new_color(self, my_color):
