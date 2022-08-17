@@ -266,7 +266,7 @@ class Display:
     PUMP_RATIO_CONTROL = const(0xf7)
 
     # fonts
-    UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
+    UNISPACE_FONT = XglcdFont('sd/Unispace12x24.c', 12, 24)  # load font
 
     # led pin
     POWER_DISPLAY = Pin(2, Pin.OUT)  # init led pin

@@ -49,7 +49,7 @@ class TestDisplay(unittest.TestCase):
         # Instantiate
         display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))
         self.display = Display(display_spi, dc=Pin(15, Pin.OUT), cs=Pin(13, Pin.OUT), rst=Pin(14, Pin.OUT))
-        self.UNISPACE_FONT = XglcdFont('Unispace12x24.c', 12, 24)  # load font
+        self.UNISPACE_FONT = XglcdFont('sd/Unispace12x24.c', 12, 24)  # load font
 
     def tearDown(self):
         """
@@ -162,7 +162,7 @@ class TestDisplay(unittest.TestCase):
         test image functionality
         """
         # Params
-        image = 'dc540_logo.raw'
+        image = 'sd/dc540_logo.raw'
         # Returns
         return_1 = None
         # Calls

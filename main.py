@@ -68,7 +68,7 @@ if __name__ == '__main__':
     while True:
         try:
             try:
-                display.image('dc540_logo.raw')
+                display.image('sd/dc540_logo.raw')
                 demo.play()
                 menu.system()
             except Exception as e:  # noqa
