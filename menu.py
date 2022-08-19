@@ -486,7 +486,8 @@ class Menu:
                     all_folders = ''
                     for folder in folders:
                         if folder == 'System Volume Information' or folder == '.fseventsd' or \
-                                folder == '.Spotlight-V100' or folder == '.Trashes' or folder == 'bad_advice':
+                                folder == '.Spotlight-V100' or folder == '.Trashes' or folder == 'bad_advice' or \
+                                folder == '3Hats.raw' or folder == 'dc540_logo.raw' or folder == 'Unispace12x24.c':
                             pass
                         else:
                             all_folders += folder + ' '
