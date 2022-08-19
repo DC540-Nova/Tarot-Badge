@@ -1112,7 +1112,7 @@ decryption_game_setup = {
 }
 
 decryption_game = {
-    'Enter Game 8 Answer': b'\xc3\xc4\x1a\xa4\xb8`\x8bp\xa6[\xd2\x1bu\xcd\xf9\x17',
+    'Enter Game 8 Answer': b'p\xd3\x00UkC\xa1\xa2O\xa4\xa9>9\xa3)\xdb',
 }
 
 stego_game = {
