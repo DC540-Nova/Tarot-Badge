@@ -25,5 +25,7 @@ import unittest
 unittest.main('test_display')
 ```
 
+<br>
+
 ## License
 [MIT License](https://raw.githubusercontent.com/DC540-Nova/Tarot-Badge/main/LICENSE?token=GHSAT0AAAAAABXL4O6QYCDD22UFRDF4XLXMYXOK47A)
