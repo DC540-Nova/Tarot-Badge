@@ -2,7 +2,6 @@
 
 source venv/bin/activate
 mpremote connect /dev/tty.u* cp boot.py :
-mpremote connect /dev/tty.u* cp Unispace12x24.c :
 mpremote connect /dev/tty.u* cp config.py :
 mpremote connect /dev/tty.u* cp ili9341.py :
 mpremote connect /dev/tty.u* cp main.py :
@@ -22,8 +21,6 @@ mpremote connect /dev/tty.u* cp encryption.py :
 mpremote connect /dev/tty.u* cp nrf24l01.py :
 mpremote connect /dev/tty.u* cp demo.py :
 mpremote connect /dev/tty.u* cp bad_advice.py :
-mpremote connect /dev/tty.u* cp dc540_logo.raw :
-mpremote connect /dev/tty.u* cp 3Hats.raw :
 echo 'rm :ids'
 echo 'rm :games_won'
 mpremote connect /dev/tty.u* rm ids > /dev/null

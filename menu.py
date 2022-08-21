@@ -64,7 +64,9 @@ class Menu:
         self.data = data
         self.deck = deck
         self.text = None
+        self.x_spacer = 32
         self.title = 8
+        self.wait = 0.1
         self.line_2 = 32
         self.line_3 = 56
         self.line_4 = 80
@@ -79,7 +81,6 @@ class Menu:
                    title_color=0b11001111011011111010001):
         """
         Private method to populate a menu
-
         Params:
             title: str
             line_3: str, optional
@@ -95,21 +96,21 @@ class Menu:
         self.text = title
         self.display.text(self.text, y=self.title, color=title_color, wrap=False, clear=True, timed=False, off=True)
         self.text = line_3
-        self.display.text(self.text, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
         self.text = line_4
-        self.display.text(self.text, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
         self.text = line_5
-        self.display.text(self.text, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
         self.text = line_6
-        self.display.text(self.text, y=self.line_6, wrap=False, clear=False, timed=False, off=True)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_6, wrap=False, clear=False, timed=False, off=True)
         self.text = line_7
-        self.display.text(self.text, y=self.line_7, wrap=False, clear=False, timed=False, off=True)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_7, wrap=False, clear=False, timed=False, off=True)
         self.text = line_8
-        self.display.text(self.text, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
         self.text = line_9
-        self.display.text(self.text, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
         self.text = line_10
-        self.display.text(self.text, y=self.line_8, wrap=False, clear=False, timed=False, off=False)
+        self.display.text(self.text, x=self.x_spacer, y=self.line_8, wrap=False, clear=False, timed=False, off=False)
 
     def __game_menu_1(self):
         """
@@ -502,13 +503,13 @@ class Menu:
                     if all_folders_len == 1:
                         self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit])
                     elif all_folders_len == 2:
-                        self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit], 'r: ' + all_folders[1][:text_upper_limit])
+                        self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit], 'r: ' + all_folders[1][:text_upper_limit])  # noqa
                     elif all_folders_len == 3:
                         self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit], 'r: ' + all_folders[1][:text_upper_limit], 'u: ' + all_folders[2][:text_upper_limit])  # noqa
                     elif all_folders_len == 4:
                         self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit], 'r: ' + all_folders[1][:text_upper_limit], 'u: ' + all_folders[2][:text_upper_limit], 'd: ' + all_folders[3][:text_upper_limit])  # noqa
                     elif all_folders_len == 5:
-                        self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit], 'r: ' + all_folders[1][:text_upper_limit], 'u: ' + all_folders[2][:text_upper_limit], 'd: ' + all_folders[3][:text_upper_limit], 's: ' + all_folders[4][:text_upper_limit])
+                        self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit], 'r: ' + all_folders[1][:text_upper_limit], 'u: ' + all_folders[2][:text_upper_limit], 'd: ' + all_folders[3][:text_upper_limit], 's: ' + all_folders[4][:text_upper_limit])  # noqa
                     elif all_folders_len == 6:
                         self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit], 'r: ' + all_folders[1][:text_upper_limit], 'u: ' + all_folders[2][:text_upper_limit], 'd: ' + all_folders[3][:text_upper_limit], 's: ' + all_folders[4][:text_upper_limit], 'e: ' + all_folders[5][:text_upper_limit])  # noqa
                     while True:
@@ -619,30 +620,48 @@ class Menu:
         """
         Private method to handle the main menu
         """
-        self.__populate('main menu', 'l: instructions', 'r: games 1 menu', 'u: games 2 menu', 'd: tarot menu',
-                        's: bad advice menu', 'e: extras menu')
+        self.__populate('main menu', 'instructions', 'games 1 menu', 'games 2 menu', 'tarot menu',
+                        'bad advice menu', 'extras menu')
+        position = self.line_3
+        if position == self.line_3:
+            self.display.text('>', x=10, y=position, wrap=False, clear=False, timed=False, off=True)
         self.file_manager.update_games_won()
         while True:
-            if self.touch.press(self.touch.button_left):
-                self.display.text(self.data.badge_instructions_1)
-                self.display.text(self.data.badge_instructions_2)
-                self.display.text(self.data.badge_instructions_3)
-                break
-            elif self.touch.press(self.touch.button_right):
-                self.__game_menu_1()
-                break
-            elif self.touch.press(self.touch.button_up):
-                self.__game_menu_2()
-                break
+            if self.touch.press(self.touch.button_up):
+                if position > self.line_3:
+                    self.display.text('>', x=10, y=position, color=0b0000000000000000, wrap=False, clear=False,
+                                      timed=False, off=True)
+                    position -= 24
+                    self.display.text('>', x=10, y=position, wrap=False, clear=False, timed=False, off=True)
+                sleep(self.wait)
             elif self.touch.press(self.touch.button_down):
-                self.__tarot_reading_menu()
-                break
+                if position <= self.line_7:
+                    self.display.text('>', x=10, y=position, color=0b0000000000000000, wrap=False, clear=False,
+                                      timed=False, off=True)
+                    position += 24
+                    self.display.text('>', x=10, y=position, wrap=False, clear=False, timed=False, off=True)
+                sleep(self.wait)
             elif self.touch.press(self.touch.button_submit):
-                self.__bad_advice_menu()
-                break
-            elif self.touch.press(self.touch.button_extra):
-                self.__extras_menu()
-                break
+                if position == self.line_3:
+                    self.display.text(self.data.badge_instructions_1)
+                    self.display.text(self.data.badge_instructions_2)
+                    self.display.text(self.data.badge_instructions_3)
+                    break
+                elif position == self.line_4:
+                    self.__game_menu_1()
+                    break
+                elif position == self.line_5:
+                    self.__game_menu_2()
+                    break
+                elif position == self.line_6:
+                    self.__tarot_reading_menu()
+                    break
+                elif position == self.line_7:
+                    self.__bad_advice_menu()
+                    break
+                elif position == self.line_8:
+                    self.__extras_menu()
+                    break
 
     def system(self):
         """

@@ -29,7 +29,7 @@
 
 badge_instructions_1 = 'More details can be found at dc540.org. There are 12 games. Some games require you to submit to the DC540 Tarot-Badge discord channel.'  # noqa
 badge_instructions_2 = 'For answers submitted to the Disord Channel, you will be sent a code to input on the badge. Other games do not need to be entered manually.'  # noqa
-badge_instructions_3 = 'There are six buttons for the games. Left = A  Right = B Up = C     Down = D  S = Submit E = Enter'  # noqa
+badge_instructions_3 = 'There are six buttons for the games. Left = A  Right = B Up = C     Down = D  Submit = S Enter = E'  # noqa
 tarot_instructions_1 = 'For the Tarot Deck, have up to 6 decks for the demo. We have provided 3 decks and you can add in 3 more.'  # noqa
 tarot_instructions_2 = 'We offer Tarot Reading. You you can get your daily card reading here with a little extra!'
 tarot_instructions_3 = 'The Tarot Scroll will display cards from the selected deck.'
