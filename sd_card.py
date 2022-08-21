@@ -112,7 +112,7 @@ class SDCard:
             if self.__write_cmd(41, 0, 0) == 0:
                 self.cdv = 512
                 return
-        raise OSError('timeout waiting for v1 card')
+        # raise OSError('timeout waiting for v1 card')
 
     def __init_card_v2(self):
         """
