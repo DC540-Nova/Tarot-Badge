@@ -528,7 +528,7 @@ class Menu:
                     self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False, off=True)
                 self.file_manager.update_games_won()
                 show_menu = False
-            elif self.touch.press(self.touch.button_up):
+            if self.touch.press(self.touch.button_up):
                 self.__up()
             elif self.touch.press(self.touch.button_down):
                 self.__down()
@@ -560,7 +560,7 @@ class Menu:
                     self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False, off=True)
                 self.file_manager.update_games_won()
                 show_menu = False
-            elif self.touch.press(self.touch.button_up):
+            if self.touch.press(self.touch.button_up):
                 self.__up()
             elif self.touch.press(self.touch.button_down):
                 self.__down()
@@ -575,72 +575,96 @@ class Menu:
                         folders = uos.listdir('sd')
                         all_folders = ''
                         for folder in folders:
-                            if folder == 'System Volume Information' or folder == '.fseventsd' or \
-                                    folder == '.Spotlight-V100' or folder == '.Trashes' or folder == 'bad_advice' or \
-                                    folder == '3Hats.raw' or folder == 'dc540_logo.raw' or folder == 'Unispace12x24.c':
+                            if folder == 'System Volume Information' or folder.startswith('.') or \
+                                    folder == 'bad_advice' or folder == '3Hats.raw' or folder == 'dc540_logo.raw' or \
+                                    folder == 'Unispace12x24.c':
                                 pass
                             else:
                                 all_folders += folder + ' '
                         all_folders = all_folders.split()  # split the strings on a space
                         all_folders = list(all_folders)  # split out string of decks to a list
-                        all_folders = all_folders[:7]  # max of 6 decks
+                        all_folders = all_folders[:6]  # max of 6 decks
                         all_folders_len = len(all_folders)
+                        print(all_folders)
+                        print(all_folders_len)
                         text_upper_limit = 15
                         # print(all_folders)
                         # print(type(all_folders))
                         # print(len(all_folders))
                         if all_folders_len == 1:
-                            self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit])
+                            self.__populate('decks', all_folders[0][:text_upper_limit])
                         elif all_folders_len == 2:
-                            self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit],
-                                            'r: ' + all_folders[1][:text_upper_limit])  # noqa
+                            self.__populate('decks', all_folders[0][:text_upper_limit],
+                                            all_folders[1][:text_upper_limit])
                         elif all_folders_len == 3:
-                            self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit],
-                                            'r: ' + all_folders[1][:text_upper_limit],
-                                            'u: ' + all_folders[2][:text_upper_limit])  # noqa
+                            self.__populate('decks', all_folders[0][:text_upper_limit],
+                                            all_folders[1][:text_upper_limit],
+                                            all_folders[2][:text_upper_limit])
                         elif all_folders_len == 4:
-                            self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit],
-                                            'r: ' + all_folders[1][:text_upper_limit],
-                                            'u: ' + all_folders[2][:text_upper_limit],
-                                            'd: ' + all_folders[3][:text_upper_limit])  # noqa
+                            self.__populate('decks', all_folders[0][:text_upper_limit],
+                                            all_folders[1][:text_upper_limit],
+                                            all_folders[2][:text_upper_limit],
+                                            all_folders[3][:text_upper_limit])
                         elif all_folders_len == 5:
-                            self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit],
-                                            'r: ' + all_folders[1][:text_upper_limit],
-                                            'u: ' + all_folders[2][:text_upper_limit],
-                                            'd: ' + all_folders[3][:text_upper_limit],
-                                            's: ' + all_folders[4][:text_upper_limit])  # noqa
+                            self.__populate('decks', all_folders[0][:text_upper_limit],
+                                            all_folders[1][:text_upper_limit],
+                                            all_folders[2][:text_upper_limit],
+                                            all_folders[3][:text_upper_limit],
+                                            all_folders[4][:text_upper_limit])
                         elif all_folders_len == 6:
-                            self.__populate('decks', 'l: ' + all_folders[0][:text_upper_limit],
-                                            'r: ' + all_folders[1][:text_upper_limit],
-                                            'u: ' + all_folders[2][:text_upper_limit],
-                                            'd: ' + all_folders[3][:text_upper_limit],
-                                            's: ' + all_folders[4][:text_upper_limit],
-                                            'e: ' + all_folders[5][:text_upper_limit])  # noqa
+                            self.__populate('decks', all_folders[0][:text_upper_limit],
+                                            all_folders[1][:text_upper_limit],
+                                            all_folders[2][:text_upper_limit],
+                                            all_folders[3][:text_upper_limit],
+                                            all_folders[4][:text_upper_limit],
+                                            all_folders[5][:text_upper_limit])
+                        self.position = self.line_3
+                        self.end_line = ((all_folders_len - 2) * 24) + self.line_3
+                        if self.position == self.line_3:
+                            self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
+                                              off=True)
                         while True:
-                            if self.touch.press(self.touch.button_left) and all_folders_len >= 1:
-                                self.deck = all_folders[0]
-                                self.file_manager.write_tarot_deck_folder(all_folders[0])
-                                break
-                            elif self.touch.press(self.touch.button_right) and all_folders_len >= 2:
-                                self.deck = all_folders[1]
-                                self.file_manager.write_tarot_deck_folder(all_folders[1])
-                                break
-                            elif self.touch.press(self.touch.button_up) and all_folders_len >= 3:
-                                self.deck = all_folders[2]
-                                self.file_manager.write_tarot_deck_folder(all_folders[2])
-                                break
-                            elif self.touch.press(self.touch.button_down) and all_folders_len >= 4:
-                                self.deck = all_folders[3]
-                                self.file_manager.write_tarot_deck_folder(all_folders[3])
-                                break
-                            elif self.touch.press(self.touch.button_submit) and all_folders_len >= 5:
-                                self.deck = all_folders[4]
-                                self.file_manager.write_tarot_deck_folder(all_folders[4])
-                                break
-                            elif self.touch.press(self.touch.button_extra) and all_folders_len >= 6:
-                                self.deck = all_folders[5]
-                                self.file_manager.write_tarot_deck_folder(all_folders[5])
-                                break
+                            if self.touch.press(self.touch.button_up):
+                                self.__up()
+                                # self.deck = all_folders[2]
+                                # self.file_manager.write_tarot_deck_folder(all_folders[2])
+                                # break
+                            elif self.touch.press(self.touch.button_down):
+                                self.__down()
+                                # self.deck = all_folders[3]
+                                # self.file_manager.write_tarot_deck_folder(all_folders[3])
+                                # break
+                            elif self.touch.press(self.touch.button_submit):
+                                if self.position == self.line_3:
+                                    self.deck = all_folders[0]
+                                    print(all_folders[0])
+                                    self.file_manager.write_tarot_deck_folder(all_folders[0])
+                                    break
+                                elif self.position == self.line_4:
+                                    self.deck = all_folders[1]
+                                    print(all_folders[1])
+                                    self.file_manager.write_tarot_deck_folder(all_folders[1])
+                                    break
+                                elif self.position == self.line_5:
+                                    self.deck = all_folders[2]
+                                    print(all_folders[2])
+                                    self.file_manager.write_tarot_deck_folder(all_folders[2])
+                                    break
+                                elif self.position == self.line_6:
+                                    self.deck = all_folders[3]
+                                    print(all_folders[3])
+                                    self.file_manager.write_tarot_deck_folder(all_folders[3])
+                                    break
+                                elif self.position == self.line_7:
+                                    self.deck = all_folders[4]
+                                    print(all_folders[4])
+                                    self.file_manager.write_tarot_deck_folder(all_folders[4])
+                                    break
+                                elif self.position == self.line_8:
+                                    self.deck = all_folders[5]
+                                    print(all_folders[5])
+                                    self.file_manager.write_tarot_deck_folder(all_folders[5])
+                                    break
                         self.display.text('DECK CHANGED')
                         show_menu = True
                     except OSError:
