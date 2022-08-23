@@ -225,7 +225,7 @@ class FileManager:
             with open('games_won', 'w') as f:
                 f.write('')
 
-    def reset(self, file, sleep_time=2):
+    def reset(self, file):
         """
         Method to reset a file
 
@@ -238,8 +238,7 @@ class FileManager:
             message = 'ARE YOU SURE YOU WANT TO RESET PAIRS?'
         elif file == 'games_won':
             message = 'ARE YOU SURE YOU WANT TO RESET GAME? [A: Yes & B: No]'
-        self.display.text(message)
-        sleep(sleep_time)
+        self.display.text(message, timed=False)
         reset = self.touch.yes_no()
         if reset == 'yes':
             if file == 'games_won':
@@ -248,7 +247,6 @@ class FileManager:
             elif file == 'ids':
                 message = 'RESETTING STATUS!'
             self.display.text(message)
-            sleep(sleep_time)
             if file == 'ids':
                 self.clear_ids_file()
             if file == 'games_won':

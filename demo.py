@@ -105,24 +105,15 @@ class Demo:
         self.neopixel[self.owheel[self.owheelpos - 1] - 1] = (self.ocr, self.ocg, self.ocb)
         self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
         self.neopixel.write()
-        if not self.thread:
-            self.__reset()
-            _thread.exit()
         while True:
             self.neopixel[self.owheel[self.owheelpos - 1] - 1] = (self.ocr, self.ocg, self.ocb)
             self.neopixel[self.iwheel[self.iwheelpos - 1] - 1] = (self.icr, self.icg, self.icb)
             self.neopixel.write()
-            if not self.thread:
-                self.__reset()
-                _thread.exit()
             x = int(randrange(-10, 10))
             y = int(randrange(-10, 10))
             new_outer = 0
             stime = randrange(5, 6) / 100
             # stime = randrange(5, 6) / 1000
-            if not self.thread:
-                self.__reset()
-                _thread.exit()
             for count in range(max(abs(x), abs(y))):
                 if x:
                     x_inc = int(x / abs(x))
@@ -132,9 +123,6 @@ class Demo:
                     new_outer = 1
                 if new_outer < 1:
                     new_outer = self.max_pos
-                if not self.thread:
-                    self.__reset()
-                    _thread.exit()
                 if y:
                     y_inc = int(y / abs(y))
                     new_inner = self.iwheelpos + y_inc
@@ -175,6 +163,17 @@ class Demo:
         while running:
             tarot_deck_folder = self.file_manager.read_tarot_deck_folder()
             for _ in self.data.cards:
+                touched_left = self.touch.press(self.touch.button_left)
+                touched_right = self.touch.press(self.touch.button_right)
+                touched_up = self.touch.press(self.touch.button_up)
+                touched_down = self.touch.press(self.touch.button_down)
+                touched_submit = self.touch.press(self.touch.button_submit)
+                touched_extra = self.touch.press(self.touch.button_extra)
+                if touched_left or touched_right or touched_up or touched_down or touched_submit or touched_extra:
+                    self.thread = False
+                    running = False
+                    sleep(0.5)
+                    break
                 card, card_reading = choice(list(self.data.cards.items()))
                 try:
                     card = 'sd/' + tarot_deck_folder + '/' + card_reading[2]
@@ -188,6 +187,7 @@ class Demo:
                     if touched_left or touched_right or touched_up or touched_down or touched_submit or touched_extra:
                         self.thread = False
                         running = False
+                        sleep(0.5)
                         break
                 except OSError:
                     # self.display.text('sd card is damaged')
