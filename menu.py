@@ -639,11 +639,6 @@ class Menu:
                                                       off=True)
                                 self.__up()
                             elif self.touch.press(self.touch.button_down):
-                                if self.position == self.line_8:
-                                    all_folders = [all_folders[i] for i in deck_order]
-                                    self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
-                                    self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
-                                                      off=True)
                                 self.__down()
                             elif self.touch.press(self.touch.button_submit):
                                 if self.position == self.line_3:
