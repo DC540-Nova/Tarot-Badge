@@ -608,20 +608,16 @@ class Menu:
                                 all_folders += folder + ' '
                         all_folders = all_folders.split()  # split the strings on a space
                         all_folders = list(all_folders)  # split out string of decks to a list
-                        first_deck = all_folders[0]
-                        last_deck = all_folders[-1]
                         deck_order = []
                         seed = 0
                         for _ in all_folders:
                             deck_order.append(seed)
                             seed += 1
-                        prev_deck_order = deck_order[-1:]
-                        next_deck_order = deck_order[1:]
-                        next_deck_order.append(0)
-                        # all_folders = all_folders[:10]  # max of 10 decks on a screen  TODO: remove
+                        deck_order = deck_order[1:]
+                        deck_order.append(0)
                         all_folders_len = len(all_folders)
-                        print(all_folders)
-                        print(all_folders_len)
+                        # print(all_folders)
+                        # print(all_folders_len)
                         text_upper_limit = 15
                         # print(all_folders)
                         # print(type(all_folders))
@@ -637,49 +633,47 @@ class Menu:
                         while True:
                             if self.touch.press(self.touch.button_up):
                                 if self.position == self.line_3:
-                                    if not all_folders[0] == first_deck:
-                                        all_folders = [all_folders[i] for i in prev_deck_order]
-                                        self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
-                                        self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
-                                                          off=True)
+                                    all_folders = [all_folders[i] for i in deck_order]
+                                    self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
+                                    self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
+                                                      off=True)
                                 self.__up()
                             elif self.touch.press(self.touch.button_down):
-                                if self.position == self.line_7:
-                                    if not all_folders[-1] == last_deck:
-                                        all_folders = [all_folders[i] for i in next_deck_order]
-                                        self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
-                                        self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
-                                                          off=True)
+                                if self.position == self.line_8:
+                                    all_folders = [all_folders[i] for i in deck_order]
+                                    self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
+                                    self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
+                                                      off=True)
                                 self.__down()
                             elif self.touch.press(self.touch.button_submit):
                                 if self.position == self.line_3:
                                     self.deck = all_folders[0]
-                                    print(all_folders[0])
+                                    # print(all_folders[0])
                                     self.file_manager.write_tarot_deck_folder(all_folders[0])
                                     break
                                 elif self.position == self.line_4:
                                     self.deck = all_folders[1]
-                                    print(all_folders[1])
+                                    # print(all_folders[1])
                                     self.file_manager.write_tarot_deck_folder(all_folders[1])
                                     break
                                 elif self.position == self.line_5:
                                     self.deck = all_folders[2]
-                                    print(all_folders[2])
+                                    # print(all_folders[2])
                                     self.file_manager.write_tarot_deck_folder(all_folders[2])
                                     break
                                 elif self.position == self.line_6:
                                     self.deck = all_folders[3]
-                                    print(all_folders[3])
+                                    # print(all_folders[3])
                                     self.file_manager.write_tarot_deck_folder(all_folders[3])
                                     break
                                 elif self.position == self.line_7:
                                     self.deck = all_folders[4]
-                                    print(all_folders[4])
+                                    # print(all_folders[4])
                                     self.file_manager.write_tarot_deck_folder(all_folders[4])
                                     break
                                 elif self.position == self.line_8:
                                     self.deck = all_folders[5]
-                                    print(all_folders[5])
+                                    # print(all_folders[5])
                                     self.file_manager.write_tarot_deck_folder(all_folders[5])
                                     break
                         self.display.text('DECK CHANGED')
