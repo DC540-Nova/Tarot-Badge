@@ -66,6 +66,7 @@ class Menu:
         self.text = None
         self.positon = None
         self.end_line = None
+        self.clear_text = '                                                                                            '
         self.x_spacer = 32
         self.title = 8
         self.wait = 0.1
@@ -76,8 +77,67 @@ class Menu:
         self.line_6 = 128
         self.line_7 = 152
         self.line_8 = 176
-        self.line_9 = 200
-        self.line_10 = 224
+
+    def __populate(self, title, line_3='', line_4='', line_5='', line_6='', line_7='', line_8='',
+                   title_color=0b11001111011011111010001):
+        """
+        Private method to populate a menu
+        Params:
+            title: str
+            line_3: str, optional
+            line_4: str, optional
+            line_5: str, optional
+            line_6: str, optional
+            line_7: str, optional
+            line_8: str, optional
+            title_color: int, optional
+        """
+        self.text = title
+        self.display.text(self.text, y=self.title, color=title_color, wrap=False, clear=True, timed=False, off=True)
+        self.text = line_3
+        self.display.text(self.text, x=self.x_spacer, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_4
+        self.display.text(self.text, x=self.x_spacer, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_5
+        self.display.text(self.text, x=self.x_spacer, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_6
+        self.display.text(self.text, x=self.x_spacer, y=self.line_6, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_7
+        self.display.text(self.text, x=self.x_spacer, y=self.line_7, wrap=False, clear=False, timed=False, off=True)
+        self.text = line_8
+        self.display.text(self.text, x=self.x_spacer, y=self.line_8, wrap=False, clear=False, timed=False, off=False)
+
+    def __deck_menu(self, all_folders, all_folders_len, text_upper_limit):
+        """
+        Private method to display decks
+        """
+        if all_folders_len == 1:
+            self.__populate('decks', all_folders[0][:text_upper_limit])
+        elif all_folders_len == 2:
+            self.__populate('decks', all_folders[0][:text_upper_limit],
+                            all_folders[1][:text_upper_limit])
+        elif all_folders_len == 3:
+            self.__populate('decks', all_folders[0][:text_upper_limit],
+                            all_folders[1][:text_upper_limit],
+                            all_folders[2][:text_upper_limit])
+        elif all_folders_len == 4:
+            self.__populate('decks', all_folders[0][:text_upper_limit],
+                            all_folders[1][:text_upper_limit],
+                            all_folders[2][:text_upper_limit],
+                            all_folders[3][:text_upper_limit])
+        elif all_folders_len == 5:
+            self.__populate('decks', all_folders[0][:text_upper_limit],
+                            all_folders[1][:text_upper_limit],
+                            all_folders[2][:text_upper_limit],
+                            all_folders[3][:text_upper_limit],
+                            all_folders[4][:text_upper_limit])
+        elif all_folders_len == 6:
+            self.__populate('decks', all_folders[0][:text_upper_limit],
+                            all_folders[1][:text_upper_limit],
+                            all_folders[2][:text_upper_limit],
+                            all_folders[3][:text_upper_limit],
+                            all_folders[4][:text_upper_limit],
+                            all_folders[5][:text_upper_limit])
 
     def __up(self):
         """
@@ -100,41 +160,6 @@ class Menu:
             self.position += 24
             self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False, off=True)
         sleep(self.wait)
-
-    def __populate(self, title, line_3='', line_4='', line_5='', line_6='', line_7='', line_8='', line_9='', line_10='',
-                   title_color=0b11001111011011111010001):
-        """
-        Private method to populate a menu
-        Params:
-            title: str
-            line_3: str, optional
-            line_4: str, optional
-            line_5: str, optional
-            line_6: str, optional
-            line_7: str, optional
-            line_8: str, optional
-            line_9: str, optional
-            line_10: str, optional
-            title_color: int, optional
-        """
-        self.text = title
-        self.display.text(self.text, y=self.title, color=title_color, wrap=False, clear=True, timed=False, off=True)
-        self.text = line_3
-        self.display.text(self.text, x=self.x_spacer, y=self.line_3, wrap=False, clear=False, timed=False, off=True)
-        self.text = line_4
-        self.display.text(self.text, x=self.x_spacer, y=self.line_4, wrap=False, clear=False, timed=False, off=True)
-        self.text = line_5
-        self.display.text(self.text, x=self.x_spacer, y=self.line_5, wrap=False, clear=False, timed=False, off=True)
-        self.text = line_6
-        self.display.text(self.text, x=self.x_spacer, y=self.line_6, wrap=False, clear=False, timed=False, off=True)
-        self.text = line_7
-        self.display.text(self.text, x=self.x_spacer, y=self.line_7, wrap=False, clear=False, timed=False, off=True)
-        self.text = line_8
-        self.display.text(self.text, x=self.x_spacer, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
-        self.text = line_9
-        self.display.text(self.text, x=self.x_spacer, y=self.line_8, wrap=False, clear=False, timed=False, off=True)
-        self.text = line_10
-        self.display.text(self.text, x=self.x_spacer, y=self.line_8, wrap=False, clear=False, timed=False, off=False)
 
     def __game_menu_1(self):
         """
@@ -591,33 +616,7 @@ class Menu:
                         # print(all_folders)
                         # print(type(all_folders))
                         # print(len(all_folders))
-                        if all_folders_len == 1:
-                            self.__populate('decks', all_folders[0][:text_upper_limit])
-                        elif all_folders_len == 2:
-                            self.__populate('decks', all_folders[0][:text_upper_limit],
-                                            all_folders[1][:text_upper_limit])
-                        elif all_folders_len == 3:
-                            self.__populate('decks', all_folders[0][:text_upper_limit],
-                                            all_folders[1][:text_upper_limit],
-                                            all_folders[2][:text_upper_limit])
-                        elif all_folders_len == 4:
-                            self.__populate('decks', all_folders[0][:text_upper_limit],
-                                            all_folders[1][:text_upper_limit],
-                                            all_folders[2][:text_upper_limit],
-                                            all_folders[3][:text_upper_limit])
-                        elif all_folders_len == 5:
-                            self.__populate('decks', all_folders[0][:text_upper_limit],
-                                            all_folders[1][:text_upper_limit],
-                                            all_folders[2][:text_upper_limit],
-                                            all_folders[3][:text_upper_limit],
-                                            all_folders[4][:text_upper_limit])
-                        elif all_folders_len == 6:
-                            self.__populate('decks', all_folders[0][:text_upper_limit],
-                                            all_folders[1][:text_upper_limit],
-                                            all_folders[2][:text_upper_limit],
-                                            all_folders[3][:text_upper_limit],
-                                            all_folders[4][:text_upper_limit],
-                                            all_folders[5][:text_upper_limit])
+                        self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
                         self.position = self.line_3
                         self.end_line = ((all_folders_len - 2) * 24) + self.line_3
                         if self.position == self.line_3:
@@ -626,14 +625,14 @@ class Menu:
                         while True:
                             if self.touch.press(self.touch.button_up):
                                 self.__up()
-                                # self.deck = all_folders[2]
-                                # self.file_manager.write_tarot_deck_folder(all_folders[2])
-                                # break
+                                if self.position == self.line_3:
+                                    my_order = [1, 2, 3, 4, 5, 0]
+                                    all_folders = [all_folders[i] for i in my_order]
+                                    self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
+                                    self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
+                                                      off=True)
                             elif self.touch.press(self.touch.button_down):
                                 self.__down()
-                                # self.deck = all_folders[3]
-                                # self.file_manager.write_tarot_deck_folder(all_folders[3])
-                                # break
                             elif self.touch.press(self.touch.button_submit):
                                 if self.position == self.line_3:
                                     self.deck = all_folders[0]
