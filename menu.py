@@ -644,7 +644,7 @@ class Menu:
                                                           off=True)
                                 self.__up()
                             elif self.touch.press(self.touch.button_down):
-                                if self.position == self.line_8:
+                                if self.position == self.line_7:
                                     if not all_folders[-1] == last_deck:
                                         all_folders = [all_folders[i] for i in next_deck_order]
                                         self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
