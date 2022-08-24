@@ -131,7 +131,7 @@ class Menu:
                             all_folders[2][:text_upper_limit],
                             all_folders[3][:text_upper_limit],
                             all_folders[4][:text_upper_limit])
-        elif all_folders_len == 6:
+        elif all_folders_len >= 6:
             self.__populate('decks', all_folders[0][:text_upper_limit],
                             all_folders[1][:text_upper_limit],
                             all_folders[2][:text_upper_limit],
@@ -608,7 +608,17 @@ class Menu:
                                 all_folders += folder + ' '
                         all_folders = all_folders.split()  # split the strings on a space
                         all_folders = list(all_folders)  # split out string of decks to a list
-                        all_folders = all_folders[:6]  # max of 6 decks
+                        first_deck = all_folders[0]
+                        last_deck = all_folders[-1]
+                        deck_order = []
+                        seed = 0
+                        for _ in all_folders:
+                            deck_order.append(seed)
+                            seed += 1
+                        prev_deck_order = deck_order[-1:]
+                        next_deck_order = deck_order[1:]
+                        next_deck_order.append(0)
+                        # all_folders = all_folders[:10]  # max of 10 decks on a screen  TODO: remove
                         all_folders_len = len(all_folders)
                         print(all_folders)
                         print(all_folders_len)
@@ -619,19 +629,27 @@ class Menu:
                         self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
                         self.position = self.line_3
                         self.end_line = ((all_folders_len - 2) * 24) + self.line_3
+                        if self.end_line >= self.line_7:
+                            self.end_line = self.line_7
                         if self.position == self.line_3:
                             self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
                                               off=True)
                         while True:
                             if self.touch.press(self.touch.button_up):
-                                self.__up()
                                 if self.position == self.line_3:
-                                    my_order = [1, 2, 3, 4, 5, 0]
-                                    all_folders = [all_folders[i] for i in my_order]
-                                    self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
-                                    self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
-                                                      off=True)
+                                    if not all_folders[0] == first_deck:
+                                        all_folders = [all_folders[i] for i in prev_deck_order]
+                                        self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
+                                        self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
+                                                          off=True)
+                                self.__up()
                             elif self.touch.press(self.touch.button_down):
+                                if self.position == self.line_8:
+                                    if not all_folders[-1] == last_deck:
+                                        all_folders = [all_folders[i] for i in next_deck_order]
+                                        self.__deck_menu(all_folders, all_folders_len, text_upper_limit)
+                                        self.display.text('>', x=10, y=self.position, wrap=False, clear=False, timed=False,
+                                                          off=True)
                                 self.__down()
                             elif self.touch.press(self.touch.button_submit):
                                 if self.position == self.line_3:
