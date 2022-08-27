@@ -159,7 +159,6 @@ class Demo:
         """
         Private IRQ method to handle the killing of a demo
         """
-        self.touch = self.backup_touch
         self.thread = False
         self.running = False
 
