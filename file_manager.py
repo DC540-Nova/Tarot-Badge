@@ -86,7 +86,7 @@ class FileManager:
     @staticmethod
     def write_games_won_file(games_won):
         """
-        Function to write to the games_won file
+        Static method to write to the games_won file
 
         Params:
             games_won: str
@@ -119,7 +119,7 @@ class FileManager:
     @staticmethod
     def write_tarot_deck_folder(tarot_deck_folder):
         """
-        Function to write to the tarot deck folder file
+        Static method to write to the tarot deck folder file
 
         Params:
             tarot_deck_folder: str
@@ -134,7 +134,7 @@ class FileManager:
     @staticmethod
     def read_tarot_deck_folder():
         """
-        Function to read to the tarot deck folder file
+        Static method to read to the tarot deck folder file
 
         Returns:
             str
