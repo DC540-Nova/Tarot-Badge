@@ -53,7 +53,6 @@ class Demo:
         self.neo_pixel = neo_pixel
         self.data = data
         self.thread = False
-        self.running = False
         self.sleep_time = 5
         # color change interval
         self.cint = 10
@@ -155,32 +154,30 @@ class Demo:
                     self.__reset()
                     _thread.exit()
 
-    def __kill(self, pin):
-        """
-        Private IRQ method to handle the killing of a demo
-        """
-        self.thread = False
-        self.running = False
-
     def play(self):
         """
         Method to handle demo play
         """
-        sleep(1)
-        btn = Pin(17, Pin.IN)
-        btn.irq(self.__kill)
         _thread.start_new_thread(self.__neopixel_animation, ())
         self.display.handle_threading_setup()
-        self.running = True
-        while self.running:
+        while True:
             tarot_deck_folder = self.file_manager.read_tarot_deck_folder()
             for _ in self.data.cards:
-                if self.running == False:
-                    break
                 card, card_reading = choice(list(self.data.cards.items()))
                 try:
+                    touched_left = self.touch.press(self.touch.button_left)
+                    touched_right = self.touch.press(self.touch.button_right)
+                    touched_up = self.touch.press(self.touch.button_up)
+                    touched_down = self.touch.press(self.touch.button_down)
+                    touched_submit = self.touch.press(self.touch.button_submit)
+                    touched_extra = self.touch.press(self.touch.button_extra)
+                    if touched_left or touched_right or touched_up or touched_down or touched_submit or touched_extra:
+                        self.neo_pixel.clear(hard_clear=True)
+                        self.thread = False
+                        break
                     card = 'sd/' + tarot_deck_folder + '/' + card_reading[2]
                     self.display.image(card, self.sleep_time)
                 except OSError:
                     # self.display.text('sd card is damaged')
                     pass
+            break
