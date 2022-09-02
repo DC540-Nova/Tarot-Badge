@@ -56,7 +56,7 @@ class FileManager:
         Static method to write to the ids file
 
         Params:
-        ids: str
+            ids: str
         """
         try:
             with open('ids', 'w') as f:
