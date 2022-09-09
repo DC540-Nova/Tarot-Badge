@@ -42,7 +42,7 @@ np[8] = (0, 255, 0)
 np.write()
 
 # sd card config
-sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
+sd_card_spi = SPI(1, baudrate=100000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
                   mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
 
 # init sd card
