@@ -44,7 +44,7 @@ np.write()
 # sd card config
 try:
     sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
-                    mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                      mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
     # init sd card
     sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
     # mount sd card filesystem
@@ -55,7 +55,7 @@ try:
 except:  # noqa
     try:
         sd_card_spi = SPI(1, baudrate=1000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
-                    mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                          mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
         # init sd card
         sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
         # mount sd card filesystem
@@ -66,7 +66,7 @@ except:  # noqa
     except:  # noqa
         try:
             sd_card_spi = SPI(1, baudrate=500000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
-                        mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                              mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
             # init sd card
             sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
             # mount sd card filesystem
@@ -76,8 +76,8 @@ except:  # noqa
             np.write()
         except:  # noqa
             try:
-                sd_card_spi = SPI(1, baudrate=100000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
-                            mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                sd_card_spi = SPI(1, baudrate=100000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB,
+                                  sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
                 # init sd card
                 sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
                 # mount sd card filesystem
@@ -86,8 +86,8 @@ except:  # noqa
                 np[15] = (255, 0, 0)
                 np.write()
             except:  # noqa
-                sd_card_spi = SPI(1, baudrate=50000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
-                            mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                sd_card_spi = SPI(1, baudrate=50000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB,
+                                  sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
                 # init sd card
                 sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
                 # mount sd card filesystem
