@@ -34,7 +34,7 @@
 
 import unittest
 
-from config import neo_pixel
+from main import neo_pixel
 from encryption import Encryption
 encryption = Encryption()
 from morse_code import MorseCode

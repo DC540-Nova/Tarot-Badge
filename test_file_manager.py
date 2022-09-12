@@ -35,11 +35,11 @@
 import unittest
 import uos
 
-from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel
+from main import button_up, button_down, button_left, button_right, button_submit, button_extra, display, neo_pixel
 from touch import Touch
 from file_manager import FileManager
 
-touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+touch = Touch(button_up, button_down, button_left, button_right, button_submit, button_extra, display)
 
 
 class TestFileManager(unittest.TestCase):

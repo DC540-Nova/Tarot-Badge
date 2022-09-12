@@ -35,7 +35,7 @@
 import uos
 import unittest
 
-from config import display
+from main import display
 
 
 class TestSDCard(unittest.TestCase):

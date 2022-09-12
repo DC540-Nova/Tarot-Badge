@@ -34,8 +34,7 @@
 
 import unittest
 
-from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display, neo_pixel, \
-    nrf
+from main import button_up, button_down, button_left, button_right, button_submit, button_extra, display, neo_pixel, nrf
 from microcontroller import Microcontroller
 from encryption import Encryption
 from touch import Touch
@@ -48,7 +47,7 @@ import data
 
 microcontroller = Microcontroller()
 encryption = Encryption()
-touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+touch = Touch(button_up, button_down, button_left, button_right, button_submit, button_extra, display)
 file_manager = FileManager(touch, display, neo_pixel)
 tarot = Tarot(file_manager, touch, display, nrf, neo_pixel, data.cards)
 morse_code = MorseCode(encryption, neo_pixel, neo_pixel.RED)

@@ -35,7 +35,7 @@
 import utime
 import unittest
 
-from config import BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display
+from main import button_up, button_down, button_left, button_right, button_submit, button_extra, display
 from touch import Touch
 
 
@@ -48,7 +48,7 @@ class TestMicrocontroller(unittest.TestCase):
         setUp class
         """
         # Instantiate
-        self.touch = Touch(BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_SUBMIT, BUTTON_EXTRA, display)
+        self.touch = Touch(button_up, button_down, button_left, button_right, button_submit, button_extra, display)
 
     @staticmethod
     def tearDown():
