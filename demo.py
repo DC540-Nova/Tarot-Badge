@@ -53,7 +53,6 @@ class Demo:
         self.neo_pixel = neo_pixel
         self.data = data
         self.thread = False
-        self.sleep_time = 5
         # color change interval
         self.cint = 10
         self.cmin = 0
@@ -176,7 +175,7 @@ class Demo:
                         self.thread = False
                         break
                     card = 'sd/' + tarot_deck_folder + '/' + card_reading[2]
-                    self.display.image(card, self.sleep_time)
+                    self.display.image(card)
                 except OSError:
                     # self.display.text('sd card is damaged')
                     pass

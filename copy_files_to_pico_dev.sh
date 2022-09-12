@@ -1,8 +1,6 @@
 #!/bin/sh
 
 source venv/bin/activate
-mpremote connect /dev/tty.u* cp boot.py :
-mpremote connect /dev/tty.u* cp config.py :
 mpremote connect /dev/tty.u* cp ili9341.py :
 mpremote connect /dev/tty.u* cp main.py :
 mpremote connect /dev/tty.u* cp neo_pixel.py :

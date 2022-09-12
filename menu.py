@@ -68,8 +68,8 @@ class Menu:
         self.end_line = None
         self.clear_text = '                                                                                            '
         self.x_spacer = 32
-        self.title = 8
         self.wait = 0.1
+        self.title = 8
         self.line_2 = 32
         self.line_3 = 56
         self.line_4 = 80

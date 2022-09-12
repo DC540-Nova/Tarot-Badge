@@ -27,7 +27,61 @@
 # pyright: reportMissingImports=false
 # pyright: reportUndefinedVariable=false
 
+
 from machine import Pin, SPI
+import uos
+
+from sd_card import SDCard
+from ili9341 import Display
+from neo_pixel import NeoPixel
+from nrf24l01 import NRF
+
+# sd card config
+sd_card_result = None
+try:
+    sd_card_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
+                      mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+    # init sd card
+    sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
+    # mount sd card filesystem
+    vfs = uos.VfsFat(sd_card)
+    uos.mount(vfs, '/sd')
+    sd_card_result = 'baudrate=4000000'
+except Exception as e:   # noqa
+    try:
+        sd_card_spi = SPI(1, baudrate=1000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
+                          mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+        # init sd card
+        sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
+        # mount sd card filesystem
+        vfs = uos.VfsFat(sd_card)
+        uos.mount(vfs, '/sd')
+    except:  # noqa
+        try:
+            sd_card_spi = SPI(1, baudrate=500000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
+                              mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+            # init sd card
+            sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
+            # mount sd card filesystem
+            vfs = uos.VfsFat(sd_card)
+            uos.mount(vfs, '/sd')
+        except:  # noqa
+            try:
+                sd_card_spi = SPI(1, baudrate=100000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB,
+                                  sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                # init sd card
+                sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
+                # mount sd card filesystem
+                vfs = uos.VfsFat(sd_card)
+                uos.mount(vfs, '/sd')
+            except:  # noqa
+                sd_card_spi = SPI(1, baudrate=50000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB,
+                                  sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                # init sd card
+                sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
+                # mount sd card filesystem
+                vfs = uos.VfsFat(sd_card)
+                uos.mount(vfs, '/sd')
 
 # button config
 BUTTON_LEFT = 21
@@ -39,17 +93,17 @@ BUTTON_EXTRA = 16
 
 # display config
 display_spi = SPI(0, baudrate=40000000, sck=Pin(6, Pin.OUT), mosi=Pin(7, Pin.OUT))
-from ili9341 import Display  # noqa
 display = Display(display_spi, dc=Pin(15, Pin.OUT), cs=Pin(13, Pin.OUT), rst=Pin(14, Pin.OUT))
 
 # neo_pixel config
 LED_PIN = 5
 LED_COUNT = 24
-from neo_pixel import NeoPixel  # noqa
 neo_pixel = NeoPixel(Pin, LED_PIN, LED_COUNT)
 
 # nrf config
 nrf_spi = SPI(1, baudrate=4000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=Pin(10, Pin.OUT),
               mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
-from nrf24l01 import NRF  # noqa
 nrf = NRF(nrf_spi, csn=Pin(3, Pin.OUT), ce=Pin(0, Pin.OUT))
+
+
+display.text(sd_card_result)

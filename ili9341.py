@@ -475,7 +475,7 @@ class Display:
             utime.sleep(sleep_time)
             self.POWER_DISPLAY.value(0)
 
-    def image(self, path, sleep_time=2, up=True, timed=True, multithreading=False):
+    def image(self, path, sleep_time=4, up=True, timed=True, multithreading=False):
         """
         Method to draw image on display
 
