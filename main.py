@@ -137,12 +137,23 @@ except Exception as e:  # noqa
                 uos.mount(vfs, '/sd')
                 sd_card_status = 'sd_card: PASS (100k)'
             except:  # noqa
-                sd_card_spi = SPI(1, baudrate=50000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB,
-                                  sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
-                sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
-                vfs = uos.VfsFat(sd_card)
-                uos.mount(vfs, '/sd')
-                sd_card_status = 'sd_card: PASS (50k)'
+                try:
+                    sd_card_spi = SPI(1, baudrate=50000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB,
+                                      sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                    sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
+                    vfs = uos.VfsFat(sd_card)
+                    uos.mount(vfs, '/sd')
+                    sd_card_status = 'sd_card: PASS (50k)'
+                except:  # noqa
+                    try:
+                        sd_card_spi = SPI(1, baudrate=1000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB,
+                                          sck=Pin(10, Pin.OUT), mosi=Pin(11, Pin.OUT), miso=Pin(8, Pin.OUT))
+                        sd_card = SDCard(sd_card_spi, cs=Pin(9, Pin.OUT))
+                        vfs = uos.VfsFat(sd_card)
+                        uos.mount(vfs, '/sd')
+                        sd_card_status = 'sd_card: PASS (1k)'
+                    except:  # noqa
+                        sd_card_status = 'sd_card: FAIL'
 
 # button config
 button_left = 21
