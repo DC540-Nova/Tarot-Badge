@@ -25,6 +25,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "py/compile.h"
 #include "py/runtime.h"
@@ -66,7 +67,7 @@
 #endif
 
 extern uint8_t __StackTop, __StackBottom;
-__attribute__((section(".uninitialized_bss"))) static char gc_heap[MICROPY_GC_HEAP_SIZE];
+static char gc_heap[MICROPY_GC_HEAP_SIZE];
 
 // Embed version info in the binary in machine readable form
 bi_decl(bi_program_version_string(MICROPY_GIT_TAG));
@@ -189,33 +190,34 @@ int main(int argc, char **argv) {
             }
         }
 
-        for (;;) {
-            if (pyexec_mode_kind == PYEXEC_MODE_RAW_REPL) {
-                if (pyexec_raw_repl() != 0) {
-                    break;
-                }
-            } else {
-                if (pyexec_friendly_repl() != 0) {
-                    break;
-                }
-            }
-        }
+    //     for (;;) {
+    //         if (pyexec_mode_kind == PYEXEC_MODE_RAW_REPL) {
+    //             if (pyexec_raw_repl() != 0) {
+    //                 break;
+    //             }
+    //         } else {
+    //             if (pyexec_friendly_repl() != 0) {
+    //                 break;
+    //             }
+    //         }
+    //     }
 
     soft_reset_exit:
-        mp_printf(MP_PYTHON_PRINTER, "MPY: soft reboot\n");
-        #if MICROPY_PY_NETWORK
-        mod_network_deinit();
-        #endif
-        rp2_pio_deinit();
-        #if MICROPY_PY_BLUETOOTH
-        mp_bluetooth_deinit();
-        #endif
-        machine_pin_deinit();
-        #if MICROPY_PY_THREAD
-        mp_thread_deinit();
-        #endif
-        gc_sweep_all();
-        mp_deinit();
+        exit(EXIT_SUCCESS);
+        // mp_printf(MP_PYTHON_PRINTER, "MPY: soft reboot\n");
+        // #if MICROPY_PY_NETWORK
+        // mod_network_deinit();
+        // #endif
+        // rp2_pio_deinit();
+        // #if MICROPY_PY_BLUETOOTH
+        // mp_bluetooth_deinit();
+        // #endif
+        // machine_pin_deinit();
+        // #if MICROPY_PY_THREAD
+        // mp_thread_deinit();
+        // #endif
+        // gc_sweep_all();
+        // mp_deinit();
     }
 
     return 0;
